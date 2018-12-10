@@ -1,0 +1,71 @@
+<!--
+  Generated template for the ReportAccidentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Report Accident</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="accidentForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Type</ion-label>
+        <ion-select formControlName="accidentType">
+          <ion-option *ngFor="let type of accidentTypes;" [value]="type.name">{{type.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list formArrayName="involvedVehicles">
+      <ion-list-header margin-top-bottom-0>
+        Vehicle(s)
+        <button ion-button color="primary" clear icon-only item-end (click)="addVehicle()">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-list-header>
+      <ion-card [formGroupName]="i" *ngFor="let vehicle of accidentForm.controls.involvedVehicles.controls;let i=index;">
+        <ion-item>
+          <button ion-button color="danger" clear icon-only item-end (click)="removeVehicle(i)">
+            <ion-icon name='trash' is-active="false" ></ion-icon>
+          </button>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Vehicle Number</ion-label>
+          <ion-input type="text" formControlName="vehicleNumber"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Vehicle Model</ion-label>
+          <ion-input type="text" formControlName="vehicleModel"></ion-input>
+        </ion-item>
+        <ion-item formGroupName="driver">
+          <ion-label stacked>Driver Name</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item formGroupName="driver">
+          <ion-label stacked>Driving Licence</ion-label>
+          <ion-input type="text" formControlName="drivingLicence"></ion-input>
+        </ion-item>
+        <ion-list formArrayName="passengers">
+          <ion-list-header margin-top-bottom-0>
+            Passenger(s)
+            <button ion-button color="primary" clear icon-only item-end (click)="addPassenger()">
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+          </ion-list-header>
+          <ion-item [formGroupName]="j" *ngFor="let passenger of vehicle.controls.passengers.controls;let j=index;">
+            <ion-label stacked>{{j+1}}) Passenger Name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+            <button ion-button color="danger" clear icon-only item-end (click)="removePassenger(j)">
+              <ion-icon name='trash' is-active="false" ></ion-icon>
+            </button>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </ion-list>
+  </form>
+</ion-content>

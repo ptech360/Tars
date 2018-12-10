@@ -1,5 +1,7 @@
 {
   "name": "tars",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

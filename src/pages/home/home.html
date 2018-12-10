@@ -1,14 +1,19 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
+  <ion-navbar color="primary">
+    <ion-title text-center>
+      Tars
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content class="home-background" padding text-center>
+  <img class="accident-logo" src="/assets/imgs/accident.png" />
+  <button ion-button outline icon-end (click)="reportAccident()">
+    Report Accident
+    <ion-icon name="arrow-forward"></ion-icon>
+  </button>
+  <button ion-button icon-end (click)="viewAccidents()">
+    Previous Accidents
+    <ion-icon name="arrow-forward"></ion-icon>
+  </button>
 </ion-content>

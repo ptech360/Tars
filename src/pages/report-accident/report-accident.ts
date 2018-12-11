@@ -58,7 +58,6 @@ export class ReportAccidentPage {
     this.accSev.getAccidentTypes().subscribe(response => {
       this.accidentTypes = response;
     });
-    // get current position
     this.geolocation.getCurrentPosition().then(pos => {
       this.latitude = pos.coords.latitude;
       this.longitude = pos.coords.longitude;
@@ -79,7 +78,7 @@ export class ReportAccidentPage {
       accidentType: ['',[Validators.required]],
       involvedVehicles: this.fb.array([this.getVehicleFormGroup()]),
       otherPeopleInvolved: [''],
-      incidentPhotos:[''],
+      incidentPhotos:this.fb.array([]),
       incidentDescription:['',[Validators.required]],
       remarks:['',[Validators.required]]
     });
@@ -160,6 +159,25 @@ export class ReportAccidentPage {
     vehicleImages.removeAt(index);
     // this.vehicleImageUrls.splice(index,1);
     // this.files.splice(index,1);
+  }
+
+  private captureIncident(accidentForm: FormGroup){
+    this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
+      const incidentPhotos = <FormArray>accidentForm.controls['incidentPhotos'];  
+      const fileName:string = 'incident-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
+      let file = this.fb.group({
+        name:fileName,
+        url:'data:image/jpeg;base64,' + onSuccess
+      });      
+      incidentPhotos.push(file);      
+    },(onError)=>{
+      alert(onError);
+    })
+  }
+
+  delIncidentImage(accidentForm: FormGroup,index:number){
+    const incidentPhotos = <FormArray>accidentForm.controls['incidentPhotos'];
+    incidentPhotos.removeAt(index);
   }
 
   saveAccidentReport(){

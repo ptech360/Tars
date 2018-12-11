@@ -6,21 +6,24 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Accident</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card-content>
-    <ion-card-title>
-      {{accident.accidentType}}
-    </ion-card-title>
-    <p>{{accident.incidentDescription}}.</p>
-  </ion-card-content>
-  <ion-card *ngFor="let vehicle of accident.involvedVehicles;" padding>
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <h2>{{accident.accidentType}}</h2>
+      <p>{{accident.incidentDescription}}.</p>
+      <ion-note item-end>
+        {{accident.geoLocation}}
+      </ion-note>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngFor="let vehicle of accident.involvedVehicles;">
     <ion-item>
       <ion-avatar item-start>
         <img src="/assets/imgs/profile.png">
@@ -29,13 +32,21 @@
       <p>{{vehicle.driver.drivingLicence}}</p>
     </ion-item>
 
-    <img [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehicleImages;" padding>
+    <img [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehicleImages;">
 
     <ion-card-content no-padding>
-      <ion-item no-padding>
+      <ion-item>
         <h2><b>Vehicle Number</b> : {{vehicle.vehicleNumber}}</h2>
         <h2><b>Vehicle Model</b> : {{vehicle.vehicleModel}}</h2>
       </ion-item>
     </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Incident Pictures
+      </ion-card-title>
+    </ion-card-content>
+    <img [src]="incidentPhoto.url" *ngFor="let incidentPhoto of accident.incidentPhotos;" padding>
   </ion-card>
 </ion-content>

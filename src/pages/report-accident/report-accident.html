@@ -104,6 +104,27 @@
         <ion-textarea formControlName="remarks"></ion-textarea>
       </ion-item>
     </ion-card>
+    <ion-card>
+      <div padding>      
+      <ion-card *ngFor="let img of accidentForm.controls.incidentPhotos.controls;let n = index;">
+        <img [src]="img.value.url"/>
+        <ion-row>
+          <ion-col text-right>
+            <button ion-button color="danger" clear icon-only item-end (click)="delIncidentImage(accidentForm,n)">
+              <ion-icon name='trash' is-active="false" ></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>            
+      </ion-card>      
+    </div>    
+
+    <div text-center>
+      <h2 color="primary">Capture Incident</h2>
+      <button ion-button icon-only class="center" margin-bottom (click)="captureIncident(accidentForm)">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </div>
+    </ion-card>
     <div padding>
       <button type="submit" ion-button block [disabled]="accidentForm.invalid" (click)="saveAccidentReport()">Save</button>
     </div>

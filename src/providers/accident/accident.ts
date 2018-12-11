@@ -36,7 +36,10 @@ export class AccidentProvider {
       geoLocation: "Gurgoan",
       incidentDescription: "Suddenly changed the direction",
       dateTime:new Date(),
-      incidentPhotos: "",
+      incidentPhotos: [{
+        name: "vehicle-img2018-12-11135631.jpeg",
+        url: "/assets/imgs/180710_wabc.jpg"
+      }],
       involvedVehicles: [{
         driver: {name: "Pankaj Kharetwal", drivingLicence: "MP28N-2012-0164333"},
         passengers: [{

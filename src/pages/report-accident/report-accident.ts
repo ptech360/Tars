@@ -47,7 +47,7 @@ export class ReportAccidentPage {
   }
 
   getGeoLoacation(){
-    this.httpClient.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+this.latitude+','+this.longitude+'&key=AIzaSyAtQPoguIV968b271dwmJKE8adrG3qD_g8').subscribe((response:any) => {
+    this.httpClient.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+this.latitude+','+this.longitude+'&key=AIzaSyCGDdlvhOQeTMKU_0roHbjebi4j3hY1ofU').subscribe((response:any) => {
       console.log(response);
       this.location = response.plus_code ? response.plus_code.compound_code : 'Not Locate';
     })

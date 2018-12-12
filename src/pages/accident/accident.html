@@ -41,12 +41,17 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <ion-card>
+  <ion-card *ngIf="accident.incidentPhotos.length">
     <ion-card-content>
       <ion-card-title>
         Incident Pictures
       </ion-card-title>
     </ion-card-content>
     <img [src]="incidentPhoto.url" *ngFor="let incidentPhoto of accident.incidentPhotos;" padding>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <h2><b>Remarks</b> : {{accident.remarks}}</h2>
+    </ion-item>
   </ion-card>
 </ion-content>

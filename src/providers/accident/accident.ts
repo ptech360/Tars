@@ -52,7 +52,9 @@ export class AccidentProvider {
         vehicleModel: "BDHHD12-67",
         vehicleNumber: "UP20MC5678"
       }],
-      otherPeopleInvolved: "Ramcharan",
+      otherPeopleInvolved: [{
+        name: "Ashok"
+      }],
       remarks: "Koiti sngara squar",
     }
   ]

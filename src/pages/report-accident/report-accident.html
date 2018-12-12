@@ -92,12 +92,29 @@
         </div>
       </ion-card>
     </ion-list>
-    <ion-card>
+    <!-- <ion-card>
       <ion-item>
         <ion-label stacked>Other People Involved</ion-label>
         <ion-textarea formControlName="otherPeopleInvolved"></ion-textarea>
       </ion-item>
-    </ion-card>
+    </ion-card> -->
+    <ion-card>
+      <ion-list formArrayName="otherPeopleInvolved">
+        <ion-list-header margin-top-bottom-0>
+          Involved Other People
+          <button ion-button color="primary" clear icon-only item-end (click)="addOtherPeople(accidentForm)">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-list-header>
+        <ion-item [formGroupName]="j" *ngFor="let people of accidentForm.controls.otherPeopleInvolved.controls;let j=index;">
+          <ion-label stacked>{{j+1}}) Name</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+          <button ion-button color="danger" clear icon-only item-end (click)="removeOtherPeople(accidentForm,j)">
+            <ion-icon name='trash' is-active="false" ></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>  
+    </ion-card>  
     <ion-card>
       <ion-item>
         <ion-label stacked>Remarks</ion-label>

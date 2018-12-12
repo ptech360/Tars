@@ -28,8 +28,8 @@
       <ion-avatar item-start>
         <img src="/assets/imgs/profile.png">
       </ion-avatar>
-      <h2>{{vehicle.driver.name}}</h2>
-      <p>{{vehicle.driver.drivingLicence}}</p>
+      <h2><b>Driver: </b>{{vehicle.driver.name}}</h2>
+      <p><b>Licence: </b>{{vehicle.driver.drivingLicence}}</p>
     </ion-item>
 
     <img [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehicleImages;">
@@ -37,7 +37,15 @@
     <ion-card-content no-padding>
       <ion-item>
         <h2><b>Vehicle Number</b> : {{vehicle.vehicleNumber}}</h2>
-        <h2><b>Vehicle Model</b> : {{vehicle.vehicleModel}}</h2>
+        <p><b>Vehicle Model</b> : {{vehicle.vehicleModel}}</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content no-padding>
+      <ion-item>
+        <h2><b>Other People Involved</b></h2>
+        <p *ngFor="let people of accident.otherPeopleInvolved;let p = index;"><b>{{p+1}}</b> : {{people.name}}</p>
       </ion-item>
     </ion-card-content>
   </ion-card>

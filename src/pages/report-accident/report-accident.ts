@@ -47,9 +47,9 @@ export class ReportAccidentPage {
   }
 
   getGeoLoacation(){
-    this.httpClient.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+this.latitude+','+this.longitude+'&key=AIzaSyCGDdlvhOQeTMKU_0roHbjebi4j3hY1ofU').subscribe((response:any) => {
+    this.httpClient.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+this.latitude+','+this.longitude+'&key=AIzaSyC0fj5LBatMHxv2d-o6OTni7V1voRbQiKM').subscribe((response:any) => {
       console.log(response);
-      this.location = response.plus_code ? response.plus_code.compound_code : 'Not Locate';
+      this.location = response.results ? response.results[0].formatted_address : 'Not Locate';
     })
   }
 
@@ -58,17 +58,16 @@ export class ReportAccidentPage {
     this.accSev.getAccidentTypes().subscribe(response => {
       this.accidentTypes = response;
     });
-    // this.geolocation.getCurrentPosition().then(pos => {
-    //   this.latitude = pos.coords.latitude;
-    //   this.longitude = pos.coords.longitude;
-    //   console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
-    //   setTimeout(() => {
-    //     this.getGeoLoacation();        
-    //   }, 2000);
-    // }).catch(error=>{
-    //   console.log(error);
-      
-    // });
+    this.geolocation.getCurrentPosition().then(pos => {
+      this.latitude = pos.coords.latitude;
+      this.longitude = pos.coords.longitude;
+      console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+      setTimeout(() => {
+        this.getGeoLoacation();        
+      }, 2000);
+    }).catch(error=>{
+      console.log(error);
+    });
   }
 
   getAccidentForm(){

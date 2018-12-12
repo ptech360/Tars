@@ -11,7 +11,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="background">
   <form [formGroup]="accidentForm">
     <ion-card>
       <ion-item>
@@ -28,18 +28,29 @@
       </ion-item>
     </ion-card>
     <ion-list formArrayName="involvedVehicles">
-      <ion-list-header margin-top-bottom-0>
+      <!-- <ion-list-header margin-top-bottom-0>
         Involved Vehicle(s)
         <button ion-button color="primary" clear icon-only item-end (click)="addVehicle()">
           <ion-icon name="add-circle"></ion-icon>
         </button>
-      </ion-list-header>
+      </ion-list-header> -->
       <ion-card [formGroupName]="i" *ngFor="let vehicle of accidentForm.controls.involvedVehicles.controls;let i=index;">
-        <ion-item>
+        <div class="flex">
+        <h2 padding>
+          Involved Vehicle(s)
+          <!-- <button ion-button color="primary" clear icon-only item-end (click)="addVehicle()">
+                  <ion-icon name="add-circle"></ion-icon>
+                </button> -->
+              </h2>
+        <div>
+         
           <button ion-button color="danger" clear icon-only item-end (click)="removeVehicle(i)">
             <ion-icon name='trash' is-active="false" ></ion-icon>
           </button>
-        </ion-item>
+         
+          
+        </div>
+        </div>
         <ion-item>
           <ion-label stacked>Vehicle Number</ion-label>
           <ion-input type="text" formControlName="vehicleNumber" autocapitalize="characters"></ion-input>
@@ -58,7 +69,7 @@
         </ion-item>
         <ion-list formArrayName="passengers">
           <ion-list-header margin-top-bottom-0>
-            Involved Passenger(s)
+           <h2>Involved Passenger(s)</h2>
             <button ion-button color="primary" clear icon-only item-end (click)="addPassenger(vehicle)">
               <ion-icon name="add-circle"></ion-icon>
             </button>
@@ -90,7 +101,13 @@
             <ion-icon name="camera"></ion-icon>
           </button>
         </div>
+        <div text-right>
+        <button ion-button color="primary" clear icon-only item-end (click)="addVehicle()">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+        </div>
       </ion-card>
+
     </ion-list>
     <!-- <ion-card>
       <ion-item>

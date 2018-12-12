@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="background">
   <ion-card>
     <ion-item>
       <h2>{{accident.accidentType}}</h2>
@@ -50,11 +50,9 @@
     </ion-card-content>
   </ion-card>
   <ion-card *ngIf="accident.incidentPhotos.length">
-    <ion-card-content>
-      <ion-card-title>
-        Incident Pictures
-      </ion-card-title>
-    </ion-card-content>
+    
+      <h2 padding-left padding-top><b>Incident Pictures</b></h2>
+    
     <img [src]="incidentPhoto.url" *ngFor="let incidentPhoto of accident.incidentPhotos;" padding>
   </ion-card>
   <ion-card>

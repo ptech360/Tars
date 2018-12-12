@@ -16,13 +16,40 @@
 <ion-content class="background">
   <ion-card>
     <ion-item>
-      <h2>{{accident.accidentType}}</h2>
+      <h2>Accident Type</h2>
+      <p>{{accident.accidentType}}.</p>
+    </ion-item>
+    <ion-item>
+      <h2>Description</h2>
       <p>{{accident.incidentDescription}}.</p>
-      <ion-note item-end>
+    </ion-item>
+    <ion-item>
+      <h2>Location</h2>
+      <p><small>
         {{accident.geoLocation}}
-      </ion-note>
+        </small>
+      </p>
     </ion-item>
   </ion-card>
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col col-6 text-wrap>
+        <p>{{accident.accidentType}}</p>
+      </ion-col>
+      <ion-col col-6 text-wrap text-right>
+        <small>{{accident.dateTime | date}}</small>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 text-wrap>
+        {{accident.incidentDescription}}
+      </ion-col>
+      <ion-col col-6>
+        <ion-badge float-right text-wrap>{{accident.geoLocation}}</ion-badge>
+        <br>
+      </ion-col>      
+    </ion-row>
+  </ion-grid> -->
   <ion-card *ngFor="let vehicle of accident.involvedVehicles;">
     <ion-item>
       <ion-avatar item-start>
@@ -40,6 +67,14 @@
         <p><b>Vehicle Model</b> : {{vehicle.vehicleModel}}</p>
       </ion-item>
     </ion-card-content>
+    <ion-card>
+      <ion-card-content no-padding>
+        <ion-item>
+          <h2><b>Passenger(s)</b></h2>
+          <p *ngFor="let pass of vehicle.passengers;let o = index;"><b>{{0+1}}</b> : {{pass.name}}</p>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </ion-card>
   <ion-card>
     <ion-card-content no-padding>

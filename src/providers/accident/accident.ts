@@ -33,7 +33,7 @@ export class AccidentProvider {
   accidentReports = [
     {
       accidentType: "Vehicle vs Vehicle Collision",
-      geoLocation: "Gurgoan",
+      geoLocation: "Nirvana, Block J, Mayfield Garden, Sector 51, Gurugram",
       incidentDescription: "Suddenly changed the direction",
       dateTime:new Date(),
       incidentPhotos: [{

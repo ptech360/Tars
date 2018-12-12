@@ -58,17 +58,17 @@ export class ReportAccidentPage {
     this.accSev.getAccidentTypes().subscribe(response => {
       this.accidentTypes = response;
     });
-    this.geolocation.getCurrentPosition().then(pos => {
-      this.latitude = pos.coords.latitude;
-      this.longitude = pos.coords.longitude;
-      console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
-      setTimeout(() => {
-        this.getGeoLoacation();        
-      }, 2000);
-    }).catch(error=>{
-      console.log(error);
+    // this.geolocation.getCurrentPosition().then(pos => {
+    //   this.latitude = pos.coords.latitude;
+    //   this.longitude = pos.coords.longitude;
+    //   console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
+    //   setTimeout(() => {
+    //     this.getGeoLoacation();        
+    //   }, 2000);
+    // }).catch(error=>{
+    //   console.log(error);
       
-    });
+    // });
   }
 
   getAccidentForm(){
@@ -77,7 +77,7 @@ export class ReportAccidentPage {
       dateTime:[new Date()],
       accidentType: ['',[Validators.required]],
       involvedVehicles: this.fb.array([this.getVehicleFormGroup()]),
-      otherPeopleInvolved: [''],
+      otherPeopleInvolved: this.fb.array([this.getPassenger()]),
       incidentPhotos:this.fb.array([]),
       incidentDescription:['',[Validators.required]],
       remarks:['',[Validators.required]]
@@ -108,20 +108,31 @@ export class ReportAccidentPage {
     involvedVehicles.push(this.getVehicleFormGroup());
   }
 
-  addPassenger(vehicleForm: FormGroup){
-    const passengers = <FormArray>vehicleForm.controls['passengers'];
-    passengers.push(this.getPassenger());
-  }
   
   removeVehicle(index: number){
     const involvedVehicles = <FormArray>this.accidentForm.controls['involvedVehicles'];
     involvedVehicles.removeAt(index);
-
+    
+  }
+  
+  addPassenger(vehicleForm: FormGroup){
+    const passengers = <FormArray>vehicleForm.controls['passengers'];
+    passengers.push(this.getPassenger());
   }
 
   removePassenger(vehicleForm: FormGroup, index:number){
     const passengers = <FormArray>vehicleForm.controls['passengers'];
     passengers.removeAt(index);
+  }
+
+  addOtherPeople(accidentForm: FormGroup){
+    const otherPeopleInvolved = <FormArray>accidentForm.controls['otherPeopleInvolved'];
+    otherPeopleInvolved.push(this.getPassenger());
+  }
+  
+  removeOtherPeople(accidentForm: FormGroup, index:number){
+    const otherPeopleInvolved = <FormArray>accidentForm.controls['otherPeopleInvolved'];
+    otherPeopleInvolved.removeAt(index);
   }
 
   private captureVehicle(vehicleForm: FormGroup){

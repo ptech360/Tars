@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -17,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'page-report-accident',
   templateUrl: 'report-accident.html',
 })
-export class ReportAccidentPage {
+export class ReportAccidentPage implements OnInit{
 
   accidentForm:FormGroup;
   accidentTypes = [];
@@ -41,9 +41,14 @@ export class ReportAccidentPage {
               public toastSev:ToastProvider,
               public camera: Camera,
               private geolocation: Geolocation,
-              public httpClient: HttpClient
+              public httpClient: HttpClient,
+              public modalCtrl:ModalController
               ) {
     this.accidentForm = this.getAccidentForm();
+  }
+
+  ngOnInit(){
+    
   }
 
   getGeoLoacation(){
@@ -75,8 +80,12 @@ export class ReportAccidentPage {
       geoLocation:[''],
       dateTime:[new Date()],
       accidentType: ['',[Validators.required]],
-      involvedVehicles: this.fb.array([this.getVehicleFormGroup()]),
-      otherPeopleInvolved: this.fb.array([this.getPassenger()]),
+      fatal: [false,[Validators.required]],
+      noOfVehicle: [0,[Validators.required]],
+      involvedVehicles: this.fb.array([]),
+      visibleVehicles: [true],
+      otherPeopleInvolved: this.fb.array([]),
+      visibleOtherPeople:[true],
       incidentPhotos:this.fb.array([]),
       incidentDescription:['',[Validators.required]],
       remarks:['',[Validators.required]]
@@ -88,35 +97,73 @@ export class ReportAccidentPage {
       vehicleNumber: ['',[Validators.required]],
       vehicleModel: ['',[Validators.required]],
       vehicleImages: this.fb.array([]),
-      driver:this.fb.group({
-        name:['',[Validators.required]],
-        drivingLicence:['',[Validators.required]]
-      }),
-      passengers:this.fb.array([this.getPassenger()]),
+      // driver:[''],
+      visibleDriver:[true],
+      visiblePassengers:[true],
+      passengers:this.fb.array([]),
+    });
+  }
+
+  getDriver(){
+    return this.fb.group({
+      name:['',[Validators.required]],
+      age:['',[Validators.required]],
+      underInfluence:[false,[Validators.required]],
+      gender:['',[Validators.required]],
+      drivingLicence:['',[Validators.required]],
+      address:['',[Validators.required]],
+      pictures:this.fb.array([])
     });
   }
 
   getPassenger(){
     return this.fb.group({
-      name:['',[Validators.required]]
+      name:['',[Validators.required]],
+      age:['',[Validators.required]],
+      underInfluence:[false,[Validators.required]],
+      gender:['',[Validators.required]],
+      drivingLicence:[''],
+      address:['',[Validators.required]],
+      pictures:this.fb.array([])
+    });
+  }
+
+  getOtherPeopleForm(){
+    return this.fb.group({
+      name:[''],
+      age:[''],
+      underInfluence:[false],
+      gender:[''],
+      drivingLicence:[''],
+      address:[''],
+      pictures:this.fb.array([])
     });
   }
 
   addVehicle(){    
-    const involvedVehicles = <FormArray>this.accidentForm.controls['involvedVehicles'];
-    involvedVehicles.push(this.getVehicleFormGroup());
+  const modal =  this.modalCtrl.create('InvolvedVehiclePage', {involvedVehicles: this.accidentForm.controls['involvedVehicles']});
+  modal.present();
+  // const involvedVehicles = <FormArray>this.accidentForm.controls['involvedVehicles'];
+  // involvedVehicles.push(this.getVehicleFormGroup());
   }
 
   
   removeVehicle(index: number){
     const involvedVehicles = <FormArray>this.accidentForm.controls['involvedVehicles'];
-    involvedVehicles.removeAt(index);
-    
+    involvedVehicles.removeAt(index);    
+  }
+
+  addDriver(vehicleForm: FormGroup){
+    const modal =  this.modalCtrl.create('InvolvedDriverPage', {vehicleForm: vehicleForm});
+    modal.present();
+    // vehicleForm.addControl('driver',this.getDriver());
   }
   
   addPassenger(vehicleForm: FormGroup){
-    const passengers = <FormArray>vehicleForm.controls['passengers'];
-    passengers.push(this.getPassenger());
+    const modal =  this.modalCtrl.create('InvolvedPassengerPage', {vehicleForm: vehicleForm});
+    modal.present();
+    // const passengers = <FormArray>vehicleForm.controls['passengers'];
+    // passengers.push(this.getPassenger());
   }
 
   removePassenger(vehicleForm: FormGroup, index:number){
@@ -125,8 +172,10 @@ export class ReportAccidentPage {
   }
 
   addOtherPeople(accidentForm: FormGroup){
-    const otherPeopleInvolved = <FormArray>accidentForm.controls['otherPeopleInvolved'];
-    otherPeopleInvolved.push(this.getPassenger());
+    const modal =  this.modalCtrl.create('InvolvedOtherPeoplePage', {accidentForm: accidentForm});
+    modal.present();
+    // const otherPeopleInvolved = <FormArray>accidentForm.controls['otherPeopleInvolved'];
+    // otherPeopleInvolved.push(this.getOtherPeopleForm());
   }
   
   removeOtherPeople(accidentForm: FormGroup, index:number){
@@ -137,19 +186,12 @@ export class ReportAccidentPage {
   private captureVehicle(vehicleForm: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
       const vehicleImages = <FormArray>vehicleForm.controls['vehicleImages'];  
-      const fileName:string = 'vehicle-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg'; 
-      
+      const fileName:string = 'vehicle-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
         url:'data:image/jpeg;base64,' + onSuccess
       });
-      
-      vehicleImages.push(file);
-      
-      // this.vehicleImageUrls.push('data:image/jpeg;base64,' + onSuccess);
-      // this.files.push(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess,fileName));
-      // console.log(this.files);
-      
+      vehicleImages.push(file);      
     },(onError)=>{
       alert(onError);
     })

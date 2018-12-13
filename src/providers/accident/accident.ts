@@ -1,6 +1,8 @@
 // import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs/observable/of';
+import { Subject } from 'rxjs/Subject';
+import { FormGroup } from '@angular/forms';
 
 /*
   Generated class for the AccidentProvider provider.
@@ -10,6 +12,8 @@ import { of } from 'rxjs/observable/of';
 */
 @Injectable()
 export class AccidentProvider {
+
+  accidentReport:FormGroup;
 
   accidentTypes = [
     {
@@ -41,9 +45,23 @@ export class AccidentProvider {
         url: "/assets/imgs/180710_wabc.jpg"
       }],
       involvedVehicles: [{
-        driver: {name: "Pankaj Kharetwal", drivingLicence: "MP28N-2012-0164333"},
+        driver: {
+          name: "Pankaj Kharetwal", 
+          drivingLicence: "MP28N-2012-0164333",
+          age:'26',
+          underInfluence:false,
+          gender:'Male',
+          address:'Chhindwara MP',
+          pictures:[]
+        },
         passengers: [{
-          name: "Aniket"
+          name: "Aniket Verma", 
+          drivingLicence: "MP28N-2012-0189333",
+          age:'22',
+          underInfluence:true,
+          gender:'Male',
+          address:'Chhindwara MP',
+          pictures:[]
         }],
         vehicleImages: [{
           name: "vehicle-img2018-12-11135631.jpeg",
@@ -53,7 +71,13 @@ export class AccidentProvider {
         vehicleNumber: "UP20MC5678"
       }],
       otherPeopleInvolved: [{
-        name: "Ashok"
+        name: "Ashok Pal", 
+        drivingLicence: "MP28N-1991-0164113",
+        age:'36',
+        underInfluence:false,
+        gender:'Male',
+        address:'Chhindwara MP',
+        pictures:[]
       }],
       remarks: "Koiti sngara squar",
     }

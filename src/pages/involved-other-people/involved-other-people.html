@@ -35,17 +35,17 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Address</ion-label>
-      <ion-textarea formControlName="address"></ion-textarea>
+      <ion-input formControlName="address"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Gender</ion-label>
+      <ion-label><small>Gender</small></ion-label>
       <ion-select formControlName="gender">
         <ion-option value="Male">Male</ion-option>
         <ion-option value="Female">Female</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Under Influence</ion-label>
+      <ion-label><small>Under Influence</small></ion-label>
       <ion-toggle formControlName="underInfluence"></ion-toggle>
     </ion-item>
 
@@ -68,7 +68,7 @@
       </button>
     </div>
     <div padding>
-      <button type="button" ion-button block small (click)="savePeople()">Save</button>
+      <button type="button" ion-button block small [disabled]="otherPeopleFormGroup.invalid" (click)="savePeople()">Save</button>
     </div>
   </ion-card>
 </ion-content>

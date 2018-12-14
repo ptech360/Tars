@@ -15,7 +15,7 @@
   <form [formGroup]="accidentForm">
     <ion-card>
       <ion-item>
-        <ion-label>Type</ion-label>
+        <ion-label><small>Type</small></ion-label>
         <ion-select formControlName="accidentType">
           <ion-option *ngFor="let type of accidentTypes;" [value]="type.name">{{type.name}}</ion-option>
         </ion-select>
@@ -23,8 +23,24 @@
     </ion-card>
     <ion-card>
       <ion-item>
-        <ion-label>Fatal</ion-label>
+        <ion-label><small>Fatal</small></ion-label>
         <ion-toggle formControlName="fatal"></ion-toggle>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-label><small>No. of Casualities</small></ion-label>
+        <ion-input type="number" formControlName="noOfCasulities" text-right></ion-input>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-label><small>Initiate</small></ion-label>
+        <ion-select formControlName="initiate" multiple="true">
+          <ion-option value="Ambulance">Ambulance</ion-option>
+          <ion-option value="Rescue Vehicle">Rescue Vehicle</ion-option>
+          <ion-option value="Fire Vehicle">Fire Vehicle</ion-option>
+        </ion-select>
       </ion-item>
     </ion-card>
     <ion-card>
@@ -35,7 +51,7 @@
     </ion-card>
     <ion-card>
       <ion-item>
-        <ion-label>No. of Vehicle Involved</ion-label>
+        <ion-label><small>No. of Vehicle Involved</small></ion-label>
         <ion-select formControlName="noOfVehicle">
           <ion-option value="1">1</ion-option>
           <ion-option value="2">2</ion-option>
@@ -44,17 +60,14 @@
         </ion-select>
       </ion-item>
     </ion-card>
-    <ion-card>
+    <ion-card *ngIf="accidentForm.value.noOfVehicle">
       <ion-list>
         <ion-list-header margin-top-bottom-0>
           Involved Vehicle(s)
           <label ion-button color="primary" clear icon-only item-end>
-            <ion-icon name="arrow-dropdown"></ion-icon>
+            <ion-icon [name]="accidentForm.value.visibleVehicles?'arrow-dropup':'arrow-dropdown'"></ion-icon>
             <input type="checkbox" formControlName="visibleVehicles" hidden>
           </label>
-          <!-- <button ion-button color="primary" clear icon-only item-end (click)="addVehicle()">
-            <ion-icon name="add-circle"></ion-icon>
-          </button> -->
         </ion-list-header>
         <div formArrayName="involvedVehicles" [hidden]="!accidentForm.value.visibleVehicles">
           <ion-card [formGroupName]="i" *ngFor="let vehicle of accidentForm.controls.involvedVehicles.controls;let i=index;">
@@ -74,18 +87,16 @@
               <ion-label stacked>Vehicle Model</ion-label>
               <ion-input type="text" formControlName="vehicleModel" autocapitalize="characters"></ion-input>
             </ion-item>
-            <ion-item *ngIf="!vehicle.controls.driver">
-              <button ion-button block small (click)="addDriver(vehicle)">Add Driver</button>
-            </ion-item>
-            <ion-list *ngIf="vehicle.controls.driver">
+            <ion-list>
               <ion-list-header margin-top-bottom-0>
                 Involved Driver
                 <label ion-button color="primary" clear icon-only item-end>
-                  <ion-icon name="arrow-dropdown"></ion-icon>
+                  <ion-icon [name]="vehicle.value.visibleDriver?'arrow-dropup':'arrow-dropdown'" ></ion-icon>
                   <input type="checkbox" formControlName="visibleDriver" hidden>
                 </label>
               </ion-list-header>
-              <ion-card formGroupName="driver" [hidden]="!vehicle.value.visibleDriver">
+              <div [hidden]="!vehicle.value.visibleDriver">
+              <ion-card formGroupName="driver" *ngIf="vehicle.controls.driver">
                 <ion-item>
                   <ion-label stacked>Driver Name</ion-label>
                   <ion-input type="text" formControlName="name"></ion-input>
@@ -114,17 +125,18 @@
                   <ion-toggle formControlName="underInfluence"></ion-toggle>
                 </ion-item>              
               </ion-card>
+              <ion-item *ngIf="!vehicle.controls.driver">
+                <button ion-button block small (click)="addDriver(vehicle)">Add Driver</button>
+              </ion-item>
+              </div>
             </ion-list>
-            <ion-list>
+            <ion-list *ngIf="vehicle.controls.driver">
               <ion-list-header margin-top-bottom-0>
                 Involved Passenger(s)
                 <label ion-button color="primary" clear icon-only item-end>
-                  <ion-icon name="arrow-dropdown"></ion-icon>
+                  <ion-icon [name]="vehicle.value.visiblePassengers?'arrow-dropup':'arrow-dropdown'"></ion-icon>
                   <input type="checkbox" formControlName="visiblePassengers" hidden>
                 </label>
-                <!-- <button ion-button color="primary" clear icon-only item-end (click)="addPassenger(vehicle)">
-                  <ion-icon name="add-circle"></ion-icon>
-                </button> -->
               </ion-list-header>
               <div formArrayName="passengers" [hidden]="!vehicle.value.visiblePassengers">
                 <ion-card [formGroupName]="j" *ngFor="let passenger of vehicle.controls.passengers.controls;let j=index;">
@@ -169,7 +181,7 @@
                 </ion-item>
               </div>              
             </ion-list>
-            <div padding>
+            <!-- <div padding>
               <ion-card *ngFor="let img of vehicle.controls.vehicleImages.controls;let m = index;">
                 <img [src]="img.value.url" />
                 <ion-row>
@@ -186,15 +198,10 @@
               <button ion-button icon-only class="center" margin-bottom (click)="captureVehicle(vehicle)">
                 <ion-icon name="camera"></ion-icon>
               </button>
-            </div>
-            <!-- <div text-right>
-              <button ion-button color="primary" clear icon-only item-end (click)="addVehicle()">
-                <ion-icon name="add-circle"></ion-icon>
-              </button>
             </div> -->
           </ion-card>
           <ion-item padding>
-            <button ion-button block small (click)="addVehicle()">Add Vehicle</button>
+            <button ion-button block small (click)="addVehicle()" [disabled]="accidentForm.controls.involvedVehicles.controls.length>=accidentForm.controls.noOfVehicle.value">Add Vehicle</button>
           </ion-item>
         </div>
       </ion-list>
@@ -208,9 +215,6 @@
               <ion-icon name="arrow-dropdown"></ion-icon>
               <input type="checkbox" formControlName="visibleOtherPeople" hidden>
             </label>
-            <!-- <button ion-button color="primary" clear icon-only item-end (click)="addOtherPeople(accidentForm)">
-              <ion-icon name="add-circle"></ion-icon>
-            </button> -->
           </ion-list-header>
           <div formArrayName="otherPeopleInvolved" [hidden]="!accidentForm.value.visibleOtherPeople">
           <ion-card [formGroupName]="j" *ngFor="let people of accidentForm.controls.otherPeopleInvolved.controls;let j=index;">
@@ -275,7 +279,6 @@
             </ion-row>
           </ion-card>
         </div>
-
         <div text-center>
           <h2 color="primary">Capture Incident</h2>
           <button ion-button icon-only class="center" margin-bottom (click)="captureIncident(accidentForm)">

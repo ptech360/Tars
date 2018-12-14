@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { HttpClientModule } from '@angular/common/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Camera } from '@ionic-native/camera';
-import {HttpClientModule} from '@angular/common/http';
+import { MediaCapture/*, MediaFile, CaptureError, CaptureImageOptions*/ } from '@ionic-native/media-capture';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ViewAccidentsPage } from '../pages/view-accidents/view-accidents';
@@ -42,6 +44,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     StatusBar,
     SplashScreen,
     Camera,
+    MediaCapture,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AccidentProvider,

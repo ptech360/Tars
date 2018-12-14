@@ -6,6 +6,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastProvider } from '../../providers/toast/toast';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient } from '@angular/common/http';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 /**
  * Generated class for the ReportAccidentPage page.
  *
@@ -33,6 +34,7 @@ export class ReportAccidentPage implements OnInit{
   latitude: number;
   longitude: number;
   location: any;
+  media: any;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -42,7 +44,8 @@ export class ReportAccidentPage implements OnInit{
               public camera: Camera,
               private geolocation: Geolocation,
               public httpClient: HttpClient,
-              public modalCtrl:ModalController
+              public modalCtrl:ModalController,
+              private mediaCapture: MediaCapture
               ) {
     this.accidentForm = this.getAccidentForm();
   }
@@ -82,13 +85,16 @@ export class ReportAccidentPage implements OnInit{
       accidentType: ['',[Validators.required]],
       fatal: [false,[Validators.required]],
       noOfVehicle: [0,[Validators.required]],
+      noOfCasulities: [0],
+      initiate:[''],
       involvedVehicles: this.fb.array([]),
       visibleVehicles: [true],
       otherPeopleInvolved: this.fb.array([]),
       visibleOtherPeople:[true],
       incidentPhotos:this.fb.array([]),
       incidentDescription:['',[Validators.required]],
-      remarks:['',[Validators.required]]
+      remarks:['',[Validators.required]],
+      fir:['FIR'+Math.random()]
     });
   }
 

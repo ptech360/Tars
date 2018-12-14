@@ -48,7 +48,7 @@
       </button>
     </div>
     <div padding>
-      <button type="button" ion-button block small (click)="saveVehicle()">Save</button>
+      <button type="button" ion-button block small [disabled]="vehicleFormGroup.invalid" (click)="saveVehicle()">Save</button>
     </div>
   </ion-card>
 </ion-content>

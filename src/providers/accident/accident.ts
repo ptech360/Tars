@@ -39,6 +39,9 @@ export class AccidentProvider {
       accidentType: "Vehicle vs Vehicle Collision",
       geoLocation: "Nirvana, Block J, Mayfield Garden, Sector 51, Gurugram",
       incidentDescription: "Suddenly changed the direction",
+      noOfCasulities:3,
+      noOfVehicle:1,
+      initiate:'Ambulance, Fire Vehicle',
       dateTime:new Date(),
       incidentPhotos: [{
         name: "vehicle-img2018-12-11135631.jpeg",
@@ -80,6 +83,7 @@ export class AccidentProvider {
         pictures:[]
       }],
       remarks: "Koiti sngara squar",
+      fir: 'FIR'+Math.random()
     }
   ]
   constructor() {

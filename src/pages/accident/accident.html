@@ -17,7 +17,23 @@
   <ion-card>
     <ion-item>
       <h2>Accident Type</h2>
-      <p>{{accident.accidentType}}.</p>
+      <p>{{accident.accidentType}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>Fatal</h2>
+      <p>{{accident.fatal ?'Yes':'No'}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>No. of Casualities</h2>
+      <p>{{accident.noOfCasulities}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>Initiate</h2>
+      <p>{{accident.initiate}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>No. of Vehicle Involved</h2>
+      <p>{{accident.noOfVehicle}}</p>
     </ion-item>
     <ion-item>
       <h2>Description</h2>
@@ -30,6 +46,10 @@
         </small>
       </p>
     </ion-item>
+    <ion-item>
+      <h2>FIR</h2>
+      <p>{{accident.fir}}</p>
+    </ion-item>
   </ion-card>
   <ion-card *ngFor="let vehicle of accident.involvedVehicles;">
     <ion-card-content no-padding>
@@ -40,30 +60,40 @@
     </ion-card-content>
 
     <img [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehicleImages;">
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="/assets/imgs/profile.png">
-      </ion-avatar>
-      <h2><b>Driver: </b>{{vehicle.driver.name}}</h2>
-      <p><b>Licence: </b>{{vehicle.driver.drivingLicence}}</p>
-      <p><b>Gender: </b>{{vehicle.driver.gender}}</p>
-      <p><b>Age: </b>{{vehicle.driver.age}}</p>
-      <p><b>Under Influence: </b>{{vehicle.driver.underInfluence?'Yes':'No'}}</p>
-      <p><b>DlNo: </b>{{vehicle.driver.drivingLicence}}</p>
-      <img [src]="img.url" *ngFor="let img of vehicle.driver.pictures;" padding>
-    </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <b>Driver</b>
+    </ion-card-header>
+    <ion-card-content no-padding>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="/assets/imgs/profile.png">
+        </ion-avatar>
+        <h2><b>Name: </b>{{vehicle.driver.name}}</h2>
+        <p><b>Driving Licence: </b>{{vehicle.driver.drivingLicence}}</p>
+      </ion-item>
+      <ion-item>
+        <p><b>Gender: </b>{{vehicle.driver.gender}}</p>
+        <p><b>Age: </b>{{vehicle.driver.age}}</p>
+        <p><b>Address: </b>{{vehicle.driver.address}}</p>
+        <p><b>Under Influence: </b>{{vehicle.driver.underInfluence?'Yes':'No'}}</p>
+        <p><b>Driving Licence: </b>{{vehicle.driver.drivingLicence}}</p>
+        <img [src]="img.url" *ngFor="let img of vehicle.driver.pictures;" padding>
+      </ion-item>
+    </ion-card-content>
+    </ion-card>
     <ion-card>
       <ion-card-header>
           Passenger(s)
       </ion-card-header>
       <ion-card-content no-padding>
         <ion-item *ngFor="let pass of vehicle.passengers;let o = index;">
-          <h2><b>{{0+1}}</b> : {{pass.name}}</h2>
+          <h2><b>Name: </b> : {{pass.name}}</h2>
           <p><b>Gender: </b>{{pass.gender}}</p>
           <p><b>Age: </b>{{pass.age}}</p>
+          <p><b>Address: </b>{{pass.address}}</p>
           <p><b>Under Influence: </b>{{pass.underInfluence?'Yes':'No'}}</p>
-          <p><b>DlNo: </b>{{pass.drivingLicence}}</p>
+          <p><b>Driving Licence: </b>{{pass.drivingLicence}}</p>
           <img [src]="img.url" *ngFor="let img of pass.pictures;" padding>
         </ion-item>
       </ion-card-content>
@@ -75,11 +105,12 @@
     </ion-card-header>
     <ion-card-content no-padding>
       <ion-item *ngFor="let people of accident.otherPeopleInvolved;let p = index;">
-        <h2><b>{{p+1}}</b> : {{people.name}}</h2>
+        <h2><b>Name: </b> : {{people.name}}</h2>
         <p><b>Gender: </b>{{people.gender}}</p>
         <p><b>Age: </b>{{people.age}}</p>
+        <p><b>Address: </b>{{people.address}}</p>
         <p><b>Under Influence: </b>{{people.underInfluence?'Yes':'No'}}</p>
-        <p><b>DlNo: </b>{{people.drivingLicence || None}}</p>
+        <p><b>Driving Licence: </b>{{people.drivingLicence || None}}</p>
         <img [src]="img.url" *ngFor="let img of people.pictures;" padding>
       </ion-item>
     </ion-card-content>

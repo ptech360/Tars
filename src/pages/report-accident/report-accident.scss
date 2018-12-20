@@ -7,4 +7,10 @@ page-report-accident {
     display: flex;
     justify-content: space-between;
   }
+  .border{
+    border: 1px solid #bdbdbd;
+  }
+  .primary-color{
+    color: color($colors,primary);
+  }
 }

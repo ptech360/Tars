@@ -1,16 +1,52 @@
 page-home {
-  .home-background{
-    background: url(/assets/imgs/emblem.png);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-position-y: 90%;
-    // filter: blur(0.5px);
-    // -webkit-filter: blur(0.5px);
-    //  background: white!important;
-  }
+  // .home-background{
+  //   background: url(/assets/imgs/emblem.png);
+  //   background-repeat: no-repeat;
+  //   background-position: bottom;
+  //   background-position-y: 90%;
+  // }
   .accident-logo{
-    height: 150px;
+    width: 125px;
+  }
+  .logo{
+    width: 160px;
+  }
+ 
+.accidentImages{
+    width: 80px;
     margin: auto;
+  }
+ 
+  .p-10{
+    padding: 10px;
+  }
+.margin-auto{
+  margin: auto;
+}
+.ml-1{
+  margin-left: 6px;
+}
+.mobile-landscape{
+  display: none;
+}
+.mobile-potrait{
+  display: block;
+}
+ @media(min-width:640px){
+.mobile-landscape{
     display: block;
   }
+  .mobile-potrait{
+    display: none;
+  }
+  .logo-ladsace{
+    transform: translateY(-50%);
+    margin-top: 20%;
+  }
+  .button-landscape{
+    transform: translateY(-50%);
+    margin-top: 25%;
+  }
+}
+  
 }

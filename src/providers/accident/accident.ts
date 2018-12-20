@@ -55,7 +55,7 @@ export class AccidentProvider {
           underInfluence:false,
           gender:'Male',
           address:'Chhindwara MP',
-          pictures:[]
+          pictures:[],
         },
         passengers: [{
           name: "Aniket Verma", 
@@ -80,9 +80,12 @@ export class AccidentProvider {
         underInfluence:false,
         gender:'Male',
         address:'Chhindwara MP',
-        pictures:[]
+        pictures:[],
       }],
       remarks: "Koiti sngara squar",
+      primaryAndSecondaryCausesOfTheAccident:'designers to design the form of the content be itself has been',
+      drawingOfAccidentDetails:'designers the content before the content itself has been',
+      informationOnAnalysingAgencyAndPersonnel: 'design content before the content itself has been',
       fir: 'FIR'+Math.random()
     }
   ]

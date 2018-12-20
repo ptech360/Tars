@@ -62,7 +62,7 @@
     <img [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehicleImages;">
     <ion-card>
       <ion-card-header>
-        <b>Driver</b>
+        <b>Driver Details</b>
     </ion-card-header>
     <ion-card-content no-padding>
       <ion-item>
@@ -78,6 +78,9 @@
         <p><b>Address: </b>{{vehicle.driver.address}}</p>
         <p><b>Under Influence: </b>{{vehicle.driver.underInfluence?'Yes':'No'}}</p>
         <p><b>Driving Licence: </b>{{vehicle.driver.drivingLicence}}</p>
+        <p><b>Type and Extent of Human Factor: </b>{{vehicle.driver.typeAndExtentOfHumanFactor}}</p>
+        <p><b>Nature of any injuries: </b>{{vehicle.driver.natureOfAnyInjuries}}</p>
+        <p><b>Data on Socio-economic status: </b>{{vehicle.driver.dataOnSocioEconomicStatus}}</p>
         <img [src]="img.url" *ngFor="let img of vehicle.driver.pictures;" padding>
       </ion-item>
     </ion-card-content>
@@ -101,7 +104,7 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-        Other People Involved
+      Pedestrian Details
     </ion-card-header>
     <ion-card-content no-padding>
       <ion-item *ngFor="let people of accident.otherPeopleInvolved;let p = index;">
@@ -111,6 +114,10 @@
         <p><b>Address: </b>{{people.address}}</p>
         <p><b>Under Influence: </b>{{people.underInfluence?'Yes':'No'}}</p>
         <p><b>Driving Licence: </b>{{people.drivingLicence || None}}</p>
+        <p><b>Driving Licence: </b>{{people.drivingLicence || None}}</p>
+        <p><b>Type and Extent of Human Factor: </b>{{people.typeAndExtentOfHumanFactor}}</p>
+        <p><b>Nature of any injuries: </b>{{people.natureOfAnyInjuries}}</p>
+        <p><b>Data on Socio-economic status: </b>{{people.dataOnSocioEconomicStatus}}</p>
         <img [src]="img.url" *ngFor="let img of people.pictures;" padding>
       </ion-item>
     </ion-card-content>
@@ -122,6 +129,9 @@
   <ion-card>
     <ion-item>
       <h2><b>Remarks</b> : {{accident.remarks}}</h2>
+      <h2><b>Causes of the accident</b> : {{accident.primaryAndSecondaryCausesOfTheAccident}}</h2>
+      <h2><b>Accident Details</b> : {{accident.drawingOfAccidentDetails}}</h2>
+      <h2><b>Information On Analysing</b> : {{accident.informationOnAnalysingAgencyAndPersonnel}}</h2>
     </ion-item>
   </ion-card>
 </ion-content>

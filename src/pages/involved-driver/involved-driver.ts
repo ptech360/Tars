@@ -44,6 +44,9 @@ export class InvolvedDriverPage {
       gender:['',[Validators.required]],
       drivingLicence:['',[Validators.required]],
       address:['',[Validators.required]],
+      typeAndExtentOfHumanFactor:[''],
+      natureOfAnyInjuries:[''],
+      dataOnSocioEconomicStatus:[''],
       pictures:this.fb.array([])
     });
   }

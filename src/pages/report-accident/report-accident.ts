@@ -85,7 +85,7 @@ export class ReportAccidentPage implements OnInit{
       accidentType: ['',[Validators.required]],
       fatal: [false,[Validators.required]],
       noOfVehicle: [0,[Validators.required]],
-      noOfCasulities: [0],
+      noOfCasulities: [0,[Validators.required]],
       initiate:[''],
       involvedVehicles: this.fb.array([]),
       visibleVehicles: [true],
@@ -93,7 +93,10 @@ export class ReportAccidentPage implements OnInit{
       visibleOtherPeople:[true],
       incidentPhotos:this.fb.array([]),
       incidentDescription:['',[Validators.required]],
-      remarks:['',[Validators.required]],
+      remarks:[''],
+      primaryAndSecondaryCausesOfTheAccident:[''],
+      drawingOfAccidentDetails:[''],
+      informationOnAnalysingAgencyAndPersonnel: [''],
       fir:['FIR'+Math.random()]
     });
   }
@@ -116,8 +119,11 @@ export class ReportAccidentPage implements OnInit{
       age:['',[Validators.required]],
       underInfluence:[false,[Validators.required]],
       gender:['',[Validators.required]],
-      drivingLicence:['',[Validators.required]],
+      drivingLicence:[''],
       address:['',[Validators.required]],
+      typeAndExtentOfHumanFactor:[''],
+      natureOfAnyInjuries:[''],
+      dataOnSocioEconomicStatus:[''],
       pictures:this.fb.array([])
     });
   }
@@ -129,7 +135,7 @@ export class ReportAccidentPage implements OnInit{
       underInfluence:[false,[Validators.required]],
       gender:['',[Validators.required]],
       drivingLicence:[''],
-      address:['',[Validators.required]],
+      address:['',[Validators.required]],      
       pictures:this.fb.array([])
     });
   }
@@ -142,6 +148,9 @@ export class ReportAccidentPage implements OnInit{
       gender:[''],
       drivingLicence:[''],
       address:[''],
+      typeAndExtentOfHumanFactor:[''],
+      natureOfAnyInjuries:[''],
+      dataOnSocioEconomicStatus:[''],
       pictures:this.fb.array([])
     });
   }

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Add Involved Driver</ion-title>
+    <ion-title>Driver Details</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" showWhen="ios">Cancel</span>
@@ -47,6 +47,18 @@
     <ion-item>
       <ion-label><small>Under Influence</small></ion-label>
       <ion-toggle formControlName="underInfluence"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Type and Extent of Human Factor</ion-label>
+      <ion-input formControlName="typeAndExtentOfHumanFactor"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Nature of any injuries</ion-label>
+      <ion-input formControlName="natureOfAnyInjuries"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Data on Socio-economic status</ion-label>
+      <ion-input formControlName="dataOnSocioEconomicStatus"></ion-input>
     </ion-item>
     <div padding>
       <ion-card *ngFor="let img of driverFormGroup.controls.pictures.controls;let m = index;">

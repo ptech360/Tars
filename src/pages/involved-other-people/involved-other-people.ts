@@ -44,6 +44,9 @@ export class InvolvedOtherPeoplePage {
       gender:[''],
       drivingLicence:[''],
       address:[''],
+      typeAndExtentOfHumanFactor:[''],
+      natureOfAnyInjuries:[''],
+      dataOnSocioEconomicStatus:[''],
       pictures:this.fb.array([])
     });
   }

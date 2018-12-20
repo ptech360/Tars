@@ -1,13 +1,17 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title text-center>
-      TARS
+      Traffic Accident Reporting System
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="home-background" padding text-center>
-  <img class="accident-logo" src="/assets/imgs/accident.png" />
+  <div class="mobile-potrait">
+  <div>
+    <img class="accident-logo" src="/assets/imgs/emblem.png" />
+  </div>
+ 
   <br>
   <button ion-button outline icon-end (click)="reportAccident()">
     Report Accident
@@ -18,4 +22,65 @@
     Previous Accidents
     <ion-icon name="arrow-forward"></ion-icon>
   </button>
+  </div>
+  <div class="mobile-landscape" >
+    <ion-grid>
+      <ion-row>
+        <ion-col col-md-6 col-xs-12>
+          <div>
+          <img class="accident-logo" src="/assets/imgs/emblem.png" />
+        </div>
+      </ion-col>
+      <ion-col col-md-6 col-xs-12>
+        <button ion-button outline icon-end (click)="reportAccident()">
+          Report Accident
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+        <br>
+        <button ion-button icon-end (click)="viewAccidents()">
+          Previous Accidents
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button></ion-col>
+      </ion-row>
+     
+    </ion-grid>
+
+
+  </div>
+ 
+
+
 </ion-content>
+<!-- <ion-content class="background">
+  <div >
+    <div text-center padding>
+      <img src="/assets/imgs/bhu-logo.png"  class="logo">
+    </div>
+    <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-8 class="margin-auto">
+            <ion-card class="p-10" text-center>
+              <img src="/assets/imgs/car-collision.png" class="accidentImages">
+              <button ion-button small outline icon-end class="button" (click)="reportAccident()">
+                Report Accident
+                <ion-icon name="arrow-forward"></ion-icon>
+              </button>
+              
+            </ion-card>
+          </ion-col>
+          <ion-col col-8 class="margin-auto">
+            <ion-card class="p-10" text-center>
+              <img src="/assets/imgs/accident.png" class="accidentImages">
+              <button ion-button outline small class="button" (click)="viewAccidents()">
+                Previous Accidents
+                <ion-icon name="arrow-forward" class="ml-1"></ion-icon>
+              </button>
+              
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content> -->

@@ -41,7 +41,23 @@ $colors: (
   dark:       #222
 );
 
-
+@media(min-width:640px){
+.mobile-landscape{
+    display: block;
+  }
+  .mobile-potrait{
+    display: none;
+  }
+  .logo-ladsace{
+    transform: translateY(-50%);
+    margin-top: 20%;
+  }
+  .button-landscape{
+    transform: translateY(-50%);
+    margin-top: 25%;
+  }
+}
+  
 
 // App iOS Variables
 // --------------------------------------------------

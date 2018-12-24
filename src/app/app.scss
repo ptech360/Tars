@@ -20,6 +20,25 @@
 margin-auto{
   margin: auto;
 }
+@media(min-width:640px){
+.mobile-landscape{
+    display: block;
+  }
+  .mobile-potrait{
+    display: none;
+  }
+  .logo-ladsace{
+    transform: translateY(-50%);
+    margin-top: 20%;
+  }
+  .button-landscape{
+    transform: translateY(-50%);
+    margin-top: 25%;
+  }
+}
+  
+
+
 // .primary{
 //   color:colors($color,primary);
 // }

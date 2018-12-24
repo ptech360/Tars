@@ -3,6 +3,10 @@ page-report-accident {
     margin-top: 0px!important; 
     margin-bottom: 0px!important;
   }
+  .pt-10{
+    padding-top: 10px;
+    color: gray;
+  }
   .flex{
     display: flex;
     justify-content: space-between;
@@ -12,5 +16,22 @@ page-report-accident {
   }
   .primary-color{
     color: color($colors,primary);
+  }
+  .bg-white{
+    background: white;
+  }
+.mob-lanscape{
+      display: none;
+    }
+
+  // view on mobile landscape/ipad
+  @media(min-width:640px){
+    .mob-potrait{
+      display: none;
+    }
+    .mob-lanscape{
+      display: block;
+    }
+    
   }
 }

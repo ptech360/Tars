@@ -14,69 +14,145 @@
 
 
 <ion-content class="background">
-  <ion-card>
-    <ion-item>
+  <div class="bg-white mob-potrait">
+  <div padding >
+    <ion-item class="border">
       <h2>Accident Type</h2>
       <p>{{accident.accidentType}}</p>
     </ion-item>
-    <ion-item>
+    <ion-item class="border" margin-top>
       <h2>Fatal</h2>
       <p>{{accident.fatal ?'Yes':'No'}}</p>
     </ion-item>
-    <ion-item>
+    <ion-item class="border" margin-top>
       <h2>No. of Casualities</h2>
       <p>{{accident.noOfCasulities}}</p>
     </ion-item>
-    <ion-item>
+    <ion-item class="border" margin-top>
       <h2>Initiate</h2>
       <p>{{accident.initiate}}</p>
     </ion-item>
-    <ion-item>
+    <ion-item class="border" margin-top>
       <h2>No. of Vehicle Involved</h2>
       <p>{{accident.noOfVehicle}}</p>
     </ion-item>
-    <ion-item>
+    <ion-item class="border" margin-top>
       <h2>Description</h2>
       <p>{{accident.incidentDescription}}.</p>
     </ion-item>
-    <ion-item>
+    <ion-item class="border" margin-top>
       <h2>Location</h2>
       <p><small>
         {{accident.geoLocation}}
         </small>
       </p>
     </ion-item>
-    <ion-item>
+    <ion-item class="border" margin-top>
       <h2>FIR</h2>
       <p>{{accident.fir}}</p>
     </ion-item>
-  </ion-card>
-  <ion-card *ngFor="let vehicle of accident.involvedVehicles;">
+  </div>
+</div>
+
+<!-- mobile-landscape/ipad view design -->
+<div class="bg-white mob-lanscape">
+  <div padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item class="border">
+            <h2>Accident Type</h2>
+            <p>{{accident.accidentType}}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item class="border">
+            <h2>Accident Type</h2>
+            <p>{{accident.accidentType}}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item class="border" margin-top>
+            <h2>Fatal</h2>
+            <p>{{accident.fatal ?'Yes':'No'}}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item class="border" margin-top>
+            <h2>No. of Casualities</h2>
+            <p>{{accident.noOfCasulities}}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item class="border" margin-top>
+            <h2>Initiate</h2>
+            <p>{{accident.initiate}}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item class="border" margin-top>
+            <h2>No. of Vehicle Involved</h2>
+            <p>{{accident.noOfVehicle}}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item class="border" margin-top>
+            <h2>Description</h2>
+            <p>{{accident.incidentDescription}}.</p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item class="border" margin-top>
+            <h2>Location</h2>
+            <p><small>
+                {{accident.geoLocation}}
+              </small>
+            </p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item class="border" margin-top>
+            <h2>FIR</h2>
+            <p>{{accident.fir}}</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>
+<!-- vehicle details -->
+
+  <div class="bg-white"  *ngFor="let vehicle of accident.involvedVehicles;"  margin-top>
+    <div class=" margin">
+      <div class="vehical-details"><b>Vehicle Details</b></div>
     <ion-card-content no-padding>
       <ion-item>
         <h2><b>Vehicle Number</b> : {{vehicle.vehicleNumber}}</h2>
         <p><b>Vehicle Model</b> : {{vehicle.vehicleModel}}</p>
       </ion-item>
     </ion-card-content>
-
-    <img [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehicleImages;">
-    <ion-card>
+    <div text-center padding>
+    <img width="100%" [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehicleImages;">
+    </div>
+    </div>
+    <ion-card class="border">
       <ion-card-header>
+        <!-- <ion-avatar item-start>
+          <img src="/assets/imgs/profile.png">
+        </ion-avatar> -->
         <b>Driver Details</b>
     </ion-card-header>
     <ion-card-content no-padding>
       <ion-item>
-        <ion-avatar item-start>
-          <img src="/assets/imgs/profile.png">
-        </ion-avatar>
+        
         <h2><b>Name: </b>{{vehicle.driver.name}}</h2>
         <p><b>Driving Licence: </b>{{vehicle.driver.drivingLicence}}</p>
       </ion-item>
       <ion-item>
-        <p><b>Gender: </b>{{vehicle.driver.gender}}</p>
-        <p><b>Age: </b>{{vehicle.driver.age}}</p>
-        <p><b>Address: </b>{{vehicle.driver.address}}</p>
-        <p><b>Under Influence: </b>{{vehicle.driver.underInfluence?'Yes':'No'}}</p>
+        <p><b>Gender: </b><span >{{vehicle.driver.gender}}</span></p>
+        <p><b>Age: </b><span>{{vehicle.driver.age}}</span></p>
+        <p><b>Address: </b><span>{{vehicle.driver.address}}</span></p>
+        <p><b>Under Influence: </b><span>{{vehicle.driver.underInfluence?'Yes':'No'}}</span></p>
         <p><b>Driving Licence: </b>{{vehicle.driver.drivingLicence}}</p>
         <p><b>Type and Extent of Human Factor: </b>{{vehicle.driver.typeAndExtentOfHumanFactor}}</p>
         <p><b>Nature of any injuries: </b>{{vehicle.driver.natureOfAnyInjuries}}</p>
@@ -85,7 +161,7 @@
       </ion-item>
     </ion-card-content>
     </ion-card>
-    <ion-card>
+    <ion-card class="border">
       <ion-card-header>
           Passenger(s)
       </ion-card-header>
@@ -101,7 +177,7 @@
         </ion-item>
       </ion-card-content>
     </ion-card>
-  </ion-card>
+  </div>
   <ion-card>
     <ion-card-header>
       Pedestrian Details
@@ -118,7 +194,8 @@
         <p><b>Type and Extent of Human Factor: </b>{{people.typeAndExtentOfHumanFactor}}</p>
         <p><b>Nature of any injuries: </b>{{people.natureOfAnyInjuries}}</p>
         <p><b>Data on Socio-economic status: </b>{{people.dataOnSocioEconomicStatus}}</p>
-        <img [src]="img.url" *ngFor="let img of people.pictures;" padding>
+        <div padding text-center><img [src]="img.url" *ngFor="let img of people.pictures;" padding></div>
+        
       </ion-item>
     </ion-card-content>
   </ion-card>

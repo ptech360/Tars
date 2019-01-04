@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
@@ -6,7 +6,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastProvider } from '../../providers/toast/toast';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient } from '@angular/common/http';
-import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions, CaptureVideoOptions } from '@ionic-native/media-capture';
+import { Media, MediaObject } from '@ionic-native/media';
+import { Storage } from '@ionic/storage';
+import { VideoPlayer } from '@ionic-native/video-player';
 /**
  * Generated class for the ReportAccidentPage page.
  *
@@ -19,9 +22,6 @@ import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ion
   templateUrl: 'report-accident.html',
 })
 export class ReportAccidentPage implements OnInit{
-
-  accidentForm:FormGroup;
-  accidentTypes = [];
   cameraOptions: CameraOptions = {
     sourceType         : this.camera.PictureSourceType.CAMERA,
     destinationType    : this.camera.DestinationType.DATA_URL,
@@ -29,12 +29,14 @@ export class ReportAccidentPage implements OnInit{
     mediaType: this.camera.MediaType.PICTURE,
     correctOrientation: true
   };
+  accidentForm:FormGroup;
+  accidentTypes = [];
   vehicleImageUrls: any = [];
   files: any = [];
   latitude: number;
   longitude: number;
   location: any;
-  media: any;
+  mediaFiles: any = [];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -42,10 +44,11 @@ export class ReportAccidentPage implements OnInit{
               public accSev: AccidentProvider,
               public toastSev:ToastProvider,
               public camera: Camera,
-              private geolocation: Geolocation,
               public httpClient: HttpClient,
               public modalCtrl:ModalController,
-              private mediaCapture: MediaCapture
+              private geolocation: Geolocation,
+              private mediaCapture: MediaCapture,
+              private videoPlayer: VideoPlayer
               ) {
     this.accidentForm = this.getAccidentForm();
   }
@@ -212,14 +215,14 @@ export class ReportAccidentPage implements OnInit{
     })
   }
 
-  dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, {type:mime});
-  }
+  // dataURLtoFile(dataurl, filename) {
+  //   var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+  //       bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+  //   while(n--){
+  //       u8arr[n] = bstr.charCodeAt(n);
+  //   }
+  //   return new File([u8arr], filename, {type:mime});
+  // }
 
   delVehicleImage(vehicleForm: FormGroup,index:number){
     const vehicleImages = <FormArray>vehicleForm.controls['vehicleImages'];
@@ -255,5 +258,28 @@ export class ReportAccidentPage implements OnInit{
       this.toastSev.showToast('Accident Reported Successfully');
       this.navCtrl.popToRoot();
     })
+  }
+
+  private captureVideo() {
+    let options: CaptureVideoOptions = {
+      limit: 1,
+      duration: 30
+    }
+    this.mediaCapture.captureVideo(options).then((res: MediaFile[]) => {
+      this.storeMediaFiles(res[0]);
+    },(err: CaptureError) => console.error(err));
+  }
+ 
+  play(file:any) {
+    this.videoPlayer.play(file.localURL);
+  }
+ 
+  storeMediaFiles(file) {
+    if(this.mediaFiles.length){
+      this.mediaFiles.push(file);
+    } else {
+      this.mediaFiles = [];
+      this.mediaFiles.push(file);      
+    }
   }
 }

@@ -1,0 +1,35 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content padding>
+  <form name="Login_Form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+    </ion-item>
+
+    <div class="err-msg" *ngIf="errorMsg">
+      <p>{{errorMsg}}</p>
+    </div>
+    <button ion-button full rounded type="submit" [disabled]="logging" style="border-radius: 4px;">{{logging?'Logging
+      In ...' :'Login' }}</button>
+    <div (click)="forgotPassword()" class="forgotPwd" color="primary">Forgot Password?</div>
+    <div color="primary" (click)="signup()" class="signUp">Sign Up</div>
+
+  </form>
+</ion-content>

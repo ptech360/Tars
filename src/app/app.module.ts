@@ -20,10 +20,16 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastProvider } from '../providers/toast/toast';
 import { AccidentPage } from '../pages/accident/accident';
 import { Geolocation } from '@ionic-native/geolocation';
+import { AuthProvider } from '../providers/auth/auth';
+import { ApiProvider } from '../providers/api/api';
+import { LoginPage } from '../pages/login/login';
+import { NetworkProvider } from '../providers/network/network';
+import { Network } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
     HomePage,
     ReportAccidentPage,
     ViewAccidentsPage,
@@ -40,6 +46,7 @@ import { Geolocation } from '@ionic-native/geolocation';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    LoginPage,
     HomePage,
     ReportAccidentPage,
     ViewAccidentsPage,
@@ -51,12 +58,16 @@ import { Geolocation } from '@ionic-native/geolocation';
     Camera,
     MediaCapture,
     Media,
+    Network,
     File,
     VideoPlayer,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider,
+    ApiProvider,
     AccidentProvider,
-    ToastProvider
+    ToastProvider,
+    NetworkProvider,
   ]
 })
 export class AppModule {}

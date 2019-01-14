@@ -1,0 +1,27 @@
+page-login {
+  .forgotPwd{
+    float: left;
+    color:color($colors, primary);
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .signUp{
+    float: right;
+    color: color($colors,primary);
+    margin-top: 10px;
+    border-bottom: 1px solid color($colors,primary);
+    cursor: pointer;
+    font-size: 15px;
+  }
+}
+
+.err-msg{
+  padding: 5px;
+  border: 1px solid red;
+  p{
+      color: red;
+  }
+  
+  
+}

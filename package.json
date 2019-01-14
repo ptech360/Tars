@@ -26,6 +26,7 @@
     "@ionic-native/geolocation": "^4.18.0",
     "@ionic-native/media": "^4.18.0",
     "@ionic-native/media-capture": "^4.18.0",
+    "@ionic-native/network": "^4.19.0",
     "@ionic-native/splash-screen": "~4.17.0",
     "@ionic-native/status-bar": "~4.17.0",
     "@ionic-native/video-player": "^4.18.0",
@@ -39,6 +40,7 @@
     "cordova-plugin-ionic-webview": "^2.3.1",
     "cordova-plugin-media": "^5.0.2",
     "cordova-plugin-media-capture": "^3.0.2",
+    "cordova-plugin-network-information": "^2.0.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-video-player": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
@@ -72,7 +74,8 @@
       "cordova-plugin-media-capture": {},
       "com.moust.cordova.videoplayer": {},
       "cordova-plugin-media": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-network-information": {}
     },
     "platforms": [
       "android"

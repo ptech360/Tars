@@ -11,7 +11,7 @@ import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 import { VideoPlayer } from '@ionic-native/video-player';
 
-import { MyApp } from './app.component';
+import { Tars } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ViewAccidentsPage } from '../pages/view-accidents/view-accidents';
 import { ReportAccidentPage } from '../pages/report-accident/report-accident';
@@ -28,7 +28,7 @@ import { Network } from '@ionic-native/network';
 
 @NgModule({
   declarations: [
-    MyApp,
+    Tars,
     LoginPage,
     HomePage,
     ReportAccidentPage,
@@ -40,12 +40,12 @@ import { Network } from '@ionic-native/network';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(Tars),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    Tars,
     LoginPage,
     HomePage,
     ReportAccidentPage,
@@ -55,6 +55,8 @@ import { Network } from '@ionic-native/network';
   providers: [
     StatusBar,
     SplashScreen,
+    ToastProvider,
+    NetworkProvider,
     Camera,
     MediaCapture,
     Media,
@@ -66,8 +68,6 @@ import { Network } from '@ionic-native/network';
     AuthProvider,
     ApiProvider,
     AccidentProvider,
-    ToastProvider,
-    NetworkProvider,
   ]
 })
 export class AppModule {}

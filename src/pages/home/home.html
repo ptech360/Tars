@@ -8,46 +8,56 @@
 
 <ion-content class="home-background" padding text-center>
   <div class="mobile-potrait">
-  <div >
-    <img class="accident-logo" src="/assets/imgs/emblem.png" />
+    <div>
+      <img class="accident-logo" src="/assets/imgs/emblem.png" />
+    </div>
+
+    <br>
+    <button ion-button outline icon-end (click)="reportAccident()">
+      Report Accident
+      <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+    <br>
+    <button ion-button icon-end (click)="viewAccidents()">
+      Previous Accidents
+      <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+    <br>
+    <button ion-button icon-end (click)="logout()">
+      Logout
+      <ion-icon name="log-out"></ion-icon>
+    </button>
   </div>
- 
-  <br>
-  <button ion-button outline icon-end (click)="reportAccident()">
-    Report Accident
-    <ion-icon name="arrow-forward"></ion-icon>
-  </button>
-  <br>
-  <button ion-button icon-end (click)="viewAccidents()">
-    Previous Accidents
-    <ion-icon name="arrow-forward"></ion-icon>
-  </button>
-  </div>
-  <div class="mobile-landscape" >
+  <div class="mobile-landscape">
     <ion-grid>
-      <ion-row >
+      <ion-row>
         <ion-col col-md-6 col-xs-12 class="logo-ladsace">
           <div>
-          <img class="accident-logo" src="/assets/imgs/emblem.png" />
-        </div>
-      </ion-col>
-      <ion-col col-md-6 col-xs-12 class="button-landscape">
-        <button ion-button outline icon-end (click)="reportAccident()">
-          Report Accident
-          <ion-icon name="arrow-forward"></ion-icon>
-        </button>
-        <br>
-        <button ion-button icon-end (click)="viewAccidents()">
-          Previous Accidents
-          <ion-icon name="arrow-forward"></ion-icon>
-        </button></ion-col>
+            <img class="accident-logo" src="/assets/imgs/emblem.png" />
+          </div>
+        </ion-col>
+        <ion-col col-md-6 col-xs-12 class="button-landscape">
+          <button ion-button outline icon-end (click)="reportAccident()">
+            Report Accident
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+          <br>
+          <button ion-button icon-end (click)="viewAccidents()">
+            Previous Accidents
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+          <br>
+          <button ion-button icon-end (click)="logout()">
+            Logout
+            <ion-icon name="log-out"></ion-icon>
+          </button>
+        </ion-col>
       </ion-row>
-     
     </ion-grid>
 
 
   </div>
- 
+
 
 
 </ion-content>

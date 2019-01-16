@@ -87,32 +87,32 @@ export class ReportAccidentPage implements OnInit{
       dateTime:[new Date()],
       accidentType: ['',[Validators.required]],
       fatal: [false,[Validators.required]],
-      noOfVehicle: [0,[Validators.required]],
-      noOfCasulities: [0,[Validators.required]],
-      initiate:[''],
-      involvedVehicles: this.fb.array([]),
+      numOfVehicle: [0,[Validators.required]],
+      numOfCasualities: [0,[Validators.required]],
+      accidentInitiate:[''],
+      vehicle: this.fb.array([]),
       visibleVehicles: [true],
-      otherPeopleInvolved: this.fb.array([]),
+      otherPerson: this.fb.array([]),
       visibleOtherPeople:[true],
-      incidentPhotos:this.fb.array([]),
-      incidentDescription:['',[Validators.required]],
+      accidentPics:this.fb.array([]),
+      description:['',[Validators.required]],
       remarks:[''],
-      primaryAndSecondaryCausesOfTheAccident:[''],
-      drawingOfAccidentDetails:[''],
-      informationOnAnalysingAgencyAndPersonnel: [''],
+      primaryAndSecondaryCauses:[''],
+      drawing:[''],
+      analysingInfo: [''],
       fir:['FIR'+Math.random()]
     });
   }
 
   getVehicleFormGroup(){
     return this.fb.group({
-      vehicleNumber: ['',[Validators.required]],
-      vehicleModel: ['',[Validators.required]],
-      vehicleImages: this.fb.array([]),
+      number: ['',[Validators.required]],
+      model: ['',[Validators.required]],
+      vehiclePics: this.fb.array([]),
       // driver:[''],
       visibleDriver:[true],
       visiblePassengers:[true],
-      passengers:this.fb.array([]),
+      person:this.fb.array([]),
     });
   }
 
@@ -127,7 +127,7 @@ export class ReportAccidentPage implements OnInit{
       typeAndExtentOfHumanFactor:[''],
       natureOfAnyInjuries:[''],
       dataOnSocioEconomicStatus:[''],
-      pictures:this.fb.array([])
+      personPics:this.fb.array([])
     });
   }
 
@@ -139,7 +139,7 @@ export class ReportAccidentPage implements OnInit{
       gender:['',[Validators.required]],
       drivingLicence:[''],
       address:['',[Validators.required]],      
-      pictures:this.fb.array([])
+      personPics:this.fb.array([])
     });
   }
 
@@ -154,21 +154,21 @@ export class ReportAccidentPage implements OnInit{
       typeAndExtentOfHumanFactor:[''],
       natureOfAnyInjuries:[''],
       dataOnSocioEconomicStatus:[''],
-      pictures:this.fb.array([])
+      personPics:this.fb.array([])
     });
   }
 
   addVehicle(){    
-  const modal =  this.modalCtrl.create('InvolvedVehiclePage', {involvedVehicles: this.accidentForm.controls['involvedVehicles']});
+  const modal =  this.modalCtrl.create('InvolvedVehiclePage', {vehicle: this.accidentForm.controls['vehicle']});
   modal.present();
-  // const involvedVehicles = <FormArray>this.accidentForm.controls['involvedVehicles'];
-  // involvedVehicles.push(this.getVehicleFormGroup());
+  // const vehicle = <FormArray>this.accidentForm.controls['vehicle'];
+  // vehicle.push(this.getVehicleFormGroup());
   }
 
   
   removeVehicle(index: number){
-    const involvedVehicles = <FormArray>this.accidentForm.controls['involvedVehicles'];
-    involvedVehicles.removeAt(index);    
+    const vehicle = <FormArray>this.accidentForm.controls['vehicle'];
+    vehicle.removeAt(index);    
   }
 
   addDriver(vehicleForm: FormGroup){
@@ -180,36 +180,36 @@ export class ReportAccidentPage implements OnInit{
   addPassenger(vehicleForm: FormGroup){
     const modal =  this.modalCtrl.create('InvolvedPassengerPage', {vehicleForm: vehicleForm});
     modal.present();
-    // const passengers = <FormArray>vehicleForm.controls['passengers'];
-    // passengers.push(this.getPassenger());
+    // const person = <FormArray>vehicleForm.controls['person'];
+    // person.push(this.getPassenger());
   }
 
   removePassenger(vehicleForm: FormGroup, index:number){
-    const passengers = <FormArray>vehicleForm.controls['passengers'];
-    passengers.removeAt(index);
+    const person = <FormArray>vehicleForm.controls['person'];
+    person.removeAt(index);
   }
 
   addOtherPeople(accidentForm: FormGroup){
     const modal =  this.modalCtrl.create('InvolvedOtherPeoplePage', {accidentForm: accidentForm});
     modal.present();
-    // const otherPeopleInvolved = <FormArray>accidentForm.controls['otherPeopleInvolved'];
-    // otherPeopleInvolved.push(this.getOtherPeopleForm());
+    // const otherPerson = <FormArray>accidentForm.controls['otherPerson'];
+    // otherPerson.push(this.getOtherPeopleForm());
   }
   
   removeOtherPeople(accidentForm: FormGroup, index:number){
-    const otherPeopleInvolved = <FormArray>accidentForm.controls['otherPeopleInvolved'];
-    otherPeopleInvolved.removeAt(index);
+    const otherPerson = <FormArray>accidentForm.controls['otherPerson'];
+    otherPerson.removeAt(index);
   }
 
   private captureVehicle(vehicleForm: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const vehicleImages = <FormArray>vehicleForm.controls['vehicleImages'];  
+      const vehiclePics = <FormArray>vehicleForm.controls['vehiclePics'];  
       const fileName:string = 'vehicle-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
         url:'data:image/jpeg;base64,' + onSuccess
       });
-      vehicleImages.push(file);      
+      vehiclePics.push(file);      
     },(onError)=>{
       alert(onError);
     })
@@ -225,29 +225,29 @@ export class ReportAccidentPage implements OnInit{
   // }
 
   delVehicleImage(vehicleForm: FormGroup,index:number){
-    const vehicleImages = <FormArray>vehicleForm.controls['vehicleImages'];
-    vehicleImages.removeAt(index);
+    const vehiclePics = <FormArray>vehicleForm.controls['vehiclePics'];
+    vehiclePics.removeAt(index);
     // this.vehicleImageUrls.splice(index,1);
     // this.files.splice(index,1);
   }
 
   private captureIncident(accidentForm: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const incidentPhotos = <FormArray>accidentForm.controls['incidentPhotos'];  
+      const accidentPics = <FormArray>accidentForm.controls['accidentPics'];  
       const fileName:string = 'incident-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
         url:'data:image/jpeg;base64,' + onSuccess
       });      
-      incidentPhotos.push(file);      
+      accidentPics.push(file);      
     },(onError)=>{
       alert(onError);
     })
   }
 
   delIncidentImage(accidentForm: FormGroup,index:number){
-    const incidentPhotos = <FormArray>accidentForm.controls['incidentPhotos'];
-    incidentPhotos.removeAt(index);
+    const accidentPics = <FormArray>accidentForm.controls['accidentPics'];
+    accidentPics.removeAt(index);
   }
 
   saveAccidentReport(){

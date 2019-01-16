@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 import { Subject } from 'rxjs/Subject';
 import { FormGroup } from '@angular/forms';
+import { ApiProvider } from '../api/api';
 
 /*
   Generated class for the AccidentProvider provider.
@@ -38,58 +39,60 @@ export class AccidentProvider {
     {
       accidentType: "Vehicle vs Vehicle Collision",
       geoLocation: "Nirvana, Block J, Mayfield Garden, Sector 51, Gurugram",
-      incidentDescription: "Suddenly changed the direction",
-      noOfCasulities:3,
-      noOfVehicle:1,
-      initiate:'Ambulance, Fire Vehicle',
+      description: "Suddenly changed the direction",
+      numOfCasualities:3,
+      numOfVehicle:1,
+      accidentInitiate:'Ambulance, Fire Vehicle',
       dateTime:new Date(),
-      incidentPhotos: [{
+      accidentPics: [{
         name: "vehicle-img2018-12-11135631.jpeg",
         url: "/assets/imgs/180710_wabc.jpg"
       }],
-      involvedVehicles: [{
-        driver: {
+      vehicle: [{
+        model: "BDHHD12-67",
+        number: "UP20MC5678",
+        person: [{
           name: "Pankaj Kharetwal", 
           drivingLicence: "MP28N-2012-0164333",
           age:'26',
           underInfluence:false,
           gender:'Male',
           address:'Chhindwara MP',
-          pictures:[],
+          personPics:[],
+          personType:['driver']
         },
-        passengers: [{
+        {
           name: "Aniket Verma", 
           drivingLicence: "MP28N-2012-0189333",
           age:'22',
           underInfluence:true,
           gender:'Male',
           address:'Chhindwara MP',
-          pictures:[]
+          personPics:[],
+          personType:['passenger']
         }],
-        vehicleImages: [{
+        vehiclePics: [{
           name: "vehicle-img2018-12-11135631.jpeg",
           url: "/assets/imgs/51f97d2a6c444.image.jpg"
-        }],
-        vehicleModel: "BDHHD12-67",
-        vehicleNumber: "UP20MC5678"
+        }]        
       }],
-      otherPeopleInvolved: [{
+      otherPerson: [{
         name: "Ashok Pal", 
         drivingLicence: "MP28N-1991-0164113",
         age:'36',
         underInfluence:false,
         gender:'Male',
         address:'Chhindwara MP',
-        pictures:[],
+        personPics:[],
       }],
       remarks: "Koiti sngara squar",
-      primaryAndSecondaryCausesOfTheAccident:'designers to design the form of the content be itself has been',
-      drawingOfAccidentDetails:'designers the content before the content itself has been',
-      informationOnAnalysingAgencyAndPersonnel: 'design content before the content itself has been',
+      primaryAndSecondaryCauses:'designers to design the form of the content be itself has been',
+      drawing:'designers the content before the content itself has been',
+      analysingInfo: 'design content before the content itself has been',
       fir: 'FIR'+Math.random()
     }
   ]
-  constructor() {
+  constructor(public api:ApiProvider) {
     console.log('Hello AccidentProvider Provider');
   }
 
@@ -98,7 +101,8 @@ export class AccidentProvider {
   }
 
   getAccidentReports(){
-    return of(this.accidentReports);
+    // return of(this.accidentReports);
+    return this.api.get('api/accident');
   }
 
   addAccidentReport(object:any){

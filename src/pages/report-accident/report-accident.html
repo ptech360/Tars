@@ -27,11 +27,11 @@
       </ion-item>
       <ion-item class="border" margin-top>
         <ion-label><small>No. of Casualities</small></ion-label>
-        <ion-input type="number" formControlName="noOfCasulities" text-right></ion-input>
+        <ion-input type="number" formControlName="numOfCasualities" text-right></ion-input>
       </ion-item>
       <ion-item class="border" margin-top>
         <ion-label><small>Initiate Response</small></ion-label>
-        <ion-select formControlName="initiate" multiple="true">
+        <ion-select formControlName="accidentInitiate" multiple="true">
           <ion-option value="Ambulance">Ambulance</ion-option>
           <ion-option value="Rescue Vehicle">Rescue Vehicle</ion-option>
           <ion-option value="Fire Vehicle">Fire Vehicle</ion-option>
@@ -39,11 +39,11 @@
       </ion-item>
       <ion-item class="border" margin-top>
         <ion-label stacked>How did the Accident Happen?</ion-label>
-        <ion-textarea formControlName="incidentDescription"></ion-textarea>
+        <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
       <ion-item class="border" margin-top>
         <ion-label><small>No. of Vehicle Involved</small></ion-label>
-        <ion-select formControlName="noOfVehicle">
+        <ion-select formControlName="numOfVehicle">
           <ion-option value="1">1</ion-option>
           <ion-option value="2">2</ion-option>
           <ion-option value="3">3</ion-option>
@@ -74,13 +74,13 @@
         <ion-col col-6>
             <ion-item class="border" >
               <ion-label><small>No. of Casualities</small></ion-label>
-              <ion-input type="number" formControlName="noOfCasulities" text-right></ion-input>
+              <ion-input type="number" formControlName="numOfCasualities" text-right></ion-input>
             </ion-item>
         </ion-col>
         <ion-col col-6>
         <ion-item class="border" >
           <ion-label><small>Initiate Response</small></ion-label>
-          <ion-select formControlName="initiate" multiple="true">
+          <ion-select formControlName="accidentInitiate" multiple="true">
             <ion-option value="Ambulance">Ambulance</ion-option>
             <ion-option value="Rescue Vehicle">Rescue Vehicle</ion-option>
             <ion-option value="Fire Vehicle">Fire Vehicle</ion-option>
@@ -91,14 +91,14 @@
         <ion-col col-6>
         <ion-item class="border" >
           <ion-label stacked>How did the Accident Happen?</ion-label>
-          <ion-textarea formControlName="incidentDescription"></ion-textarea>
+          <ion-textarea formControlName="description"></ion-textarea>
         </ion-item>
         </ion-col>
 
         <ion-col col-6>
         <ion-item class="border" >
           <ion-label><small>No. of Vehicle Involved</small></ion-label>
-          <ion-select formControlName="noOfVehicle">
+          <ion-select formControlName="numOfVehicle">
             <ion-option value="1">1</ion-option>
             <ion-option value="2">2</ion-option>
             <ion-option value="3">3</ion-option>
@@ -119,8 +119,8 @@
             <input type="checkbox" formControlName="visibleVehicles" hidden>
           </label>
         </ion-list-header>
-        <div formArrayName="involvedVehicles" [hidden]="!accidentForm.value.visibleVehicles">
-          <div [formGroupName]="i" *ngFor="let vehicle of accidentForm.controls.involvedVehicles.controls;let i=index;">
+        <div formArrayName="vehicle" [hidden]="!accidentForm.value.visibleVehicles">
+          <div [formGroupName]="i" *ngFor="let vehicle of accidentForm.controls.vehicle.controls;let i=index;">
             <div class="detail-box">
             <ion-card-header no-padding>
               
@@ -133,11 +133,11 @@
             </ion-card-header>
             <ion-item>
               <ion-label stacked>Vehicle Number</ion-label>
-              <ion-input type="text" formControlName="vehicleNumber" autocapitalize="characters"></ion-input>
+              <ion-input type="text" formControlName="number" autocapitalize="characters"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked>Vehicle Model</ion-label>
-              <ion-input type="text" formControlName="vehicleModel" autocapitalize="characters"></ion-input>
+              <ion-input type="text" formControlName="model" autocapitalize="characters"></ion-input>
             </ion-item>
             </div>
             <ion-list>
@@ -203,8 +203,8 @@
                   <input type="checkbox" formControlName="visiblePassengers" hidden>
                 </label>
               </ion-list-header>
-              <div formArrayName="passengers" [hidden]="!vehicle.value.visiblePassengers">
-                <ion-card class="border" [formGroupName]="j" *ngFor="let passenger of vehicle.controls.passengers.controls;let j=index;">
+              <div formArrayName="person" [hidden]="!vehicle.value.visiblePassengers">
+                <ion-card class="border" [formGroupName]="j" *ngFor="let passenger of vehicle.controls.person.controls;let j=index;">
                   <ion-card-header no-padding>
                     <ion-item>
                       Passenger {{j+1}}
@@ -248,7 +248,7 @@
             </ion-list>
           </div>
           <ion-item padding>
-            <button ion-button block small (click)="addVehicle()" [disabled]="accidentForm.controls.involvedVehicles.controls.length>=accidentForm.controls.noOfVehicle.value">Add
+            <button ion-button block small (click)="addVehicle()" [disabled]="accidentForm.controls.vehicle.controls.length>=accidentForm.controls.numOfVehicle.value">Add
               Vehicle</button>
           </ion-item>
         </div>
@@ -264,8 +264,8 @@
             <input type="checkbox" formControlName="visibleOtherPeople" hidden>
           </label>
         </ion-list-header>
-        <div  formArrayName="otherPeopleInvolved" [hidden]="!accidentForm.value.visibleOtherPeople">
-          <ion-card class="border" [formGroupName]="j" *ngFor="let people of accidentForm.controls.otherPeopleInvolved.controls;let j=index;">
+        <div  formArrayName="otherPerson" [hidden]="!accidentForm.value.visibleOtherPeople">
+          <ion-card class="border" [formGroupName]="j" *ngFor="let people of accidentForm.controls.otherPerson.controls;let j=index;">
             <ion-card-header no-padding>
               <ion-item>
                   Pedestrian {{j+1}}
@@ -329,22 +329,22 @@
         </ion-item>
         <ion-item>
           <ion-label stacked>Primary and Secondary Causes of the accident</ion-label>
-          <ion-input formControlName="primaryAndSecondaryCausesOfTheAccident"></ion-input>
+          <ion-input formControlName="primaryAndSecondaryCauses"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Drawing Of Accident Details</ion-label>
-          <ion-input formControlName="drawingOfAccidentDetails"></ion-input>
+          <ion-input formControlName="drawing"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Information On Analysing Agency And Personnel</ion-label>
-          <ion-input formControlName="informationOnAnalysingAgencyAndPersonnel"></ion-input>
+          <ion-input formControlName="analysingInfo"></ion-input>
         </ion-item>
       </ion-list>
     </div>
     <!-- incident Photos -->
     <div>
       <div>
-        <ion-card *ngFor="let img of accidentForm.controls.incidentPhotos.controls;let n = index;">
+        <ion-card *ngFor="let img of accidentForm.controls.accidentPics.controls;let n = index;">
           <img [src]="img.value.url" />
           <ion-row>
             <ion-col text-right>

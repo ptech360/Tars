@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { AlertController } from 'ionic-angular';
 
 /*
   Generated class for the ApiProvider provider.
@@ -16,7 +17,7 @@ export class ApiProvider {
 
   url: string = 'http://localhost:8080';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public alertCtrl: AlertController) {
   }
 
   private getAccessToken() {
@@ -43,7 +44,7 @@ export class ApiProvider {
         reqOpts.params = reqOpts.params.set(k, params[k]);
       }
     }
-
+    this.addRequestOptions(reqOpts);
     return this.http.get<Observable<HttpResponse<Object>>>(this.url + '/' + endpoint, reqOpts).map(this.extractData)
       .catch(this.handleError);
   }
@@ -91,6 +92,7 @@ export class ApiProvider {
       // console.log('An error occurred:', );
       errorInfo.status = err.status;
       errorInfo.status == 0 ? errorInfo.message = "Some error occured, couldn\'t conect to server" : errorInfo.message = err.message || 'Some Error Occured';
+
     }
     else {
       /**The backend returned an unsuccessful response code.*/
@@ -98,7 +100,17 @@ export class ApiProvider {
       errorInfo.status = err.status;
       errorInfo.message = err.error.message || err.error.error || 'Internal Server Error';
     }
+    this.showError(errorInfo.message);
     return Observable.throw(errorInfo);
+  }
+
+  showError(message){
+    const alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    })
+    alert.present();
   }
 
 }

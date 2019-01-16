@@ -15,200 +15,185 @@
 
 <ion-content class="background">
   <div class="bg-white mob-potrait">
-  <div padding >
-    <ion-item class="border">
-      <h2>Accident Type</h2>
-      <p>{{accident.accidentType}}</p>
-    </ion-item>
-    <ion-item class="border" margin-top>
-      <h2>Fatal</h2>
-      <p>{{accident.fatal ?'Yes':'No'}}</p>
-    </ion-item>
-    <ion-item class="border" margin-top>
-      <h2>No. of Casualities</h2>
-      <p>{{accident.noOfCasulities}}</p>
-    </ion-item>
-    <ion-item class="border" margin-top>
-      <h2>Initiate</h2>
-      <p>{{accident.initiate}}</p>
-    </ion-item>
-    <ion-item class="border" margin-top>
-      <h2>No. of Vehicle Involved</h2>
-      <p>{{accident.noOfVehicle}}</p>
-    </ion-item>
-    <ion-item class="border" margin-top>
-      <h2>Description</h2>
-      <p>{{accident.incidentDescription}}.</p>
-    </ion-item>
-    <ion-item class="border" margin-top>
-      <h2>Location</h2>
-      <p><small>
-        {{accident.geoLocation}}
-        </small>
-      </p>
-    </ion-item>
-    <ion-item class="border" margin-top>
-      <h2>FIR</h2>
-      <p>{{accident.fir}}</p>
-    </ion-item>
+    <div padding>
+      <ion-item class="border">
+        <h2>Accident Type</h2>
+        <p>{{accident.accidentType}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Fatal</h2>
+        <p>{{accident.fatal ?'Yes':'No'}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>No. of Casualities</h2>
+        <p>{{accident.numOfCasualities}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Initiate</h2>
+        <p>{{accident.accidentInitiate}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>No. of Vehicle Involved</h2>
+        <p>{{accident.numOfVehicle}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Description</h2>
+        <p>{{accident.description}}.</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Location</h2>
+        <p><small>
+            {{accident.geoLocation}}
+          </small>
+        </p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>FIR</h2>
+        <p>{{accident.fir}}</p>
+      </ion-item>
+    </div>
   </div>
-</div>
 
-<!-- mobile-landscape/ipad view design -->
-<div class="bg-white mob-lanscape">
-  <div padding>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-6>
-          <ion-item class="border">
-            <h2>Accident Type</h2>
-            <p>{{accident.accidentType}}</p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item class="border">
-            <h2>Accident Type</h2>
-            <p>{{accident.accidentType}}</p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item class="border" margin-top>
-            <h2>Fatal</h2>
-            <p>{{accident.fatal ?'Yes':'No'}}</p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item class="border" margin-top>
-            <h2>No. of Casualities</h2>
-            <p>{{accident.noOfCasulities}}</p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item class="border" margin-top>
-            <h2>Initiate</h2>
-            <p>{{accident.initiate}}</p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item class="border" margin-top>
-            <h2>No. of Vehicle Involved</h2>
-            <p>{{accident.noOfVehicle}}</p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item class="border" margin-top>
-            <h2>Description</h2>
-            <p>{{accident.incidentDescription}}.</p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item class="border" margin-top>
-            <h2>Location</h2>
-            <p><small>
-                {{accident.geoLocation}}
-              </small>
-            </p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item class="border" margin-top>
-            <h2>FIR</h2>
-            <p>{{accident.fir}}</p>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <!-- mobile-landscape/ipad view design -->
+  <div class="bg-white mob-lanscape">
+    <div padding>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item class="border">
+              <h2>Accident Type</h2>
+              <p>{{accident.accidentType}}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item class="border" margin-top>
+              <h2>Fatal</h2>
+              <p>{{accident.fatal ?'Yes':'No'}}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item class="border" margin-top>
+              <h2>No. of Casualities</h2>
+              <p>{{accident.numOfCasualities}}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item class="border" margin-top>
+              <h2>Initiate</h2>
+              <p>{{accident.accidentInitiate}}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item class="border" margin-top>
+              <h2>No. of Vehicle Involved</h2>
+              <p>{{accident.numOfVehicle}}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item class="border" margin-top>
+              <h2>Description</h2>
+              <p>{{accident.description}}.</p>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item class="border" margin-top>
+              <h2>Location</h2>
+              <p><small>
+                  {{accident.geoLocation}}
+                </small>
+              </p>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item class="border" margin-top>
+              <h2>FIR</h2>
+              <p>{{accident.fir}}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
-</div>
-<!-- vehicle details -->
+  <!-- vehicle details -->
 
-  <div class="bg-white"  *ngFor="let vehicle of accident.involvedVehicles;"  margin-top>
+  <div class="bg-white" *ngFor="let vehicle of accident.vehicle;" margin-top>
     <div class=" margin">
       <div class="vehical-details"><b>Vehicle Details</b></div>
-    <ion-card-content no-padding>
-      <ion-item>
-        <h2><b>Vehicle Number</b> : {{vehicle.vehicleNumber}}</h2>
-        <p><b>Vehicle Model</b> : {{vehicle.vehicleModel}}</p>
-      </ion-item>
-    </ion-card-content>
-    <div text-center padding>
-    <img width="100%" [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehicleImages;">
-    </div>
-    </div>
-    <ion-card class="border">
-      <ion-card-header>
-        <!-- <ion-avatar item-start>
-          <img src="/assets/imgs/profile.png">
-        </ion-avatar> -->
-        <b>Driver Details</b>
-    </ion-card-header>
-    <ion-card-content no-padding>
-      <ion-item>
-        
-        <h2><b>Name: </b>{{vehicle.driver.name}}</h2>
-        <p><b>Driving Licence: </b>{{vehicle.driver.drivingLicence}}</p>
-      </ion-item>
-      <ion-item>
-        <p><b>Gender: </b><span >{{vehicle.driver.gender}}</span></p>
-        <p><b>Age: </b><span>{{vehicle.driver.age}}</span></p>
-        <p><b>Address: </b><span>{{vehicle.driver.address}}</span></p>
-        <p><b>Under Influence: </b><span>{{vehicle.driver.underInfluence?'Yes':'No'}}</span></p>
-        <p><b>Driving Licence: </b>{{vehicle.driver.drivingLicence}}</p>
-        <p><b>Type and Extent of Human Factor: </b>{{vehicle.driver.typeAndExtentOfHumanFactor}}</p>
-        <p><b>Nature of any injuries: </b>{{vehicle.driver.natureOfAnyInjuries}}</p>
-        <p><b>Data on Socio-economic status: </b>{{vehicle.driver.dataOnSocioEconomicStatus}}</p>
-        <img [src]="img.url" *ngFor="let img of vehicle.driver.pictures;" padding>
-      </ion-item>
-    </ion-card-content>
-    </ion-card>
-    <ion-card class="border">
-      <ion-card-header>
-          Passenger(s)
-      </ion-card-header>
       <ion-card-content no-padding>
-        <ion-item *ngFor="let pass of vehicle.passengers;let o = index;">
-          <h2><b>Name: </b> : {{pass.name}}</h2>
-          <p><b>Gender: </b>{{pass.gender}}</p>
-          <p><b>Age: </b>{{pass.age}}</p>
-          <p><b>Address: </b>{{pass.address}}</p>
-          <p><b>Under Influence: </b>{{pass.underInfluence?'Yes':'No'}}</p>
-          <p><b>Driving Licence: </b>{{pass.drivingLicence}}</p>
-          <img [src]="img.url" *ngFor="let img of pass.pictures;" padding>
+        <ion-item>
+          <h2><b>Vehicle Number</b> : {{vehicle.number}}</h2>
+          <p><b>Vehicle Model</b> : {{vehicle.model}}</p>
         </ion-item>
       </ion-card-content>
-    </ion-card>
+      <div text-center padding>
+        <img width="100%" [src]="bucketUrl + vehicleImg.picName + accessToken" *ngFor="let vehicleImg of vehicle.vehiclePics;">
+      </div>
+    </div>
+    <div *ngFor="let pass of vehicle.person;let o = index;">
+      <ion-card class="border">
+        <ion-card-header *ngIf="pass.personType=='driver'">
+          <!-- <ion-avatar item-start>
+            <img src="/assets/imgs/profile.png">
+          </ion-avatar> -->
+          <b>Driver Details</b>
+        </ion-card-header>
+        <ion-card-header *ngIf="pass.personType=='passenger'">
+          Passenger ({{o}})
+        </ion-card-header>
+        <ion-card-content no-padding>
+          <ion-item>
+            <h2><b>Name: </b>{{pass.name}}</h2>
+            <p><b>Driving Licence: </b>{{pass.drivingLicence}}</p>
+          </ion-item>
+          <ion-item>
+            <p><b>Gender: </b><span>{{pass.gender}}</span></p>
+            <p><b>Age: </b><span>{{pass.age}}</span></p>
+            <p><b>Address: </b><span>{{pass.address}}</span></p>
+            <p><b>Under Influence: </b><span>{{pass.underInfluence?'Yes':'No'}}</span></p>
+            <p><b>Driving Licence: </b>{{pass.drivingLicence}}</p>
+            <p><b>Type and Extent of Human Factor: </b>{{pass.typeAndExtentOfHumanFactor}}</p>
+            <p><b>Nature of any injuries: </b>{{pass.natureOfAnyInjuries}}</p>
+            <p><b>Data on Socio-economic status: </b>{{pass.dataOnSocioEconomicStatus}}</p>
+            <img [src]="bucketUrl + img.picName + accessToken" *ngFor="let img of pass.personPics;" padding>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
   <ion-card>
     <ion-card-header>
       Pedestrian Details
     </ion-card-header>
     <ion-card-content no-padding>
-      <ion-item *ngFor="let people of accident.otherPeopleInvolved;let p = index;">
-        <h2><b>Name: </b> : {{people.name}}</h2>
-        <p><b>Gender: </b>{{people.gender}}</p>
-        <p><b>Age: </b>{{people.age}}</p>
-        <p><b>Address: </b>{{people.address}}</p>
-        <p><b>Under Influence: </b>{{people.underInfluence?'Yes':'No'}}</p>
-        <p><b>Driving Licence: </b>{{people.drivingLicence || None}}</p>
-        <p><b>Driving Licence: </b>{{people.drivingLicence || None}}</p>
-        <p><b>Type and Extent of Human Factor: </b>{{people.typeAndExtentOfHumanFactor}}</p>
-        <p><b>Nature of any injuries: </b>{{people.natureOfAnyInjuries}}</p>
-        <p><b>Data on Socio-economic status: </b>{{people.dataOnSocioEconomicStatus}}</p>
-        <div padding text-center><img [src]="img.url" *ngFor="let img of people.pictures;" padding></div>
-        
-      </ion-item>
+      <div *ngFor="let people of accident.otherPerson;let p = index;">
+        <ion-item>
+          <h2><b>Name: </b>{{people.name}}</h2>
+          <p><b>Driving Licence: </b>{{people.drivingLicence}}</p>
+        </ion-item>
+        <ion-item>
+          <p><b>Gender: </b><span>{{people.gender}}</span></p>
+          <p><b>Age: </b><span>{{people.age}}</span></p>
+          <p><b>Address: </b><span>{{people.address}}</span></p>
+          <p><b>Under Influence: </b><span>{{people.underInfluence?'Yes':'No'}}</span></p>
+          <p><b>Driving Licence: </b>{{people.drivingLicence}}</p>
+          <p><b>Type and Extent of Human Factor: </b>{{people.typeAndExtentOfHumanFactor}}</p>
+          <p><b>Nature of any injuries: </b>{{people.natureOfAnyInjuries}}</p>
+          <p><b>Data on Socio-economic status: </b>{{people.dataOnSocioEconomicStatus}}</p>
+          <img [src]="bucketUrl + img.picName + accessToken" *ngFor="let img of people.personPics;" padding>
+        </ion-item>
+      </div>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="accident.incidentPhotos.length">    
-    <h2 padding-left padding-top><b>Incident Pictures</b></h2>    
-    <img [src]="incidentPhoto.url" *ngFor="let incidentPhoto of accident.incidentPhotos;" padding>
+  <ion-card *ngIf="accident.accidentPics.length">
+    <h2 padding-left padding-top><b>Incident Pictures</b></h2>
+    <img [src]="bucketUrl + incidentPhoto.picName + accessToken" *ngFor="let incidentPhoto of accident.accidentPics;" padding>
   </ion-card>
   <ion-card>
     <ion-item>
       <h2><b>Remarks</b> : {{accident.remarks}}</h2>
-      <h2><b>Causes of the accident</b> : {{accident.primaryAndSecondaryCausesOfTheAccident}}</h2>
-      <h2><b>Accident Details</b> : {{accident.drawingOfAccidentDetails}}</h2>
-      <h2><b>Information On Analysing</b> : {{accident.informationOnAnalysingAgencyAndPersonnel}}</h2>
+      <h2><b>Causes of the accident</b> : {{accident.primaryAndSecondaryCauses}}</h2>
+      <h2><b>Accident Details</b> : {{accident.drawing}}</h2>
+      <h2><b>Information On Analysing</b> : {{accident.analysingInfo}}</h2>
     </ion-item>
   </ion-card>
 </ion-content>

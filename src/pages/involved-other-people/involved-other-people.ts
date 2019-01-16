@@ -47,14 +47,14 @@ export class InvolvedOtherPeoplePage {
       typeAndExtentOfHumanFactor:[''],
       natureOfAnyInjuries:[''],
       dataOnSocioEconomicStatus:[''],
-      pictures:this.fb.array([])
+      personPics:this.fb.array([])
     });
   }
 
 
   private capturePeople(otherPeople: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const driverImages = <FormArray>otherPeople.controls['pictures'];  
+      const driverImages = <FormArray>otherPeople.controls['personPics'];  
       const fileName:string = 'driver-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
@@ -76,15 +76,15 @@ export class InvolvedOtherPeoplePage {
   }
 
   delPeopleImage(otherPeople: FormGroup,index:number){
-    const driverImages = <FormArray>otherPeople.controls['pictures'];
+    const driverImages = <FormArray>otherPeople.controls['personPics'];
     driverImages.removeAt(index);
   }
 
   savePeople(){
     this.accidentForm.controls['visibleOtherPeople'].patchValue(false);
     this.accidentForm.controls['visibleVehicles'].patchValue(false);    
-    const otherPeopleInvolved = <FormArray>this.accidentForm.controls['otherPeopleInvolved'];
-    otherPeopleInvolved.push(this.otherPeopleFormGroup);
+    const otherPerson = <FormArray>this.accidentForm.controls['otherPerson'];
+    otherPerson.push(this.otherPeopleFormGroup);
     console.log(this.accidentForm.value);
     
     this.dismiss();

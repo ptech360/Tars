@@ -44,13 +44,13 @@ export class InvolvedPassengerPage {
       gender:['',[Validators.required]],
       drivingLicence:[''],
       address:['',[Validators.required]],
-      pictures:this.fb.array([])
+      personPics:this.fb.array([])
     });
   }
 
   private capturePassenger(driverForm: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const driverImages = <FormArray>driverForm.controls['pictures'];  
+      const driverImages = <FormArray>driverForm.controls['personPics'];  
       const fileName:string = 'driver-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
@@ -72,14 +72,14 @@ export class InvolvedPassengerPage {
   }
 
   delPassengerImage(driverForm: FormGroup,index:number){
-    const driverImages = <FormArray>driverForm.controls['pictures'];
+    const driverImages = <FormArray>driverForm.controls['personPics'];
     driverImages.removeAt(index);
   }
 
   savePassenger(){
     this.vehicleForm.controls['visiblePassengers'].patchValue(false);
-    const passengers = <FormArray>this.vehicleForm.controls['passengers'];
-    passengers.push(this.passengerFormGroup);
+    const person = <FormArray>this.vehicleForm.controls['person'];
+    person.push(this.passengerFormGroup);
     this.dismiss();
   }
 

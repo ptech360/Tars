@@ -61,7 +61,7 @@
       <ion-input formControlName="dataOnSocioEconomicStatus"></ion-input>
     </ion-item>
     <div padding>
-      <ion-card *ngFor="let img of driverFormGroup.controls.pictures.controls;let m = index;">
+      <ion-card *ngFor="let img of driverFormGroup.controls.personPics.controls;let m = index;">
         <img [src]="img.value.url" />
         <ion-row>
           <ion-col text-right>

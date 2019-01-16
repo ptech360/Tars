@@ -23,14 +23,14 @@
   <ion-card [formGroup]="vehicleFormGroup">
     <ion-item>
       <ion-label stacked>Vehicle Number</ion-label>
-      <ion-input type="text" formControlName="vehicleNumber" autocapitalize="characters"></ion-input>
+      <ion-input type="text" formControlName="number" autocapitalize="characters"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Vehicle Model</ion-label>
-      <ion-input type="text" formControlName="vehicleModel" autocapitalize="characters"></ion-input>
+      <ion-input type="text" formControlName="model" autocapitalize="characters"></ion-input>
     </ion-item>
     <div padding>
-      <ion-card *ngFor="let img of vehicleFormGroup.controls.vehicleImages.controls;let m = index;">
+      <ion-card *ngFor="let img of vehicleFormGroup.controls.vehiclePics.controls;let m = index;">
         <img [src]="img.value.url" />
         <ion-row>
           <ion-col text-right>

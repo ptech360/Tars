@@ -49,7 +49,7 @@
       <ion-toggle formControlName="underInfluence"></ion-toggle>
     </ion-item>
     <div padding>
-      <ion-card *ngFor="let img of passengerFormGroup.controls.pictures.controls;let m = index;">
+      <ion-card *ngFor="let img of passengerFormGroup.controls.personPics.controls;let m = index;">
         <img [src]="img.value.url" />
         <ion-row>
           <ion-col text-right>

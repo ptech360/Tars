@@ -47,13 +47,13 @@ export class InvolvedDriverPage {
       typeAndExtentOfHumanFactor:[''],
       natureOfAnyInjuries:[''],
       dataOnSocioEconomicStatus:[''],
-      pictures:this.fb.array([])
+      personPics:this.fb.array([])
     });
   }
 
   private captureDriver(driverForm: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const driverImages = <FormArray>driverForm.controls['pictures'];  
+      const driverImages = <FormArray>driverForm.controls['personPics'];  
       const fileName:string = 'driver-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
@@ -75,7 +75,7 @@ export class InvolvedDriverPage {
   }
 
   delDriverImage(driverForm: FormGroup,index:number){
-    const driverImages = <FormArray>driverForm.controls['pictures'];
+    const driverImages = <FormArray>driverForm.controls['personPics'];
     driverImages.removeAt(index);
   }
 

@@ -18,7 +18,7 @@ import { CameraOptions, Camera } from '@ionic-native/camera';
 })
 export class InvolvedVehiclePage {
   vehicleFormGroup:FormGroup;
-  involvedVehicles: FormArray;
+  vehicle: FormArray;
   cameraOptions: CameraOptions = {
     sourceType         : this.camera.PictureSourceType.CAMERA,
     destinationType    : this.camera.DestinationType.DATA_URL,
@@ -33,35 +33,35 @@ export class InvolvedVehiclePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InvolvedVehiclePage');
-    this.involvedVehicles = <FormArray>this.navParams.get('involvedVehicles');
+    this.vehicle = <FormArray>this.navParams.get('vehicle');
   }
 
   getVehicleFormGroup(){
     return this.fb.group({
-      vehicleNumber: ['',[Validators.required]],
-      vehicleModel: ['',[Validators.required]],
-      vehicleImages: this.fb.array([]),
+      number: ['',[Validators.required]],
+      model: ['',[Validators.required]],
+      vehiclePics: this.fb.array([]),
       // driver:[''],
       visibleDriver:[true],
       visiblePassengers:[true],
-      passengers:this.fb.array([]),
+      person:this.fb.array([]),
     });
   }
 
   saveVehicle(){
-    this.involvedVehicles.push(this.vehicleFormGroup);
+    this.vehicle.push(this.vehicleFormGroup);
     this.dismiss();
   }
 
   private captureVehicle(vehicleForm: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const vehicleImages = <FormArray>vehicleForm.controls['vehicleImages'];  
+      const vehiclePics = <FormArray>vehicleForm.controls['vehiclePics'];  
       const fileName:string = 'vehicle-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
         url:'data:image/jpeg;base64,' + onSuccess
       });
-      vehicleImages.push(file);      
+      vehiclePics.push(file);      
     },(onError)=>{
       alert(onError);
     })
@@ -77,8 +77,8 @@ export class InvolvedVehiclePage {
   }
 
   delVehicleImage(vehicleForm: FormGroup,index:number){
-    const vehicleImages = <FormArray>vehicleForm.controls['vehicleImages'];
-    vehicleImages.removeAt(index);
+    const vehiclePics = <FormArray>vehicleForm.controls['vehiclePics'];
+    vehiclePics.removeAt(index);
     // this.vehicleImageUrls.splice(index,1);
     // this.files.splice(index,1);
   }

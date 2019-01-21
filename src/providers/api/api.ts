@@ -15,13 +15,13 @@ import { AlertController } from 'ionic-angular';
 @Injectable()
 export class ApiProvider {
 
-  url: string = 'http://localhost:8080';
+  url: string = 'http://192.168.1.5:8080';
 
   constructor(public http: HttpClient, public alertCtrl: AlertController) {
   }
 
   private getAccessToken() {
-    return !localStorage.getItem('access_token') ? 'Basic ZWZrb24tYXRjczpueHRsaWZl' : 'Bearer ' + localStorage.getItem('access_token');
+    return !(localStorage.getItem('access_token')) ? 'Basic ZWZrb24tYXRjczpueHRsaWZl' : 'Bearer ' + localStorage.getItem('access_token');
   }
 
   addRequestOptions(reqOpts: any){
@@ -100,9 +100,9 @@ export class ApiProvider {
       errorInfo.status = err.status;
       errorInfo.message = err.error.message || err.error.error || 'Internal Server Error';
     }
-    this.showError(errorInfo.message);
     return Observable.throw(errorInfo);
   }
+  
 
   showError(message){
     const alert = this.alertCtrl.create({

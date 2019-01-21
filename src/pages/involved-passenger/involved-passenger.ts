@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AccidentProvider } from '../../providers/accident/accident';
 
@@ -26,6 +26,7 @@ export class InvolvedPassengerPage {
     mediaType: this.camera.MediaType.PICTURE,
     correctOrientation: true
   };
+  passengerImageUrls: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public fb:FormBuilder, public accSev: AccidentProvider, public camera: Camera, public viewCtrl: ViewController) {
     this.passengerFormGroup = this.getPassenger();
@@ -38,28 +39,33 @@ export class InvolvedPassengerPage {
 
   getPassenger(){
     return this.fb.group({
-      name:['',[Validators.required]],
-      age:['',[Validators.required]],
-      underInfluence:[false,[Validators.required]],
-      gender:['',[Validators.required]],
-      drivingLicence:[''],
-      address:['',[Validators.required]],
-      personPics:this.fb.array([])
+      name: ['', [Validators.required]],
+      age: ['', [Validators.required]],
+      underInfluence: [false, [Validators.required]],
+      gender: ['', [Validators.required]],
+      licence: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      typeAndExtentOfHumanFactor: [''],
+      natureOfAnyInjuries: [''],
+      dataOnSocioEconomicStatus: [''],
+      personPics: this.fb.array([]),
+      personType:['passenger']
     });
   }
 
-  private capturePassenger(driverForm: FormGroup){
+  private capturePassenger(passengerForm: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const driverImages = <FormArray>driverForm.controls['personPics'];  
-      const fileName:string = 'driver-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
+      const passengerImages = <FormArray>passengerForm.controls['personPics'];  
+      const fileName:string = 'person-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
         url:'data:image/jpeg;base64,' + onSuccess
       });
-      driverImages.push(file);      
+      passengerImages.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' +onSuccess, fileName)));
+      this.passengerImageUrls.push(file);      
     },(onError)=>{
       alert(onError);
-    })
+    });
   }
 
   dataURLtoFile(dataurl, filename) {

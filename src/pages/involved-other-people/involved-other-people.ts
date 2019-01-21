@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AccidentProvider } from '../../providers/accident/accident';
 
@@ -26,7 +26,7 @@ export class InvolvedOtherPeoplePage {
     correctOrientation: true
   };
   accidentForm: FormGroup;
-
+  otherPeopleImageUrls: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,public fb:FormBuilder, public accSev: AccidentProvider, public camera: Camera, public viewCtrl: ViewController) {
     this.otherPeopleFormGroup = this.getOtherPeopleForm();
   }
@@ -38,29 +38,31 @@ export class InvolvedOtherPeoplePage {
 
   getOtherPeopleForm(){
     return this.fb.group({
-      name:[''],
-      age:[''],
-      underInfluence:[false],
-      gender:[''],
-      drivingLicence:[''],
-      address:[''],
-      typeAndExtentOfHumanFactor:[''],
-      natureOfAnyInjuries:[''],
-      dataOnSocioEconomicStatus:[''],
-      personPics:this.fb.array([])
+      name: ['', [Validators.required]],
+      age: ['', [Validators.required]],
+      underInfluence: [false, [Validators.required]],
+      gender: ['', [Validators.required]],
+      licence: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      typeAndExtentOfHumanFactor: [''],
+      natureOfAnyInjuries: [''],
+      dataOnSocioEconomicStatus: [''],
+      personPics: this.fb.array([]),
+      personType: ['other']
     });
   }
 
 
   private capturePeople(otherPeople: FormGroup){
     this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const driverImages = <FormArray>otherPeople.controls['personPics'];  
-      const fileName:string = 'driver-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
+      const otherPeopleImages = <FormArray>otherPeople.controls['personPics'];  
+      const fileName:string = 'person-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
       let file = this.fb.group({
         name:fileName,
         url:'data:image/jpeg;base64,' + onSuccess
       });
-      driverImages.push(file);      
+      otherPeopleImages.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' +onSuccess,fileName))); 
+      this.otherPeopleImageUrls.push(file);     
     },(onError)=>{
       alert(onError);
     })
@@ -76,8 +78,9 @@ export class InvolvedOtherPeoplePage {
   }
 
   delPeopleImage(otherPeople: FormGroup,index:number){
-    const driverImages = <FormArray>otherPeople.controls['personPics'];
-    driverImages.removeAt(index);
+    const otherPeopleImages = <FormArray>otherPeople.controls['personPics'];
+    otherPeopleImages.removeAt(index);
+    this.otherPeopleImageUrls.splice(index,1);
   }
 
   savePeople(){

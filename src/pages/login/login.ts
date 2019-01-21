@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
+import { ToastProvider } from '../../providers/toast/toast';
 
 /**
  * Generated class for the LoginPage page.
@@ -20,7 +21,7 @@ export class LoginPage implements OnInit{
   logging: boolean;
   errorMsg: string;
 
-  constructor(public events: Events,public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public auth: AuthProvider) {
+  constructor(public events: Events,public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public auth: AuthProvider, public toastProvider: ToastProvider) {
   }
 
   ionViewDidLoad() {
@@ -51,13 +52,21 @@ export class LoginPage implements OnInit{
 
   login() {
     this.logging = true;
-    this.auth.login(this.loginForm.value).subscribe((res: any) => {
-      this.logging = false;
-      this.auth.saveToken(res.access_token);
+    this.auth.login(this.loginForm.value).toPromise()
+    .then((res: any) => {
+      this.auth.saveToken(res.access_token)
       this.navigate();
-    }, (error: any) => {
-      this.logging = false;
     })
+    .catch((err: any) => {
+      if (err.status == 400) {
+        this.showError('Username or Password is Invalid');
+      } else {
+        this.showError(err.message);
+      }
+    })
+    .then(() => {
+      this.logging = false;
+    });
   }
 
   navigate() {

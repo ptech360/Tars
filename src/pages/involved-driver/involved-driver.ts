@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -17,71 +17,77 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
   templateUrl: 'involved-driver.html',
 })
 export class InvolvedDriverPage {
-  driverFormGroup:FormGroup;
+  driverFormGroup: FormGroup;
   vehicleForm: FormGroup;
+  driverImageUrls = [];
   cameraOptions: CameraOptions = {
-    sourceType         : this.camera.PictureSourceType.CAMERA,
-    destinationType    : this.camera.DestinationType.DATA_URL,
-    encodingType       : this.camera.EncodingType.JPEG,
+    sourceType: this.camera.PictureSourceType.CAMERA,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     correctOrientation: true
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public fb:FormBuilder, public accSev: AccidentProvider, public camera: Camera, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public accSev: AccidentProvider, public camera: Camera, public viewCtrl: ViewController) {
     this.driverFormGroup = this.getDriver();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InvolvedDriverPage');
     this.vehicleForm = <FormGroup>this.navParams.get('vehicleForm');
   }
 
-  getDriver(){
+  getDriver() {
     return this.fb.group({
-      name:['',[Validators.required]],
-      age:['',[Validators.required]],
-      underInfluence:[false,[Validators.required]],
-      gender:['',[Validators.required]],
-      drivingLicence:['',[Validators.required]],
-      address:['',[Validators.required]],
-      typeAndExtentOfHumanFactor:[''],
-      natureOfAnyInjuries:[''],
-      dataOnSocioEconomicStatus:[''],
-      personPics:this.fb.array([])
+      name: ['', [Validators.required]],
+      age: ['', [Validators.required]],
+      underInfluence: [false, [Validators.required]],
+      gender: ['', [Validators.required]],
+      licence: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      typeAndExtentOfHumanFactor: [''],
+      natureOfAnyInjuries: [''],
+      dataOnSocioEconomicStatus: [''],
+      personPics: this.fb.array([]),
+      personType:['driver']
     });
   }
 
-  private captureDriver(driverForm: FormGroup){
-    this.camera.getPicture(this.cameraOptions).then((onSuccess)=>{
-      const driverImages = <FormArray>driverForm.controls['personPics'];  
-      const fileName:string = 'driver-img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg';       
+  private captureDriver(driverForm: FormGroup) {
+    this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
+      const driverImages = <FormArray>driverForm.controls['personPics'];
+      const fileName: string = 'person-img' + new Date().toISOString().substring(0, 10) + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.jpeg';
       let file = this.fb.group({
-        name:fileName,
-        url:'data:image/jpeg;base64,' + onSuccess
+        name: fileName,
+        url: 'data:image/jpeg;base64,' + onSuccess
       });
-      driverImages.push(file);      
-    },(onError)=>{
+      driverImages.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' +onSuccess, fileName)));
+      this.driverImageUrls.push(file);
+    }, (onError) => {
       alert(onError);
     })
   }
+  
 
   dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
     }
-    return new File([u8arr], filename, {type:mime});
+    return new File([u8arr], filename, { type: mime });
   }
 
-  delDriverImage(driverForm: FormGroup,index:number){
+  delDriverImage(driverForm: FormGroup, index: number) {
     const driverImages = <FormArray>driverForm.controls['personPics'];
     driverImages.removeAt(index);
+    this.driverImageUrls.splice(index,1);
   }
 
-  saveDriver(){
-    this.vehicleForm.addControl('driver',this.driverFormGroup);
+  saveDriver() {
+    // this.vehicleForm.addControl('person', this.driverFormGroup);
     this.vehicleForm.controls['visibleDriver'].patchValue(false);
+    const person = <FormArray>this.vehicleForm.controls['person'];
+    person.push(this.driverFormGroup);
     this.dismiss();
   }
 

@@ -6,10 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
-import { MediaCapture/*, MediaFile, CaptureError, CaptureImageOptions*/ } from '@ionic-native/media-capture';
-import { Media } from '@ionic-native/media';
-import { File } from '@ionic-native/file';
-import { VideoPlayer } from '@ionic-native/video-player';
+// import { MediaCapture/*, MediaFile, CaptureError, CaptureImageOptions*/ } from '@ionic-native/media-capture';
+// import { Media } from '@ionic-native/media';
+// import { VideoPlayer } from '@ionic-native/video-player';
 
 import { Tars } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -58,11 +57,10 @@ import { Network } from '@ionic-native/network';
     ToastProvider,
     NetworkProvider,
     Camera,
-    MediaCapture,
-    Media,
+    // MediaCapture,
+    // Media,
     Network,
-    File,
-    VideoPlayer,
+    // VideoPlayer,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,

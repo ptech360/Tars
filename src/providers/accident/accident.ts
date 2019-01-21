@@ -14,7 +14,7 @@ import { ApiProvider } from '../api/api';
 @Injectable()
 export class AccidentProvider {
 
-  accidentReport:FormGroup;
+  accidentReport: FormGroup;
 
   accidentTypes = [
     {
@@ -33,17 +33,22 @@ export class AccidentProvider {
       name: 'Vehicle vs Pedestrian Collision',
       code: '004'
     }
-]
+  ]
 
   accidentReports = [
     {
       accidentType: "Vehicle vs Vehicle Collision",
-      geoLocation: "Nirvana, Block J, Mayfield Garden, Sector 51, Gurugram",
+      location: "Nirvana, Block J, Mayfield Garden, Sector 51, Gurugram",
       description: "Suddenly changed the direction",
-      numOfCasualities:3,
-      numOfVehicle:1,
-      accidentInitiate:'Ambulance, Fire Vehicle',
-      dateTime:new Date(),
+      numOfCasualities: 3,
+      numOfVehicle: 1,
+      accidentInitiate: 'Ambulance, Fire Vehicle',
+      createdAt: new Date(),
+      remarks: "Koiti sngara squar",
+      primaryAndSecondaryCauses: 'designers to design the form of the content be itself has been',
+      drawing: 'designers the content before the content itself has been',
+      analysingInfo: 'design content before the content itself has been',
+      fir: 'FIR' + Math.random(),
       accidentPics: [{
         name: "vehicle-img2018-12-11135631.jpeg",
         url: "/assets/imgs/180710_wabc.jpg"
@@ -52,62 +57,66 @@ export class AccidentProvider {
         model: "BDHHD12-67",
         number: "UP20MC5678",
         person: [{
-          name: "Pankaj Kharetwal", 
-          drivingLicence: "MP28N-2012-0164333",
-          age:'26',
-          underInfluence:false,
-          gender:'Male',
-          address:'Chhindwara MP',
-          personPics:[],
-          personType:['driver']
+          name: "Pankaj Kharetwal",
+          licence: "MP28N-2012-0164333",
+          age: '26',
+          underInfluence: false,
+          gender: 'Male',
+          address: 'Chhindwara MP',
+          personPics: [],
+          personType: ['person']
         },
         {
-          name: "Aniket Verma", 
-          drivingLicence: "MP28N-2012-0189333",
-          age:'22',
-          underInfluence:true,
-          gender:'Male',
-          address:'Chhindwara MP',
-          personPics:[],
-          personType:['passenger']
+          name: "Aniket Verma",
+          licence: "MP28N-2012-0189333",
+          age: '22',
+          underInfluence: true,
+          gender: 'Male',
+          address: 'Chhindwara MP',
+          personPics: [],
+          personType: ['passenger']
         }],
         vehiclePics: [{
           name: "vehicle-img2018-12-11135631.jpeg",
           url: "/assets/imgs/51f97d2a6c444.image.jpg"
-        }]        
+        }]
       }],
       otherPerson: [{
-        name: "Ashok Pal", 
-        drivingLicence: "MP28N-1991-0164113",
-        age:'36',
-        underInfluence:false,
-        gender:'Male',
-        address:'Chhindwara MP',
-        personPics:[],
+        name: "Ashok Pal",
+        licence: "MP28N-1991-0164113",
+        age: '36',
+        underInfluence: false,
+        gender: 'Male',
+        address: 'Chhindwara MP',
+        personPics: [],
       }],
-      remarks: "Koiti sngara squar",
-      primaryAndSecondaryCauses:'designers to design the form of the content be itself has been',
-      drawing:'designers the content before the content itself has been',
-      analysingInfo: 'design content before the content itself has been',
-      fir: 'FIR'+Math.random()
     }
   ]
-  constructor(public api:ApiProvider) {
+  constructor(public api: ApiProvider) {
     console.log('Hello AccidentProvider Provider');
   }
 
-  getAccidentTypes(){
+  getBaseUrl(){
+    return this.api.url;
+  }
+
+  getAccidentTypes() {
     return of(this.accidentTypes);
   }
 
-  getAccidentReports(){
+  getAccidentReports() {
     // return of(this.accidentReports);
     return this.api.get('api/accident');
   }
 
-  addAccidentReport(object:any){
-    this.accidentReports.push(object);
-    return of({status:200});
+  reportAccident(data){
+    return this.api.post('api/accident',data);
+  }
+
+  addAccidentReport(object: any) {
+    // this.accidentReports.push(object);
+    // return of({ status: 200 });
+    return this.api.post('api/accident',object,{});
   }
 
 }

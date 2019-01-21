@@ -30,7 +30,7 @@
       <ion-input type="text" formControlName="model" autocapitalize="characters"></ion-input>
     </ion-item>
     <div padding>
-      <ion-card *ngFor="let img of vehicleFormGroup.controls.vehiclePics.controls;let m = index;">
+      <ion-card *ngFor="let img of vehicleImageUrls;let m = index;">
         <img [src]="img.value.url" />
         <ion-row>
           <ion-col text-right>

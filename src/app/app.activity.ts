@@ -21,6 +21,8 @@ export class Activity {
 
   handleEvents() {
     this.events.subscribe('user:login', () => {
+      console.log("login");
+      
       this.login();
     });
 
@@ -35,8 +37,8 @@ export class Activity {
     });
   }
   public logout() {
-    localStorage.clear();
-    this.appCtrl.getRootNavs()[0].setRoot(LoginPage, {}, { animate: true, direction: 'forward' });
+    localStorage.setItem('access_token','');
+    this.rootPage = LoginPage;
   }
 
   public offline() {
@@ -55,7 +57,7 @@ export class Activity {
     if(this.authProvider.isLoggedIn()){
       this.rootPage = HomePage;
     } else {
-      this.rootPage = LoginPage
+      this.rootPage = LoginPage;
     }
   }
 }

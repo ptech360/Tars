@@ -43,7 +43,7 @@
       <ion-item class="border" margin-top>
         <h2>Location</h2>
         <p><small>
-            {{accident.geoLocation}}
+            {{accident.location}}
           </small>
         </p>
       </ion-item>
@@ -99,7 +99,7 @@
             <ion-item class="border" margin-top>
               <h2>Location</h2>
               <p><small>
-                  {{accident.geoLocation}}
+                  {{accident.location}}
                 </small>
               </p>
             </ion-item>
@@ -131,7 +131,7 @@
     </div>
     <div *ngFor="let pass of vehicle.person;let o = index;">
       <ion-card class="border">
-        <ion-card-header *ngIf="pass.personType=='driver'">
+        <ion-card-header *ngIf="pass.personType=='person'">
           <!-- <ion-avatar item-start>
             <img src="/assets/imgs/profile.png">
           </ion-avatar> -->
@@ -143,14 +143,14 @@
         <ion-card-content no-padding>
           <ion-item>
             <h2><b>Name: </b>{{pass.name}}</h2>
-            <p><b>Driving Licence: </b>{{pass.drivingLicence}}</p>
+            <p><b>Driving Licence: </b>{{pass.licence}}</p>
           </ion-item>
           <ion-item>
             <p><b>Gender: </b><span>{{pass.gender}}</span></p>
             <p><b>Age: </b><span>{{pass.age}}</span></p>
             <p><b>Address: </b><span>{{pass.address}}</span></p>
             <p><b>Under Influence: </b><span>{{pass.underInfluence?'Yes':'No'}}</span></p>
-            <p><b>Driving Licence: </b>{{pass.drivingLicence}}</p>
+            <p><b>Driving Licence: </b>{{pass.licence}}</p>
             <p><b>Type and Extent of Human Factor: </b>{{pass.typeAndExtentOfHumanFactor}}</p>
             <p><b>Nature of any injuries: </b>{{pass.natureOfAnyInjuries}}</p>
             <p><b>Data on Socio-economic status: </b>{{pass.dataOnSocioEconomicStatus}}</p>
@@ -168,14 +168,14 @@
       <div *ngFor="let people of accident.otherPerson;let p = index;">
         <ion-item>
           <h2><b>Name: </b>{{people.name}}</h2>
-          <p><b>Driving Licence: </b>{{people.drivingLicence}}</p>
+          <p><b>Driving Licence: </b>{{people.licence}}</p>
         </ion-item>
         <ion-item>
           <p><b>Gender: </b><span>{{people.gender}}</span></p>
           <p><b>Age: </b><span>{{people.age}}</span></p>
           <p><b>Address: </b><span>{{people.address}}</span></p>
           <p><b>Under Influence: </b><span>{{people.underInfluence?'Yes':'No'}}</span></p>
-          <p><b>Driving Licence: </b>{{people.drivingLicence}}</p>
+          <p><b>Driving Licence: </b>{{people.licence}}</p>
           <p><b>Type and Extent of Human Factor: </b>{{people.typeAndExtentOfHumanFactor}}</p>
           <p><b>Nature of any injuries: </b>{{people.natureOfAnyInjuries}}</p>
           <p><b>Data on Socio-economic status: </b>{{people.dataOnSocioEconomicStatus}}</p>
@@ -190,7 +190,7 @@
   </ion-card>
   <ion-card>
     <ion-item>
-      <h2><b>Remarks</b> : {{accident.remarks}}</h2>
+      <h2><b>Remarks</b> : {{accident.remark}}</h2>
       <h2><b>Causes of the accident</b> : {{accident.primaryAndSecondaryCauses}}</h2>
       <h2><b>Accident Details</b> : {{accident.drawing}}</h2>
       <h2><b>Information On Analysing</b> : {{accident.analysingInfo}}</h2>

@@ -27,7 +27,7 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Driving Licence</ion-label>
-      <ion-input type="text" formControlName="drivingLicence" autocapitalize="characters"></ion-input>
+      <ion-input type="text" formControlName="licence" autocapitalize="characters"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Age</ion-label>
@@ -61,7 +61,7 @@
       <ion-input formControlName="dataOnSocioEconomicStatus"></ion-input>
     </ion-item>
     <div padding>
-      <ion-card *ngFor="let img of driverFormGroup.controls.personPics.controls;let m = index;">
+      <ion-card *ngFor="let img of driverImageUrls;let m = index;">
         <img [src]="img.value.url" />
         <ion-row>
           <ion-col text-right>

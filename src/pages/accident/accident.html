@@ -14,7 +14,7 @@
 
 
 <ion-content class="background">
-  <div class="bg-white mob-potrait">
+  <div class="bg-white">
     <div padding>
       <ion-item class="border">
         <h2>Accident Type</h2>
@@ -55,47 +55,47 @@
   </div>
 
   <!-- mobile-landscape/ipad view design -->
-  <div class="bg-white mob-lanscape">
-    <div padding>
+  <!-- <div class="bg-white mob-lanscape">
+    <div>
       <ion-grid>
         <ion-row>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border">
               <h2>Accident Type</h2>
               <p>{{accident.accidentType}}</p>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border" margin-top>
               <h2>Fatal</h2>
               <p>{{accident.fatal ?'Yes':'No'}}</p>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border" margin-top>
               <h2>No. of Casualities</h2>
               <p>{{accident.numOfCasualities}}</p>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border" margin-top>
               <h2>Initiate</h2>
               <p>{{accident.accidentInitiate}}</p>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border" margin-top>
               <h2>No. of Vehicle Involved</h2>
               <p>{{accident.numOfVehicle}}</p>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border" margin-top>
               <h2>Description</h2>
               <p>{{accident.description}}.</p>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border" margin-top>
               <h2>Location</h2>
               <p><small>
@@ -104,7 +104,7 @@
               </p>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border" margin-top>
               <h2>FIR</h2>
               <p>{{accident.fir}}</p>
@@ -113,13 +113,13 @@
         </ion-row>
       </ion-grid>
     </div>
-  </div>
+  </div> -->
   <!-- vehicle details -->
 
   <div class="bg-white" *ngFor="let vehicle of accident.vehicle;" margin-top>
     <div class=" margin">
       <div class="vehical-details"><b>Vehicle Details</b></div>
-      <ion-card-content no-padding>
+      <ion-card-content>
         <ion-item>
           <h2><b>Vehicle Number</b> : {{vehicle.number}}</h2>
           <p><b>Vehicle Model</b> : {{vehicle.model}}</p>

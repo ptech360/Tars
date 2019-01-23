@@ -7,23 +7,29 @@
 </ion-header>
 
 <ion-content class="home-background" padding text-center>
-  <div class="mobile-potrait">
+  <div class="home-page">
     <div>
       <img class="accident-logo" src="/assets/imgs/emblem.png" />
     </div>
 
     <br>
-    <button ion-button outline icon-end (click)="reportAccident()">
+
+    <div class="col-md">
+      <p class="title-page">COMMISSIONERATE POLICE <br> BHUBANESWAR CUTTACK</p>
+      
+    </div>
+
+
+    <button ion-button icon-end class="button-full" (click)="reportAccident()">
       Report Accident
       <ion-icon name="arrow-forward"></ion-icon>
     </button>
-    <br>
-    <button ion-button icon-end (click)="viewAccidents()">
+    <button class="button-full" ion-button icon-end (click)="viewAccidents()">
       Previous Accidents
       <ion-icon name="arrow-forward"></ion-icon>
     </button>
     <br>
-    <button ion-button icon-end (click)="logout()">
+    <button color="danger" class="button-round button-full" ion-button rounded icon-end (click)="logout()">
       Logout
       <ion-icon name="log-out"></ion-icon>
     </button>

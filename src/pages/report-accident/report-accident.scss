@@ -1,3 +1,76 @@
 page-report-accident{
+ 
+  .section{
+    padding: 0 15px;
+
+    .list{
+      .item{
+        
+
+        &:first-child{
+          border-top: none;
+        }
+        padding: 0;
+        .item-inner{
+          padding: 0;
+          .text-input{
+            margin: 0;
+            padding: 10px;
+          }
+          .label{
+              margin: 0;
+              padding: 10px 15px;
+          }
+        }
+      }
+    }
+  }
+  .border{
+    .item-inner {
+      border: none !important;
+      box-shadow: none !important;
+    }
+    
+  }
+  ion-list-header{
+    &.list-header{
+      margin-bottom: 0;
+      background: white;
+    }
+  }
+  .pedestrian_drop{
+    background-color: color($colors, white);
+    ion-card{
+      margin-top: 0px !important;
+      border-top: solid 1px #ddd;
+    }
+  }
+
+
+  .vehicle_drop{
+    ion-label{
+      &.label{
+        margin: 0 !important;
+      }
+    }
+
+    ion-item{
+      .item-inner{
+        border-bottom: none !important;
+        padding: 0 !important;
+
+      }
+    }
+  }
+}
+
+
+ion-card{
+  .item{
+    border-bottom: 0.55px solid #c8c7cc !important;
+  }
+}
+.person-details{
+  background-color: color($colors, white);
 
 }

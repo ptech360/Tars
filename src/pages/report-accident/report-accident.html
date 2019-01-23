@@ -54,10 +54,10 @@
     </div>
 
     <!-- ipad/mobile lanscape view -->
-    <div class="bg-white mob-lanscape">
+    <!-- <div class="bg-white mob-lanscape">
       <ion-grid>
         <ion-row>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border">
               <ion-label><small>Accident Type</small></ion-label>
               <ion-select formControlName="accidentType">
@@ -65,19 +65,19 @@
               </ion-select>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border">
               <ion-label><small>Fatal</small></ion-label>
               <ion-toggle formControlName="fatal"></ion-toggle>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border">
               <ion-label><small>No. of Casualities</small></ion-label>
               <ion-input type="number" formControlName="numOfCasualities" text-right></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border">
               <ion-label><small>Initiate Response</small></ion-label>
               <ion-select formControlName="accidentInitiate" multiple="true">
@@ -88,13 +88,13 @@
             </ion-item>
           </ion-col>
 
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border">
               <ion-label stacked>How did the Accident Happen?</ion-label>
               <ion-textarea formControlName="description"></ion-textarea>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-12>
             <ion-item class="border">
               <ion-label><small>No. of Vehicle Involved</small></ion-label>
               <ion-select formControlName="numOfVehicle">
@@ -107,9 +107,9 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-    </div>
+    </div> -->
     <!-- involved vehicle -->
-    <div margin-top>
+    <div class="section" margin-top>
       <ion-list class="bg-white">
         <ion-list-header margin-top-bottom-0>
           Vehicle Details
@@ -118,7 +118,7 @@
             <input type="checkbox" formControlName="visibleVehicles" hidden>
           </label>
         </ion-list-header>
-        <div formArrayName="vehicle" [hidden]="!accidentForm.value.visibleVehicles">
+        <div class="vehicle_drop" formArrayName="vehicle" [hidden]="!accidentForm.value.visibleVehicles">
           <div [formGroupName]="i" *ngFor="let vehicle of accidentForm.controls.vehicle.controls;let i=index;">
             <div class="detail-box">
               <ion-card-header no-padding>
@@ -139,7 +139,7 @@
               </ion-item>
             </div>
             <ion-list>
-              <div formArrayName="person">
+              <div class="person-details" formArrayName="person">
                 <div [formGroupName]="j" *ngFor="let passenger of vehicle.controls.person.controls;let j=index;">
                 <ion-list-header margin-top-bottom-0 *ngIf="j==0">
                   Involved Driver
@@ -222,7 +222,7 @@
       </ion-list>
     </div>
     <!-- Pedestrian details -->
-    <div *ngIf="accidentForm.controls.vehicle.valid">
+    <div class="section" *ngIf="accidentForm.controls.vehicle.valid">
       <ion-list class="bg-white">
         <ion-list-header margin-top-bottom-0>
           Pedestrian Details
@@ -232,7 +232,7 @@
             <input type="checkbox" formControlName="visibleOtherPeople" hidden>
           </label>
         </ion-list-header>
-        <div formArrayName="otherPerson" [hidden]="!accidentForm.value.visibleOtherPeople">
+        <div class="pedestrian_drop" formArrayName="otherPerson" [hidden]="!accidentForm.value.visibleOtherPeople">
           <ion-card class="border" [formGroupName]="j" *ngFor="let people of accidentForm.controls.otherPerson.controls;let j=index;">
             <ion-card-header no-padding>
               <ion-item>
@@ -289,20 +289,23 @@
       </ion-list>
     </div>
     <!-- remarks -->
-    <div>
+    <div class="section">
       <ion-list>
         <ion-item>
           <ion-label stacked>Remarks</ion-label>
           <ion-textarea formControlName="remark"></ion-textarea>
         </ion-item>
+        <br>
         <ion-item>
           <ion-label stacked>Primary and Secondary Causes of the accident</ion-label>
           <ion-input formControlName="primaryAndSecondaryCauses"></ion-input>
         </ion-item>
+        <br>
         <ion-item>
           <ion-label stacked>Drawing Of Accident Details</ion-label>
           <ion-input formControlName="drawing"></ion-input>
         </ion-item>
+        <br>
         <ion-item>
           <ion-label stacked>Information On Analysing Agency And Personnel</ion-label>
           <ion-input formControlName="analysingInfo"></ion-input>
@@ -310,7 +313,7 @@
       </ion-list>
     </div>
     <!-- incident Photos -->
-    <div *ngIf="accidentForm.controls.vehicle.length">
+    <div class="section" *ngIf="accidentForm.controls.vehicle.length">
       <div>
         <ion-card *ngFor="let img of accidentImageUrls;let n = index;">
           <img [src]="img.value.url" />

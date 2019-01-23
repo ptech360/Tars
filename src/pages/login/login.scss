@@ -1,3 +1,110 @@
 page-login {
+ .login-main{
+  background-color: color($colors, primary);
+  background-image: linear-gradient(#4486ff, #8db5ff);
+
+  .scroll-content{
+    padding-bottom: 20px !important;
+  }
+
+  // &#loginForm{
+  //   background-color: blue;
+  //   background-image: linear-gradient(#adc9ff, #709ff7);
+  // }
+  .login-middle {
+    width: 100%;
+    padding: 0 15px;
+    max-width: 550px;
+    margin: auto;
+
+    .logo{
+      text-align: center;
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 40px;
+      margin-top:40px;
+
+    }
+    form{
+      button{
+        &.signin-btn{
+        border-radius: 50px !important;
+        background-color: color($colors, light);
+        color: color($colors, primary);
+        padding: 0;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        max-width: 150px;
+        text-transform: uppercase;
+      }
+    }
+    .forgotPwd {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      cursor: pointer;
+      color: color($colors, light);
+      text-decoration: underline;
+      font-weight: bold;
+  }
+  .signUp {
+    width: 100%;
+    text-align: center;
+    margin-top: 80px;
+    color: color($colors, light);
+
+    a {
+      color: color($colors, light);
+      font-weight: bold;
+  }
 
 }
+    
+      .err-msg{
+        text-align: center;
+        width: 100%;
+        p{
+          color: color($colors, danger);
+        }
+      }
+      .item{
+        padding: 0;
+     
+        margin: 10px 0;
+        background-color: transparent !important;
+
+        .item-inner{
+          border-bottom: none;
+          padding: 0;
+          box-shadow: none !important;
+          ion-input{
+            .text-input{
+              padding: 11px 10px;
+              width: 100%;
+              margin: 0;
+              border-bottom: solid 1px rgba(250, 250, 250, 0.3);
+              border-radius: 0px;
+              color: color($colors, light);
+
+              &::-webkit-input-placeholder{
+                color: color($colors, light) !important;
+              }
+          
+            }
+          }
+
+        }
+      }
+
+
+    }
+
+    
+}
+
+
+}
+
+}
+

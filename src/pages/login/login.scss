@@ -83,7 +83,9 @@ page-login {
               padding: 11px 10px;
               width: 100%;
               margin: 0;
-              border-bottom: solid 1px rgba(250, 250, 250, 0.3);
+              border-bottom-width: 0.55px;
+              border-bottom-style: solid;
+              border-bottom-color: color($colors, border-color);
               border-radius: 0px;
               color: color($colors, light);
 

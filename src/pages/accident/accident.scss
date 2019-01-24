@@ -1,14 +1,32 @@
 page-accident {
+.vehical-details-main{
+  background-color: color($colors, white);
 
-.vehical-details{
-  padding: 0 16px;
-}
-  .item{
-    border-bottom: 0.55px solid #c8c7cc;
-    .item-inner{
-      border-bottom: none !important;
+  .vehical-details{
+    padding: 10px 16px;
+    border-bottom-width: 0.55px;
+    border-bottom-style: solid;
+    border-bottom-color: color($colors, border-color);
+
+  }
+  .card-content{
+    padding: 0;
+
+    .item{
+      border-bottom: none;
     }
   }
+}
+
+
+.item{
+  border-bottom-width: 0.55px;
+  border-bottom-style: solid;
+  border-bottom-color: color($colors, border-color);
+  .item-inner{
+    border-bottom: none !important;
+  }
+}
 
 
 }

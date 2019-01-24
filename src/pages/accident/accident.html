@@ -116,8 +116,9 @@
   </div> -->
   <!-- vehicle details -->
 
-  <div class="bg-white" *ngFor="let vehicle of accident.vehicle;" margin-top>
-    <div class=" margin">
+  <div class="bg-white" *ngFor="let vehicle of accident.vehicle;">
+    <div padding>
+      <div class="vehical-details-main" >
       <div class="vehical-details"><b>Vehicle Details</b></div>
       <ion-card-content>
         <ion-item>
@@ -128,6 +129,7 @@
       <div text-center padding>
         <img width="100%" [src]="bucketUrl + vehicleImg.picName + accessToken" *ngFor="let vehicleImg of vehicle.vehiclePics;">
       </div>
+    </div>
     </div>
     <div *ngFor="let pass of vehicle.person;let o = index;">
       <ion-card class="border">

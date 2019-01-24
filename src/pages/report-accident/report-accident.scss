@@ -26,6 +26,11 @@ page-report-accident{
     }
   }
   .border{
+    
+    border-bottom-width: 0.55px;
+    border-bottom-style: solid;
+    border-bottom-color: color($colors, border-color);
+
     .item-inner {
       border: none !important;
       box-shadow: none !important;
@@ -42,7 +47,9 @@ page-report-accident{
     background-color: color($colors, white);
     ion-card{
       margin-top: 0px !important;
-      border-top: solid 1px #ddd;
+      border-top-width: 0.55px;
+      border-top-style: solid;
+      border-top-color: color($colors, border-color);
     }
   }
 
@@ -65,12 +72,17 @@ page-report-accident{
 }
 
 
-ion-card{
-  .item{
-    border-bottom: 0.55px solid #c8c7cc !important;
+.modal-wrapper{
+  ion-card{
+    .item{
+      border-bottom: 0.55px;
+      border-bottom-style: solid;
+      border-bottom-color: color($colors, border-color);
+    }
   }
+  
 }
 .person-details{
   background-color: color($colors, white);
-
+  padding-top: 10px;
 }

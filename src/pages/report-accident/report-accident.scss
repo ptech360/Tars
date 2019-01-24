@@ -45,6 +45,7 @@ page-report-accident{
   }
   .pedestrian_drop{
     background-color: color($colors, white);
+   
     ion-card{
       margin-top: 0px !important;
       border-top-width: 0.55px;
@@ -73,6 +74,12 @@ page-report-accident{
 
 
 .modal-wrapper{
+  ion-content{
+ 
+    .scroll-content{
+     padding: 0 !important;
+    }
+  }
   ion-card{
     .item{
       border-bottom: 0.55px;

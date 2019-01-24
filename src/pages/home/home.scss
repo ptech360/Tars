@@ -3,14 +3,42 @@ page-home {
   font-size: 18px;
   font-weight: bold;
   line-height: 26px;
-  color: color($colors, dark)
+  color: #a0203f;
+  margin-top: 0;
   
 }
 .scroll-content{
   .home-page{
     max-width: 550px;
     margin: auto;
+
+   
   }
 }
+
+}
+
+
+@media (orientation: portrait) {
+  .home-top{
+    width: 100%;
+  }
+  .home-bottom{
+    width: 100%;
+  }
+}
+@media (orientation: landscape) {
+  .home-top{
+    width: 50%;
+
+    .accident-logo {
+        max-width: 130px;
+    }
+    
+  }
+  .home-bottom{
+    width: 50%;
+    margin-top: 13%;
+  }
 
 }

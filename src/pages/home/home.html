@@ -8,65 +8,47 @@
 
 <ion-content class="home-background" padding text-center>
   <div class="home-page">
-    <div>
-      <img class="accident-logo" src="/assets/imgs/emblem.png" />
-    </div>
+      <ion-grid>
+          <ion-row>
+            <div class="home-top">
+              <div>
+                <img class="accident-logo" src="/assets/imgs/emblem.png" />
+              </div>
+              <div class="col-md">
+                <p class="title-page">COMMISSIONERATE POLICE <br> BHUBANESWAR CUTTACK</p>
+              </div>
+            </div>
+            <div class="home-bottom">
+              <button ion-button icon-end class="button-full" (click)="reportAccident()">
+                Report Accident
+                <ion-icon name="paper"></ion-icon>
+              </button>
+              <button class="button-full" ion-button icon-end (click)="viewAccidents()">
+                Previous Accidents
+                <ion-icon name="list"></ion-icon>
+              </button>
+            </div>
 
-    <br>
-
-    <div class="col-md">
-      <p class="title-page">COMMISSIONERATE POLICE <br> BHUBANESWAR CUTTACK</p>
-      
-    </div>
-
-
-    <button ion-button icon-end class="button-full" (click)="reportAccident()">
-      Report Accident
-      <ion-icon name="arrow-forward"></ion-icon>
-    </button>
-    <button class="button-full" ion-button icon-end (click)="viewAccidents()">
-      Previous Accidents
-      <ion-icon name="arrow-forward"></ion-icon>
-    </button>
-    <br>
-    <button color="danger" class="button-round button-full" ion-button rounded icon-end (click)="logout()">
-      Logout
-      <ion-icon name="log-out"></ion-icon>
-    </button>
-  </div>
-  <!-- <div class="mobile-landscape">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-md-6 col-xs-12 class="logo-ladsace">
-          <div>
-            <img class="accident-logo" src="/assets/imgs/emblem.png" />
-          </div>
-        </ion-col>
-        <ion-col col-md-6 col-xs-12 class="button-landscape">
-          <button ion-button outline icon-end (click)="reportAccident()">
-            Report Accident
-            <ion-icon name="arrow-forward"></ion-icon>
-          </button>
-          <br>
-          <button ion-button icon-end (click)="viewAccidents()">
-            Previous Accidents
-            <ion-icon name="arrow-forward"></ion-icon>
-          </button>
-          <br>
-          <button ion-button icon-end (click)="logout()">
-            Logout
-            <ion-icon name="log-out"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
+                    
+        
+    
+    </ion-row>
     </ion-grid>
 
-
-  </div> -->
-
-
-
+  </div>
 </ion-content>
+
+
+<ion-footer>
+    <ion-toolbar>
+      <!-- <ion-title>Footer</ion-title> -->
+      <button color="danger" class="button-round button-full" ion-button rounded icon-end (click)="logout()">
+          Logout
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+    </ion-toolbar>
+  </ion-footer>
+
 <!-- <ion-content class="background">
   <div >
     <div text-center padding>

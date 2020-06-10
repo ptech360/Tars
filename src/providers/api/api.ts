@@ -15,7 +15,9 @@ import { AlertController } from 'ionic-angular';
 @Injectable()
 export class ApiProvider {
 
-  url: string = 'http://192.168.1.5:8080';
+  // url: string = 'http://tars-env.waqdt6r6dm.ap-south-1.elasticbeanstalk.com';
+  url: string = 'http://tars.us-east-2.elasticbeanstalk.com';
+
 
   constructor(public http: HttpClient, public alertCtrl: AlertController) {
   }
@@ -24,7 +26,7 @@ export class ApiProvider {
     return !(localStorage.getItem('access_token')) ? 'Basic ZWZrb24tYXRjczpueHRsaWZl' : 'Bearer ' + localStorage.getItem('access_token');
   }
 
-  addRequestOptions(reqOpts: any){
+  addRequestOptions(reqOpts: any) {
     reqOpts['observe'] = 'response';
     reqOpts.headers = {};
     reqOpts.headers['Authorization'] = this.getAccessToken();
@@ -92,19 +94,19 @@ export class ApiProvider {
       // console.log('An error occurred:', );
       errorInfo.status = err.status;
       errorInfo.status == 0 ? errorInfo.message = "Some error occured, couldn\'t conect to server" : errorInfo.message = err.message || 'Some Error Occured';
-
-    }
-    else {
+      // this.showError(errorInfo.message);
+    } else {
       /**The backend returned an unsuccessful response code.*/
       // console.log('Server occurred:', err);
       errorInfo.status = err.status;
       errorInfo.message = err.error.message || err.error.error || 'Internal Server Error';
+      // this.showError(errorInfo.message);
     }
     return Observable.throw(errorInfo);
   }
-  
 
-  showError(message){
+
+  showError = (message) => {
     const alert = this.alertCtrl.create({
       title: 'Error',
       subTitle: message,

@@ -25,7 +25,9 @@ export class InvolvedDriverPage {
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    correctOrientation: true
+    correctOrientation: true,
+    targetWidth: 600,
+    targetHeight: 600,
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public accSev: AccidentProvider, public camera: Camera, public viewCtrl: ViewController) {

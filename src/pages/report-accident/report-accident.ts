@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -26,7 +26,9 @@ export class ReportAccidentPage implements OnInit {
     destinationType    : this.camera.DestinationType.DATA_URL,
     encodingType       : this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    correctOrientation: true
+    correctOrientation: true,
+    targetWidth: 600,
+    targetHeight: 600,
   };
 
   accidentForm: FormGroup;
@@ -47,6 +49,7 @@ export class ReportAccidentPage implements OnInit {
     public httpClient: HttpClient,
     public modalCtrl: ModalController,
     private geolocation: Geolocation,
+    public alertCtrl: AlertController
     // private mediaCapture: MediaCapture,
     // private videoPlayer: VideoPlayer
   ) {
@@ -206,8 +209,18 @@ export class ReportAccidentPage implements OnInit {
       this.toastSev.showToast('Accident Reported Successfully');
       this.navCtrl.popToRoot();
     }, error => {
+      this.showError(error.message);
       this.toastSev.hideLoader();
     })
+  }
+
+  showError = (message) =>{
+    const alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    })
+    alert.present();
   }
 
   convertModelToFormData(model: any, form: FormData = null, namespace = ''): FormData {
@@ -220,8 +233,7 @@ export class ReportAccidentPage implements OnInit {
           if (typeof element != 'object'){
             formData.append(`${formKey}[${index}]`, element);
           } else if(element instanceof File){   
-            const file: File = element;   
-            debugger      
+            const file: File = element;    
             formData.append(`${formKey}[${index}]`, file);
           }else {
             const tempFormKey= `${formKey}[${index}]`;

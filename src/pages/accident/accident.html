@@ -49,7 +49,7 @@
       </ion-item>
       <ion-item class="border" margin-top>
         <h2>FIR</h2>
-        <p>{{accident.fir}}</p>
+        <p>{{accident.firNum}}</p>
       </ion-item>
     </div>
   </div>
@@ -118,29 +118,30 @@
 
   <div class="bg-white" *ngFor="let vehicle of accident.vehicle;">
     <div padding>
-      <div class="vehical-details-main" >
-      <div class="vehical-details"><b>Vehicle Details</b></div>
-      <ion-card-content>
-        <ion-item>
-          <h2><b>Vehicle Number</b> : {{vehicle.number}}</h2>
-          <p><b>Vehicle Model</b> : {{vehicle.model}}</p>
-        </ion-item>
-      </ion-card-content>
-      <div text-center padding>
-        <img width="100%" [src]="bucketUrl + vehicleImg.picName + accessToken" *ngFor="let vehicleImg of vehicle.vehiclePics;">
+      <div class="vehical-details-main">
+        <div class="vehical-details"><b>Vehicle Details</b></div>
+        <ion-card-content>
+          <ion-item>
+            <h2><b>Vehicle Number</b> : {{vehicle.number}}</h2>
+            <p><b>Vehicle Model</b> : {{vehicle.model}}</p>
+          </ion-item>
+        </ion-card-content>
+        <div text-center padding>
+          <img width="100%" [src]="bucketUrl + vehicleImg.picName + accessToken"
+            *ngFor="let vehicleImg of vehicle.vehiclePics;">
+        </div>
       </div>
-    </div>
     </div>
     <div *ngFor="let pass of vehicle.person;let o = index;">
       <ion-card class="border">
-        <ion-card-header *ngIf="pass.personType=='person'">
+        <ion-card-header *ngIf="pass.personType=='driver'">
           <!-- <ion-avatar item-start>
             <img src="/assets/imgs/profile.png">
           </ion-avatar> -->
           <b>Driver Details</b>
         </ion-card-header>
         <ion-card-header *ngIf="pass.personType=='passenger'">
-          Passenger ({{o}})
+          Passenger ({{o + 1}})
         </ion-card-header>
         <ion-card-content no-padding>
           <ion-item>
@@ -163,7 +164,7 @@
     </div>
   </div>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header *ngIf="accident.otherPerson.length">
       Pedestrian Details
     </ion-card-header>
     <ion-card-content no-padding>
@@ -188,7 +189,8 @@
   </ion-card>
   <ion-card *ngIf="accident.accidentPics.length">
     <h2 padding-left padding-top><b>Incident Pictures</b></h2>
-    <img [src]="bucketUrl + incidentPhoto.picName + accessToken" *ngFor="let incidentPhoto of accident.accidentPics;" padding>
+    <img [src]="bucketUrl + incidentPhoto.picName + accessToken" *ngFor="let incidentPhoto of accident.accidentPics;"
+      padding>
   </ion-card>
   <ion-card>
     <ion-item>

@@ -8,31 +8,27 @@
 
 <ion-content class="home-background" padding text-center>
   <div class="home-page">
-      <ion-grid>
-          <ion-row>
-            <div class="home-top">
-              <div>
-                <img class="accident-logo" src="/assets/imgs/emblem.png" />
-              </div>
-              <div class="col-md">
-                <p class="title-page">COMMISSIONERATE POLICE <br> BHUBANESWAR CUTTACK</p>
-              </div>
-            </div>
-            <div class="home-bottom">
-              <button ion-button icon-end class="button-full" (click)="reportAccident()">
-                Report Accident
-                <ion-icon name="paper"></ion-icon>
-              </button>
-              <button class="button-full" ion-button icon-end (click)="viewAccidents()">
-                Previous Accidents
-                <ion-icon name="list"></ion-icon>
-              </button>
-            </div>
-
-                    
-        
-    
-    </ion-row>
+    <ion-grid>
+      <ion-row>
+        <div class="home-top">
+          <div>
+            <img class="accident-logo" src="/assets/imgs/emblem.png" />
+          </div>
+          <div class="col-md">
+            <p class="title-page">COMMISSIONERATE POLICE <br> BHUBANESWAR CUTTACK</p>
+          </div>
+        </div>
+        <div class="home-bottom">
+          <button ion-button icon-end class="button-full" (click)="reportAccident()">
+            Report Accident
+            <ion-icon name="paper"></ion-icon>
+          </button>
+          <button class="button-full" ion-button icon-end (click)="viewAccidents()">
+            Previous Accidents
+            <ion-icon name="list"></ion-icon>
+          </button>
+        </div>
+      </ion-row>
     </ion-grid>
 
   </div>
@@ -40,14 +36,14 @@
 
 
 <ion-footer>
-    <ion-toolbar>
-      <!-- <ion-title>Footer</ion-title> -->
-      <button color="danger" class="button-round button-full" ion-button rounded icon-end (click)="logout()">
-          Logout
-          <ion-icon name="log-out"></ion-icon>
-        </button>
-    </ion-toolbar>
-  </ion-footer>
+  <ion-toolbar>
+    <!-- <ion-title>Footer</ion-title> -->
+    <button color="danger" class="button-round button-full" ion-button rounded icon-end (click)="logout()">
+      Logout
+      <ion-icon name="log-out"></ion-icon>
+    </button>
+  </ion-toolbar>
+</ion-footer>
 
 <!-- <ion-content class="background">
   <div >

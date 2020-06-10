@@ -23,7 +23,9 @@ export class InvolvedOtherPeoplePage {
     destinationType    : this.camera.DestinationType.DATA_URL,
     encodingType       : this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    correctOrientation: true
+    correctOrientation: true,
+    targetWidth: 600,
+    targetHeight: 600,
   };
   accidentForm: FormGroup;
   otherPeopleImageUrls: any = [];

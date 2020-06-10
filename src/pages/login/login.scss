@@ -1,8 +1,8 @@
 page-login {
  .login-main{
-  background-color: color($colors, primary);
-  background-image: linear-gradient(#4486ff, #8db5ff);
-
+  // background-color: color($colors, primary);
+  // background-image: linear-gradient(#4486ff, #8db5ff);
+  background: white;
   .scroll-content{
     padding-bottom: 20px !important;
   }
@@ -29,8 +29,10 @@ page-login {
       button{
         &.signin-btn{
         border-radius: 50px !important;
-        background-color: color($colors, light);
-        color: color($colors, primary);
+        // background-color: color($colors, light);
+        background-color: color($colors, primary);
+        // color: color($colors, primary);
+        color: color($colors, white);
         padding: 0;
         margin: auto;
         margin-top: 30px;
@@ -44,7 +46,8 @@ page-login {
       text-align: center;
       margin-top: 20px;
       cursor: pointer;
-      color: color($colors, light);
+      // color: color($colors, light);
+      color: color($colors, primary);
       text-decoration: underline;
       font-weight: bold;
   }
@@ -52,10 +55,12 @@ page-login {
     width: 100%;
     text-align: center;
     margin-top: 80px;
-    color: color($colors, light);
-
+    // color: color($colors, light);
+    color: color($colors, primary);
     a {
-      color: color($colors, light);
+      // color: color($colors, light);
+      color: color($colors, primary);
+
       font-weight: bold;
   }
 
@@ -87,10 +92,11 @@ page-login {
               border-bottom-style: solid;
               border-bottom-color: color($colors, border-color);
               border-radius: 0px;
-              color: color($colors, light);
-
+              // color: color($colors, light);
+              color: color($colors, dark);
               &::-webkit-input-placeholder{
-                color: color($colors, light) !important;
+                // color: color($colors, light) !important;
+                color: color($colors, dark);
               }
           
             }

@@ -33,6 +33,7 @@ export class ReportAccidentPage implements OnInit {
 
   accidentForm: FormGroup;
   accidentTypes = [];
+  accidentInitiates = [];
   accidentImageUrls = [];
   files: any = [];
   latitude: number;
@@ -71,6 +72,9 @@ export class ReportAccidentPage implements OnInit {
     this.accSev.getAccidentTypes().subscribe(response => {
       this.accidentTypes = response;
     });
+    this.accSev.getAccidentInitaites().subscribe(response => {
+      this.accidentInitiates = response;
+    })
     this.geolocation.getCurrentPosition().then(pos => {
       this.latitude = pos.coords.latitude;
       this.longitude = pos.coords.longitude;
@@ -85,23 +89,27 @@ export class ReportAccidentPage implements OnInit {
 
   getAccidentForm() {
     return this.fb.group({
-      accidentInitiate: ['',[Validators.required]],
-      accidentPics: this.fb.array([]),
-      accidentType: ['',[Validators.required]],
-      analysingInfo: ['',[Validators.required]],
-      createdBy: [],
-      description: ['',[Validators.required]],
-      drawing: [],
       fatal: [false,[Validators.required]],
       numOfCasualities: [0,[Validators.required]],
-      numOfVehicle: [],
-      vehicle: this.fb.array([]),
-      otherPerson: this.fb.array([]),
+      description: ['',[Validators.required]],
+      numOfVehicle: [,[Validators.required]],
+      remark: [,[Validators.required]],
+      medias: [],
+      type: ['',[Validators.required]],
       primaryAndSecondaryCauses: [],
-      remark: [],
-      visibleVehicles: [true],
-      visibleOtherPeople: [true],
-      location:[]
+      drawing: [],
+      analysingInfo: [null],
+      longitude :[,[Validators.required]],
+      latitude :[,[Validators.required]],
+      address :[,[Validators.required]],
+      // location:[],
+      initiates: ['',[Validators.required]],
+      // accidentPics: this.fb.array([]),
+      // createdBy: [],
+      // vehicle: this.fb.array([]),
+      // otherPerson: this.fb.array([]),
+      // visibleVehicles: [true],
+      // visibleOtherPeople: [true],
     });
   }
 
@@ -196,22 +204,23 @@ export class ReportAccidentPage implements OnInit {
   }
 
   saveAccidentReport() {
-    this.accidentForm.controls.location.patchValue(this.location);
-    this.toastSev.showLoader();
-    const accidentForm = this.accidentForm.value;
-    delete accidentForm['visibleVehicles'];
-    delete accidentForm['visibleOtherPeople'];
-    delete accidentForm.vehicle.visiblePassengers;
-    delete accidentForm.vehicle.visibleDriver;
-    const formData = this.convertModelToFormData(accidentForm, new FormData(), '');
-    this.accSev.addAccidentReport(formData).subscribe(response => {
-      this.toastSev.hideLoader();
-      this.toastSev.showToast('Accident Reported Successfully');
-      this.navCtrl.popToRoot();
-    }, error => {
-      this.showError(error.message);
-      this.toastSev.hideLoader();
-    })
+    console.log(this.accidentForm.value);
+    // this.accidentForm.controls.location.patchValue(this.location);
+    // this.toastSev.showLoader();
+    // const accidentForm = this.accidentForm.value;
+    // delete accidentForm['visibleVehicles'];
+    // delete accidentForm['visibleOtherPeople'];
+    // delete accidentForm.vehicle.visiblePassengers;
+    // delete accidentForm.vehicle.visibleDriver;
+    // const formData = this.convertModelToFormData(accidentForm, new FormData(), '');
+    // this.accSev.addAccidentReport(formData).subscribe(response => {
+    //   this.toastSev.hideLoader();
+    //   this.toastSev.showToast('Accident Reported Successfully');
+    //   this.navCtrl.popToRoot();
+    // }, error => {
+    //   this.showError(error.message);
+    //   this.toastSev.hideLoader();
+    // })
   }
 
   showError = (message) =>{

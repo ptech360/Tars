@@ -101,12 +101,17 @@ export class AccidentProvider {
   }
 
   getAccidentTypes() {
-    return of(this.accidentTypes);
+    // return of(this.accidentTypes);
+    return this.api.get('api/accidentTypes');
+  }
+
+  getAccidentInitaites(){
+    return this.api.get('api/initiates');
   }
 
   getAccidentReports() {
     // return of(this.accidentReports);
-    return this.api.get('api/accident');
+    return this.api.get('api/accidents');
   }
 
   reportAccident(data){

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Events, Alert, AlertController } from 'ionic-angular';
 import { ReportAccidentPage } from '../report-accident/report-accident';
 import { ViewAccidentsPage } from '../view-accidents/view-accidents';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @Component({
   selector: 'page-home',
@@ -9,7 +10,7 @@ import { ViewAccidentsPage } from '../view-accidents/view-accidents';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public events: Events, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public events: Events, public alertCtrl: AlertController, public auth: AuthProvider) {
 
   }
 
@@ -31,7 +32,9 @@ export class HomePage {
       }, {
         text: 'Logout',
         handler: () => {
-          this.events.publish('user:logout');
+          this.auth.logout().subscribe((res)=>{
+            this.events.publish('user:logout');
+          })
         }
       }]
 

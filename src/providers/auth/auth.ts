@@ -33,4 +33,16 @@ export class AuthProvider {
       localStorage.setItem('access_token', token);
   }
 
+  logout(){
+    return this.api.get("api/me/logout");
+  }
+
+  generatePassword(username:string){
+    return this.api.get("forgot-password/"+username);
+  }
+
+  forgetPassword(reqBody){
+    return this.api.post("forgot-password",reqBody);
+  }
+
 }

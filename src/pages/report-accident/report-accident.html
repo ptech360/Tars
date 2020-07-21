@@ -21,33 +21,34 @@
                 <ion-label>Items</ion-label>
               </ion-list-header> -->
           <ion-item class="border">
-            <ion-label><small>Accident Type</small></ion-label>
-            <ion-select formControlName="accidentType">
+            <ion-label><small>Accident Type*</small></ion-label>
+            <ion-select formControlName="type">
               <ion-option *ngFor="let type of accidentTypes;" [value]="type.name">{{type.name}}</ion-option>
             </ion-select>
           </ion-item>
           <ion-item class="border">
-            <ion-label><small>No. of Casualities</small></ion-label>
+            <ion-label><small>No. of Casualities*</small></ion-label>
             <ion-input type="number" formControlName="numOfCasualities" text-right></ion-input>
           </ion-item>
           <ion-item class="border">
-            <ion-label stacked>How did the Accident Happen?</ion-label>
+            <ion-label stacked>How did the Accident Happen?*</ion-label>
             <ion-textarea formControlName="description"></ion-textarea>
           </ion-item>
           <ion-item class="border">
-            <ion-label><small>Initiate Response</small></ion-label>
-            <ion-select formControlName="accidentInitiate" multiple="true">
-              <ion-option value="Ambulance">Ambulance</ion-option>
+            <ion-label><small>Initiate Response*</small></ion-label>
+            <ion-select formControlName="initiates" multiple="true">
+              <ion-option *ngFor="let init of accidentInitiates;" [value]="init.name">{{init.name}}</ion-option>
+              <!-- <ion-option value="Ambulance">Ambulance</ion-option>
               <ion-option value="Rescue Vehicle">Rescue Vehicle</ion-option>
-              <ion-option value="Fire Vehicle">Fire Vehicle</ion-option>
+              <ion-option value="Fire Vehicle">Fire Vehicle</ion-option> -->
             </ion-select>
           </ion-item>
           <ion-item class="border">
-            <ion-label><small>Fatal</small></ion-label>
+            <ion-label><small>Fatal*</small></ion-label>
             <ion-toggle formControlName="fatal"></ion-toggle>
           </ion-item>
           <ion-item class="border">
-            <ion-label><small>No. of Vehicle Involved</small></ion-label>
+            <ion-label><small>No. of Vehicle Involved*</small></ion-label>
             <ion-select formControlName="numOfVehicle">
               <ion-option value="1">1</ion-option>
               <ion-option value="2">2</ion-option>
@@ -61,7 +62,7 @@
       </ion-card>
 
       <!--Card-no.2-->
-      <ion-card>
+      <!-- <ion-card>
         <ion-list-header>
           Vehicle Details
           <label ion-button color="primary" clear icon-only item-end>
@@ -186,9 +187,9 @@
           </div>
 
         </ion-list>
-      </ion-card>
+      </ion-card> -->
 
-      <ion-card>
+      <!-- <ion-card>
         <ion-list-header margin-top-bottom-0>
           Pedestrian Details
           <label ion-button color="primary" clear icon-only item-end>
@@ -258,12 +259,12 @@
           </div>
 
         </ion-list>
-      </ion-card>
+      </ion-card> -->
 
       <ion-card>
         <ion-list>
           <ion-item class="border">
-            <ion-label stacked>Remarks</ion-label>
+            <ion-label stacked>Remarks*</ion-label>
             <ion-textarea formControlName="remark"></ion-textarea>
           </ion-item>
 
@@ -418,7 +419,7 @@
       </div>
     </div>
     <div padding>
-      <button type="submit" ion-button block [disabled]="accidentForm.invalid" (click)="saveAccidentReport()"> Save</button>
+      <button type="submit" ion-button block   (click)="saveAccidentReport()"> Save</button>
     </div>
   </form>
 </ion-content>

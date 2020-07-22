@@ -16,82 +16,82 @@ export class AccidentProvider {
 
   accidentReport: FormGroup;
 
-  accidentTypes = [
-    {
-      name: 'Vehicle Crashed',
-      code: '001'
-    },
-    {
-      name: 'Vehicle vs Vehicle Collision',
-      code: '002'
-    },
-    {
-      name: 'Vehicle Overturned',
-      code: '003'
-    },
-    {
-      name: 'Vehicle vs Pedestrian Collision',
-      code: '004'
-    }
-  ]
+  // accidentTypes = [
+  //   {
+  //     name: 'Vehicle Crashed',
+  //     code: '001'
+  //   },
+  //   {
+  //     name: 'Vehicle vs Vehicle Collision',
+  //     code: '002'
+  //   },
+  //   {
+  //     name: 'Vehicle Overturned',
+  //     code: '003'
+  //   },
+  //   {
+  //     name: 'Vehicle vs Pedestrian Collision',
+  //     code: '004'
+  //   }
+  // ]
 
-  accidentReports = [
-    {
-      accidentType: "Vehicle vs Vehicle Collision",
-      location: "Nirvana, Block J, Mayfield Garden, Sector 51, Gurugram",
-      description: "Suddenly changed the direction",
-      numOfCasualities: 3,
-      numOfVehicle: 1,
-      accidentInitiate: 'Ambulance, Fire Vehicle',
-      createdAt: new Date(),
-      remarks: "Koiti sngara squar",
-      primaryAndSecondaryCauses: 'designers to design the form of the content be itself has been',
-      drawing: 'designers the content before the content itself has been',
-      analysingInfo: 'design content before the content itself has been',
-      fir: 'FIR' + Math.random(),
-      accidentPics: [{
-        name: "vehicle-img2018-12-11135631.jpeg",
-        url: "/assets/imgs/180710_wabc.jpg"
-      }],
-      vehicle: [{
-        model: "BDHHD12-67",
-        number: "UP20MC5678",
-        person: [{
-          name: "Pankaj Kharetwal",
-          licence: "MP28N-2012-0164333",
-          age: '26',
-          underInfluence: false,
-          gender: 'Male',
-          address: 'Chhindwara MP',
-          personPics: [],
-          personType: ['person']
-        },
-        {
-          name: "Aniket Verma",
-          licence: "MP28N-2012-0189333",
-          age: '22',
-          underInfluence: true,
-          gender: 'Male',
-          address: 'Chhindwara MP',
-          personPics: [],
-          personType: ['passenger']
-        }],
-        vehiclePics: [{
-          name: "vehicle-img2018-12-11135631.jpeg",
-          url: "/assets/imgs/51f97d2a6c444.image.jpg"
-        }]
-      }],
-      otherPerson: [{
-        name: "Ashok Pal",
-        licence: "MP28N-1991-0164113",
-        age: '36',
-        underInfluence: false,
-        gender: 'Male',
-        address: 'Chhindwara MP',
-        personPics: [],
-      }],
-    }
-  ]
+  // accidentReports = [
+  //   {
+  //     accidentType: "Vehicle vs Vehicle Collision",
+  //     location: "Nirvana, Block J, Mayfield Garden, Sector 51, Gurugram",
+  //     description: "Suddenly changed the direction",
+  //     numOfCasualities: 3,
+  //     numOfVehicle: 1,
+  //     accidentInitiate: 'Ambulance, Fire Vehicle',
+  //     createdAt: new Date(),
+  //     remarks: "Koiti sngara squar",
+  //     primaryAndSecondaryCauses: 'designers to design the form of the content be itself has been',
+  //     drawing: 'designers the content before the content itself has been',
+  //     analysingInfo: 'design content before the content itself has been',
+  //     fir: 'FIR' + Math.random(),
+  //     accidentPics: [{
+  //       name: "vehicle-img2018-12-11135631.jpeg",
+  //       url: "/assets/imgs/180710_wabc.jpg"
+  //     }],
+  //     vehicle: [{
+  //       model: "BDHHD12-67",
+  //       number: "UP20MC5678",
+  //       person: [{
+  //         name: "Pankaj Kharetwal",
+  //         licence: "MP28N-2012-0164333",
+  //         age: '26',
+  //         underInfluence: false,
+  //         gender: 'Male',
+  //         address: 'Chhindwara MP',
+  //         personPics: [],
+  //         personType: ['person']
+  //       },
+  //       {
+  //         name: "Aniket Verma",
+  //         licence: "MP28N-2012-0189333",
+  //         age: '22',
+  //         underInfluence: true,
+  //         gender: 'Male',
+  //         address: 'Chhindwara MP',
+  //         personPics: [],
+  //         personType: ['passenger']
+  //       }],
+  //       vehiclePics: [{
+  //         name: "vehicle-img2018-12-11135631.jpeg",
+  //         url: "/assets/imgs/51f97d2a6c444.image.jpg"
+  //       }]
+  //     }],
+  //     otherPerson: [{
+  //       name: "Ashok Pal",
+  //       licence: "MP28N-1991-0164113",
+  //       age: '36',
+  //       underInfluence: false,
+  //       gender: 'Male',
+  //       address: 'Chhindwara MP',
+  //       personPics: [],
+  //     }],
+  //   }
+  // ]
   constructor(public api: ApiProvider) {
     console.log('Hello AccidentProvider Provider');
   }

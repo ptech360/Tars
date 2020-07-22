@@ -285,6 +285,15 @@
         </ion-list>
       </ion-card>
 
+      <ion-card>
+        <ion-list>
+          <ion-item class="border">
+            <ion-label stacked>Address*</ion-label>
+            <ion-input formControlName="address"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+
 
     </div>
 
@@ -419,7 +428,7 @@
       </div>
     </div>
     <div padding>
-      <button type="submit" ion-button block   (click)="saveAccidentReport()"> Save</button>
+      <button type="submit" ion-button block [disabled]="accidentForm.invalid" (click)="saveAccidentReport()"> Save</button>
     </div>
   </form>
 </ion-content>

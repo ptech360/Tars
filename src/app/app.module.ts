@@ -24,6 +24,8 @@ import { ApiProvider } from '../providers/api/api';
 import { LoginPage } from '../pages/login/login';
 import { NetworkProvider } from '../providers/network/network';
 import { Network } from '@ionic-native/network';
+import { MediaCapture } from '@ionic-native/media-capture/ngx';
+import { VideoPlayer } from '@ionic-native/video-player';
 
 @NgModule({
   declarations: [
@@ -57,10 +59,10 @@ import { Network } from '@ionic-native/network';
     ToastProvider,
     NetworkProvider,
     Camera,
-    // MediaCapture,
+    MediaCapture,
     // Media,
     Network,
-    // VideoPlayer,
+    VideoPlayer,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,

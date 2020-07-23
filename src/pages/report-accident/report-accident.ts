@@ -22,9 +22,9 @@ import { InvolvedVehiclePage } from '../involved-vehicle/involved-vehicle';
 })
 export class ReportAccidentPage implements OnInit {
   cameraOptions: CameraOptions = {
-    sourceType         : this.camera.PictureSourceType.CAMERA,
-    destinationType    : this.camera.DestinationType.DATA_URL,
-    encodingType       : this.camera.EncodingType.JPEG,
+    sourceType: this.camera.PictureSourceType.CAMERA,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     correctOrientation: true,
     targetWidth: 600,
@@ -62,9 +62,10 @@ export class ReportAccidentPage implements OnInit {
   }
 
   getGeoLoacation() {
-    this.httpClient.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + this.latitude + ',' + this.longitude + '&key=AIzaSyC0fj5LBatMHxv2d-o6OTni7V1voRbQiKM').subscribe((response: any) => {
+    this.httpClient.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + this.latitude + ',' + this.longitude + '&key=AIzaSyCaNwEauxusdcGJMGNvzcRdCSVo9zBWt-M').subscribe((response: any) => {
       console.log(response);
-      // this.location = response.results ? response.results[0].formatted_address : 'Not Locate';
+      this.location = response.results ? response.results[0].formatted_address : 'Not Locate';
+      this.accidentForm.controls.address.patchValue(this.location);
     })
   }
 
@@ -78,10 +79,8 @@ export class ReportAccidentPage implements OnInit {
     this.geolocation.getCurrentPosition().then(pos => {
       this.latitude = pos.coords.latitude;
       this.longitude = pos.coords.longitude;
-      // this.accidentForm.value.longitude=pos.coords.longitude;
-      // this.accidentForm.value.latitude=pos.coords.latitude;
-          this.accidentForm.controls.latitude.patchValue(this.latitude);
-    this.accidentForm.controls.longitude.patchValue(this.longitude);
+      this.accidentForm.controls.latitude.patchValue(this.latitude);
+      this.accidentForm.controls.longitude.patchValue(this.longitude);
       console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
       setTimeout(() => {
         this.getGeoLoacation();
@@ -93,27 +92,27 @@ export class ReportAccidentPage implements OnInit {
 
   getAccidentForm() {
     return this.fb.group({
-      fatal: [false,[Validators.required]],
-      numOfCasualities: [0,[Validators.required]],
-      description: ['',[Validators.required]],
-      numOfVehicle: [,[Validators.required]],
-      remark: [,[Validators.required]],
+      fatal: [false, [Validators.required]],
+      numOfCasualities: [0, [Validators.required]],
+      description: ['', [Validators.required]],
+      numOfVehicle: [, [Validators.required]],
+      remark: [, [Validators.required]],
       medias: this.fb.array([]),
-      type: ['',[Validators.required]],
+      type: ['', [Validators.required]],
       primaryAndSecondaryCauses: [],
       drawing: [],
       analysingInfo: [null],
-      longitude :[,[Validators.required]],
-      latitude :[,[Validators.required]],
-      address :[,[Validators.required]],
+      longitude: [, [Validators.required]],
+      latitude: [, [Validators.required]],
+      address: [, [Validators.required]],
       // location:[],
-      initiates: ['',[Validators.required]],
+      initiates: ['', [Validators.required]],
       // accidentPics: this.fb.array([]),
-      // createdBy: [],
-      // vehicle: this.fb.array([]),
-      // otherPerson: this.fb.array([]),
-      // visibleVehicles: [true],
-      // visibleOtherPeople: [true],
+      // createdBy: [],      
+    //   vehicle: this.fb.array([]),
+    //   otherPerson: this.fb.array([]),
+    //   visibleVehicles: [true],
+    //   visibleOtherPeople: [true],
     });
   }
 
@@ -174,19 +173,19 @@ export class ReportAccidentPage implements OnInit {
 
   public captureIncident(accidentForm: FormGroup) {
     this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
-      
+
       const accidentPics = <FormArray>accidentForm.controls['medias'];
-      const fileName: string = 'img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg'; 
+      const fileName: string = 'img' + new Date().toISOString().substring(0, 10) + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.jpeg';
       let file = this.fb.group({
         name: fileName,
         url: 'data:image/jpeg;base64,' + onSuccess
       });
-      console.log("File name - ",fileName); 
+      console.log("File name - ", fileName);
 
       this.accidentImageUrls.push(file);
-      accidentPics.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess,fileName)));       
-      console.log(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess,fileName));
-           
+      accidentPics.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess, fileName)));
+      console.log(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess, fileName));
+
     }, (onError) => {
       alert(onError);
     });
@@ -194,17 +193,17 @@ export class ReportAccidentPage implements OnInit {
 
   dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
     }
-    return new File([u8arr], filename, {type:mime});
+    return new File([u8arr], filename, { type: mime });
   }
 
   delIncidentImage(accidentForm: FormGroup, index: number) {
     const accidentPics = <FormArray>accidentForm.controls['medias'];
     accidentPics.removeAt(index);
-    this.accidentImageUrls.splice(index,1);
+    this.accidentImageUrls.splice(index, 1);
   }
 
   //   delIncidentImage(accidentForm: FormGroup, index: number) {
@@ -216,10 +215,10 @@ export class ReportAccidentPage implements OnInit {
   // }
 
   saveAccidentReport() {
-  //   this.accidentForm.controls.latitude.patchValue(this.latitude);
-  //   this.accidentForm.controls.longitude.patchValue(this.longitude);
-    console.log(this.accidentForm.value);
+    //   this.accidentForm.controls.latitude.patchValue(this.latitude);
+    //   this.accidentForm.controls.longitude.patchValue(this.longitude);
 
+    console.log(this.accidentForm.value);
     this.toastSev.showLoader();
     const accidentForm = this.accidentForm.value;
     const formData = new FormData();
@@ -228,7 +227,6 @@ export class ReportAccidentPage implements OnInit {
         if (typeof (this.accidentForm.value[key]) == 'object') {
           this.accidentForm.value.medias.forEach((element, index) => {
             formData.append(key + '[' + index + '].media', element);
-            console.log("medias");
           });
         }
       }
@@ -236,14 +234,14 @@ export class ReportAccidentPage implements OnInit {
         if (this.accidentForm.value[key] !== null)
           this.accidentForm.value.initiates.forEach((element, index) => {
             formData.append(key + '[' + index + ']', element);
-            console.log("initiates");
           });
       }
       else {
         formData.append(key, this.accidentForm.value[key])
       }
     });
-    console.log(formData);
+    // this.navCtrl.push(InvolvedVehiclePage, {item: this.accidentForm.value});
+
     // delete accidentForm['visibleVehicles'];
     // delete accidentForm['visibleOtherPeople'];
     // delete accidentForm.vehicle.visiblePassengers;
@@ -252,15 +250,15 @@ export class ReportAccidentPage implements OnInit {
     this.accSev.addAccidentReport(formData).subscribe(response => {
       this.toastSev.hideLoader();
       this.toastSev.showToast('Accident Reported Successfully');
-      // this.navCtrl.popToRoot();
-      this.navCtrl.push(InvolvedVehiclePage);
+      this.navCtrl.popToRoot();
+      // this.navCtrl.push(InvolvedVehiclePage, {accident: res });
     }, error => {
       this.showError(error.message);
       this.toastSev.hideLoader();
     });
   }
 
-  showError = (message) =>{
+  showError = (message) => {
     const alert = this.alertCtrl.create({
       title: 'Error',
       subTitle: message,
@@ -276,17 +274,17 @@ export class ReportAccidentPage implements OnInit {
       let formKey = namespace ? `${namespace}.${propertyName}` : propertyName;
       if (model[propertyName] instanceof Array) {
         model[propertyName].forEach((element, index) => {
-          if (typeof element != 'object'){
+          if (typeof element != 'object') {
             formData.append(`${formKey}[${index}]`, element);
-          } else if(element instanceof File){   
-            const file: File = element;    
+          } else if (element instanceof File) {
+            const file: File = element;
             formData.append(`${formKey}[${index}]`, file);
-          }else {
-            const tempFormKey= `${formKey}[${index}]`;
+          } else {
+            const tempFormKey = `${formKey}[${index}]`;
             this.convertModelToFormData(element, formData, tempFormKey);
           }
         });
-      } else if (typeof model[propertyName] === 'object' && !(model[propertyName] instanceof File)) {        
+      } else if (typeof model[propertyName] === 'object' && !(model[propertyName] instanceof File)) {
         this.convertModelToFormData(model[propertyName], formData, formKey);
       }
       else {

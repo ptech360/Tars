@@ -124,4 +124,8 @@ export class AccidentProvider {
     return this.api.post('api/accident',object,{});
   }
 
+  addVehicleReport(accidentId :number,object:any) {
+    return this.api.post('api/accident/'+accidentId+'/vehicle',object,{});
+  }
+
 }

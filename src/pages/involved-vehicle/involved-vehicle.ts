@@ -19,6 +19,8 @@ import { CameraOptions, Camera } from '@ionic-native/camera';
 export class InvolvedVehiclePage {
   vehicleFormGroup: FormGroup;
   vehicle: FormArray;
+  item:any; //temp
+  accident: any;
   vehicleImageUrls = [];
   cameraOptions: CameraOptions = {
     sourceType: this.camera.PictureSourceType.CAMERA,
@@ -37,15 +39,18 @@ export class InvolvedVehiclePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad InvolvedVehiclePage');
     this.vehicle = <FormArray>this.navParams.get('vehicle');
+    // this.item = this.navParams.get('item');
+    // console.log("Item - ", this.item);
+    // this.accident = this.navParams.get('accident');
   }
 
   getVehicleFormGroup() {
     return this.fb.group({
       number: ['', [Validators.required]],
       model: ['', [Validators.required]],
-      vehiclePics: this.fb.array([]),
-      visibleDriver: [true],
-      visiblePassengers: [true],
+      medias: this.fb.array([]),
+      // visibleDriver: [true],
+      // visiblePassengers: [true],
       person: this.fb.array([]),
     });
   }

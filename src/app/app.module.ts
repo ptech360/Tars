@@ -26,6 +26,7 @@ import { NetworkProvider } from '../providers/network/network';
 import { Network } from '@ionic-native/network';
 import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { VideoPlayer } from '@ionic-native/video-player';
+import { InvolvedVehiclePage } from '../pages/involved-vehicle/involved-vehicle';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { VideoPlayer } from '@ionic-native/video-player';
     HomePage,
     ReportAccidentPage,
     ViewAccidentsPage,
-    AccidentPage
+    AccidentPage,
+    InvolvedVehiclePage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { VideoPlayer } from '@ionic-native/video-player';
     HomePage,
     ReportAccidentPage,
     ViewAccidentsPage,
-    AccidentPage
+    AccidentPage,
+    InvolvedVehiclePage
   ],
   providers: [
     StatusBar,

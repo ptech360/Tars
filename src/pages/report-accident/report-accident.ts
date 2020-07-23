@@ -8,6 +8,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient } from '@angular/common/http';
 import { VideoPlayer } from '@ionic-native/video-player';
 import { CaptureVideoOptions, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture/ngx';
+import { InvolvedVehiclePage } from '../involved-vehicle/involved-vehicle';
 /**
  * Generated class for the ReportAccidentPage page.
  *
@@ -77,8 +78,10 @@ export class ReportAccidentPage implements OnInit {
     this.geolocation.getCurrentPosition().then(pos => {
       this.latitude = pos.coords.latitude;
       this.longitude = pos.coords.longitude;
-      this.accidentForm.value.longitude=pos.coords.longitude;
-      this.accidentForm.value.latitude=pos.coords.latitude;
+      // this.accidentForm.value.longitude=pos.coords.longitude;
+      // this.accidentForm.value.latitude=pos.coords.latitude;
+          this.accidentForm.controls.latitude.patchValue(this.latitude);
+    this.accidentForm.controls.longitude.patchValue(this.longitude);
       console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
       setTimeout(() => {
         this.getGeoLoacation();
@@ -173,19 +176,16 @@ export class ReportAccidentPage implements OnInit {
     this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
       
       const accidentPics = <FormArray>accidentForm.controls['medias'];
-      // const accidentPics = [];
       const fileName: string = 'img'+new Date().toISOString().substring(0,10)+new Date().getHours()+new Date().getMinutes()+new Date().getSeconds()+'.jpeg'; 
       let file = this.fb.group({
         name: fileName,
         url: 'data:image/jpeg;base64,' + onSuccess
       });
       console.log("File name - ",fileName); 
-      // const media = this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess,fileName);  
 
       this.accidentImageUrls.push(file);
       accidentPics.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess,fileName)));       
       console.log(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess,fileName));
-      // this.accidentForm.value.medias.push({ media: media});
            
     }, (onError) => {
       alert(onError);
@@ -216,8 +216,8 @@ export class ReportAccidentPage implements OnInit {
   // }
 
   saveAccidentReport() {
-    this.accidentForm.controls.latitude.patchValue(this.latitude);
-    this.accidentForm.controls.longitude.patchValue(this.longitude);
+  //   this.accidentForm.controls.latitude.patchValue(this.latitude);
+  //   this.accidentForm.controls.longitude.patchValue(this.longitude);
     console.log(this.accidentForm.value);
 
     this.toastSev.showLoader();
@@ -226,21 +226,24 @@ export class ReportAccidentPage implements OnInit {
     Object.keys(this.accidentForm.value).forEach(key => {
       if (key == 'medias') {
         if (typeof (this.accidentForm.value[key]) == 'object') {
-          this.accidentForm.value[key].forEach((element, index) => {
+          this.accidentForm.value.medias.forEach((element, index) => {
             formData.append(key + '[' + index + '].media', element);
+            console.log("medias");
           });
         }
       }
       else if (key == 'initiates') {
         if (this.accidentForm.value[key] !== null)
-          this.accidentForm.value[key].forEach((element, index) => {
+          this.accidentForm.value.initiates.forEach((element, index) => {
             formData.append(key + '[' + index + ']', element);
+            console.log("initiates");
           });
       }
       else {
         formData.append(key, this.accidentForm.value[key])
       }
     });
+    console.log(formData);
     // delete accidentForm['visibleVehicles'];
     // delete accidentForm['visibleOtherPeople'];
     // delete accidentForm.vehicle.visiblePassengers;
@@ -249,7 +252,8 @@ export class ReportAccidentPage implements OnInit {
     this.accSev.addAccidentReport(formData).subscribe(response => {
       this.toastSev.hideLoader();
       this.toastSev.showToast('Accident Reported Successfully');
-      this.navCtrl.popToRoot();
+      // this.navCtrl.popToRoot();
+      this.navCtrl.push(InvolvedVehiclePage);
     }, error => {
       this.showError(error.message);
       this.toastSev.hideLoader();

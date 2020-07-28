@@ -4,7 +4,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-title>Vehicle 1</ion-title>
+<!-- <ion-title>Vehicle 1</ion-title> -->
 
 <ion-content class="background" padding>
     <form [formGroup]="vehicleFormGroup">
@@ -121,7 +121,7 @@
         </div>
     </form>
     <div padding>
-        <button type="button" ion-button block (click)="saveVehicle()">Save</button>
+        <button type="button" ion-button block [disabled]="vehicleFormGroup.invalid" (click)="saveVehicle()">Save</button>
     </div>
 </ion-content>
 <ion-footer>

@@ -63,7 +63,7 @@ export class AddPersonPage {
       underInfluence: [false, [Validators.required]],
       medias: this.fb.array([]),
       type: [, [Validators.required]],
-    })
+    });
   }
 
   savePerson() {

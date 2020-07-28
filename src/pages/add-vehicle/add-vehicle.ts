@@ -41,7 +41,7 @@ export class AddVehiclePage implements OnInit {
         private navCtrl: NavController
     ) {
         this.accidentForm = <FormGroup>this.navParams.get('accident');
-        console.log("Accident Response - ",this.navParams.get('accident'));
+        console.log("Accident Response - ", this.navParams.get('accident'));
 
         this.vehicleFormGroup = this.fb.group({
             number: [, [Validators.required]],
@@ -57,77 +57,25 @@ export class AddVehiclePage implements OnInit {
             // } else {}
             const vehicle = <FormArray>this.accidentForm['vehicles'];
             vehicle.push(this.vehicleFormGroup.value);
-            // this.accidentForm['index']++
-            console.log("Index - ",this.accidentForm['index']);
-            if(this.accidentForm['index']){
+            console.log("Index - ", this.accidentForm['index']);
+            if (this.accidentForm['index']) {
                 this.index = this.accidentForm['index'];
             }
         }
         else {
-            // this.accidentForm.addControl('vehicle', this.fb.array([this.vehicleFormGroup]));
             this.accidentForm['vehicles'] = [this.vehicleFormGroup.value];
         }
         console.log("Accident Form - ", this.accidentForm);
-
-        // console.log("Accident Response - ",this.navParams.get('accident'));
-        // const accidentObject = this.navParams.get('accident');
-        // this.accidentForm = this.fb.group(accidentObject); 
-        // if (this.accidentForm.contains('vehicles')) {
-        //     // this.accidentForm.removeControl('vehicles');
-        // } 
-        // else {
-        // }
-        // const vehicles = this.accidentForm.controls['vehicles'] as FormArray;
-
-        // if (accidentObject.vehicles.length) {
-        //     vehicles.patchValue(accidentObject.vehicles);
-        // } else {
-        //     this.accidentForm.addControl('vehicles', this.fb.array([]));
-        //     vehicles.push(this.fb.group({
-        //         number: [, [Validators.required]],
-        //         model: [, [Validators.required]],
-        //         medias: this.fb.array([]),
-        //         persons: this.fb.array([], Validators.required),
-        //     }));
-        // }
-
-
-        // this.vehicleFormGroup = this.fb.group({
-        //     number: [, [Validators.required]],
-        //     model: [, [Validators.required]],
-        //     medias: this.fb.array([]),
-        //     persons: this.fb.array([], Validators.required),
-        // })
-
-        // console.log(this.navParams.get('accident'));
-        // const accidentObject = this.navParams.get('accident');
-        // this.vehicles = new FormArray([]);
-        // this.accidentForm = this.fb.group(accidentObject);
-        // if(accidentObject.vehicles){
-        //     this.accidentForm.controls.vehicles
-        //     // this.accidentForm.addControl('vehicles',this.fb.array([]));
-        //     // this.vehicles.patchValue(accidentObject.vehciles);
-        // }
-        // else {
-        //     this.accidentForm.addControl('vehicles',this.fb.array([this.vehicleFormGroup]));
-        // }
-        this.getVehicleFormGroup();
     }
 
     ionViewDidLoad() {
         console.log('AddVehiclePage');
-        // this.accident = <FormGroup>this.navParams.get('accident');
-        // this.accidentForm = this.fb.group(this.navParams.get('accident'));
-        // console.log(this.navParams.get('accident'));
-
         this.accService.getPersonTypes().subscribe(res => {
             this.personTypes = res;
         });
-        // console.log("Accident Form - ", this.accidentForm);
     }
 
     ngOnInit() {
-        // this.getVehicleFormGroup();
     }
 
     getVehicleFormGroup() {
@@ -148,8 +96,6 @@ export class AddVehiclePage implements OnInit {
 
     addPerson() {
         const modal = this.modalCtrl.create('AddPersonPage', { persons: this.vehicleFormGroup.controls['persons'] });
-        // console.log("Vehicles FormArray - ", this.accidentForm.controls.vehicles);
-        // const modal = this.modalCtrl.create('AddPersonPage', { persons: this.accidentForm.controls.vehicles['controls'][0]['controls']['persons'] });
         modal.present();
     }
 
@@ -162,54 +108,28 @@ export class AddVehiclePage implements OnInit {
         this.accidentForm['index'] = this.index;
         this.accidentForm['vehicles'][this.index] = this.vehicleFormGroup.value;
         this.toastSev.showLoader();
+        // this.navCtrl.push(AddPedestrianPage, { accident: this.accidentForm });
+        
+
 
         const formData = this.convertModelToFormData(this.vehicleFormGroup.value, new FormData(), '');
         this.accSev.addVehicleReport(this.accidentForm['id'], formData).subscribe(response => {
             console.log(response);
             this.accidentForm['index']++;
             this.toastSev.hideLoader();
-            if(this.accidentForm['index']<this.accidentForm['numOfVehicle']){
+            if (this.accidentForm['index'] < this.accidentForm['numOfVehicle']) {
                 this.toastSev.showToast('Vehicle Added Successfully');
                 this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm });
-            } 
-            else {
-                this.navCtrl.push(AddPedestrianPage);
             }
-            
+            else {
+                this.accidentForm['index']=0;
+                this.navCtrl.push(AddPedestrianPage, { accident: this.accidentForm });
+            }
+
         }, error => {
             console.log(error);
+            this.toastSev.hideLoader();
         });
-
-
-
-
-        // const vehicle = <FormArray>this.accidentForm.controls['vehicles'];
-        // if (this.index < this.accidentForm['numOfVehicle']) {
-        //     this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm });
-        //     console.log("--*---Vehicle Added---*--");
-
-        //     // const formData = this.convertModelToFormData(this.vehicleFormGroup.value, new FormData(), '');
-
-        //     // this.accSev.addVehicleReport(this.accidentForm['id'], formData).subscribe(response => {
-        //     //     console.log(response);
-        //     //     this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm });
-        //     // }, error => {
-        //     //     console.log(error);
-        //     // });
-        // }
-        // else {
-        //     console.log("Move to Add Pedestrian");
-        // }
-
-
-
-        // const formData = this.convertModelToFormData(this.vehicleFormGroup.value, new FormData(), '');
-
-        // this.accSev.addVehicleReport(this.accident['id'], formData).subscribe(response => {
-        //     console.log(response);
-        // }, error => {
-        //     console.log(error);
-        // });
     }
 
     showError = (message) => {

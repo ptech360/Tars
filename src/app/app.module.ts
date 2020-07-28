@@ -29,6 +29,7 @@ import { VideoPlayer } from '@ionic-native/video-player';
 import { InvolvedVehiclePage } from '../pages/involved-vehicle/involved-vehicle';
 import { AddVehiclePage } from '../pages/add-vehicle/add-vehicle';
 import { AddPersonPage } from '../pages/add-person/add-person';
+import { AddPedestrianPage } from '../pages/add-pedestrian/add-pedestrian';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AddPersonPage } from '../pages/add-person/add-person';
     ViewAccidentsPage,
     AccidentPage,
     AddVehiclePage,
+    AddPedestrianPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { AddPersonPage } from '../pages/add-person/add-person';
     ReportAccidentPage,
     ViewAccidentsPage,
     AccidentPage,
-    AddVehiclePage
+    AddVehiclePage,
+    AddPedestrianPage
   ],
   providers: [
     StatusBar,

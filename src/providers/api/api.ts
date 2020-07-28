@@ -18,7 +18,7 @@ export class ApiProvider {
   // url: string = 'http://tars-env.waqdt6r6dm.ap-south-1.elasticbeanstalk.com';
   // url: string = 'http://tars.us-east-2.elasticbeanstalk.com';
   // url: string = 'http://localhost:8083';
-  url: string = 'http://3.21.142.123';
+  url: string = 'http://3.133.28.174';
 
 
 

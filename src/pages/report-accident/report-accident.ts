@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { VideoPlayer } from '@ionic-native/video-player';
 import { CaptureVideoOptions, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture/ngx';
 import { InvolvedVehiclePage } from '../involved-vehicle/involved-vehicle';
+import { AddVehiclePage } from '../add-vehicle/add-vehicle';
 /**
  * Generated class for the ReportAccidentPage page.
  *
@@ -33,7 +34,7 @@ export class ReportAccidentPage implements OnInit {
 
   accidentForm: FormGroup;
   accidentTypes = [];
-  accidentInitiates = [];
+  // accidentInitiates = [];
   accidentImageUrls = [];
   files: any = [];
   latitude: number;
@@ -73,9 +74,6 @@ export class ReportAccidentPage implements OnInit {
     this.accSev.getAccidentTypes().subscribe(response => {
       this.accidentTypes = response;
     });
-    this.accSev.getAccidentInitaites().subscribe(response => {
-      this.accidentInitiates = response;
-    })
     this.geolocation.getCurrentPosition().then(pos => {
       this.latitude = pos.coords.latitude;
       this.longitude = pos.coords.longitude;
@@ -96,23 +94,23 @@ export class ReportAccidentPage implements OnInit {
       numOfCasualities: [0, [Validators.required]],
       description: ['', [Validators.required]],
       numOfVehicle: [, [Validators.required]],
-      remark: [, [Validators.required]],
+      remark: ['', [Validators.required]],
       medias: this.fb.array([]),
       type: ['', [Validators.required]],
-      primaryAndSecondaryCauses: [],
-      drawing: [],
-      analysingInfo: [null],
+      primaryAndSecondaryCauses: [null],
+      drawing: [null],
+      analysingInfo: ['', [Validators.required]],
       longitude: [, [Validators.required]],
       latitude: [, [Validators.required]],
       address: [, [Validators.required]],
       // location:[],
-      initiates: ['', [Validators.required]],
+      // initiates: ['', [Validators.required]],
       // accidentPics: this.fb.array([]),
       // createdBy: [],      
-    //   vehicle: this.fb.array([]),
-    //   otherPerson: this.fb.array([]),
-    //   visibleVehicles: [true],
-    //   visibleOtherPeople: [true],
+        // vehicles: this.fb.array([]),
+      //   otherPerson: this.fb.array([]),
+      //   visibleVehicles: [true],
+      //   visibleOtherPeople: [true],
     });
   }
 
@@ -215,8 +213,7 @@ export class ReportAccidentPage implements OnInit {
   // }
 
   saveAccidentReport() {
-    //   this.accidentForm.controls.latitude.patchValue(this.latitude);
-    //   this.accidentForm.controls.longitude.patchValue(this.longitude);
+    // this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm.value });
 
     console.log(this.accidentForm.value);
     this.toastSev.showLoader();
@@ -230,17 +227,13 @@ export class ReportAccidentPage implements OnInit {
           });
         }
       }
-      else if (key == 'initiates') {
-        if (this.accidentForm.value[key] !== null)
-          this.accidentForm.value.initiates.forEach((element, index) => {
-            formData.append(key + '[' + index + ']', element);
-          });
-      }
       else {
         formData.append(key, this.accidentForm.value[key])
       }
     });
     // this.navCtrl.push(InvolvedVehiclePage, {item: this.accidentForm.value});
+    // this.navCtrl.push(AddVehiclePage, {item: this.accidentForm.value});
+
 
     // delete accidentForm['visibleVehicles'];
     // delete accidentForm['visibleOtherPeople'];
@@ -250,8 +243,7 @@ export class ReportAccidentPage implements OnInit {
     this.accSev.addAccidentReport(formData).subscribe(response => {
       this.toastSev.hideLoader();
       this.toastSev.showToast('Accident Reported Successfully');
-      this.navCtrl.popToRoot();
-      // this.navCtrl.push(InvolvedVehiclePage, {accident: res });
+      this.navCtrl.push(AddVehiclePage, { accident: response });
     }, error => {
       this.showError(error.message);
       this.toastSev.hideLoader();

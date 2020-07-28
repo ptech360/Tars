@@ -1,0 +1,129 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Add Involved Vehicle</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-title>Vehicle 1</ion-title>
+
+<ion-content class="background" padding>
+    <form [formGroup]="vehicleFormGroup">
+        <!-- <ng-container formArrayName="vehicles"> -->
+            <!-- <ion-card *ngFor="let vehicle of accidentForm.controls.vehicles['controls']; let i = index"
+                [formGroupName]="i"> -->
+                <ion-card>
+                <ion-card-header no-padding>
+                    <ion-item>
+                        Vehicle {{index+1}}
+                    </ion-item>
+                </ion-card-header>
+                <ion-item>
+                    <ion-label stacked>Vehicle Number*</ion-label>
+                    <ion-input type="text" formControlName="number" autocapitalize="characters"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked>Vehicle Model*</ion-label>
+                    <ion-input type="text" formControlName="model" autocapitalize="characters"></ion-input>
+                </ion-item>
+                <div padding>
+                    <ion-card *ngFor="let img of vehicleImageUrls;let i = index;">
+                        <img [src]="img.value.url" />
+                        <ion-row>
+                            <ion-col text-right>
+                                <button ion-button color="danger" clear icon-only item-end
+                                    (click)="delVehicleImage(vehicleFormGroup,i)">
+                                    <ion-icon name='trash' is-active="false"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card>
+                </div>
+                <div text-center>
+                    <h2 color="primary">Capture Photos/Video</h2>
+                    <button ion-button icon-only class="center" margin-bottom
+                        (click)="captureVehicle(vehicleFormGroup)">
+                        <ion-icon name="camera"></ion-icon>
+                    </button>
+                </div>
+
+                <!-- <ion-list *ngIf="vehicle.get('persons')"> -->
+                    <ion-list>
+                    <div formArrayName="persons">
+                        <ion-card [formGroupName]="i"
+                            *ngFor="let person of vehicleFormGroup.controls.persons['controls'];let i=index;">
+                <!-- <ion-list>
+                    <div formArrayName="persons">
+                        <ion-card [formGroupName]="i"
+                            *ngFor="let person of vehicle.controls.persons['controls'];let i=index;"> -->
+                            <ion-card-header no-padding>
+                                <ion-item>
+                                    Person {{i+1}}
+                                    <button ion-button color="danger" clear icon-only item-end
+                                        (click)="removePerson(i)">
+                                        <ion-icon name='trash' is-active="false"></ion-icon>
+                                    </button>
+                                </ion-item>
+                            </ion-card-header>
+                            <ion-item>
+                                <ion-label stacked><small>Person Type*</small></ion-label>
+                                <ion-select formControlName="type">
+                                    <ion-option *ngFor="let type of personTypes;" [value]="type">{{type}}</ion-option>
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>Name*</ion-label>
+                                <ion-input type="text" formControlName="name"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>Driving Licence</ion-label>
+                                <ion-input type="text" formControlName="licence" autocapitalize="characters">
+                                </ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>Age*</ion-label>
+                                <ion-input type="number" formControlName="age"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>Address*</ion-label>
+                                <ion-textarea formControlName="address"></ion-textarea>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Gender*</ion-label>
+                                <ion-select formControlName="gender">
+                                    <ion-option value="Male">Male</ion-option>
+                                    <ion-option value="Female">Female</ion-option>
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Under Influence*</ion-label>
+                                <ion-toggle formControlName="underInfluence"></ion-toggle>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>Type and Extent of Human Factor</ion-label>
+                                <ion-input formControlName="typeAndExtendOfHumanFactor"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>Nature of any injuries</ion-label>
+                                <ion-input formControlName="natureOfAnyInjuries"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>Data on Socio-economic status</ion-label>
+                                <ion-input formControlName="dataOnSocioEconomicStatus"></ion-input>
+                            </ion-item>
+                        </ion-card>
+                    </div>
+
+                </ion-list>
+            </ion-card>
+        <!-- </ng-container> -->
+        <div padding-left padding-right>
+            <button ion-button block small (click)="addPerson()">Add Person</button>
+        </div>
+    </form>
+    <div padding>
+        <button type="button" ion-button block (click)="saveVehicle()">Save</button>
+    </div>
+</ion-content>
+<ion-footer>
+    <button type="button" ion-button block small>Back</button>
+</ion-footer>

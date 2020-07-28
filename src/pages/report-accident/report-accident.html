@@ -34,15 +34,15 @@
             <ion-label stacked>How did the Accident Happen?*</ion-label>
             <ion-textarea formControlName="description"></ion-textarea>
           </ion-item>
-          <ion-item class="border">
+          <!-- <ion-item class="border">
             <ion-label><small>Initiate Response*</small></ion-label>
             <ion-select formControlName="initiates" multiple="true">
               <ion-option *ngFor="let init of accidentInitiates;" [value]="init.name">{{init.name}}</ion-option>
-              <!-- <ion-option value="Ambulance">Ambulance</ion-option>
+              <ion-option value="Ambulance">Ambulance</ion-option>
               <ion-option value="Rescue Vehicle">Rescue Vehicle</ion-option>
-              <ion-option value="Fire Vehicle">Fire Vehicle</ion-option> -->
+              <ion-option value="Fire Vehicle">Fire Vehicle</ion-option>
             </ion-select>
-          </ion-item>
+          </ion-item> -->
           <ion-item class="border">
             <ion-label><small>Fatal*</small></ion-label>
             <ion-toggle formControlName="fatal"></ion-toggle>
@@ -269,6 +269,11 @@
           </ion-item>
 
           <ion-item class="border">
+            <ion-label stacked>Information On Analysing Agency And Personnel*</ion-label>
+            <ion-input formControlName="analysingInfo"></ion-input>
+          </ion-item>
+
+          <ion-item class="border">
             <ion-label stacked>Primary and Secondary Causes of the accident</ion-label>
             <ion-input formControlName="primaryAndSecondaryCauses"></ion-input>
           </ion-item>
@@ -278,10 +283,7 @@
             <ion-input formControlName="drawing"></ion-input>
           </ion-item>
 
-          <ion-item class="border">
-            <ion-label stacked>Information On Analysing Agency And Personnel</ion-label>
-            <ion-input formControlName="analysingInfo"></ion-input>
-          </ion-item>
+
         </ion-list>
       </ion-card>
 
@@ -422,13 +424,13 @@
         <button ion-button icon-only class="center" margin-bottom (click)="captureVideo()">
           <ion-icon name="videocam"></ion-icon>
         </button>
-        <button ion-button icon-only class="center" margin-bottom >
+        <button ion-button icon-only class="center" margin-bottom>
           <ion-icon name="mic"></ion-icon>
         </button>
       </div>
     </div>
     <div padding>
-      <button type="submit" ion-button block [disabled]="accidentForm.invalid" (click)="saveAccidentReport()"> Save</button>
+      <button type="submit" ion-button block (click)="saveAccidentReport()"> Save</button>
     </div>
   </form>
 </ion-content>

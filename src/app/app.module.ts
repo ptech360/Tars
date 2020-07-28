@@ -27,6 +27,8 @@ import { Network } from '@ionic-native/network';
 import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { VideoPlayer } from '@ionic-native/video-player';
 import { InvolvedVehiclePage } from '../pages/involved-vehicle/involved-vehicle';
+import { AddVehiclePage } from '../pages/add-vehicle/add-vehicle';
+import { AddPersonPage } from '../pages/add-person/add-person';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import { InvolvedVehiclePage } from '../pages/involved-vehicle/involved-vehicle'
     ReportAccidentPage,
     ViewAccidentsPage,
     AccidentPage,
-    InvolvedVehiclePage
+    AddVehiclePage,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ import { InvolvedVehiclePage } from '../pages/involved-vehicle/involved-vehicle'
     ReportAccidentPage,
     ViewAccidentsPage,
     AccidentPage,
-    InvolvedVehiclePage
+    AddVehiclePage
   ],
   providers: [
     StatusBar,
@@ -67,10 +69,10 @@ import { InvolvedVehiclePage } from '../pages/involved-vehicle/involved-vehicle'
     Network,
     VideoPlayer,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider,
     ApiProvider,
     AccidentProvider,
   ]
 })
-export class AppModule {}
+export class AppModule { }

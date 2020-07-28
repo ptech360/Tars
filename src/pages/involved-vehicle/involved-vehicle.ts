@@ -19,7 +19,6 @@ import { CameraOptions, Camera } from '@ionic-native/camera';
 export class InvolvedVehiclePage {
   vehicleFormGroup: FormGroup;
   vehicle: FormArray;
-  item:any; //temp
   accident: any;
   vehicleImageUrls = [];
   cameraOptions: CameraOptions = {

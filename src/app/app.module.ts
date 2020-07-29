@@ -40,7 +40,6 @@ import { AddPedestrianPage } from '../pages/add-pedestrian/add-pedestrian';
     ViewAccidentsPage,
     AccidentPage,
     AddVehiclePage,
-    AddPedestrianPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +58,6 @@ import { AddPedestrianPage } from '../pages/add-pedestrian/add-pedestrian';
     ViewAccidentsPage,
     AccidentPage,
     AddVehiclePage,
-    AddPedestrianPage
   ],
   providers: [
     StatusBar,

@@ -1,5 +1,5 @@
 <!--
-  Generated template for the AddPedestrianPage page.
+  Generated template for the AddPersonPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Pedestrain Details</ion-title>
+    <ion-title>Driver Details</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" showWhen="ios">Cancel</span>
@@ -20,10 +20,14 @@
 
 
 <ion-content padding>
-  <form [formGroup]="pedestrainForm">
+  <form [formGroup]="driverForm">
     <ion-item>
       <ion-label stacked>Name*</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Driving Licence</ion-label>
+      <ion-input type="text" formControlName="licence" autocapitalize="characters"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Age*</ion-label>
@@ -31,17 +35,17 @@
     </ion-item>
     <ion-item>
       <ion-label stacked>Address*</ion-label>
-      <ion-textarea formControlName="address"></ion-textarea>
+      <ion-input formControlName="address"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Gender*</ion-label>
+      <ion-label><small>Gender*</small></ion-label>
       <ion-select formControlName="gender">
         <ion-option value="Male">Male</ion-option>
         <ion-option value="Female">Female</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Under Influence*</ion-label>
+      <ion-label><small>Under Influence*</small></ion-label>
       <ion-toggle formControlName="underInfluence"></ion-toggle>
     </ion-item>
     <ion-item>
@@ -57,11 +61,11 @@
       <ion-input formControlName="dataOnSocioEconomicStatus"></ion-input>
     </ion-item>
     <div padding>
-      <ion-card *ngFor="let img of pedestrianImageUrls;let i = index;">
+      <ion-card *ngFor="let img of driverImageUrls;let i = index;">
         <img [src]="img.value.url" />
         <ion-row>
           <ion-col text-right>
-            <button ion-button color="danger" clear icon-only item-end (click)="delPedestrianImage(pedestrainForm,i)">
+            <button ion-button color="danger" clear icon-only item-end (click)="delDriverImage(driverForm,i)">
               <ion-icon name='trash' is-active="false"></ion-icon>
             </button>
           </ion-col>
@@ -70,15 +74,12 @@
     </div>
     <div text-center>
       <h2 color="primary">Capture Photos/Video</h2>
-      <button ion-button icon-only class="center" margin-bottom (click)="capturePassenger(pedestrainForm)">
+      <button ion-button icon-only class="center" margin-bottom (click)="captureDriver(driverForm)">
         <ion-icon name="camera"></ion-icon>
       </button>
     </div>
-    <button type="button" ion-button block [disabled]="pedestrainForm.invalid" (click)="savePedestrian()">Save Pedestrian</button>
+    <div padding>
+      <button type="button" ion-button block small (click)="saveDriver()">Save Driver</button>
+    </div>
   </form>
 </ion-content>
-
-<!-- <ion-footer>
-  <button type="button" ion-button block>Back</button>
-  <button type="button" ion-button block color="secondary" [disabled]="pedestrainForm.invalid" (click)="submitPedestrian()">Submit</button>
-</ion-footer> -->

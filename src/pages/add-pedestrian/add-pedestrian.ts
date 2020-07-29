@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, ViewController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -41,7 +41,8 @@ export class AddPedestrianPage {
     public modalCtrl: ModalController,
     private accService: AccidentProvider,
     public toastSev: ToastProvider,
-    public alertCtrl: AlertController,) {
+    public alertCtrl: AlertController,
+    public viewCtrl: ViewController) {
     this.getPedestrianForm();
   }
 
@@ -72,32 +73,38 @@ export class AddPedestrianPage {
   }
 
   savePedestrian() {
-    this.toastSev.showLoader();
     console.log(this.pedestrainForm.value);
-    this.accidentForm['index'] = this.index;
-    const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
-    this.accService.addPedestrian(this.accidentForm['id'], formData).subscribe(response => {
-      this.toastSev.hideLoader();
-      console.log(response);
-      this.accidentForm['index']++;
-      this.toastSev.showToast('Pedestrain ' + this.index + ' saved !');
-      this.navCtrl.push(AddPedestrianPage, { accident: this.accidentForm });
-    })
-  }
-
-  submitPedestrian() {
+    const pedestrian = <FormArray>this.accidentForm['pedestrians'];
+    pedestrian.push(this.pedestrainForm.value);
+    // this.viewCtrl.dismiss({ accident: this.accidentForm });
     this.toastSev.showLoader();
+    // this.accidentForm['index'] = this.index;
     const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
     this.accService.addPedestrian(this.accidentForm['id'], formData).subscribe(response => {
       this.toastSev.hideLoader();
       console.log(response);
-      this.toastSev.showToast('Accident Saved Successfully !');
-      this.navCtrl.popToRoot();
-    }, (error => {
-      console.log(error);
+      // this.accidentForm['index']++;
+      this.toastSev.showToast('Pedestrain Added !');
+      this.viewCtrl.dismiss({ accident: this.accidentForm });
+      // this.navCtrl.push(AddPedestrianPage, { accident: this.accidentForm });
+    },(error=>{
       this.toastSev.hideLoader();
     }))
   }
+
+  // submitPedestrian() {
+  //   this.toastSev.showLoader();
+  //   const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
+  //   this.accService.addPedestrian(this.accidentForm['id'], formData).subscribe(response => {
+  //     this.toastSev.hideLoader();
+  //     console.log(response);
+  //     this.toastSev.showToast('Accident Saved Successfully !');
+  //     this.navCtrl.popToRoot();
+  //   }, (error => {
+  //     console.log(error);
+  //     this.toastSev.hideLoader();
+  //   }))
+  // }
 
   private capturePassenger(personForm: FormGroup) {
     this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
@@ -154,6 +161,10 @@ export class AddPedestrianPage {
       }
     }
     return formData;
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 
 }

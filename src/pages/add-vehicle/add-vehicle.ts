@@ -70,9 +70,9 @@ export class AddVehiclePage implements OnInit {
 
     ionViewDidLoad() {
         console.log('AddVehiclePage');
-        this.accService.getPersonTypes().subscribe(res => {
-            this.personTypes = res;
-        });
+        // this.accService.getPersonTypes().subscribe(res => {
+        //     this.personTypes = res;
+        // });
     }
 
     ngOnInit() {
@@ -104,26 +104,53 @@ export class AddVehiclePage implements OnInit {
         persons.removeAt(index);
     }
 
+    addDriver() {
+        const modal = this.modalCtrl.create('AddDriverPage', { persons: this.vehicleFormGroup.controls['persons'] });
+        modal.present();
+    }
+
+    removeDriver(index) {
+        const driver = <FormArray>this.vehicleFormGroup.controls['persons'];
+        driver.removeAt(index);
+    }
+
+    addPedestrian() {
+        if (!this.accidentForm['pedestrians']) {
+            this.accidentForm['pedestrians'] = [];
+        }
+        const modal = this.modalCtrl.create('AddPedestrianPage', { accident: this.accidentForm })
+        modal.present();
+        modal.onDidDismiss(response => {
+            console.log(response);
+            this.accidentForm = response.accident
+        });
+    }
+
+    removePedestrian(index){
+        const pedestrian = this.accidentForm['pedestrians'];
+        // pedestrian.removeAt(index);
+        pedestrian.splice(index,1);
+    }
+
     saveVehicle() {
         this.accidentForm['index'] = this.index;
         this.accidentForm['vehicles'][this.index] = this.vehicleFormGroup.value;
+        console.log(this.accidentForm);
+        // this.accidentForm['index']++;
+
         this.toastSev.showLoader();
-        // this.navCtrl.push(AddPedestrianPage, { accident: this.accidentForm });
-        
-
-
         const formData = this.convertModelToFormData(this.vehicleFormGroup.value, new FormData(), '');
         this.accSev.addVehicleReport(this.accidentForm['id'], formData).subscribe(response => {
             console.log(response);
             this.accidentForm['index']++;
             this.toastSev.hideLoader();
-            if (this.accidentForm['index'] < this.accidentForm['numOfVehicle']) {
-                this.toastSev.showToast('Vehicle Added Successfully');
-                this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm });
+        if (this.accidentForm['index'] < this.accidentForm['numOfVehicle']) {
+            this.toastSev.showToast('Vehicle Added Successfully');
+            this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm });
             }
             else {
-                this.accidentForm['index']=0;
-                this.navCtrl.push(AddPedestrianPage, { accident: this.accidentForm });
+                this.accidentForm['index']++;
+                // this.navCtrl.push(AddPedestrianPage, { accident: this.accidentForm });
             }
 
         }, error => {
@@ -131,6 +158,11 @@ export class AddVehiclePage implements OnInit {
             this.toastSev.hideLoader();
         });
     }
+
+    submitAccident() {
+            this.toastSev.showToast('Accident Saved Successfully !');
+    this.navCtrl.popToRoot();
+  }
 
     showError = (message) => {
         const alert = this.alertCtrl.create({
@@ -194,6 +226,8 @@ export class AddVehiclePage implements OnInit {
         }
         return formData;
     }
+
+
 
 
 

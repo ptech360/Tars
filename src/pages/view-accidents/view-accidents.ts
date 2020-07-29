@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { AccidentPage } from '../accident/accident';
+import { AccidentDetailsPage } from '../accident-details/accident-details';
 
 /**
  * Generated class for the ViewAccidentsPage page.
@@ -20,6 +21,7 @@ export class ViewAccidentsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public accSev: AccidentProvider) {
     this.accSev.getAccidentReports().subscribe(response => {
       this.accidents = response;
+      console.log(response);
     });
   }
 
@@ -28,7 +30,8 @@ export class ViewAccidentsPage {
   }
 
   openIncidentDetailPage(index: number) {
-    this.navCtrl.push(AccidentPage, { 'accident': this.accidents[index]});
+    // this.navCtrl.push(AccidentPage, { 'accident': this.accidents[index]});
+    this.navCtrl.push(AccidentDetailsPage, { 'accident': this.accidents[index]});
   }
 
 

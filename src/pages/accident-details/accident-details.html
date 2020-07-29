@@ -1,0 +1,118 @@
+<!--
+  Generated template for the AccidentDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Accident</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background">
+  <div class="bg-white">
+    <div padding>
+      <ion-item class="border">
+        <h2>Accident Type</h2>
+        <p>{{accident.type}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Fatal</h2>
+        <p>{{accident.fatal ?'Yes':'No'}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>No. of Casualities</h2>
+        <p>{{accident.numOfCasualities}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>No. of Vehicle Involved</h2>
+        <p>{{accident.numOfVehicle}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Description</h2>
+        <p>{{accident.description}}.</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Location</h2>
+        <p> {{accident.address}}
+        </p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>FIR</h2>
+        <p>{{accident.firNum}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Date</h2>
+        <p>{{accident.createdAt | date:'medium'}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Analysing Info</h2>
+        <p>{{accident.analysingInfo}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Primary And Secondary Causes</h2>
+        <p>{{accident.primaryAndSecondaryCauses}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Drawing</h2>
+        <p>{{accident.drawing}}</p>
+      </ion-item>
+      <ion-item class="border" margin-top>
+        <h2>Remark</h2>
+        <p>{{accident.remark}}</p>
+      </ion-item>
+    </div>
+  </div>
+
+  <div class="bg-white" *ngFor="let vehicle of accident.vehicles;">
+    <div padding>
+      <div class="vehical-details-main">
+        <div class="vehical-details"><b>Vehicle Details</b></div>
+        <ion-card-content>
+          <ion-item>
+            <h2><b>Vehicle Number</b> : {{vehicle.number}}</h2>
+            <p><b>Vehicle Model</b> : {{vehicle.model}}</p>
+          </ion-item>
+        </ion-card-content>
+        <!-- <div text-center padding>
+          <img width="100%" [src]="bucketUrl + vehicleImg.picName + accessToken"
+            *ngFor="let vehicleImg of vehicle.vehiclePics;">
+        </div> -->
+      </div>
+    </div>
+    <div *ngFor="let pass of vehicle.persons;let o = index;">
+      <ion-card class="border">
+        <ion-card-header *ngIf="pass.type=='Driver'">
+          <!-- <ion-avatar item-start>
+            <img src="/assets/imgs/profile.png">
+          </ion-avatar> -->
+          <b>Driver Details</b>
+        </ion-card-header>
+        <ion-card-header *ngIf="pass.type=='Passenger'">
+          Passenger ({{o}})
+        </ion-card-header>
+        <ion-card-content no-padding>
+          <ion-item>
+            <h2><b>Name: </b>{{pass.name}}</h2>
+            <p><b>Driving Licence: </b>{{pass.licence}}</p>
+          </ion-item>
+          <ion-item>
+            <p><b>Gender: </b><span>{{pass.gender}}</span></p>
+            <p><b>Age: </b><span>{{pass.age}}</span></p>
+            <p><b>Address: </b><span>{{pass.address}}</span></p>
+            <p><b>Under Influence: </b><span>{{pass.underInfluence?'Yes':'No'}}</span></p>
+            <p><b>Type and Extent of Human Factor: </b>{{pass.typeAndExtendOfHumanFactor}}</p>
+            <p><b>Nature of any injuries: </b>{{pass.natureOfAnyInjuries}}</p>
+            <p><b>Data on Socio-economic status: </b>{{pass.dataOnSocioEconomicStatus}}</p>
+            <!-- <img [src]="bucketUrl + img.picName + accessToken" *ngFor="let img of pass.personPics;" padding> -->
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+</ion-content>

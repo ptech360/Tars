@@ -127,7 +127,7 @@
         <!-- </ng-container> -->
     </form>
     <div padding >
-        <button type="button" ion-button block *ngIf="accidentForm['index']>accidentForm['numOfVehicle']-1" (click)="saveVehicle()">Save Vehicle</button>
+        <button type="button" ion-button block *ngIf="index<accidentForm['numOfVehicle']" (click)="saveVehicle()">Save Vehicle</button>
     </div>
 
     <ng-container *ngIf="accidentForm['pedestrians']">

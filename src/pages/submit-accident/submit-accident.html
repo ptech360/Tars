@@ -1,0 +1,112 @@
+<!--
+  Generated template for the SubmitAccidentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Accident Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <h3><b>Accident : </b></h3>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <p><b>Accident: </b><span>{{accidentForm['type']}}</span></p>
+        <p><b>Fatal: </b><span>{{accidentForm['fatal']?'Yes':'No'}}</span></p>
+        <p><b>Num Of Casualities: </b><span>{{accidentForm['numOfCasualities']}}</span></p>
+        <p><b>Num Of Vehicle: </b><span>{{accidentForm['numOfVehicle']}}</span></p>
+        <p><b>Description: </b><span>{{accidentForm['Description']}}</span></p>
+        <p><b>Location: </b><span>{{accidentForm['address']}}</span></p>
+        <p><b>Primary And Secondary Causes: </b><span>{{accidentForm['primaryAndSecondaryCauses']}}</span></p>
+        <p><b>Drawing: </b><span>{{accidentForm['drawing']}}</span></p>
+        <p><b>Analysing Info: </b><span>{{accidentForm['analysingInfo']}}</span></p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngFor="let vehicle of accidentForm['vehicles']">
+    <ion-card>
+      <ion-card-header>
+        <h3><b>Vehicle Details</b></h3>
+      </ion-card-header>
+      <ion-item>
+        <ion-item>
+          <h2><b>Vehicle Number</b> : {{vehicle.number}}</h2>
+          <p><b>Vehicle Model</b> : {{vehicle.model}}</p>
+        </ion-item>
+      </ion-item>
+      <div *ngFor="let person of vehicle.persons; let i = index">
+        <ion-card>
+          <ion-card-header *ngIf="person.type=='Driver'">
+            <b>Driver Details</b>
+          </ion-card-header>
+          <ion-card-header *ngIf="person.type=='Passenger'">
+            Passenger ({{i}})
+          </ion-card-header>
+          <ion-item>
+            <h2><b>Name: </b>{{person.name}}</h2>
+            <p><b>Driving Licence: </b>{{person.licence}}</p>
+          </ion-item>
+          <ion-item>
+            <p><b>Gender: </b><span>{{person.gender}}</span></p>
+            <p><b>Age: </b><span>{{person.age}}</span></p>
+            <p><b>Address: </b><span>{{person.address}}</span></p>
+            <p><b>Under Influence: </b><span>{{person.underInfluence?'Yes':'No'}}</span></p>
+            <p><b>Type and Extent of Human Factor: </b>{{person.typeAndExtendOfHumanFactor}}</p>
+            <p><b>Nature of any injuries: </b>{{person.natureOfAnyInjuries}}</p>
+            <p><b>Data on Socio-economic status: </b>{{person.dataOnSocioEconomicStatus}}</p>
+          </ion-item>
+        </ion-card>
+      </div>
+    </ion-card>
+  </div>
+  <div *ngIf="accidentForm['pedestrians']">
+    <ion-card>
+      <ion-card-header>
+        <h3><b>Pedestrian Details</b></h3>
+      </ion-card-header>
+      <div *ngFor="let ped of accidentForm['pedestrians']; let i = index;">
+        <ion-card>
+          <ion-card-header>
+            <span><h2><b>Pedestrain {{i+1}}</b></h2></span>
+            <button ion-button color="danger" clear icon-only item-end (click)="removePedestrian(i)">
+              <ion-icon name='trash' is-active="false"></ion-icon>
+            </button>
+            <button ion-button color="primary" clear icon-only item-end (click)="editPedestrian(i)">
+              <ion-icon name='create' is-active="false"></ion-icon>
+            </button>
+          </ion-card-header>
+          <ion-item>
+            <ion-item>
+              <p><b>Name: </b><span>{{ped.name}}</span></p>
+              <p><b>Gender: </b><span>{{ped.gender}}</span></p>
+              <p><b>Age: </b><span>{{ped.age}}</span></p>
+              <p><b>Address: </b><span>{{ped.address}}</span></p>
+              <p><b>Under Influence: </b><span>{{ped.underInfluence?'Yes':'No'}}</span></p>
+              <p><b>Type and Extent of Human Factor: </b>{{ped.typeAndExtendOfHumanFactor}}</p>
+              <p><b>Nature of any injuries: </b>{{ped.natureOfAnyInjuries}}</p>
+              <p><b>Data on Socio-economic status: </b>{{ped.dataOnSocioEconomicStatus}}</p>
+            </ion-item>
+          </ion-item>
+        </ion-card>
+
+      </div>
+    </ion-card>
+  </div>
+  <button type="button" ion-button block color="primary" (click)="addPedestrian()">Add Pedestrian</button>
+
+</ion-content>
+
+
+<ion-footer>
+  <button type="button" ion-button block color="secondary" (click)="submitAccident()">Submit</button>
+</ion-footer>

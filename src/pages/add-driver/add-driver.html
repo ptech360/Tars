@@ -79,7 +79,7 @@
       </button>
     </div>
     <div padding>
-      <button type="button" ion-button block small (click)="saveDriver()">Save Driver</button>
+      <button type="button" ion-button block small [disabled]="driverForm.invalid" (click)="saveDriver()">Save Driver</button>
     </div>
   </form>
 </ion-content>

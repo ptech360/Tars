@@ -20,6 +20,7 @@ export class AddDriverPage {
   driverForm: FormGroup;
   driverImageUrls: any = [];
   driver: FormArray;
+  index:number;
   cameraOptions: CameraOptions = {
     sourceType: this.camera.PictureSourceType.CAMERA,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -42,7 +43,18 @@ export class AddDriverPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddDriverPage');
     this.driver = <FormArray>this.navParams.get('persons')
+    this.index = this.navParams.get('index');
     console.log(this.navParams.get('persons'));
+    if(this.index==0){
+      const editPersonObj = this.driver.controls[this.index];
+      console.log(editPersonObj);
+      Object.keys(editPersonObj.value).forEach(key => {
+        if (editPersonObj.value[key]) {
+          this.driverForm.controls[key].patchValue(editPersonObj.value[key]);
+        }
+      });
+    }
+    
   }
 
   getDriver(){
@@ -63,9 +75,17 @@ export class AddDriverPage {
   }
 
   saveDriver() {
-    console.log(this.driverForm.value);
-    this.driver.push(this.driverForm);
-    this.dismiss();
+    if(this.index==0){
+      this.driver.removeAt(this.index);
+      this.driver.insert(0,this.driverForm);
+      this.dismiss();
+      this.index = 1;
+    }
+    else {
+      console.log(this.driverForm.value);
+      this.driver.push(this.driverForm);
+      this.dismiss();
+    }
   }
 
   private captureDriver(driverForm: FormGroup) {

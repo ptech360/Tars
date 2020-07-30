@@ -68,51 +68,42 @@
                                     <span *ngIf="i>0">Passenger {{i}} Details</span>
                                     
                                     <button ion-button color="danger" clear icon-only item-end
-                                        (click)="removePerson(i)">
+                                        (click)="removePerson(i)" *ngIf="i>0">
                                         <ion-icon name='trash' is-active="false"></ion-icon>
                                     </button>
+                                    <button ion-button color="primary" clear icon-only item-end
+                                     (click)="editPerson(i)">
+                                    <ion-icon name='create' is-active="false"></ion-icon>
+                                </button>
                                 </ion-item>
                             </ion-card-header>
                             <ion-item>
-                                <ion-label stacked>Name*</ion-label>
-                                <ion-input type="text" formControlName="name"></ion-input>
+                                <ion-label><b>Name  : </b>{{person.controls.name.value}}</ion-label>
                             </ion-item>
                             <ion-item>
-                                <ion-label stacked>Driving Licence</ion-label>
-                                <ion-input type="text" formControlName="licence" autocapitalize="characters">
-                                </ion-input>
+                                <ion-label><b>Driving Licence : </b>{{person.controls.licence.value}}</ion-label>
                             </ion-item>
                             <ion-item>
-                                <ion-label stacked>Age*</ion-label>
-                                <ion-input type="number" formControlName="age"></ion-input>
+                                <ion-label><b>Age  : </b>{{person.controls.age.value}}</ion-label>
                             </ion-item>
                             <ion-item>
-                                <ion-label stacked>Address*</ion-label>
-                                <ion-textarea formControlName="address"></ion-textarea>
+                                <ion-label><b>Gender  : </b>{{person.controls.gender.value}}</ion-label>                               
                             </ion-item>
                             <ion-item>
-                                <ion-label>Gender*</ion-label>
-                                <ion-select formControlName="gender">
-                                    <ion-option value="Male">Male</ion-option>
-                                    <ion-option value="Female">Female</ion-option>
-                                </ion-select>
+                                <ion-label><b>Address  : </b>{{person.controls.address.value}}</ion-label>
+                            </ion-item>                      
+                            <!-- <ion-item>
+                                <ion-label><b>Under Influence  : </b>{{person.controls.underInfluence.value}}</ion-label>                                
                             </ion-item>
                             <ion-item>
-                                <ion-label>Under Influence*</ion-label>
-                                <ion-toggle formControlName="underInfluence"></ion-toggle>
+                                <ion-label><b>Type and Extent of Human Factor : </b>{{person.controls.typeAndExtendOfHumanFactor.value}}</ion-label>
                             </ion-item>
                             <ion-item>
-                                <ion-label stacked>Type and Extent of Human Factor</ion-label>
-                                <ion-input formControlName="typeAndExtendOfHumanFactor"></ion-input>
+                                <ion-label><b>Nature of any injuries : </b>{{person.controls.natureOfAnyInjuries.value}}</ion-label>
                             </ion-item>
                             <ion-item>
-                                <ion-label stacked>Nature of any injuries</ion-label>
-                                <ion-input formControlName="natureOfAnyInjuries"></ion-input>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label stacked>Data on Socio-economic status</ion-label>
-                                <ion-input formControlName="dataOnSocioEconomicStatus"></ion-input>
-                            </ion-item>
+                                <ion-label><b>Data on Socio-economic status : </b>{{person.controls.dataOnSocioEconomicStatus.value}}</ion-label>
+                            </ion-item> -->
                         </ion-card>
                     </div>
 
@@ -127,10 +118,10 @@
         <!-- </ng-container> -->
     </form>
     <div padding >
-        <button type="button" ion-button block *ngIf="index<accidentForm['numOfVehicle']" (click)="saveVehicle()">Save Vehicle</button>
+        <button type="button" ion-button block [disabled]="vehicleFormGroup.invalid" (click)="saveVehicle()">Save Vehicle and Continue</button>
     </div>
 
-    <ng-container *ngIf="accidentForm['pedestrians']">
+    <!-- <ng-container *ngIf="accidentForm['pedestrians']">
         <ion-card *ngFor="let ped of accidentForm['pedestrians']; let j=index">
             <ion-card-header>
                 Pedestrain {{j+1}}
@@ -161,14 +152,14 @@
                 <ion-label>Type and Extend of Human Factor : {{ped.typeAndExtendOfHumanFactor}}</ion-label>
             </ion-item>
         </ion-card>
-    </ng-container>
+    </ng-container> -->
 
-    <div padding>
+    <!-- <div padding>
         <button type="button" ion-button block color="tertiary" *ngIf="accidentForm['index']>accidentForm['numOfVehicle']-1" (click)="addPedestrian()">Add Pedestrain</button>
-    </div>
+    </div> -->
 
 </ion-content>
 <ion-footer>
-    <button type="button" ion-button block small>Back</button>
-    <button type="button" ion-button block color="secondary" *ngIf="accidentForm['index']>accidentForm['numOfVehicle']-1" (click)="submitAccident()">Submit</button>
+    <!-- <button type="button" ion-button block small>Back</button>
+    <button type="button" ion-button block color="secondary" *ngIf="accidentForm['index']>accidentForm['numOfVehicle']-1" (click)="submitAccident()">Submit</button> -->
 </ion-footer>

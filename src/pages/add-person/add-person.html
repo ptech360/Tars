@@ -79,7 +79,7 @@
       </button>
     </div>
     <div padding>
-      <button type="button" ion-button block small (click)="savePerson()">Save</button>
+      <button type="button" ion-button block small [disabled]="personForm.invalid" (click)="savePerson()">Save</button>
     </div>
   </form>
 </ion-content>

@@ -21,7 +21,7 @@ export class AddPedestrianPage {
 
   pedestrainForm: FormGroup;
   accidentForm: FormGroup;
-  index: number = 0;
+  index: number = -1;
   pedestrianImageUrls = [];
   cameraOptions: CameraOptions = {
     sourceType: this.camera.PictureSourceType.CAMERA,
@@ -50,9 +50,19 @@ export class AddPedestrianPage {
     console.log('ionViewDidLoad AddPedestrianPage');
     console.log(this.navParams.get('accident'));
     this.accidentForm = <FormGroup>this.navParams.get('accident');
-    if (this.accidentForm['index']) {
-      this.index = this.accidentForm['index'];
+    this.index = this.navParams.get('index');
+    if (this.navParams.get('index')>-1) {
+      const editPedestrainObj = this.accidentForm['pedestrians'][this.index];
+      console.log(editPedestrainObj);
+      Object.keys(editPedestrainObj).forEach(key => {
+        if (editPedestrainObj[key] && this.pedestrainForm.controls[key]) {
+          this.pedestrainForm.controls[key].patchValue(editPedestrainObj[key]);
+        }
+      });
     }
+    // if (this.accidentForm['index']) {
+    //   this.index = this.accidentForm['index'];
+    // }
   }
 
   getPedestrianForm() {
@@ -75,31 +85,40 @@ export class AddPedestrianPage {
   savePedestrian() {
     console.log(this.pedestrainForm.value);
     const pedestrian = <FormArray>this.accidentForm['pedestrians'];
-    pedestrian.push(this.pedestrainForm.value);
-    // this.viewCtrl.dismiss({ accident: this.accidentForm });
-    this.toastSev.showLoader();
-    // this.accidentForm['index'] = this.index;
     const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
-    this.accService.addPedestrian(this.accidentForm['id'], formData).subscribe(response => {
-      this.toastSev.hideLoader();
-      console.log(response);
-      // this.accidentForm['index']++;
-      this.toastSev.showToast('Pedestrain Added !');
-      this.viewCtrl.dismiss({ accident: this.accidentForm });
-      // this.navCtrl.push(AddPedestrianPage, { accident: this.accidentForm });
-    },(error=>{
-      this.toastSev.hideLoader();
-    }))
+    if (this.pedestrainForm.value.id) {
+      this.accService.editPedestrian(this.accidentForm['id'], this.pedestrainForm.value.id,formData).subscribe(response => {
+        this.toastSev.hideLoader();
+        this.toastSev.showToast('Pedestrian Updated !');
+        pedestrian.removeAt(this.index);
+        pedestrian.insert(this.index, response);
+        console.log(response);
+        this.dismiss();
+      }, (error => {
+        this.toastSev.hideLoader();
+      }))
+    }
+    else {
+      this.accService.addPedestrian(this.accidentForm['id'], formData).subscribe(response => {
+        pedestrian.push(response);
+        this.toastSev.hideLoader();
+        console.log(response);
+        this.toastSev.showToast('Pedestrain Saved !');
+        this.dismiss();
+      }, (error => {
+        this.toastSev.hideLoader();
+      }))
+    }
   }
 
   // submitPedestrian() {
   //   this.toastSev.showLoader();
   //   const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
   //   this.accService.addPedestrian(this.accidentForm['id'], formData).subscribe(response => {
+          // pedestrian.push(this.pedestrainForm.value);
   //     this.toastSev.hideLoader();
   //     console.log(response);
-  //     this.toastSev.showToast('Accident Saved Successfully !');
-  //     this.navCtrl.popToRoot();
+  //     this.toastSev.showToast('Pedestrian Saved !');
   //   }, (error => {
   //     console.log(error);
   //     this.toastSev.hideLoader();

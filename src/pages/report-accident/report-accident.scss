@@ -70,6 +70,57 @@ page-report-accident{
       }
     }
   }
+
+
+  ion-card{
+
+    ion-list{
+      ion-item{
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+
+      }
+      ion-label{
+        color: #333 !important;
+        font-size: 14px !important;
+        margin: 5px 0 !important;
+        code{
+          color: red;
+          margin-right: 10px;
+        }
+      }
+      ion-select{
+        font-size: 14px;
+        outline: none;
+        
+        color: #555;
+      }
+      ion-input{
+        margin: 0; 
+        border: solid 1px #ddd;
+        padding: 0 10px;
+        color: #555;
+      font-size: 14px;
+        outline: none;
+        .text-input-md{
+          margin: 5px 0  !important;
+        }
+      }
+    }
+
+    ion-textarea{
+      border: solid 1px #ddd;
+      margin-top: 0;
+      outline: none;
+
+      margin-bottom: 10px;
+      padding: 10px;
+      color: #555;
+      font-size: 14px;
+    }
+  }
+
+
 }
 
 
@@ -92,4 +143,19 @@ page-report-accident{
 .person-details{
   background-color: color($colors, white);
   padding-top: 10px;
+}
+
+.remarks-card{
+  ion-label{
+    margin: 10px 0 !important;
+  }
+  ion-input{
+    margin-bottom: 10px !important;
+  }
+}
+
+.accident-happen{
+  ion-label{
+    margin: 10px 0 !important;
+  }
 }

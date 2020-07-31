@@ -1,4 +1,16 @@
 page-home {
+
+  ion-header{
+    ion-navbar{
+      background: red;
+
+      ion-title{
+        .toolbar-title{
+          font-size: 18px !important;
+        }
+      }
+    }
+  }
 .title-page{
   font-size: 18px;
   font-weight: bold;
@@ -11,7 +23,11 @@ page-home {
   .home-page{
     max-width: 550px;
     margin: auto;
-
+    .home-borrom{
+      .button-full{
+        background-color: #2395ae !important;
+      }
+    }
    
   }
 }

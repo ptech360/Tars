@@ -1,3 +1,27 @@
-page-add-person {
+    page-add-person {
+        ion-label{
+            // margin-bottom: 8px !important;
+            color: #333;
+            font-size: 14px;
+            // font-weight: bold;
+            code{
+                color: red;
+            }
+        }
+        .label-ios[stacked]{
+            color: #333;
+            font-size: 14px;
+            // font-weight: bold;
+        }
+        ion-select{
+            color: #555;
+            font-size: 14px ;
+        }
+        ion-input{
+            color: #555;
+            font-size: 14px ;
+        }
+    }
 
-}
+
+

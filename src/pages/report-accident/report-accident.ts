@@ -41,6 +41,7 @@ export class ReportAccidentPage implements OnInit {
   longitude: number;
   location: string;
   mediaFiles: any = [];
+  accidentObject = {};
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -90,6 +91,7 @@ export class ReportAccidentPage implements OnInit {
 
   getAccidentForm() {
     return this.fb.group({
+      id: [], 
       fatal: [false, [Validators.required]],
       numOfCasualities: [0, [Validators.required]],
       description: ['', [Validators.required]],
@@ -213,10 +215,15 @@ export class ReportAccidentPage implements OnInit {
   // }
 
   saveAccidentReport() {
+
     // this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm.value });
 
-    console.log(this.accidentForm.value);
+    if(this.accidentObject['id']){
+      this.accidentForm.controls.id.patchValue(this.accidentObject['id']);
+    }
+
     this.toastSev.showLoader();
+    console.log(this.accidentForm.value);
     const accidentForm = this.accidentForm.value;
     const formData = new FormData();
     Object.keys(this.accidentForm.value).forEach(key => {
@@ -231,23 +238,28 @@ export class ReportAccidentPage implements OnInit {
         formData.append(key, this.accidentForm.value[key])
       }
     });
-    // this.navCtrl.push(InvolvedVehiclePage, {item: this.accidentForm.value});
-    // this.navCtrl.push(AddVehiclePage, {item: this.accidentForm.value});
 
-
-    // delete accidentForm['visibleVehicles'];
-    // delete accidentForm['visibleOtherPeople'];
-    // delete accidentForm.vehicle.visiblePassengers;
-    // delete accidentForm.vehicle.visibleDriver;
-    // const formData = this.convertModelToFormData(accidentForm, new FormData(), '');
-    this.accSev.addAccidentReport(formData).subscribe(response => {
-      this.toastSev.hideLoader();
-      this.toastSev.showToast('Accident Reported Successfully');
-      this.navCtrl.push(AddVehiclePage, { accident: response });
-    }, error => {
-      this.showError(error.message);
-      this.toastSev.hideLoader();
-    });
+    if (this.accidentForm.value.id) {
+      this.accSev.editAccidentReport(this.accidentForm.value.id, formData).subscribe(response => {
+        this.accidentObject = response;
+        this.toastSev.hideLoader();
+        this.toastSev.showToast('Accident Updated !');
+        this.navCtrl.push(AddVehiclePage, { accident: response });
+      }, error => {
+        this.showError(error.message);
+        this.toastSev.hideLoader();
+      });
+    } else {
+      this.accSev.addAccidentReport(formData).subscribe(response => {
+        this.accidentObject = response;
+        this.toastSev.hideLoader();
+        this.toastSev.showToast('Accident Reported !');
+        this.navCtrl.push(AddVehiclePage, { accident: response });
+      }, error => {
+        this.showError(error.message);
+        this.toastSev.hideLoader();
+      });
+    }
   }
 
   showError = (message) => {

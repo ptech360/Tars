@@ -30,6 +30,8 @@ import { InvolvedVehiclePage } from '../pages/involved-vehicle/involved-vehicle'
 import { AddVehiclePage } from '../pages/add-vehicle/add-vehicle';
 import { AddPersonPage } from '../pages/add-person/add-person';
 import { AddPedestrianPage } from '../pages/add-pedestrian/add-pedestrian';
+import { AccidentDetailsPage } from '../pages/accident-details/accident-details';
+import { SubmitAccidentPage } from '../pages/submit-accident/submit-accident';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { AddPedestrianPage } from '../pages/add-pedestrian/add-pedestrian';
     ViewAccidentsPage,
     AccidentPage,
     AddVehiclePage,
-    AddPedestrianPage
+    AccidentDetailsPage,
+    SubmitAccidentPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { AddPedestrianPage } from '../pages/add-pedestrian/add-pedestrian';
     ViewAccidentsPage,
     AccidentPage,
     AddVehiclePage,
-    AddPedestrianPage
+    AccidentDetailsPage,
+    SubmitAccidentPage
   ],
   providers: [
     StatusBar,

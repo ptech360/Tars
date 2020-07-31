@@ -118,14 +118,22 @@ export class AccidentProvider {
     return this.api.get('api/accidents');
   }
 
-  reportAccident(data){
-    return this.api.post('api/accident',data);
-  }
+  // reportAccident(data){
+  //   return this.api.post('api/accident',data);
+  // }
 
   addAccidentReport(object: any) {
     // this.accidentReports.push(object);
     // return of({ status: 200 });
     return this.api.post('api/accident',object,{});
+  }
+
+  editAccidentReport(accidentId:number,object:any){
+    return this.api.put('api/accident/'+accidentId,object,{});
+  }
+
+  submitAccident(accidentId:number){
+    return this.api.put('api/submit/accident/'+accidentId,{},{});
   }
 
   addVehicleReport(accidentId :number,object:any) {
@@ -134,6 +142,14 @@ export class AccidentProvider {
 
   addPedestrian(accidentId: number,object:any){
     return this.api.post('api/accident/'+accidentId+'/person',object,{})
+  }
+
+  editPedestrian(accidentId:number,personId:number,object:any){
+    return this.api.put('api/accident/'+accidentId+'/person/'+personId,object,{});
+  }
+
+  deletePedestrian(accidentId:number,personId:number){
+    return this.api.delete('api/accident/'+accidentId+'/person/'+personId);
   }
 
 }

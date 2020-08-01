@@ -22,30 +22,30 @@
 <ion-content padding>
   <form [formGroup]="driverForm">
     <ion-item>
-      <ion-label stacked>Name*</ion-label>
+      <ion-label>Name <code>*</code> </ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label stacked>Driving Licence</ion-label>
+      <ion-label>Driving Licence</ion-label>
       <ion-input type="text" formControlName="licence" autocapitalize="characters"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label stacked>Age*</ion-label>
+      <ion-label>Age <code>*</code></ion-label>
       <ion-input type="number" formControlName="age"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label stacked>Address*</ion-label>
+      <ion-label>Address <code>*</code></ion-label>
       <ion-input formControlName="address"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label><small>Gender*</small></ion-label>
+      <ion-label>Gender <code>*</code></ion-label>
       <ion-select formControlName="gender">
         <ion-option value="Male">Male</ion-option>
         <ion-option value="Female">Female</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label><small>Under Influence*</small></ion-label>
+      <ion-label>Under Influence <code>*</code></ion-label>
       <ion-toggle formControlName="underInfluence"></ion-toggle>
     </ion-item>
     <ion-item>

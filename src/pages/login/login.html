@@ -22,14 +22,15 @@
 
   <form name="Login_Form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <ion-item>
-        <ion-icon name="username"></ion-icon>
+        <!-- <ion-icon name="username"></ion-icon> -->
+        <ion-icon name="person-circle-outline"></ion-icon>
         <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
     </ion-item>
 
-    <div (click)="forgotPassword()" class="forgotPwd" color="primary">Forgot Password?</div>
+    <div (click)="forgotPassword()" class="forgotPwd">Forgot Password?</div>
 
 
     <div class="err-msg" *ngIf="errorMsg">

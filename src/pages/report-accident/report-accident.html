@@ -20,22 +20,22 @@
           <!-- <ion-list-header>
                 <ion-label>Items</ion-label>
               </ion-list-header> -->
-          <ion-item class="border">
-            <ion-label><small>Accident Type*</small></ion-label>
+          <ion-item class="border" lines="none">
+            <ion-label>Accident Type <code>*</code></ion-label>
             <ion-select formControlName="type">
               <ion-option *ngFor="let type of accidentTypes;" [value]="type.name">{{type.name}}</ion-option>
             </ion-select>
           </ion-item>
           <ion-item class="border">
-            <ion-label><small>No. of Casualities*</small></ion-label>
+            <ion-label>No. of Casualities <code>*</code></ion-label>
             <ion-input type="number" formControlName="numOfCasualities" text-right></ion-input>
           </ion-item>
-          <ion-item class="border">
-            <ion-label stacked>How did the Accident Happen?*</ion-label>
+          <ion-item class="border accident-happen">
+            <ion-label stacked>How did the Accident Happen? <code>*</code> </ion-label>
             <ion-textarea formControlName="description"></ion-textarea>
           </ion-item>
           <!-- <ion-item class="border">
-            <ion-label><small>Initiate Response*</small></ion-label>
+            <ion-label>Initiate Response <code>*</code></ion-label>
             <ion-select formControlName="initiates" multiple="true">
               <ion-option *ngFor="let init of accidentInitiates;" [value]="init.name">{{init.name}}</ion-option>
               <ion-option value="Ambulance">Ambulance</ion-option>
@@ -44,11 +44,11 @@
             </ion-select>
           </ion-item> -->
           <ion-item class="border">
-            <ion-label><small>Fatal*</small></ion-label>
+            <ion-label>Fatal <code>*</code></ion-label>
             <ion-toggle formControlName="fatal"></ion-toggle>
           </ion-item>
           <ion-item class="border">
-            <ion-label><small>No. of Vehicle Involved*</small></ion-label>
+            <ion-label>No. of Vehicle Involved <code>*</code></ion-label>
             <ion-select formControlName="numOfVehicle">
               <ion-option value="1">1</ion-option>
               <ion-option value="2">2</ion-option>
@@ -261,15 +261,15 @@
         </ion-list>
       </ion-card> -->
 
-      <ion-card>
+      <ion-card class="remarks-card">
         <ion-list>
           <ion-item class="border">
-            <ion-label stacked>Remarks*</ion-label>
+            <ion-label stacked>Remarks <code>*</code> </ion-label>
             <ion-textarea formControlName="remark"></ion-textarea>
           </ion-item>
 
           <ion-item class="border">
-            <ion-label stacked>Information On Analysing Agency And Personnel*</ion-label>
+            <ion-label stacked>Information On Analysing Agency And Personnel <code>*</code> </ion-label>
             <ion-input formControlName="analysingInfo"></ion-input>
           </ion-item>
 
@@ -287,10 +287,10 @@
         </ion-list>
       </ion-card>
 
-      <ion-card>
+      <ion-card class="remarks-card">
         <ion-list>
           <ion-item class="border">
-            <ion-label stacked>Address*</ion-label>
+            <ion-label stacked>Address <code>*</code> </ion-label>
             <ion-input formControlName="address"></ion-input>
           </ion-item>
         </ion-list>

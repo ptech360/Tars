@@ -1,8 +1,8 @@
 page-login {
  .login-main{
   // background-color: color($colors, primary);
-  // background-image: linear-gradient(#4486ff, #8db5ff);
-  background: white;
+  background-image: linear-gradient(45deg, #1f96af, #523972);
+  // background: #1f96af;
   .scroll-content{
     padding-bottom: 20px !important;
   }
@@ -13,7 +13,7 @@ page-login {
   // }
   .login-middle {
     width: 100%;
-    padding: 0 15px;
+    padding: 0;
     max-width: 550px;
     margin: auto;
 
@@ -24,11 +24,18 @@ page-login {
       margin-bottom: 40px;
       margin-top:40px;
 
+      img{
+        max-width: 180px;
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
     }
     form{
       button{
         &.signin-btn{
-        border-radius: 50px !important;
+        border-radius: 0px !important;
         // background-color: color($colors, light);
         background-color: color($colors, primary);
         // color: color($colors, primary);
@@ -37,29 +44,33 @@ page-login {
         margin: auto;
         margin-top: 30px;
         margin-bottom: 30px;
-        max-width: 150px;
+        font-size: 15px;
+        // max-width: 150px;
         text-transform: uppercase;
       }
     }
     .forgotPwd {
       width: 100%;
-      text-align: center;
-      margin-top: 20px;
+      text-align: right;
+      margin-top: 10x;
+    font-size: 15px;
+
       cursor: pointer;
       // color: color($colors, light);
-      color: color($colors, primary);
+      color: color($colors, light);
       text-decoration: underline;
-      font-weight: bold;
+      // font-weight: bold;
   }
   .signUp {
     width: 100%;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 30px;
+    font-size: 15px;
     // color: color($colors, light);
-    color: color($colors, primary);
+    color: color($colors, light);
     a {
       // color: color($colors, light);
-      color: color($colors, primary);
+      color: color($colors, light);
 
       font-weight: bold;
   }
@@ -88,15 +99,15 @@ page-login {
               padding: 11px 10px;
               width: 100%;
               margin: 0;
-              border-bottom-width: 0.55px;
-              border-bottom-style: solid;
-              border-bottom-color: color($colors, border-color);
+              border-width: 0.55px;
+              border-style: solid;
+              border-color: color($colors, border-color);
               border-radius: 0px;
               // color: color($colors, light);
-              color: color($colors, dark);
+              color: color($colors, light);
               &::-webkit-input-placeholder{
                 // color: color($colors, light) !important;
-                color: color($colors, dark);
+                color: color($colors, light);
               }
           
             }

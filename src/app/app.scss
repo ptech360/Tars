@@ -42,3 +42,26 @@ margin-auto{
 // .primary{
 //   color:colors($color,primary);
 // }
+
+ion-alert{
+  .alert-wrapper{
+    .alert-head{
+      padding:  15px;
+      background: rgba(0,0,0,0.05);
+      .alert-title{
+        font-size: 18px;
+      }
+    }
+    .alert-radio-group{
+      padding: 10px 0;
+      .alert-tappable{
+        line-height: normal !important;
+        padding: 5px 10px 5px 0 !important;
+        min-height: initial !important;
+        .alert-radio-label{
+          padding: 5px 10px 5px 20px !important;
+        }
+      }
+    }
+  }
+}

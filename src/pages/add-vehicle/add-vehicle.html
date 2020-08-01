@@ -11,18 +11,18 @@
         <!-- <ng-container formArrayName="vehicles"> -->
             <!-- <ion-card *ngFor="let vehicle of accidentForm.controls.vehicles['controls']; let i = index"
                 [formGroupName]="i"> -->
-                <ion-card>
+                <ion-card class="add-vehicle-card">
                 <ion-card-header no-padding>
                     <ion-item>
                         Vehicle {{index+1}}
                     </ion-item>
                 </ion-card-header>
                 <ion-item>
-                    <ion-label stacked>Vehicle Number*</ion-label>
+                    <ion-label stacked>Vehicle Number <code>*</code> </ion-label>
                     <ion-input type="text" formControlName="number" autocapitalize="characters"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label stacked>Vehicle Model*</ion-label>
+                    <ion-label stacked>Vehicle Model <code>*</code> </ion-label>
                     <ion-input type="text" formControlName="model" autocapitalize="characters"></ion-input>
                 </ion-item>
                 <div padding>
@@ -48,7 +48,7 @@
 
                 <!-- <ion-list *ngIf="vehicle.get('persons')"> -->
                     <ion-list>
-                    <div formArrayName="persons">
+                    <div class="person-list-main" formArrayName="persons">
                         <ion-card [formGroupName]="i"
                             *ngFor="let person of vehicleFormGroup.controls.persons['controls'];let i=index;">
                 <!-- <ion-list>

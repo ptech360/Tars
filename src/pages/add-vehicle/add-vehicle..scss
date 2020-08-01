@@ -1,0 +1,88 @@
+ion-content{
+   
+        form{
+            .add-vehicle-card{
+                margin:0 0 15px 0 !important;
+                width: 100% !important;
+
+                ion-label{
+                    // margin-bottom: 8px !important;
+                    code{
+                        color: red;
+                    }
+                }
+            }
+        }
+        ion-card{
+            ion-card-header{
+                border-bottom: solid 1px #ddd;
+                background: rgba(0, 0, 0, 0.05);
+                ion-item{
+                    ion-label{
+                        font-size: 16px !important;
+                        color: #555;
+                        margin: 0 !important;
+                        font-weight: bold;
+                    }
+                }
+            }
+            ion-item{
+                // margin-bottom: 10px !important;
+                ion-label{
+                    font-size: 14px !important;
+                    color: #333 !important;
+                    margin-bottom: 8px !important;
+
+                }
+                ion-input{
+                    border: solid 1px #ddd;
+                    padding: 0 10px;
+                    font-size: 14px;
+                    color: #555;
+                }
+                
+            }
+        }
+       
+    
+}
+
+.person-list-main{
+    ion-card{
+        box-shadow: 0 0 10px #ddd;
+        padding-bottom: 15px;
+        ion-card-header{
+            ion-item{
+                padding-bottom: 0;
+
+                .button-clear-ios-danger{
+                    width: 25px;
+                    font-size: 10px !important;
+                    background: #f53d3d;
+                    color: white;
+                }
+            }
+        }
+        .gender{
+            padding-bottom: 0 !important;
+        }
+        ion-item{
+            border-bottom: solid 1px #ddd;
+            padding-bottom: 10px;
+
+            ion-select{
+                border: solid 1px #ddd;
+                padding: 8px 10px !important;
+                font-size: 14px;
+                color: #555;
+            }
+
+            ion-textarea{
+                border: solid 1px #ddd;
+                padding: 8px 10px !important;
+                font-size: 14px;
+                color: #555;
+            }
+        }
+    }
+}

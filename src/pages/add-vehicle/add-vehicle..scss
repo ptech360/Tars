@@ -4,7 +4,7 @@ ion-content{
             .add-vehicle-card{
                 margin:0 0 15px 0 !important;
                 width: 100% !important;
-
+                padding-bottom: 15PX;
                 ion-label{
                     // margin-bottom: 8px !important;
                     code{
@@ -32,6 +32,7 @@ ion-content{
                     font-size: 14px !important;
                     color: #333 !important;
                     margin-bottom: 8px !important;
+                    font-weight: bold;
 
                 }
                 ion-input{
@@ -55,11 +56,20 @@ ion-content{
             ion-item{
                 padding-bottom: 0;
 
-                .button-clear-ios-danger{
+                .delete{
                     width: 25px;
                     font-size: 10px !important;
-                    background: #f53d3d;
-                    color: white;
+                    color: #f53d3d;
+                    border: solid 1px;
+                }
+                .edit{
+                    width: 25px;
+                    font-size: 10px !important;
+                    color: #2494af;
+                    border: solid 1px;
+                }
+                ion-label{
+                    font-weight: bold;
                 }
             }
         }
@@ -82,6 +92,9 @@ ion-content{
                 padding: 8px 10px !important;
                 font-size: 14px;
                 color: #555;
+            }
+            ion-label{
+                font-weight: normal;
             }
         }
     }

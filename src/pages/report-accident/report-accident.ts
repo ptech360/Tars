@@ -6,7 +6,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastProvider } from '../../providers/toast/toast';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient } from '@angular/common/http';
-import { VideoPlayer } from '@ionic-native/video-player';
 import { InvolvedVehiclePage } from '../involved-vehicle/involved-vehicle';
 import { AddVehiclePage } from '../add-vehicle/add-vehicle';
 /**
@@ -51,9 +50,7 @@ export class ReportAccidentPage implements OnInit {
     public httpClient: HttpClient,
     public modalCtrl: ModalController,
     private geolocation: Geolocation,
-    public alertCtrl: AlertController,
-    // private mediaCapture: MediaCapture,
-    // private videoPlayer: VideoPlayer
+    public alertCtrl: AlertController
   ) {
     this.accidentForm = this.getAccidentForm();
   }
@@ -296,20 +293,6 @@ export class ReportAccidentPage implements OnInit {
     }
     return formData;
   }
-
-  // public captureVideo() {
-  //   let options: CaptureVideoOptions = {
-  //     limit: 1,
-  //     duration: 30
-  //   }
-  //   this.mediaCapture.captureVideo(options).then((res: any[]) => {
-  //     this.storeMediaFiles(res[0]);
-  //   }, (err: CaptureError) => console.error(err));
-  // }
-
-  // play(file: any) {
-  //   this.videoPlayer.play(file.localURL);
-  // }
 
 
   storeMediaFiles(file) {

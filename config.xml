@@ -3,7 +3,7 @@
     <name>Tars</name>
     <description>Traffic Accident Recording System app</description>
     <author email="kharetwal.pankaj111@gmail.com" href="#">NxtLife Technologies Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -91,6 +91,7 @@
     <allow-navigation href="http://192.168.1.8:8100" sessionid="2f602261" />
     <allow-navigation href="http://192.168.1.8:8101" sessionid="dee137b3" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
+    <allow-navigation href="http://localhost:8100" sessionid="55692ba0" />
     <engine name="browser" spec="6.0.0" />
     <engine name="android" spec="7.0.0" />
 </widget>

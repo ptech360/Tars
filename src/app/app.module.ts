@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -59,6 +59,7 @@ import { MediaComponent } from '../components/media/media';
     IonicModule.forRoot(Tars),
     IonicStorageModule.forRoot()
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [IonicApp],
   entryComponents: [
     Tars,

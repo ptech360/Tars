@@ -14,11 +14,11 @@ export class HomePage {
 
   }
 
-  reportAccident(){
+  reportAccident() {
     this.navCtrl.push(ReportAccidentPage);
   }
 
-  viewAccidents(){
+  viewAccidents() {
     this.navCtrl.push(ViewAccidentsPage);
   }
 
@@ -32,7 +32,9 @@ export class HomePage {
       }, {
         text: 'Logout',
         handler: () => {
-          this.auth.logout().subscribe((res)=>{
+          this.auth.logout().subscribe((res) => {
+            this.events.publish('user:logout');
+          }, error => {
             this.events.publish('user:logout');
           })
         }

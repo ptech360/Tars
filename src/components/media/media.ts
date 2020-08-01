@@ -26,7 +26,9 @@ const MEDIA_FOLDER_NAME = 'my_media';
   templateUrl: 'media.html'
 })
 export class MediaComponent implements OnInit, AfterViewInit {
+  directory: string;
   @Input() formGroup: FormGroup;
+  @Input() mediaFor: string;
   files = [];
 
   constructor(
@@ -51,15 +53,15 @@ export class MediaComponent implements OnInit, AfterViewInit {
     this.plt.ready().then(() => {
       let path = this.file.dataDirectory;
       try {
-        this.file.checkDir(path, MEDIA_FOLDER_NAME).then(
+        this.file.checkDir(path, this.mediaFor).then(
           () => {
-            // this.file.removeRecursively(path, MEDIA_FOLDER_NAME);
+            // this.file.removeRecursively(path, this.mediaFor);
             this.loadFiles();
           },
           err => {
             console.log(err);
 
-            this.file.createDir(path, MEDIA_FOLDER_NAME, false);
+            this.file.createDir(path, this.mediaFor, false);
           }
         );
       } catch (error) {
@@ -201,7 +203,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
 
     const name = myPath.substr(myPath.lastIndexOf('/') + 1);
     const copyFrom = myPath.substr(0, myPath.lastIndexOf('/') + 1);
-    const copyTo = this.file.dataDirectory + MEDIA_FOLDER_NAME;
+    const copyTo = this.file.dataDirectory + this.mediaFor;
 
     this.file.copyFile(copyFrom, name, copyTo, newName).then(
       success => {
@@ -228,17 +230,20 @@ export class MediaComponent implements OnInit, AfterViewInit {
     }
   }
 
-  deleteFile(f: FileEntry) {
+  deleteFile(f: FileEntry, index: number) {
     const path = f.nativeURL.substr(0, f.nativeURL.lastIndexOf('/') + 1);
     this.file.removeFile(path, f.name).then(() => {
-      // this.loadFiles();
+      const medias = <FormArray>this.formGroup.controls['medias'];
+      medias.removeAt(index);
+      this.loadFiles();
     }, err => console.log('error remove: ', err));
   }
 
   loadFiles() {
-    this.file.listDir(this.file.dataDirectory, MEDIA_FOLDER_NAME).then(
+    this.file.listDir(this.file.dataDirectory, this.mediaFor).then(
       res => {
         this.files = res;
+        console.log(this.files);
       },
       err => console.log('error loading files: ', err)
     );

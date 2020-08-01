@@ -7,7 +7,6 @@ import { ToastProvider } from '../../providers/toast/toast';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient } from '@angular/common/http';
 import { VideoPlayer } from '@ionic-native/video-player';
-import { CaptureVideoOptions, MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture/ngx';
 import { InvolvedVehiclePage } from '../involved-vehicle/involved-vehicle';
 import { AddVehiclePage } from '../add-vehicle/add-vehicle';
 /**
@@ -91,7 +90,7 @@ export class ReportAccidentPage implements OnInit {
 
   getAccidentForm() {
     return this.fb.group({
-      id: [], 
+      id: [],
       fatal: [false, [Validators.required]],
       numOfCasualities: [0, [Validators.required]],
       description: ['', [Validators.required]],
@@ -109,7 +108,7 @@ export class ReportAccidentPage implements OnInit {
       // initiates: ['', [Validators.required]],
       // accidentPics: this.fb.array([]),
       // createdBy: [],      
-        // vehicles: this.fb.array([]),
+      // vehicles: this.fb.array([]),
       //   otherPerson: this.fb.array([]),
       //   visibleVehicles: [true],
       //   visibleOtherPeople: [true],
@@ -218,7 +217,7 @@ export class ReportAccidentPage implements OnInit {
 
     // this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm.value });
 
-    if(this.accidentObject['id']){
+    if (this.accidentObject['id']) {
       this.accidentForm.controls.id.patchValue(this.accidentObject['id']);
     }
 

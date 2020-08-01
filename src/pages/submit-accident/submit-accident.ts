@@ -52,20 +52,20 @@ export class SubmitAccidentPage {
     modal.present();
   }
 
-  removePedestrian(index){
+  removePedestrian(index) {
     const pedestrian = this.accidentForm['pedestrians'];
     const pedId = this.accidentForm['pedestrians'][index]['id'];
-    this.toastSev.showLoader();
+    // this.toastSev.showLoader();
     // pedestrian.splice(index,1);
-    // this.accService.deletePedestrian(this.accidentForm['id'],pedId).subscribe(response=> {
-    //   this.toastSev.hideLoader();
-    //   pedestrian.splice(index,1);
-    //   console.log(response);
-    // },(error => {
-    //   this.toastSev.hideLoader();
-    //   console.log(error);
-    // }))
-}
+    this.accService.deletePedestrian(this.accidentForm['id'], pedId).subscribe(response => {
+      this.toastSev.hideLoader();
+      pedestrian.splice(index, 1);
+      console.log(response);
+    }, (error => {
+      this.toastSev.hideLoader();
+      console.log(error);
+    }));
+  }
 
   submitAccident(){
     this.toastSev.showLoader();

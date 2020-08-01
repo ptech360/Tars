@@ -90,8 +90,9 @@ export class AddPedestrianPage {
       this.accService.editPedestrian(this.accidentForm['id'], this.pedestrainForm.value.id,formData).subscribe(response => {
         this.toastSev.hideLoader();
         this.toastSev.showToast('Pedestrian Updated !');
-        pedestrian.removeAt(this.index);
-        pedestrian.insert(this.index, response);
+        pedestrian[this.index] = response;
+        // pedestrian.removeAt(this.index);
+        // pedestrian.insert(this.index, response);
         console.log(response);
         this.dismiss();
       }, (error => {

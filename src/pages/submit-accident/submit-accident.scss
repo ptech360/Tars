@@ -1,3 +1,16 @@
-page-submit-accident {
-
+ion-header{
+    ion-navbar{
+        color: white;
+        .toolbar-background{
+            background-color: #2494af;
+        }
+        .back-button{
+            color: white;
+        }
+        ion-title{
+            .toolbar-title{
+                color: white;
+            }
+        }
+    }
 }

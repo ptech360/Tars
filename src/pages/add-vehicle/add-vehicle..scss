@@ -16,8 +16,9 @@ ion-content{
         ion-card{
             ion-card-header{
                 border-bottom: solid 1px #ddd;
-                background: rgba(0, 0, 0, 0.05);
+                background: rgba(0, 0, 0, 0.01);
                 ion-item{
+                // background-color: rgba(0, 0, 0, 0.02);
                     ion-label{
                         font-size: 16px !important;
                         color: #555;
@@ -50,10 +51,11 @@ ion-content{
 
 .person-list-main{
     ion-card{
-        box-shadow: 0 0 10px #ddd;
-        padding-bottom: 15px;
+        // box-shadow: 0 0 5px #ddd;
+        padding-bottom: 0;
         ion-card-header{
             ion-item{
+                background-color: rgba(0, 0, 0, 0.01);
                 padding-bottom: 0;
 
                 .delete{
@@ -78,7 +80,7 @@ ion-content{
         }
         ion-item{
             border-bottom: solid 1px #ddd;
-            padding-bottom: 10px;
+            padding-bottom: 0;
 
             ion-select{
                 border: solid 1px #ddd;

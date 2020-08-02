@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController, AlertController, NavController } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavParams, ModalController, AlertController, NavController, Navbar } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { CameraOptions, Camera } from '@ionic-native/camera';
@@ -13,22 +13,13 @@ import { SubmitAccidentPage } from '../submit-accident/submit-accident';
     templateUrl: 'add-vehicle.html',
 })
 export class AddVehiclePage implements OnInit {
-
+    @ViewChild(Navbar) navBar: Navbar;
     vehicleFormGroup: FormGroup;
-    accidentForm: FormGroup;
+    public accidentForm: FormGroup;
     vehicleImageUrls = [];
     personTypes = [];
     index: number = 0;
     // vehicles : FormArray; 
-    cameraOptions: CameraOptions = {
-        sourceType: this.camera.PictureSourceType.CAMERA,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
-        correctOrientation: true,
-        targetWidth: 600,
-        targetHeight: 600,
-    };
 
 
     constructor(public navParams: NavParams,
@@ -53,11 +44,8 @@ export class AddVehiclePage implements OnInit {
 
         if (this.accidentForm['vehicles']) {
             console.log("Contains Vehicle");
-            // if(noofvehicles==vechiles.length-1){
-            //     patch value
-            // } else {}
-            const vehicle = <FormArray>this.accidentForm['vehicles'];
-            vehicle.push(this.vehicleFormGroup.value);
+            const vehicles = <FormArray>this.accidentForm['vehicles'];
+            vehicles.push(this.vehicleFormGroup.value);
             console.log("Index - ", this.accidentForm['index']);
             if (this.accidentForm['index']) {
                 this.index = this.accidentForm['index'];
@@ -71,9 +59,13 @@ export class AddVehiclePage implements OnInit {
 
     ionViewDidLoad() {
         console.log('AddVehiclePage');
-        // this.accService.getPersonTypes().subscribe(res => {
-        //     this.personTypes = res;
-        // });
+        this.navBar.backButtonClick = (e: UIEvent) => {
+            // todo something
+            setTimeout(() => {
+                this.navCtrl.getPrevious().data = this.accidentForm.value;
+                this.navCtrl.pop();
+            }, 0);
+        }
     }
 
     ngOnInit() {
@@ -102,11 +94,11 @@ export class AddVehiclePage implements OnInit {
 
     editPerson(index) {
         if (index == 0) {
-            const modal = this.modalCtrl.create('AddDriverPage', { persons: this.vehicleFormGroup.controls['persons'],index: index});
+            const modal = this.modalCtrl.create('AddDriverPage', { persons: this.vehicleFormGroup.controls['persons'], index: index });
             modal.present();
         }
         else {
-            const modal = this.modalCtrl.create('AddPersonPage', { persons: this.vehicleFormGroup.controls['persons'],index: index });
+            const modal = this.modalCtrl.create('AddPersonPage', { persons: this.vehicleFormGroup.controls['persons'], index: index });
             modal.present();
         }
     }
@@ -138,14 +130,14 @@ export class AddVehiclePage implements OnInit {
         });
     }
 
-    removePedestrian(index){
+    removePedestrian(index) {
         const pedestrian = this.accidentForm['pedestrians'];
         // pedestrian.removeAt(index);
-        pedestrian.splice(index,1);
+        pedestrian.splice(index, 1);
     }
 
     saveVehicle() {
-        
+
         this.accidentForm['index'] = this.index;
         this.accidentForm['vehicles'][this.index] = this.vehicleFormGroup.value;
         console.log(this.accidentForm);
@@ -158,9 +150,9 @@ export class AddVehiclePage implements OnInit {
             this.accidentForm['vehicles'][this.index] = response;
             this.accidentForm['index']++;
             this.toastSev.hideLoader();
-        if (this.accidentForm['index'] < this.accidentForm['numOfVehicle']) {
-            this.toastSev.showToast('Vehicle Added Successfully');
-            this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm });
+            if (this.accidentForm['index'] < this.accidentForm['numOfVehicle']) {
+                this.toastSev.showToast('Vehicle Added Successfully');
+                this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm });
             }
             else {
                 this.accidentForm['index']++;
@@ -185,33 +177,6 @@ export class AddVehiclePage implements OnInit {
             buttons: ['OK']
         })
         alert.present();
-    }
-
-
-
-    private captureVehicle(vehicleFormGroup: FormGroup) {
-        this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
-            console.log(onSuccess);
-            const vehiclePics = <FormArray>vehicleFormGroup.controls['medias'];
-            const fileName: string = 'vehicle-img' + new Date().toISOString().substring(0, 10) + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.jpeg';
-            let file = this.fb.group({
-                name: fileName,
-                url: 'data:image/jpeg;base64,' + onSuccess
-            });
-            this.vehicleImageUrls.push(file);
-            vehiclePics.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess, fileName)));
-        }, (onError) => {
-            alert(onError);
-        })
-    }
-
-    dataURLtoFile(dataurl, filename) {
-        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new File([u8arr], filename, { type: mime });
     }
 
     convertModelToFormData(model: any, form: FormData = null, namespace = ''): FormData {

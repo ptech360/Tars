@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController, Navbar } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -20,6 +20,7 @@ import { AddVehiclePage } from '../add-vehicle/add-vehicle';
   templateUrl: 'report-accident.html',
 })
 export class ReportAccidentPage implements OnInit {
+  @ViewChild(Navbar) navBar: Navbar;
   cameraOptions: CameraOptions = {
     sourceType: this.camera.PictureSourceType.CAMERA,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -55,6 +56,10 @@ export class ReportAccidentPage implements OnInit {
     this.accidentForm = this.getAccidentForm();
   }
 
+  ionViewWillEnter() {
+    console.log(this.navParams.get('accident') || null);
+  }
+
   ngOnInit() {
 
   }
@@ -68,6 +73,10 @@ export class ReportAccidentPage implements OnInit {
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick = (e: UIEvent) => {
+      // todo something
+      this.navCtrl.pop();
+    }
     this.accSev.getAccidentTypes().subscribe(response => {
       this.accidentTypes = response;
     });
@@ -146,60 +155,6 @@ export class ReportAccidentPage implements OnInit {
   removeOtherPeople(accidentForm: FormGroup, index: number) {
     const otherPerson = <FormArray>accidentForm.controls['otherPerson'];
     otherPerson.removeAt(index);
-  }
-
-  private captureVehicle(vehicleForm: FormGroup) {
-    this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
-      const vehiclePics = <FormArray>vehicleForm.controls['vehiclePics'];
-      const fileName: string = 'vehicle-img' + new Date().toISOString().substring(0, 10) + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.jpeg';
-      let file = this.fb.group({
-        name: fileName,
-        url: 'data:image/jpeg;base64,' + onSuccess
-      });
-      vehiclePics.push(file);
-    }, (onError) => {
-      alert(onError);
-    })
-  }
-
-  delVehicleImage(vehicleForm: FormGroup, index: number) {
-    const vehiclePics = <FormArray>vehicleForm.controls['vehiclePics'];
-    vehiclePics.removeAt(index);
-  }
-
-  public captureIncident(accidentForm: FormGroup) {
-    this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
-
-      const accidentPics = <FormArray>accidentForm.controls['medias'];
-      const fileName: string = 'img' + new Date().toISOString().substring(0, 10) + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.jpeg';
-      let file = this.fb.group({
-        name: fileName,
-        url: 'data:image/jpeg;base64,' + onSuccess
-      });
-      console.log("File name - ", fileName);
-
-      this.accidentImageUrls.push(file);
-      accidentPics.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess, fileName)));
-      console.log(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess, fileName));
-
-    }, (onError) => {
-      alert(onError);
-    });
-  }
-
-  dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, { type: mime });
-  }
-
-  delIncidentImage(accidentForm: FormGroup, index: number) {
-    const accidentPics = <FormArray>accidentForm.controls['medias'];
-    accidentPics.removeAt(index);
-    this.accidentImageUrls.splice(index, 1);
   }
 
   //   delIncidentImage(accidentForm: FormGroup, index: number) {
@@ -294,13 +249,9 @@ export class ReportAccidentPage implements OnInit {
     return formData;
   }
 
+  back() {
+    console.log("back clicked");
 
-  storeMediaFiles(file) {
-    if (this.mediaFiles.length) {
-      this.mediaFiles.push(file);
-    } else {
-      this.mediaFiles = [];
-      this.mediaFiles.push(file);
-    }
   }
+
 }

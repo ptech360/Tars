@@ -13,7 +13,7 @@
                 [formGroupName]="i"> -->
         <ion-card class="add-vehicle-card">
             <ion-card-header no-padding>
-                <ion-item>
+                <ion-item style="background-color:rgba(0,0,0,0.03) !important;">
                     Vehicle {{index+1}}
                 </ion-item>
             </ion-card-header>
@@ -27,7 +27,7 @@
                     <code>*</code> </ion-label>
                 <ion-input type="text" formControlName="model" autocapitalize="characters"></ion-input>
             </ion-item>
-            <div text-center>
+            <div margin-top>
                 <ion-list>
                     <media [mediaFor]="'vehicle'" [formGroup]="vehicleFormGroup"></media>
                 </ion-list>
@@ -52,13 +52,13 @@
                                 <span *ngIf="i==0">Driver Details</span>
                                 <!-- Person {{i+1}} -->
                                 <span *ngIf="i>0">Passenger {{i}} Details</span>
-
-                                <button ion-button color="danger" clear icon-only item-end (click)="removePerson(i)" *ngIf="i>0">
-                                    <ion-icon name='trash' is-active="false"></ion-icon>
-                                </button>
-                                <button ion-button color="primary" clear icon-only item-end (click)="editPerson(i)">
+                                <button class="edit" ion-button color="primary" clear icon-only item-end (click)="editPerson(i)">
                                     <ion-icon name='create' is-active="false"></ion-icon>
                                 </button>
+                                <button class="delete" ion-button color="danger" clear icon-only item-end (click)="removePerson(i)" *ngIf="i>0">
+                                    <ion-icon name='trash' is-active="false"></ion-icon>
+                                </button>
+                                
                             </ion-item>
                         </ion-card-header>
                         <ion-item>
@@ -106,7 +106,7 @@
         </ion-card>
         <!-- </ng-container> -->
     </form>
-    <div padding>
+    <div>
         <button type="button" ion-button block [disabled]="vehicleFormGroup.invalid" (click)="saveVehicle()">Save Vehicle and Continue</button>
     </div>
 

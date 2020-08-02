@@ -14,3 +14,79 @@ ion-header{
         }
     }
 }
+
+ion-card-header{
+    background-color: rgba(0,0,0,0.03) !important;
+}
+ion-card-content{
+    ion-item{
+        padding-left: 0 !important;
+
+        ion-label{
+            p{
+                font-weight: normal;
+                color: #333 !important;
+                font-size: 14px !important;
+                margin-bottom: 10px !important;
+            }
+        }
+    }
+}
+
+ion-content{
+    ion-card{
+        h2{
+            font-size: 16px !important;
+            font-weight: bold !important;
+        }
+        h3{
+            font-size: 15px !important;
+            font-weight: bold !important;
+            margin: 0 !important;
+        }
+
+        ul{
+            padding-left: 0;
+            margin: 0 !important;
+            li{
+                font-size: 14px;
+                font-weight: normal;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+}
+
+
+.pedestrian-details {
+    ion-card {
+        ion-card-header {
+            
+            h2 {
+                display: inline-block;
+                width: auto;
+                margin-top: 8px !important;
+            }
+            .action {
+                display: inline-block;
+                width: auto;
+                float: right;
+
+                .delete {
+                    width: 25px;
+                    font-size: 10px !important;
+                    color: #f53d3d;
+                    border: solid 1px;
+                }
+                .edit {
+                    width: 25px;
+                    font-size: 10px !important;
+                    color: #2494af;
+                    border: solid 1px;
+                }
+
+            }
+        }
+    }
+}

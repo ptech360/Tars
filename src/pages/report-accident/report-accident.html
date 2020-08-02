@@ -92,10 +92,12 @@
         </ion-list>
       </ion-card>
     </div>
-    <div class="section" text-center>
+    <div>
+    <ion-card>
       <ion-list>
         <media [mediaFor]="'accident'" [formGroup]="accidentForm"></media>
       </ion-list>
+    </ion-card>
     </div>
     <div padding>
       <button type="submit" ion-button block [disabled]="accidentForm.invalid" (click)="saveAccidentReport()"> Save</button>

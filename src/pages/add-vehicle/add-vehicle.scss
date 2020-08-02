@@ -4,7 +4,15 @@ ion-content{
             .add-vehicle-card{
                 margin:0 0 15px 0 !important;
                 width: 100% !important;
-                padding-bottom: 15PX;
+                padding-bottom: 15px;
+
+                ion-item{
+                    .item-inner{
+                        border-bottom: none;
+                        box-shadow: none;
+                        padding-right: 15px !important;
+                    }
+                }
                 ion-label{
                     // margin-bottom: 8px !important;
                     code{
@@ -53,6 +61,8 @@ ion-content{
     ion-card{
         // box-shadow: 0 0 5px #ddd;
         padding-bottom: 0;
+
+
         ion-card-header{
             ion-item{
                 background-color: rgba(0, 0, 0, 0.01);
@@ -100,5 +110,11 @@ ion-content{
                 margin: 0 !important;
             }
         }
+    }
+}
+
+.media-list-box{
+    ion-list{
+        border: solid 1px #ddd;
     }
 }

@@ -61,7 +61,9 @@
       <ion-input formControlName="dataOnSocioEconomicStatus"></ion-input>
     </ion-item>
     <div padding>
-      <ion-card *ngFor="let img of driverImageUrls;let i = index;">
+      <ion-card >
+      <!-- <ion-card *ngFor="let img of driverImageUrls;let i = index;"> -->
+
         <img [src]="img.value.url" />
         <ion-row>
           <ion-col text-right>
@@ -72,7 +74,7 @@
         </ion-row>
       </ion-card>
     </div>
-    <div text-center>
+    <div text-center class="capture-main">
       <h2 color="primary">Capture Photos/Video</h2>
       <button ion-button icon-only class="center" margin-bottom (click)="captureDriver(driverForm)">
         <ion-icon name="camera"></ion-icon>

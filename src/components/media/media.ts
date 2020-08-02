@@ -56,7 +56,12 @@ export class MediaComponent implements OnInit, AfterViewInit {
         this.file.checkDir(path, this.mediaFor).then(
           () => {
             // this.file.removeRecursively(path, this.mediaFor);
-            this.loadFiles();
+            this.loadFiles().then(() => {
+              this.files.forEach(f => {
+                this.file.removeFile(path + '/' + this.mediaFor, f.name)
+              });
+              this.loadFiles()
+            })
           },
           err => {
             console.log(err);
@@ -240,7 +245,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
   }
 
   loadFiles() {
-    this.file.listDir(this.file.dataDirectory, this.mediaFor).then(
+    return this.file.listDir(this.file.dataDirectory, this.mediaFor).then(
       res => {
         this.files = res;
         console.log(this.files);

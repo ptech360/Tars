@@ -14,7 +14,7 @@
         <ion-card class="add-vehicle-card">
             <ion-card-header no-padding>
                 <ion-item style="background-color:rgba(0,0,0,0.03) !important;">
-                    Vehicle {{index+1}}
+                    Vehicle {{accidentGlobalObject.vehicleCounter + 1}}
                 </ion-item>
             </ion-card-header>
             <ion-item>
@@ -58,7 +58,7 @@
                                 <button class="delete" ion-button color="danger" clear icon-only item-end (click)="removePerson(i)" *ngIf="i>0">
                                     <ion-icon name='trash' is-active="false"></ion-icon>
                                 </button>
-                                
+
                             </ion-item>
                         </ion-card-header>
                         <ion-item>

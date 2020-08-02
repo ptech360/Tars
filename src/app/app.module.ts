@@ -37,6 +37,7 @@ import { SubmitAccidentPage } from '../pages/submit-accident/submit-accident';
 import { FileProvider } from '../providers/file/file';
 import { Base64 } from '@ionic-native/base64';
 import { MediaComponent } from '../components/media/media';
+import { AddDriverPage } from '../pages/add-driver/add-driver';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,10 @@ import { MediaComponent } from '../components/media/media';
     AddVehiclePage,
     AccidentDetailsPage,
     SubmitAccidentPage,
-    MediaComponent
+    MediaComponent,
+    AddDriverPage,
+    AddPedestrianPage,
+    AddPersonPage
   ],
   imports: [
     BrowserModule,
@@ -69,6 +73,9 @@ import { MediaComponent } from '../components/media/media';
     ViewAccidentsPage,
     AccidentPage,
     AddVehiclePage,
+    AddDriverPage,
+    AddPersonPage,
+    AddPedestrianPage,
     AccidentDetailsPage,
     SubmitAccidentPage,
     MediaComponent

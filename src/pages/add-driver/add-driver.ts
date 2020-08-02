@@ -11,7 +11,7 @@ import { AccidentProvider } from '../../providers/accident/accident';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-add-driver',
   templateUrl: 'add-driver.html',
@@ -20,7 +20,7 @@ export class AddDriverPage {
   driverForm: FormGroup;
   driverImageUrls: any = [];
   driver: FormArray;
-  index:number;
+  index: number;
   cameraOptions: CameraOptions = {
     sourceType: this.camera.PictureSourceType.CAMERA,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -45,7 +45,7 @@ export class AddDriverPage {
     this.driver = <FormArray>this.navParams.get('persons')
     this.index = this.navParams.get('index');
     console.log(this.navParams.get('persons'));
-    if(this.index==0){
+    if (this.index == 0) {
       const editPersonObj = this.driver.controls[this.index];
       console.log(editPersonObj);
       Object.keys(editPersonObj.value).forEach(key => {
@@ -54,10 +54,10 @@ export class AddDriverPage {
         }
       });
     }
-    
+
   }
 
-  getDriver(){
+  getDriver() {
     this.driverForm = this.fb.group({
       id: [null],
       name: [, [Validators.required]],
@@ -75,9 +75,9 @@ export class AddDriverPage {
   }
 
   saveDriver() {
-    if(this.index==0){
+    if (this.index == 0) {
       this.driver.removeAt(this.index);
-      this.driver.insert(0,this.driverForm);
+      this.driver.insert(0, this.driverForm);
       this.dismiss();
       this.index = 1;
     }

@@ -11,7 +11,6 @@ import { AccidentProvider } from '../../providers/accident/accident';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-add-person',
   templateUrl: 'add-person.html',
@@ -77,9 +76,9 @@ export class AddPersonPage {
   }
 
   savePerson() {
-    if(this.index){
+    if (this.index) {
       this.persons.removeAt(this.index);
-      this.persons.insert(this.index,this.personForm);
+      this.persons.insert(this.index, this.personForm);
       this.dismiss()
       this.index = 0;
     }
@@ -88,36 +87,6 @@ export class AddPersonPage {
       this.persons.push(this.personForm);
       this.dismiss();
     }
-  }
-
-  private capturePassenger(personForm: FormGroup) {
-    this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
-      const personImages = <FormArray>personForm.controls['medias'];
-      const fileName: string = 'person-img' + new Date().toISOString().substring(0, 10) + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.jpeg';
-      let file = this.fb.group({
-        name: fileName,
-        url: 'data:image/jpeg;base64,' + onSuccess
-      });
-      personImages.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess, fileName)));
-      this.personImageUrls.push(file);
-    }, (onError) => {
-      alert(onError);
-    });
-  }
-
-  dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, { type: mime });
-  }
-
-  delPassengerImage(personForm: FormGroup, index: number) {
-    const personImages = <FormArray>personForm.controls['medias'];
-    personImages.removeAt(index);
-    this.personImageUrls.splice(index, 1);
   }
 
   dismiss() {

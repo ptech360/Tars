@@ -96,7 +96,7 @@ export class AccidentProvider {
     console.log('Hello AccidentProvider Provider');
   }
 
-  getBaseUrl(){
+  getBaseUrl() {
     return this.api.url;
   }
 
@@ -105,7 +105,7 @@ export class AccidentProvider {
     return this.api.get('api/accidentTypes');
   }
 
-  getPersonTypes(){
+  getPersonTypes() {
     return this.api.get('api/personTypes');
   }
 
@@ -125,35 +125,35 @@ export class AccidentProvider {
   addAccidentReport(object: any) {
     // this.accidentReports.push(object);
     // return of({ status: 200 });
-    return this.api.post('api/accident',object,{});
+    return this.api.post('api/accident', object, {});
   }
 
-  editAccidentReport(accidentId:number,object:any){
-    return this.api.put('api/accident/'+accidentId,object,{});
+  editAccidentReport(accidentId: number, object: any) {
+    return this.api.put('api/accident/' + accidentId, object, {});
   }
 
-  submitAccident(accidentId:number){
-    return this.api.put('api/submit/accident/'+accidentId,{},{});
+  submitAccident(accidentId: number) {
+    return this.api.put(`api/accident/${accidentId}/submit`, {});
   }
 
-  addVehicleReport(accidentId :number,object:any) {
-    return this.api.post('api/accident/'+accidentId+'/vehicle',object,{});
+  addVehicleReport(accidentId: number, object: any) {
+    return this.api.post('api/accident/' + accidentId + '/vehicle', object, {});
   }
 
   editVehicleReport(accidentId: number, vehicleId: number, object: any) {
     return this.api.put('/api/accident/' + accidentId + '/vehicle/' + vehicleId, object, {});
   }
 
-  addPedestrian(accidentId: number,object:any){
-    return this.api.post('api/accident/'+accidentId+'/person',object,{})
+  addPedestrian(accidentId: number, object: any) {
+    return this.api.post('api/accident/' + accidentId + '/person', object, {})
   }
 
-  editPedestrian(accidentId:number,personId:number,object:any){
-    return this.api.put('api/accident/'+accidentId+'/person/'+personId,object,{});
+  editPedestrian(accidentId: number, personId: number, object: any) {
+    return this.api.put('api/accident/' + accidentId + '/person/' + personId, object, {});
   }
 
-  deletePedestrian(accidentId:number,personId:number){
-    return this.api.delete('api/accident/'+accidentId+'/person/'+personId);
+  deletePedestrian(accidentId: number, personId: number) {
+    return this.api.delete('api/accident/' + accidentId + '/person/' + personId);
   }
 
 }

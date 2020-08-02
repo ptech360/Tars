@@ -1,40 +1,20 @@
 <!-- Generated template for the MediaComponent component -->
+
 <div class="media-list">
-  <ion-item>
-      <div class="file">
-        <ion-icon name="image" slot="start"></ion-icon>
-        <strong>1598765434567.jpg</strong>
-        <p>accident/1598765434567.jpg</p>
+  <ng-container *ngFor="let f of files; let i = index;">
+    <ion-item>
+      <div class="file" (click)="openFile(f)">
+        <ion-icon name="image" slot="start" *ngIf="f.name.endsWith('jpg')"></ion-icon>
+        <ion-icon name="videocam" slot="start" *ngIf="f.name.endsWith('MOV') || f.name.endsWith('mp4')"></ion-icon>
+        <ion-icon name="mic" slot="start" *ngIf="f.name.endsWith('wav')"></ion-icon>
+        <strong>{{ f.name }}</strong>
+        <p>{{ f.fullPath }}</p>
       </div>
-      <ion-icon class="delete" name="trash" slot="icon-only" slot="end" color="danger"></ion-icon>
-  </ion-item>
-  <ion-item>
-    <div class="file">
-      <ion-icon name="videocam" slot="start"></ion-icon>
-      <strong>1598765434567.mp4</strong>
-      <p>accident/1598765434567.mp4</p>
-    </div>
-    <ion-icon class="delete" name="trash" slot="icon-only" slot="end" color="danger"></ion-icon>
-  </ion-item>
-  <ion-item>
-    <div class="file">
-      <ion-icon name="mic" slot="start"></ion-icon>
-      <strong>1598765434567.wav</strong>
-      <p>accident/1598765434567.wav</p>
-    </div>
-    <ion-icon class="delete" name="trash" slot="icon-only" slot="end" color="danger"></ion-icon>
-  </ion-item>
+      <ion-icon class="delete" name="trash" slot="icon-only" slot="end" (click)="deleteFile(f, i)" color="danger"></ion-icon>
+    </ion-item>
+  </ng-container>
 </div>
 
-
-<ion-item (click)="openFile(f)" *ngFor="let f of files; let i = index;">
-  <ion-icon name="image" slot="start"></ion-icon>
-  <ion-icon name="videocam" slot="start" *ngIf="f.name.endsWith('MOV') || f.name.endsWith('mp4')"></ion-icon>
-  <ion-icon name="mic" slot="start" *ngIf="f.name.endsWith('wav')"></ion-icon>
-  {{ f.name }}
-  <p>{{ f.fullPath }}</p>
-  <ion-icon name="trash" slot="icon-only" slot="end" (click)="deleteFile(f, i)" color="danger"></ion-icon>
-</ion-item>
 <ion-item class="capture">
   <h2 color="primary">Capture Photos/Video</h2>
   <button ion-button fill="clear" expand="full" color="light" (click)="selectMedia()">

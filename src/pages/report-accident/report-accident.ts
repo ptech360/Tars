@@ -20,6 +20,7 @@ import { AddVehiclePage } from '../add-vehicle/add-vehicle';
   templateUrl: 'report-accident.html',
 })
 export class ReportAccidentPage implements OnInit {
+  accidentGlobalObject: any = {};
   @ViewChild(Navbar) navBar: Navbar;
   cameraOptions: CameraOptions = {
     sourceType: this.camera.PictureSourceType.CAMERA,
@@ -57,11 +58,12 @@ export class ReportAccidentPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    console.log(this.navParams.get('accident') || null);
+    this.accidentGlobalObject.vehicleCounter = -1;
+    console.log(this.accidentGlobalObject);
   }
 
   ngOnInit() {
-
+    console.log(this.accidentGlobalObject);
   }
 
   getGeoLoacation() {
@@ -85,7 +87,6 @@ export class ReportAccidentPage implements OnInit {
       this.longitude = pos.coords.longitude;
       this.accidentForm.controls.latitude.patchValue(this.latitude);
       this.accidentForm.controls.longitude.patchValue(this.longitude);
-      console.log('lat: ' + pos.coords.latitude + ', lon: ' + pos.coords.longitude);
       setTimeout(() => {
         this.getGeoLoacation();
       }, 2000);
@@ -98,26 +99,18 @@ export class ReportAccidentPage implements OnInit {
     return this.fb.group({
       id: [],
       fatal: [false, [Validators.required]],
-      numOfCasualities: [0, [Validators.required]],
-      description: ['', [Validators.required]],
-      numOfVehicle: [, [Validators.required]],
-      remark: ['', [Validators.required]],
+      numOfCasualities: [1, [Validators.required]],
+      description: ['Lorem Ipsum is simply dummy text of the printing and typesetting industry', [Validators.required]],
+      numOfVehicle: [1, [Validators.required]],
+      remark: ['Contrary to popular belief, Lorem Ipsum is not simply random text', [Validators.required]],
       medias: this.fb.array([]),
       type: ['', [Validators.required]],
-      primaryAndSecondaryCauses: [null],
-      drawing: [null],
-      analysingInfo: ['', [Validators.required]],
+      primaryAndSecondaryCauses: ['fact that a reader will be distracted by the readable content of a page when looking at its layou'],
+      drawing: ['fact that a reader will be distracted by the readable content of a page'],
+      analysingInfo: ['It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', [Validators.required]],
       longitude: [, [Validators.required]],
       latitude: [, [Validators.required]],
-      address: [, [Validators.required]],
-      // location:[],
-      // initiates: ['', [Validators.required]],
-      // accidentPics: this.fb.array([]),
-      // createdBy: [],      
-      // vehicles: this.fb.array([]),
-      //   otherPerson: this.fb.array([]),
-      //   visibleVehicles: [true],
-      //   visibleOtherPeople: [true],
+      address: [, [Validators.required]]
     });
   }
 
@@ -157,18 +150,7 @@ export class ReportAccidentPage implements OnInit {
     otherPerson.removeAt(index);
   }
 
-  //   delIncidentImage(accidentForm: FormGroup, index: number) {
-  //   const accidentPics:any[] = accidentForm.controls['medias'].value;
-  //   console.log("Before - ",accidentPics);
-  //   accidentPics.splice(index,1);
-  //   this.accidentImageUrls.splice(index,1);
-  //   console.log("After - ",accidentPics);
-  // }
-
   saveAccidentReport() {
-
-    // this.navCtrl.push(AddVehiclePage, { accident: this.accidentForm.value });
-
     if (this.accidentObject['id']) {
       this.accidentForm.controls.id.patchValue(this.accidentObject['id']);
     }
@@ -195,7 +177,10 @@ export class ReportAccidentPage implements OnInit {
         this.accidentObject = response;
         this.toastSev.hideLoader();
         this.toastSev.showToast('Accident Updated !');
-        this.navCtrl.push(AddVehiclePage, { accident: response });
+        Object.assign(this.accidentGlobalObject, response);
+        debugger
+        this.accidentGlobalObject.vehicleCounter = 0;
+        this.navCtrl.push(AddVehiclePage, { accident: this.accidentGlobalObject });
       }, error => {
         this.showError(error.message);
         this.toastSev.hideLoader();
@@ -205,7 +190,9 @@ export class ReportAccidentPage implements OnInit {
         this.accidentObject = response;
         this.toastSev.hideLoader();
         this.toastSev.showToast('Accident Reported !');
-        this.navCtrl.push(AddVehiclePage, { accident: response });
+        this.accidentGlobalObject = response;
+        this.accidentGlobalObject.vehicleCounter = 0;
+        this.navCtrl.push(AddVehiclePage, { accident: this.accidentGlobalObject });
       }, error => {
         this.showError(error.message);
         this.toastSev.hideLoader();
@@ -247,11 +234,6 @@ export class ReportAccidentPage implements OnInit {
       }
     }
     return formData;
-  }
-
-  back() {
-    console.log("back clicked");
-
   }
 
 }

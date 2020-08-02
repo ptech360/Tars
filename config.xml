@@ -91,7 +91,7 @@
     <allow-navigation href="http://192.168.1.8:8100" sessionid="2f602261" />
     <allow-navigation href="http://192.168.1.8:8101" sessionid="dee137b3" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
-    <allow-navigation href="http://localhost:8100" sessionid="882549b2" />
+    <allow-navigation href="http://localhost:8100" sessionid="c619b052" />
     <engine name="browser" spec="6.0.0" />
     <engine name="android" spec="7.0.0" />
 </widget>

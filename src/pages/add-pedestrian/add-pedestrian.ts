@@ -12,7 +12,6 @@ import { ToastProvider } from '../../providers/toast/toast';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-add-pedestrian',
   templateUrl: 'add-pedestrian.html',
@@ -51,7 +50,7 @@ export class AddPedestrianPage {
     console.log(this.navParams.get('accident'));
     this.accidentForm = <FormGroup>this.navParams.get('accident');
     this.index = this.navParams.get('index');
-    if (this.navParams.get('index')>-1) {
+    if (this.navParams.get('index') > -1) {
       const editPedestrainObj = this.accidentForm['pedestrians'][this.index];
       console.log(editPedestrainObj);
       Object.keys(editPedestrainObj).forEach(key => {
@@ -87,7 +86,7 @@ export class AddPedestrianPage {
     const pedestrian = <FormArray>this.accidentForm['pedestrians'];
     const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
     if (this.pedestrainForm.value.id) {
-      this.accService.editPedestrian(this.accidentForm['id'], this.pedestrainForm.value.id,formData).subscribe(response => {
+      this.accService.editPedestrian(this.accidentForm['id'], this.pedestrainForm.value.id, formData).subscribe(response => {
         this.toastSev.hideLoader();
         this.toastSev.showToast('Pedestrian Updated !');
         pedestrian[this.index] = response;
@@ -116,7 +115,7 @@ export class AddPedestrianPage {
   //   this.toastSev.showLoader();
   //   const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
   //   this.accService.addPedestrian(this.accidentForm['id'], formData).subscribe(response => {
-          // pedestrian.push(this.pedestrainForm.value);
+  // pedestrian.push(this.pedestrainForm.value);
   //     this.toastSev.hideLoader();
   //     console.log(response);
   //     this.toastSev.showToast('Pedestrian Saved !');
@@ -125,36 +124,6 @@ export class AddPedestrianPage {
   //     this.toastSev.hideLoader();
   //   }))
   // }
-
-  private capturePassenger(personForm: FormGroup) {
-    this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
-      const personImages = <FormArray>this.pedestrainForm.controls['medias'];
-      const fileName: string = 'person-img' + new Date().toISOString().substring(0, 10) + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.jpeg';
-      let file = this.fb.group({
-        name: fileName,
-        url: 'data:image/jpeg;base64,' + onSuccess
-      });
-      personImages.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' + onSuccess, fileName)));
-      this.pedestrianImageUrls.push(file);
-    }, (onError) => {
-      alert(onError);
-    });
-  }
-
-  delPedestrianImage(personForm: FormGroup, index: number) {
-    const personImages = <FormArray>this.pedestrainForm.controls['medias'];
-    personImages.removeAt(index);
-    this.pedestrianImageUrls.splice(index, 1);
-  }
-
-  dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, { type: mime });
-  }
 
   convertModelToFormData(model: any, form: FormData = null, namespace = ''): FormData {
     let formData = form || new FormData();

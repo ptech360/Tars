@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera } from '@ionic-native/camera';
 import { ToastProvider } from '../../providers/toast/toast';
+import { AddPedestrianPage } from '../add-pedestrian/add-pedestrian';
 
 /**
  * Generated class for the SubmitAccidentPage page.
@@ -39,16 +40,16 @@ export class SubmitAccidentPage {
     // this.accidentForm = <FormGroup>this.navParams.get('accident');
   }
 
-  addPedestrian(){
+  addPedestrian() {
     if (!this.accidentForm['pedestrians']) {
       this.accidentForm['pedestrians'] = [];
     }
-    const modal = this.modalCtrl.create('AddPedestrianPage', { accident: this.accidentForm })
+    const modal = this.modalCtrl.create(AddPedestrianPage, { accident: this.accidentForm })
     modal.present();
   }
 
-  editPedestrian(index){
-    const modal = this.modalCtrl.create('AddPedestrianPage', { accident: this.accidentForm, index: index})
+  editPedestrian(index) {
+    const modal = this.modalCtrl.create(AddPedestrianPage, { accident: this.accidentForm, index: index })
     modal.present();
   }
 
@@ -67,14 +68,14 @@ export class SubmitAccidentPage {
     }));
   }
 
-  submitAccident(){
+  submitAccident() {
     this.toastSev.showLoader();
-    this.accService.submitAccident(this.accidentForm['id']).subscribe(response=>{
+    this.accService.submitAccident(this.accidentForm['id']).subscribe(response => {
       this.toastSev.showToast('Accident Reported Successfully !');
       console.log(response);
       this.toastSev.hideLoader();
       this.navCtrl.popToRoot();
-    },(error =>{
+    }, (error => {
       console.log(error);
       this.toastSev.hideLoader();
     }))

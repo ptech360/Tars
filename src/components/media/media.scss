@@ -22,3 +22,51 @@
         }
     }
 }
+
+
+.media-list{
+    
+    ion-item{
+        border-bottom: solid 1px #ddd !important;
+        &.item {
+            .file{
+                display: inline-block;
+                width: auto;
+
+                strong{
+                    color: #333;
+                    font-size: 14px;
+
+                }
+                p{
+                    font-weight: normal;
+                    font-size: 12px;
+                    margin-top: 5px;
+                    padding-left: 25px;
+                    color: #333;
+                }
+            }
+            ion-icon{
+                width: 20px;
+                color: #2494af;
+                &.delete {
+                    display: inline-block;
+                    float: right;
+                    width: 20px;
+                    font-size: 15px !important;
+                    color: #f53d3d;
+                    border: solid 1px;
+                    height: 20px;
+                    text-align: center;
+                    line-height: 20px;
+                    border-radius: 2px;
+                }
+            }
+        }
+        ion-label{
+            font-weight: normal;
+        }
+
+        
+    }
+}

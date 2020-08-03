@@ -46,7 +46,9 @@ export class AddVehiclePage implements OnInit {
     patchVehicle() {
         const currentVehicle = this.accidentGlobalObject.vehicles[this.accidentGlobalObject.vehicleCounter]
         if (this.accidentGlobalObject.vehicles && currentVehicle) {
-            this.vehicleFormGroup.patchValue(currentVehicle)
+            this.vehicleFormGroup.controls.id.patchValue(currentVehicle.id);
+            this.vehicleFormGroup.controls.number.patchValue(currentVehicle.number);
+            this.vehicleFormGroup.controls.model.patchValue(currentVehicle.model);
             if (currentVehicle.persons && currentVehicle.persons.length) {
                 const persons = <FormArray>this.vehicleFormGroup.controls['persons']
                 currentVehicle.persons.forEach(person => {

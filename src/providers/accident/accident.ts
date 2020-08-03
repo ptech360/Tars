@@ -132,8 +132,12 @@ export class AccidentProvider {
     return this.api.put('api/accident/' + accidentId, object, {});
   }
 
+  // submitAccident(accidentId: number) {
+  //   return this.api.put(`api/accident/${accidentId}/submit`, {});
+  // }
+
   submitAccident(accidentId: number) {
-    return this.api.put(`api/accident/${accidentId}/submit`, {});
+    return this.api.put('api/accident/' + accidentId + '/submit', {}, {});
   }
 
   addVehicleReport(accidentId: number, object: any) {
@@ -153,7 +157,7 @@ export class AccidentProvider {
   }
 
   deletePedestrian(accidentId: number, personId: number) {
-    return this.api.delete('api/accident/' + accidentId + '/person/' + personId);
+    return this.api.delete('api/accident/' + accidentId + '/person/' + personId, {});
   }
 
 }

@@ -43,19 +43,24 @@
   </ion-card> -->
 
   <ion-list>
+    <ion-spinner *ngIf="accidentLoader" name="crescent"></ion-spinner>
+
     <ion-card *ngFor="let acc of accidents;let i = index;" (click)="openIncidentDetailPage(i)">
       <ion-grid>
         <ion-row>
           <ion-col col-6 text-wrap>
-            <b>{{acc.accidentType}}</b>
+            <b>{{acc.type}}</b>
           </ion-col>
           <ion-col col-6 text-wrap text-right>
-            <small>{{acc.createdDate | date}}</small>
+            <small>{{acc.createdAt | date:'medium'}}</small>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-12 text-wrap>
             {{acc.description}}
+          </ion-col>
+          <ion-col col-12>
+            <b>Status - </b>{{acc.status}}
           </ion-col>
           <!-- <ion-col col-6>
             <ion-badge float-right text-wrap>{{acc.location}}</ion-badge>

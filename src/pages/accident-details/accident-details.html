@@ -115,4 +115,25 @@
     </div>
   </div>
 
+  <div class="bg-white" *ngFor="let pedestrian of accident.pedestrians;let i = index;">
+    <h4>Pedestrian Details</h4>
+    <ion-card>
+      <ion-card-header>
+        Pedestrian {{i+1}}
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <p><b>Name: </b><span>{{pedestrian.name}}</span></p>
+          <p><b>Gender: </b><span>{{pedestrian.gender}}</span></p>
+          <p><b>Age: </b><span>{{pedestrian.age}}</span></p>
+          <p><b>Address: </b><span>{{pedestrian.address}}</span></p>
+          <p><b>Under Influence: </b><span>{{pedestrian.underInfluence?'Yes':'No'}}</span></p>
+          <p><b>Type and Extent of Human Factor: </b>{{pedestrian.typeAndExtendOfHumanFactor}}</p>
+          <p><b>Nature of any injuries: </b>{{pedestrian.natureOfAnyInjuries}}</p>
+          <p><b>Data on Socio-economic status: </b>{{pedestrian.dataOnSocioEconomicStatus}}</p>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
 </ion-content>

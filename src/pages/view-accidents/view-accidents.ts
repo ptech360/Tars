@@ -17,12 +17,17 @@ import { AccidentDetailsPage } from '../accident-details/accident-details';
 })
 export class ViewAccidentsPage {
   accidents = [];
+  accidentLoader:boolean=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public accSev: AccidentProvider) {
+    this.accidentLoader = true;
     this.accSev.getAccidentReports().subscribe(response => {
+      this.accidentLoader = false;
       this.accidents = response;
       console.log(response);
-    });
+    },(error => {
+      this.accidentLoader = false;
+    }));
   }
 
   ionViewDidLoad() {

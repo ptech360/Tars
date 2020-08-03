@@ -60,10 +60,23 @@ export class ReportAccidentPage implements OnInit {
   ionViewWillEnter() {
     this.accidentGlobalObject.vehicleCounter = 0;
     console.log(this.accidentGlobalObject);
+    if(this.navParams.get('accident')){
+      this.accidentGlobalObject = this.navParams.get('accident');
+      this.patchAccident();
+    }
   }
 
   ngOnInit() {
     console.log(this.accidentGlobalObject);
+  }
+
+  patchAccident(){
+    const accident = this.navParams.get('accident');
+    Object.keys(accident).forEach(key => {      
+      if(this.accidentForm.controls[key]){
+        this.accidentForm.controls[key].patchValue(accident[key]);
+      }
+    })
   }
 
   getGeoLoacation() {

@@ -16,7 +16,7 @@
 <ion-content class="background">
   <div class="bg-white">
     <div padding>
-      <ion-item class="border">
+      <ion-item class="border" *ngIf="accident.type">
         <h2>Accident Type</h2>
         <p>{{accident.type}}</p>
       </ion-item>
@@ -24,46 +24,53 @@
         <h2>Fatal</h2>
         <p>{{accident.fatal ?'Yes':'No'}}</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.numOfCasualities">
         <h2>No. of Casualities</h2>
         <p>{{accident.numOfCasualities}}</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.numOfVehicle">
         <h2>No. of Vehicle Involved</h2>
         <p>{{accident.numOfVehicle}}</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.description">
         <h2>Description</h2>
         <p>{{accident.description}}.</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.address">
         <h2>Location</h2>
         <p> {{accident.address}}
         </p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.firNum">
         <h2>FIR</h2>
         <p>{{accident.firNum}}</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.createdAt">
         <h2>Date</h2>
         <p>{{accident.createdAt | date:'medium'}}</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.analysingInfo">
         <h2>Analysing Info</h2>
         <p>{{accident.analysingInfo}}</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.primaryAndSecondaryCauses">
         <h2>Primary And Secondary Causes</h2>
         <p>{{accident.primaryAndSecondaryCauses}}</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.drawing">
         <h2>Drawing</h2>
         <p>{{accident.drawing}}</p>
       </ion-item>
-      <ion-item class="border" margin-top>
+      <ion-item class="border" margin-top *ngIf="accident.remark">
         <h2>Remark</h2>
         <p>{{accident.remark}}</p>
+      </ion-item>
+      <ion-item *ngIf="accident.medias">
+        <h2>Medias :</h2>
+        <div *ngFor="let accidentImg of accident.medias;let i = index;">
+          <img [src]="bucketUrl + accidentImg.mediaName + accessToken">
+          <a  [attr.href]="bucketUrl + accidentImg.mediaName + accessToken">{{accidentImg.mediaName}}</a>
+        </div>
       </ion-item>
     </div>
   </div>
@@ -78,10 +85,10 @@
             <p><b>Vehicle Model</b> : {{vehicle.model}}</p>
           </ion-item>
         </ion-card-content>
-        <!-- <div text-center padding>
-          <img width="100%" [src]="bucketUrl + vehicleImg.picName + accessToken"
-            *ngFor="let vehicleImg of vehicle.vehiclePics;">
-        </div> -->
+        <div text-center padding>
+          <img width="100%" [src]="bucketUrl + vehicleImg.mediaName + accessToken"
+            *ngFor="let vehicleImg of vehicle.medias;">
+        </div>
       </div>
     </div>
     <div *ngFor="let pass of vehicle.persons;let o = index;">
@@ -101,14 +108,14 @@
             <p><b>Driving Licence: </b>{{pass.licence}}</p>
           </ion-item>
           <ion-item>
-            <p><b>Gender: </b><span>{{pass.gender}}</span></p>
-            <p><b>Age: </b><span>{{pass.age}}</span></p>
-            <p><b>Address: </b><span>{{pass.address}}</span></p>
+            <p *ngIf="pass.gender"><b>Gender: </b><span>{{pass.gender}}</span></p>
+            <p *ngIf="pass.age"><b>Age: </b><span>{{pass.age}}</span></p>
+            <p *ngIf="pass.address"> <b>Address: </b><span>{{pass.address}}</span></p>
             <p><b>Under Influence: </b><span>{{pass.underInfluence?'Yes':'No'}}</span></p>
-            <p><b>Type and Extent of Human Factor: </b>{{pass.typeAndExtendOfHumanFactor}}</p>
-            <p><b>Nature of any injuries: </b>{{pass.natureOfAnyInjuries}}</p>
-            <p><b>Data on Socio-economic status: </b>{{pass.dataOnSocioEconomicStatus}}</p>
-            <!-- <img [src]="bucketUrl + img.picName + accessToken" *ngFor="let img of pass.personPics;" padding> -->
+            <p *ngIf="pass.typeAndExtendOfHumanFactor"><b>Type and Extent of Human Factor: </b>{{pass.typeAndExtendOfHumanFactor}}</p>
+            <p *ngIf="pass.natureOfAnyInjuries"><b>Nature of any injuries: </b>{{pass.natureOfAnyInjuries}}</p>
+            <p *ngIf="pass.dataOnSocioEconomicStatus"><b>Data on Socio-economic status: </b>{{pass.dataOnSocioEconomicStatus}}</p>
+            <img [src]="bucketUrl + personImg.mediaName + accessToken" *ngFor="let personImg of pass.medias;" padding>
           </ion-item>
         </ion-card-content>
       </ion-card>
@@ -123,14 +130,15 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <p><b>Name: </b><span>{{pedestrian.name}}</span></p>
-          <p><b>Gender: </b><span>{{pedestrian.gender}}</span></p>
-          <p><b>Age: </b><span>{{pedestrian.age}}</span></p>
-          <p><b>Address: </b><span>{{pedestrian.address}}</span></p>
+          <p *ngIf="pedestrian.name"><b>Name: </b><span>{{pedestrian.name}}</span></p>
+          <p *ngIf="pedestrian.gender"><b>Gender: </b><span>{{pedestrian.gender}}</span></p>
+          <p *ngIf="pedestrian.age"><b>Age: </b><span>{{pedestrian.age}}</span></p>
+          <p *ngIf="pedestrian.address"><b>Address: </b><span>{{pedestrian.address}}</span></p>
           <p><b>Under Influence: </b><span>{{pedestrian.underInfluence?'Yes':'No'}}</span></p>
-          <p><b>Type and Extent of Human Factor: </b>{{pedestrian.typeAndExtendOfHumanFactor}}</p>
-          <p><b>Nature of any injuries: </b>{{pedestrian.natureOfAnyInjuries}}</p>
-          <p><b>Data on Socio-economic status: </b>{{pedestrian.dataOnSocioEconomicStatus}}</p>
+          <p *ngIf="pedestrian.typeAndExtendOfHumanFactor"><b>Type and Extent of Human Factor: </b>{{pedestrian.typeAndExtendOfHumanFactor}}</p>
+          <p *ngIf="pedestrian.natureOfAnyInjuries"><b>Nature of any injuries: </b>{{pedestrian.natureOfAnyInjuries}}</p>
+          <p *ngIf="pedestrian.dataOnSocioEconomicStatus"><b>Data on Socio-economic status: </b>{{pedestrian.dataOnSocioEconomicStatus}}</p>
+          <img [src]="bucketUrl + pedestrianImg.mediaName + accessToken" *ngFor="let pedestrianImg of pedestrian.medias;" padding>
         </ion-item>
       </ion-card-content>
     </ion-card>

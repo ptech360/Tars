@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AccidentProvider } from '../../providers/accident/accident';
 
 /**
  * Generated class for the AccidentDetailsPage page.
@@ -15,10 +16,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AccidentDetailsPage {
   accident: any;
+  bucketUrl: any;
+  accessToken = "&access_token=" + localStorage.getItem('access_token');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private accService: AccidentProvider) {
     this.accident = this.navParams.get('accident');
     console.log(this.accident);
+    this.bucketUrl = this.accService.getBaseUrl() + '/api/media/download?name=';
   }
 
   ionViewDidLoad() {

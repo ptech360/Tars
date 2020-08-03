@@ -67,9 +67,9 @@ export class AddPedestrianPage {
   getPedestrianForm() {
     this.pedestrainForm = this.fb.group({
       id: [null],
-      name: [, [Validators.required]],
-      age: [, [Validators.required]],
-      address: [, [Validators.required]],
+      name: ['Ankush', [Validators.required]],
+      age: [34, [Validators.required]],
+      address: ['abcd', [Validators.required]],
       gender: [, [Validators.required]],
       typeAndExtendOfHumanFactor: [null],
       natureOfAnyInjuries: [null],

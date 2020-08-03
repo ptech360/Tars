@@ -61,10 +61,10 @@ export class AddPersonPage {
   getPassenger() {
     this.personForm = this.fb.group({
       id: [null],
-      name: [, [Validators.required]],
+      name: ['anirudh', [Validators.required]],
       licence: [null],
-      age: [, [Validators.required]],
-      address: [, [Validators.required]],
+      age: [34, [Validators.required]],
+      address: ['kjhgfd', [Validators.required]],
       gender: [, [Validators.required]],
       typeAndExtendOfHumanFactor: [null],
       natureOfAnyInjuries: [null],

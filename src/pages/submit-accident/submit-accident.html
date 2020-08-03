@@ -41,7 +41,8 @@
           <li><b>How did the Accident Happen?: </b><span>{{accidentForm['description']}}</span></li>
           <li><b>Location: </b><span>{{accidentForm['address']}}</span></li>
           <li><b>Remarks: </b><span>{{accidentForm['remark']}}</span></li>
-          <li><b>Primary and Secondary Causes of the accident: </b><span>{{accidentForm['primaryAndSecondaryCauses']}}</span></li>
+          <li><b>Primary and Secondary Causes of the accident:
+            </b><span>{{accidentForm['primaryAndSecondaryCauses']}}</span></li>
           <li><b>Drawing Of Accident Details: </b><span>{{accidentForm['drawing']}}</span></li>
           <li><b>Information On Analysing Agency And Personnel: </b><span>{{accidentForm['analysingInfo']}}</span></li>
         </ul>
@@ -68,45 +69,47 @@
             <ion-card-header *ngIf="person.type=='Passenger'">
               Passenger ({{i}})
             </ion-card-header>
-           
+
             <ion-item>
               <ul>
-              <li><b>Name: </b>{{person.name}}</li>
-              <li><b>Driving Licence: </b>{{person.licence}}</li>
-              <li><b>Gender: </b><span>{{person.gender}}</span></li>
-              <li><b>Age: </b><span>{{person.age}}</span></li>
-              <li><b>Address: </b><span>{{person.address}}</span></li>
-              <li><b>Under Influence: </b><span>{{person.underInfluence?'Yes':'No'}}</span></li>
-              <li><b>Type and Extent of Human Factor: </b>{{person.typeAndExtendOfHumanFactor}}</li>
-              <li><b>Nature of any injuries: </b>{{person.natureOfAnyInjuries}}</li>
-              <li><b>Data on Socio-economic status: </b>{{person.dataOnSocioEconomicStatus}}</li>
-            </ul>
+                <li><b>Name: </b>{{person.name}}</li>
+                <li><b>Driving Licence: </b>{{person.licence}}</li>
+                <li><b>Gender: </b><span>{{person.gender}}</span></li>
+                <li><b>Age: </b><span>{{person.age}}</span></li>
+                <li><b>Address: </b><span>{{person.address}}</span></li>
+                <li><b>Under Influence: </b><span>{{person.underInfluence?'Yes':'No'}}</span></li>
+                <li><b>Type and Extent of Human Factor: </b>{{person.typeAndExtendOfHumanFactor}}</li>
+                <li><b>Nature of any injuries: </b>{{person.natureOfAnyInjuries}}</li>
+                <li><b>Data on Socio-economic status: </b>{{person.dataOnSocioEconomicStatus}}</li>
+              </ul>
             </ion-item>
           </ion-card>
         </div>
       </ion-card>
     </div>
-    <div class="pedestrian-details" *ngIf="accidentForm['pedestrians'].length">
-      <ion-card>
-        <ion-card-header>
-          <h3>Pedestrian Details</h3>
-        </ion-card-header>
-        <div *ngFor="let ped of accidentForm['pedestrians']; let i = index;">
-          <ion-card>
-            <ion-card-header style="padding: 5px 15px;">
-              <h2>Pedestrain {{i+1}}</h2>
-              <div class="action">
-                <button class="edit" ion-button color="primary" clear icon-only item-end (click)="editPedestrian(i)">
-                  <ion-icon name='create' is-active="false"></ion-icon>
-                </button>
-                <button class="delete" ion-button color="danger" clear icon-only item-end (click)="removePedestrian(i)">
-                  <ion-icon name='trash' is-active="false"></ion-icon>
-                </button>
-              </div>
-            </ion-card-header>
-            <ion-item>
-              <ion-item style="padding-left: 0;">
-                <ul>
+    <div class="pedestrian-details" *ngIf="accidentForm['pedestrians']">
+      <div *ngIf="accidentForm['pedestrians'].length">
+        <ion-card>
+          <ion-card-header>
+            <h3>Pedestrian Details</h3>
+          </ion-card-header>
+          <div *ngFor="let ped of accidentForm['pedestrians']; let i = index;">
+            <ion-card>
+              <ion-card-header style="padding: 5px 15px;">
+                <h2>Pedestrain {{i+1}}</h2>
+                <div class="action">
+                  <button class="edit" ion-button color="primary" clear icon-only item-end (click)="editPedestrian(i)">
+                    <ion-icon name='create' is-active="false"></ion-icon>
+                  </button>
+                  <button class="delete" ion-button color="danger" clear icon-only item-end
+                    (click)="removePedestrian(i)">
+                    <ion-icon name='trash' is-active="false"></ion-icon>
+                  </button>
+                </div>
+              </ion-card-header>
+              <ion-item>
+                <ion-item style="padding-left: 0;">
+                  <ul>
                     <li><b>Name: </b><span>{{ped.name}}</span></li>
                     <li><b>Gender: </b><span>{{ped.gender}}</span></li>
                     <li><b>Age: </b><span>{{ped.age}}</span></li>
@@ -115,17 +118,18 @@
                     <li><b>Type and Extent of Human Factor: </b>{{ped.typeAndExtendOfHumanFactor}}</li>
                     <li><b>Nature of any injuries: </b>{{ped.natureOfAnyInjuries}}</li>
                     <li><b>Data on Socio-economic status: </b>{{ped.dataOnSocioEconomicStatus}}</li>
-                </ul>
+                  </ul>
+                </ion-item>
               </ion-item>
-            </ion-item>
-          </ion-card>
-  
-        </div>
-      </ion-card>
+            </ion-card>
+
+          </div>
+        </ion-card>
+      </div>
     </div>
   </ion-card>
 
-  
+
   <button type="button" ion-button block color="primary" (click)="addPedestrian()">Add Pedestrian</button>
 
 </ion-content>

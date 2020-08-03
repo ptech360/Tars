@@ -82,8 +82,16 @@
       <ion-item *ngIf="accident.medias">
         <h2>Medias :</h2>
         <div *ngFor="let accidentImg of accident.medias;let i = index;">
-          <img [src]="bucketUrl + accidentImg.mediaName + accessToken">
-          <a  [attr.href]="bucketUrl + accidentImg.mediaName + accessToken">{{accidentImg.mediaName}}</a>
+          <div *ngIf="accidentImg.extension=='.jpg'">
+            <img [src]="bucketUrl + accidentImg.mediaName + accessToken">
+            <a  [attr.href]="bucketUrl + accidentImg.mediaName + accessToken">{{accidentImg.mediaName}}</a>
+          </div>
+          <div *ngIf="accidentImg.extension=='.mp4'">
+            <video controls>
+              <source [src]="bucketUrl + accidentImg.mediaName + accessToken" type="video/mp4">
+              <a  [attr.href]="bucketUrl + accidentImg.mediaName + accessToken">{{accidentImg.mediaName}}</a>
+            </video>
+          </div>
         </div>
       </ion-item>
     </div>

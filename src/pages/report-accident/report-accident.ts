@@ -249,4 +249,8 @@ export class ReportAccidentPage implements OnInit {
     return formData;
   }
 
+  goToHome(){
+    this.navCtrl.popToRoot();
+  }
+
 }

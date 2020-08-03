@@ -27,7 +27,7 @@
       <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Driving Licence</ion-label>
+      <ion-label>Driving Licence<code>*</code></ion-label>
       <ion-input type="text" formControlName="licence" autocapitalize="characters"></ion-input>
     </ion-item>
     <ion-item>
@@ -47,7 +47,6 @@
         <code>*</code>
       </ion-label>
       <ion-select formControlName="gender">
-        <ion-option value="" selected disabled>Select</ion-option>
         <ion-option value="Male">Male</ion-option>
         <ion-option value="Female">Female</ion-option>
       </ion-select>
@@ -77,9 +76,9 @@
         <img [src]="img.value.url" />
         <ion-row>
           <ion-col text-right>
-            <button ion-button color="danger" clear icon-only item-end (click)="delDriverImage(driverForm,i)">
+            <!-- <button ion-button color="danger" clear icon-only item-end (click)="delDriverImage(driverForm,i)">
               <ion-icon name='trash' is-active="false"></ion-icon>
-            </button>
+            </button> -->
           </ion-col>
         </ion-row>
       </ion-card>

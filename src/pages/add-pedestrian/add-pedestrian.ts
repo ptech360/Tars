@@ -74,6 +74,7 @@ export class AddPedestrianPage {
 
   savePedestrian() {
     console.log(this.pedestrainForm.value);
+    this.toastSev.showLoader();
     const pedestrian = <FormArray>this.accidentForm['pedestrians'];
     const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
     if (this.pedestrainForm.value.id) {

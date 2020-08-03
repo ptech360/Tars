@@ -30,4 +30,7 @@ export class AccidentDetailsPage {
     console.log('ionViewDidLoad AccidentDetailsPage');
   }
 
+  goToHome() {
+    this.navCtrl.popToRoot();
+  }
 }

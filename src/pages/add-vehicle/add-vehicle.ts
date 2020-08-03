@@ -211,6 +211,10 @@ export class AddVehiclePage implements OnInit {
         return formData;
     }
 
+    goToHome(){
+        this.navCtrl.popToRoot();
+    }
+
 
 
 

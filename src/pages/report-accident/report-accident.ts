@@ -58,7 +58,7 @@ export class ReportAccidentPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.accidentGlobalObject.vehicleCounter = -1;
+    this.accidentGlobalObject.vehicleCounter = 0;
     console.log(this.accidentGlobalObject);
   }
 
@@ -91,7 +91,7 @@ export class ReportAccidentPage implements OnInit {
         this.getGeoLoacation();
       }, 2000);
     }).catch(error => {
-      console.log(error);
+      this.showError(error.message);
     });
   }
 

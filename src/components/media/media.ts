@@ -70,7 +70,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
           }
         );
       } catch (error) {
-        console.log(error);
+        this.showError(error.message);
 
       }
 

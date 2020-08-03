@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { AccidentProvider } from '../../providers/accident/accident';
@@ -27,6 +27,7 @@ export class AddDriverPage {
     public fb: FormBuilder,
     public camera: Camera,
     public viewCtrl: ViewController,
+    public alertCtrl: AlertController,
     private accService: AccidentProvider) {
     this.getDriver();
   }
@@ -81,6 +82,15 @@ export class AddDriverPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  showError = (message) => {
+    const alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    })
+    alert.present();
   }
 
 }

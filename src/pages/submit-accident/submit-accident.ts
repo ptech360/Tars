@@ -64,7 +64,7 @@ export class SubmitAccidentPage {
       console.log(response);
     }, (error => {
       this.toastSev.hideLoader();
-      console.log(error);
+      this.showError(error.message);
     }));
   }
 
@@ -76,9 +76,18 @@ export class SubmitAccidentPage {
       this.toastSev.hideLoader();
       this.navCtrl.popToRoot();
     }, (error => {
-      console.log(error);
+      this.showError(error.message);
       this.toastSev.hideLoader();
     }))
+  }
+
+  showError = (message) => {
+    const alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    })
+    alert.present();
   }
 
 }

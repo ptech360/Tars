@@ -22,15 +22,6 @@ export class AddPedestrianPage {
   accidentForm: FormGroup;
   index: number = -1;
   pedestrianImageUrls = [];
-  cameraOptions: CameraOptions = {
-    sourceType: this.camera.PictureSourceType.CAMERA,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    correctOrientation: true,
-    targetWidth: 600,
-    targetHeight: 600,
-  };
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -120,7 +111,7 @@ export class AddPedestrianPage {
   //     console.log(response);
   //     this.toastSev.showToast('Pedestrian Saved !');
   //   }, (error => {
-  //     console.log(error);
+  //     this.showError(error.message);
   //     this.toastSev.hideLoader();
   //   }))
   // }
@@ -154,6 +145,15 @@ export class AddPedestrianPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  showError = (message) => {
+    const alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    })
+    alert.present();
   }
 
 }

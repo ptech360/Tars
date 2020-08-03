@@ -123,7 +123,8 @@ export class AddVehiclePage implements OnInit {
             this.accSev.editVehicleReport(this.accidentGlobalObject.id, this.vehicleFormGroup.value.id, formData).subscribe(response => {
                 if (this.accidentGlobalObject.vehicles && this.accidentGlobalObject.vehicles.length) {
                     if (response.medias == null) response.medias = []
-                    this.accidentGlobalObject.vehicles.push(response);
+                    const vehicleIndex: number = this.accidentGlobalObject.vehicles.findIndex(v => v.id == response.id);
+                    this.accidentGlobalObject.vehicles.splice(vehicleIndex, 1, response);
                     this.accidentGlobalObject.vehicleCounter++;
                 } else {
                     this.accidentGlobalObject.vehicles = [];
@@ -139,7 +140,7 @@ export class AddVehiclePage implements OnInit {
                     this.navCtrl.push(SubmitAccidentPage, { accident: this.accidentGlobalObject });
                 }
             }, error => {
-                console.log(error);
+                this.showError(error.message);
                 this.toastSev.hideLoader();
             });
         } else {
@@ -165,7 +166,7 @@ export class AddVehiclePage implements OnInit {
                     this.navCtrl.push(SubmitAccidentPage, { accident: this.accidentGlobalObject });
                 }
             }, error => {
-                console.log(error);
+                this.showError(error.message);
                 this.toastSev.hideLoader();
             });
         }

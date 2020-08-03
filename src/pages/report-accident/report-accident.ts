@@ -60,10 +60,6 @@ export class ReportAccidentPage implements OnInit {
   ionViewWillEnter() {
     this.accidentGlobalObject.vehicleCounter = 0;
     console.log(this.accidentGlobalObject);
-    if(this.navParams.get('accident')){
-      this.accidentGlobalObject = this.navParams.get('accident');
-      this.patchAccident();
-    }
   }
 
   ngOnInit() {
@@ -91,6 +87,10 @@ export class ReportAccidentPage implements OnInit {
     this.navBar.backButtonClick = (e: UIEvent) => {
       // todo something
       this.navCtrl.pop();
+    }
+    if(this.navParams.get('accident')){
+      this.accidentGlobalObject = this.navParams.get('accident');
+      this.patchAccident();
     }
     this.accSev.getAccidentTypes().subscribe(response => {
       this.accidentTypes = response;
@@ -191,7 +191,6 @@ export class ReportAccidentPage implements OnInit {
         this.toastSev.hideLoader();
         this.toastSev.showToast('Accident Updated !');
         Object.assign(this.accidentGlobalObject, response);
-        debugger
         this.accidentGlobalObject.vehicleCounter = 0;
         this.navCtrl.push(AddVehiclePage, { accident: this.accidentGlobalObject });
       }, error => {

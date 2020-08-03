@@ -41,7 +41,7 @@ export class AddDriverPage {
       const editPersonObj = this.driver.controls[this.index];
       console.log(editPersonObj);
       Object.keys(editPersonObj.value).forEach(key => {
-        if (editPersonObj.value[key]) {
+        if (editPersonObj.value[key]&&this.driverForm.controls[key]) {
           this.driverForm.controls[key].patchValue(editPersonObj.value[key]);
         }
       });

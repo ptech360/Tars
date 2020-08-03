@@ -51,7 +51,7 @@ export class AddPersonPage {
       const editPersonObj = this.persons.controls[this.index];
       console.log(editPersonObj);
       Object.keys(editPersonObj.value).forEach(key => {
-        if (editPersonObj.value[key]) {
+        if (editPersonObj.value[key] && this.personForm.controls[key]) {
           this.personForm.controls[key].patchValue(editPersonObj.value[key]);
         }
       });

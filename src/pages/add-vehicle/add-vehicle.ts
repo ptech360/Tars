@@ -136,7 +136,7 @@ export class AddVehiclePage implements OnInit {
                 }
                 this.toastSev.hideLoader();
                 this.toastSev.showToast('Vehicle Updated Successfully');
-                if (this.accidentGlobalObject.vehicles.length < this.accidentGlobalObject.numOfVehicle) {
+                if (this.accidentGlobalObject.vehicleCounter < this.accidentGlobalObject.numOfVehicle) {
                     this.navCtrl.push(AddVehiclePage, { accident: this.accidentGlobalObject });
                 } else {
                     this.navCtrl.push(SubmitAccidentPage, { accident: this.accidentGlobalObject });

@@ -42,7 +42,6 @@
         <ion-label>Gender
           <code>*</code> </ion-label>
         <ion-select formControlName="gender">
-          <ion-option value="" selected disabled>Select</ion-option>
           <ion-option value="Male">Male</ion-option>
           <ion-option value="Female">Female</ion-option>
         </ion-select>
@@ -69,9 +68,9 @@
           <img [src]="img.value.url" />
           <ion-row>
             <ion-col text-right>
-              <button ion-button color="danger" clear icon-only item-end (click)="delPedestrianImage(pedestrainForm,i)">
+              <!-- <button ion-button color="danger" clear icon-only item-end (click)="delPedestrianImage(pedestrainForm,i)">
                 <ion-icon name='trash' is-active="false"></ion-icon>
-              </button>
+              </button> -->
             </ion-col>
           </ion-row>
         </ion-card>

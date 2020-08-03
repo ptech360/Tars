@@ -4,6 +4,7 @@ import { AccidentProvider } from '../../providers/accident/accident';
 import { AccidentPage } from '../accident/accident';
 import { AccidentDetailsPage } from '../accident-details/accident-details';
 import { ReportAccidentPage } from '../report-accident/report-accident';
+import { ToastProvider } from '../../providers/toast/toast';
 
 /**
  * Generated class for the ViewAccidentsPage page.
@@ -18,16 +19,18 @@ import { ReportAccidentPage } from '../report-accident/report-accident';
 })
 export class ViewAccidentsPage {
   accidents = [];
-  accidentLoader: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public accSev: AccidentProvider) {
-    this.accidentLoader = true;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public accSev: AccidentProvider,
+    public toastSev: ToastProvider,
+  ) {
+    this.toastSev.showLoader();
     this.accSev.getAccidentReports().subscribe(response => {
-      this.accidentLoader = false;
       this.accidents = response;
       console.log(response);
+      this.toastSev.hideLoader();
     }, (error => {
-      this.accidentLoader = false;
+      this.toastSev.hideLoader();
+
     }));
   }
 
@@ -41,7 +44,7 @@ export class ViewAccidentsPage {
   }
 
 
-  editAccident(index: number,e) {
+  editAccident(index: number, e) {
     e.stopPropagation();
     this.navCtrl.push(ReportAccidentPage, { 'accident': this.accidents[index] });
   }

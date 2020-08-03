@@ -63,7 +63,7 @@ export class AddPersonPage {
     this.personForm = this.fb.group({
       id: [null],
       name: ['anirudh', [Validators.required]],
-      licence: [null],
+      licence: [null, [Validators.required]],
       age: [34, [Validators.required]],
       address: ['kjhgfd', [Validators.required]],
       gender: [, [Validators.required]],

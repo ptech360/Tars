@@ -43,7 +43,6 @@
   </ion-card> -->
 
   <ion-list>
-    <ion-spinner *ngIf="accidentLoader" name="crescent"></ion-spinner>
 
     <ion-card *ngFor="let acc of accidents;let i = index;" (click)="openIncidentDetailPage(i)">
       <ion-grid>
@@ -67,7 +66,8 @@
             <p *ngIf="acc.status=='Submit'">Submitted</p>
           </ion-col>
           <ion-col text-right>
-            <button class="edit" ion-button color="primary" clear icon-only item-end *ngIf="acc.status=='Draft'" (click)="editAccident(i,$event)">
+            <button class="edit" ion-button color="primary" clear icon-only item-end *ngIf="acc.status=='Draft'"
+              (click)="editAccident(i,$event)">
               <ion-icon name='create' is-active="false"></ion-icon>
             </button>
           </ion-col>

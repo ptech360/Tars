@@ -155,7 +155,7 @@ export class AddVehiclePage implements OnInit {
                     this.accidentGlobalObject.vehicles = [];
                     if (response.medias == null) response.medias = [];
                     this.accidentGlobalObject.vehicles.push(response);
-                    this.accidentGlobalObject.vehicleCounter = 0;
+                    this.accidentGlobalObject.vehicleCounter = 1;
                 }
                 this.toastSev.hideLoader();
                 this.toastSev.showToast('Vehicle Added Successfully');

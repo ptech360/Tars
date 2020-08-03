@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { AccidentPage } from '../accident/accident';
 import { AccidentDetailsPage } from '../accident-details/accident-details';
+import { ReportAccidentPage } from '../report-accident/report-accident';
 
 /**
  * Generated class for the ViewAccidentsPage page.
@@ -17,7 +18,7 @@ import { AccidentDetailsPage } from '../accident-details/accident-details';
 })
 export class ViewAccidentsPage {
   accidents = [];
-  accidentLoader:boolean=false;
+  accidentLoader: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public accSev: AccidentProvider) {
     this.accidentLoader = true;
@@ -25,7 +26,7 @@ export class ViewAccidentsPage {
       this.accidentLoader = false;
       this.accidents = response;
       console.log(response);
-    },(error => {
+    }, (error => {
       this.accidentLoader = false;
     }));
   }
@@ -36,7 +37,13 @@ export class ViewAccidentsPage {
 
   openIncidentDetailPage(index: number) {
     // this.navCtrl.push(AccidentPage, { 'accident': this.accidents[index]});
-    this.navCtrl.push(AccidentDetailsPage, { 'accident': this.accidents[index]});
+    this.navCtrl.push(AccidentDetailsPage, { 'accident': this.accidents[index] });
+  }
+
+
+  editAccident(index: number,e) {
+    e.stopPropagation();
+    this.navCtrl.push(ReportAccidentPage, { 'accident': this.accidents[index] });
   }
 
 

@@ -3,7 +3,7 @@
     <name>Tars</name>
     <description>Traffic Accident Recording System app</description>
     <author email="kharetwal.pankaj111@gmail.com" href="#">NxtLife Technologies Team</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

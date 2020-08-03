@@ -116,7 +116,7 @@
   </div>
 
   <div class="bg-white" *ngFor="let pedestrian of accident.pedestrians;let i = index;">
-    <h4>Pedestrian Details</h4>
+    <h4 *ngIf="i==0">Pedestrian Details</h4>
     <ion-card>
       <ion-card-header>
         Pedestrian {{i+1}}

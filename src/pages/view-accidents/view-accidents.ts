@@ -49,5 +49,9 @@ export class ViewAccidentsPage {
     this.navCtrl.push(ReportAccidentPage, { 'accident': this.accidents[index] });
   }
 
+  goToHome(){
+    this.navCtrl.popToRoot();
+  }
+
 
 }

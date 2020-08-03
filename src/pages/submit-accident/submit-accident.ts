@@ -90,4 +90,8 @@ export class SubmitAccidentPage {
     alert.present();
   }
 
+  goToHome(){
+    this.navCtrl.popToRoot();
+  }
+
 }

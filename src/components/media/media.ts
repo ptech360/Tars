@@ -11,7 +11,7 @@ import { Media, MediaObject } from '@ionic-native/media';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Base64 } from '@ionic-native/base64';
-import { Platform, ActionSheetController } from 'ionic-angular';
+import { Platform, ActionSheetController, AlertController } from 'ionic-angular';
 import { FileProvider } from '../../providers/file/file';
 import { FormArray, FormGroup, FormControl } from '@angular/forms';
 const MEDIA_FOLDER_NAME = 'my_media';
@@ -41,6 +41,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
     private actionSheetController: ActionSheetController,
     private plt: Platform,
     private fileService: FileProvider,
+    public alertCtrl: AlertController,
     private base64: Base64
   ) {
     console.log('Hello MediaComponent Component');
@@ -142,10 +143,9 @@ export class MediaComponent implements OnInit, AfterViewInit {
                 this.readFile(data[0]);
               })
             })
-
         }
       },
-      (err: CaptureError) => console.error(err)
+      (err: any) => this.showError(err.message)
     );
   }
 
@@ -154,7 +154,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
     this.base64.encodeFile(file.fullPath).then((base64File: string) => {
       accidentPics.push(new FormControl(this.dataURLtoFile(base64File, file.name, file.type)));
     }, (err) => {
-      console.log(err);
+      this.showError(err.message)
     });
   }
 
@@ -174,7 +174,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
           this.copyFileToLocalDir(data[0].fullPath);
         }
       },
-      (err: CaptureError) => console.error(err)
+      (err: any) => this.showError(err.message)
     );
   }
 
@@ -191,7 +191,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
             })
         }
       },
-      (err: CaptureError) => console.error(err)
+      (err: any) => this.showError(err.message)
     );
   }
 
@@ -215,7 +215,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
         this.loadFiles();
       },
       error => {
-        console.log('error: ', error);
+        this.showError(error.message)
       }
     );
   }
@@ -241,7 +241,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
       const medias = <FormArray>this.formGroup.controls['medias'];
       medias.removeAt(index);
       this.loadFiles();
-    }, err => console.log('error remove: ', err));
+    }, err => this.showError(err.message))
   }
 
   loadFiles() {
@@ -250,8 +250,17 @@ export class MediaComponent implements OnInit, AfterViewInit {
         this.files = res;
         console.log(this.files);
       },
-      err => console.log('error loading files: ', err)
+      err => this.showError(err.message)
     );
   }
 
+  showError = (message) => {
+    const alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    })
+    alert.present();
+  }
 }
+

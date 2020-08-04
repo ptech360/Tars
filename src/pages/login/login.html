@@ -16,31 +16,35 @@
 <ion-content class="login-main" padding>
 
   <div class="login-middle">
-  <div class="logo text-center">
-      <img src="/assets/imgs/bscl.png" />
-  </div>
-
-  <form name="Login_Form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-        <!-- <ion-icon name="username"></ion-icon> -->
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
-    </ion-item>
-
-    <!-- <div (click)="forgotPassword()" class="forgotPwd">Forgot Password?</div> -->
-
-
-    <div class="err-msg" *ngIf="errorMsg">
-      <p>{{errorMsg}}</p>
-    </div>
-    <button class="signin-btn" ion-button full rounded type="submit" [disabled]="logging" style="border-radius: 4px;">{{logging?'Logging
-      In ...' :'Login' }}</button>
     
-    <!-- <div color="primary" (click)="signup()" class="signUp">Don't have an account ? <a href="#">Sign Up</a></div> -->
+    <div class="logo text-center">
+        <img src="/assets/imgs/bscl.png" />
+    </div>
+  <ion-card padding>
+    <form name="Login_Form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+          <!-- <ion-icon name="username"></ion-icon> -->
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+      </ion-item>
+  
+      <!-- <div (click)="forgotPassword()" class="forgotPwd">Forgot Password?</div> -->
+  
+  
+      <div class="err-msg" *ngIf="errorMsg">
+        <p>{{errorMsg}}</p>
+      </div>
+      <button class="signin-btn" ion-button full rounded type="submit" [disabled]="logging" style="border-radius: 4px;">{{logging?'Logging
+        In ...' :'Login' }}</button>
+      
+      <!-- <div color="primary" (click)="signup()" class="signUp">Don't have an account ? <a href="#">Sign Up</a></div> -->
+  
+    </form>
+  </ion-card>
 
-  </form>
+
   </div>
 </ion-content>

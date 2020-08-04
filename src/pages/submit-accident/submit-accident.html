@@ -28,10 +28,10 @@
 
 <ion-content padding>
   <ion-card style="margin-right:0; margin-left:0; width: 100%;">
-    <ion-card-header style="background-color: rgba(0, 0, 0, 0.05) !important;">
-      <h2><b>Accident Details</b></h2>
+    <ion-card-header style="background-color: rgba(36, 148, 175) !important; color: white; ">
+      <h2 style="color: white; font-size: 16px !important;"><b>Accident Details</b></h2>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content class="accident-details-contents">
       <ion-item>
         <ul>
           <li><b>Accident Type: </b><span>{{accidentForm['type']}}</span></li>
@@ -49,8 +49,8 @@
     </ion-card-content>
     <div *ngFor="let vehicle of accidentForm['vehicles']; let i = index">
       <ion-card>
-        <ion-card-header>
-          <h3> <b>Vehicle {{i+1}} Details</b> </h3>
+        <ion-card-header style="background-color: rgba(36, 148, 175) !important; color: white; ">
+          <h3 style="color: white; font-size: 16px !important;"> <b>Vehicle {{i+1}} Details</b> </h3>
         </ion-card-header>
         <ion-item style="padding-left:0 !important;">
           <ion-item>
@@ -66,7 +66,7 @@
               <h3>Driver Details</h3>
             </ion-card-header>
             <ion-card-header *ngIf="person.type=='Passenger'">
-              Passenger ({{i}})
+              <b>Passenger ({{i}})</b>
             </ion-card-header>
            
             <ion-item>
@@ -88,13 +88,13 @@
     </div>
     <div class="pedestrian-details" *ngIf="accidentForm['pedestrians']">
       <ion-card>
-        <ion-card-header>
-          <h3>Pedestrian Details</h3>
+        <ion-card-header style="background-color: rgba(36, 148, 175) !important; color: white; ">
+          <h3 style="color: white; font-size: 16px !important;">Pedestrian Details</h3>
         </ion-card-header>
         <div *ngFor="let ped of accidentForm['pedestrians']; let i = index;">
           <ion-card>
             <ion-card-header style="padding: 5px 15px;">
-              <h2>Pedestrain {{i+1}}</h2>
+              <h2 style="margin-top: 5px !important; font-size: 15px !important; color: #333 !important; ">Pedestrain {{i+1}}</h2>
               <div class="action">
                 <button class="edit" ion-button color="primary" clear icon-only item-end (click)="editPedestrian(i)">
                   <ion-icon name='create' is-active="false"></ion-icon>

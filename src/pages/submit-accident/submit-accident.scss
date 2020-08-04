@@ -52,6 +52,7 @@ ion-content{
                 font-size: 14px;
                 font-weight: normal;
                 margin-bottom: 10px;
+                line-height: 22px;
             }
         }
     }
@@ -74,19 +75,37 @@ ion-content{
                 float: right;
 
                 .delete {
-                    width: 25px;
-                    font-size: 10px !important;
+                    width: 20px;
+                    font-size: 8px !important;
                     color: #f53d3d;
                     border: solid 1px;
+                    height: 20px;
                 }
                 .edit {
-                    width: 25px;
-                    font-size: 10px !important;
+                    width: 20px;
+                    font-size: 8px !important;
                     color: #2494af;
                     border: solid 1px;
+                    height: 20px;
                 }
 
             }
+        }
+    }
+}
+
+ion-label{
+    white-space:inherit !important;
+    text-overflow: inherit !important;
+    overflow: inherit !important;
+}
+
+.accident-details-contents{
+    .item-inner{
+        padding-right: 0;
+
+        ion-label{
+            margin-right: 0;
         }
     }
 }

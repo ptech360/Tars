@@ -28,7 +28,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Driving Licence<code>*</code></ion-label>
-      <ion-input type="text" formControlName="licence" autocapitalize="characters"></ion-input>
+      <ion-input type="text" formControlName="licence" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Age
@@ -83,8 +83,8 @@
         </ion-row>
       </ion-card>
     </div>
-    <div class="media-list-box" margin-top padding>
-      <ion-list>
+    <div class="media-list-box" padding-left padding-right>
+      <ion-list style="margin-bottom: 0;">
         <media [mediaFor]="'driver'" [formGroup]="driverForm"></media>
       </ion-list>
     </div>

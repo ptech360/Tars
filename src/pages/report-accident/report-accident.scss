@@ -160,3 +160,17 @@ page-report-accident{
     margin: 10px 0 !important;
   }
 }
+
+ion-header{
+  ion-toolbar{
+    ion-buttons{
+      button{
+        font-size: 13px !important; 
+        margin-right: 5px !important;
+      }
+    }
+  }
+}
+.header-ios .toolbar-ios:last-child .toolbar-background-ios{
+  border-bottom: none !important;
+}

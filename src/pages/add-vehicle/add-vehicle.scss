@@ -119,18 +119,33 @@ ion-content{
     }
 }
 
-.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
-    border-bottom: none !important;
-    box-shadow: none !important;
+// .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+//     border-bottom: 1px solid #ddd !important;
+//     box-shadow: none !important;
+// }
+
+// ion-item{
+//     &.input-has-focus{
+
+//         .item-inner{
+
+//             border-bottom-color: #ddd !important;
+//             box-shadow: none !important;
+
+//         }
+//     }
+// }
+
+.vehicle-number{
+    .item-inner{
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
 }
 
-ion-item{
-    &.input-has-focus{
-
-        .item-inner{
-            border-bottom: none !important;
-            box-shadow: none !important;
-
-        }
+.vehicle-model{
+    .item-inner{
+        border-bottom: none !important;
+        box-shadow: none !important;
     }
 }

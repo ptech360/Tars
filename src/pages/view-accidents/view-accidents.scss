@@ -1,5 +1,72 @@
 page-view-accidents {
     ion-card.card {
-        border-left: 5px groove;
+        border-left: solid 5px #2494af;
+
+        .view-header{
+            
+            margin-left: -10px;
+            margin-right: -10px;
+            margin-top: -10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.03);
+            box-shadow: 0 0 3px #ddd;
+
+            ion-col{
+                b{
+                    color: #333;
+                }
+                small{
+                    color: #2494af;
+                    // vertical-align: top;
+                }
+            }
+
+            ion-col{
+                .edit{
+                    width: 20px;
+                    font-size: 8px !important;
+                    color: #2494af;
+                    border: solid 1px;
+                    height: 20px;
+                    margin: 0;
+                }
+            }
+        }
+
+        .view-contents{
+            padding: 15px 0;
+            ion-col{
+                color: #333;
+                line-height: 22px;
+            }
+        }
+        .view-footer{
+            margin-left: -10px;
+            margin-right: -10px;
+            margin-bottom: -10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.01);
+            box-shadow: 0 0 2px #ddd;
+            ion-col{
+                b{
+                    color: #333;
+
+                }
+                p{
+                    .submitted{
+                        color: #32db64;
+
+                    }
+                    .draft{
+                        color: #f53d3d;
+                    }
+                }
+            }
+
+            
+        }
     }
+
+    
 }
+

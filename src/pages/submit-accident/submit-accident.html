@@ -41,7 +41,8 @@
           <li><b>How did the Accident Happen?: </b><span>{{accidentForm['description']}}</span></li>
           <li><b>Location: </b><span>{{accidentForm['address']}}</span></li>
           <li><b>Remarks: </b><span>{{accidentForm['remark']}}</span></li>
-          <li><b>Primary and Secondary Causes of the accident: </b><span>{{accidentForm['primaryAndSecondaryCauses']}}</span></li>
+          <li><b>Primary and Secondary Causes of the accident:
+            </b><span>{{accidentForm['primaryAndSecondaryCauses']}}</span></li>
           <li><b>Drawing Of Accident Details: </b><span>{{accidentForm['drawing']}}</span></li>
           <li><b>Information On Analysing Agency And Personnel: </b><span>{{accidentForm['analysingInfo']}}</span></li>
         </ul>
@@ -68,25 +69,26 @@
             <ion-card-header *ngIf="person.type=='Passenger'">
               <b>Passenger ({{i}})</b>
             </ion-card-header>
-           
+
             <ion-item>
               <ul>
-              <li><b>Name: </b>{{person.name}}</li>
-              <li><b>Driving Licence: </b>{{person.licence}}</li>
-              <li><b>Gender: </b><span>{{person.gender}}</span></li>
-              <li><b>Age: </b><span>{{person.age}}</span></li>
-              <li><b>Address: </b><span>{{person.address}}</span></li>
-              <li><b>Under Influence: </b><span>{{person.underInfluence?'Yes':'No'}}</span></li>
-              <li><b>Type and Extent of Human Factor: </b>{{person.typeAndExtendOfHumanFactor}}</li>
-              <li><b>Nature of any injuries: </b>{{person.natureOfAnyInjuries}}</li>
-              <li><b>Data on Socio-economic status: </b>{{person.dataOnSocioEconomicStatus}}</li>
-            </ul>
+                <li><b>Name: </b>{{person.name}}</li>
+                <li><b>Driving Licence: </b>{{person.licence}}</li>
+                <li><b>Gender: </b><span>{{person.gender}}</span></li>
+                <li><b>Age: </b><span>{{person.age}}</span></li>
+                <li><b>Address: </b><span>{{person.address}}</span></li>
+                <li><b>Under Influence: </b><span>{{person.underInfluence?'Yes':'No'}}</span></li>
+                <li><b>Type and Extent of Human Factor: </b>{{person.typeAndExtendOfHumanFactor}}</li>
+                <li><b>Nature of any injuries: </b>{{person.natureOfAnyInjuries}}</li>
+                <li><b>Data on Socio-economic status: </b>{{person.dataOnSocioEconomicStatus}}</li>
+              </ul>
             </ion-item>
           </ion-card>
         </div>
       </ion-card>
     </div>
     <div class="pedestrian-details" *ngIf="accidentForm['pedestrians']">
+      <div *ngIf="accidentForm['pedestrians'].length">
       <ion-card>
         <ion-card-header style="background-color: rgba(36, 148, 175) !important; color: white; ">
           <h3 style="color: white; font-size: 16px !important;">Pedestrian Details</h3>
@@ -115,17 +117,19 @@
                     <li><b>Type and Extent of Human Factor: </b>{{ped.typeAndExtendOfHumanFactor}}</li>
                     <li><b>Nature of any injuries: </b>{{ped.natureOfAnyInjuries}}</li>
                     <li><b>Data on Socio-economic status: </b>{{ped.dataOnSocioEconomicStatus}}</li>
-                </ul>
+                  </ul>
+                </ion-item>
               </ion-item>
-            </ion-item>
-          </ion-card>
-  
+            </ion-card>
+
+          </div>
+        </ion-card>
         </div>
-      </ion-card>
+      </div>
     </div>
   </ion-card>
 
-  
+
   <button type="button" ion-button block color="primary" (click)="addPedestrian()">Add Pedestrian</button>
 
 </ion-content>

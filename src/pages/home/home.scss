@@ -1,5 +1,12 @@
 page-home {
-
+  .home-background{
+    background-color: #fafafa !important;
+  }
+  ion-footer{
+    .toolbar-background{
+      background-color: white !important;
+    }
+  }
   ion-header{
     ion-navbar{
       background: red;
@@ -15,7 +22,7 @@ page-home {
   font-size: 18px;
   font-weight: bold;
   line-height: 26px;
-  color: #a0203f;
+  color: #333;
   margin-top: 0;
   
 }
@@ -23,6 +30,11 @@ page-home {
   .home-page{
     max-width: 550px;
     margin: auto;
+    margin-top: 120px;
+    ion-card{
+      box-shadow: 0 0 3px #ddd !important;
+      background-color: white !important;
+    }
     .home-borrom{
       .button-full{
         background-color: #2395ae !important;
@@ -36,6 +48,7 @@ page-home {
 
 
 @media (orientation: portrait) {
+ 
   .home-top{
     width: 100%;
     margin-bottom: 40px;
@@ -65,8 +78,17 @@ page-home {
 .home-page {
   .home-bottom {
     button {
-      margin-left: 0;
+      
       margin-bottom: 10px;
+
+      max-width: 260px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 2px;
+
+      &.previous-btn{
+        background-color: #58ae68;
+      }
     }
   }
 }

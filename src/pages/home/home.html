@@ -8,29 +8,35 @@
 
 <ion-content class="home-background" padding text-center>
   <div class="home-page">
-    <ion-grid>
-      <ion-row>
-        <div class="home-top">
+    <ion-card >
+      <ion-card-header>
+        <div class="col-md">
+          <p class="title-page">COMMISSIONERATE POLICE <br> BHUBANESWAR CUTTACK</p>
+        </div>
+      </ion-card-header>
+      <ion-row padding>
+        <!-- <div class="home-top">
           <div>
             <img class="accident-logo" src="/assets/imgs/emblem.png" />
           </div>
-          <!-- <div class="col-md">
+          <div class="col-md">
             <p class="title-page">COMMISSIONERATE POLICE <br> BHUBANESWAR CUTTACK</p>
-          </div> -->
-        </div>
+          </div>
+        </div> -->
         <div class="home-bottom">
-          <button ion-button icon-end class="button-full" (click)="reportAccident()">
+          <button ion-button icon-end class="button-full report-btn" (click)="reportAccident()">
             Report Accident
-             <ion-icon name="paper-outline"></ion-icon>
+             <!-- <ion-icon name="paper-outline"></ion-icon> -->
           </button>
-          <button class="button-full" ion-button icon-end (click)="viewAccidents()">
+          <button class="button-full previous-btn" ion-button icon-end (click)="viewAccidents()">
             Previous Accidents
-            <ion-icon name="list-outline"></ion-icon>
+            <!-- <ion-icon name="list-outline"></ion-icon> -->
  
           </button>
         </div>
       </ion-row>
-    </ion-grid>
+      
+    </ion-card>
 
   </div>
 </ion-content>

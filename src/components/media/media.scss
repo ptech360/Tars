@@ -1,6 +1,11 @@
 .capture{
     text-align: center;
-
+    padding-top: 5px;
+    padding-bottom: 5px;
+    .item-inner{
+        border-bottom: none !important;
+    }
+    
     h2{
         font-size: 14px;
         color:#333;
@@ -21,6 +26,16 @@
             margin-right: 10px;
         }
     }
+
+    ion-item{
+        button{
+            &.select-media-btn{
+                height: 30px !important;
+            }
+        }  
+    }
+
+
 }
 
 
@@ -70,3 +85,4 @@
         
     }
 }
+

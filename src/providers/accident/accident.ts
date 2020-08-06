@@ -15,7 +15,7 @@ import { ApiProvider } from '../api/api';
 export class AccidentProvider {
 
   accidentReport: FormGroup;
-
+  accidentTypes: any[] = [];
   // accidentTypes = [
   //   {
   //     name: 'Vehicle Crashed',
@@ -101,8 +101,14 @@ export class AccidentProvider {
   }
 
   getAccidentTypes() {
-    // return of(this.accidentTypes);
-    return this.api.get('api/accidentTypes');
+    if (this.accidentTypes.length) {
+      return of(this.accidentTypes);
+    } else {
+      return this.api.get('api/accidentTypes').map(accidentTypes => {
+        this.accidentTypes = accidentTypes;
+        return accidentTypes;
+      })
+    }
   }
 
   getPersonTypes() {

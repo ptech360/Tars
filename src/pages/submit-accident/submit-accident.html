@@ -29,35 +29,71 @@
 <ion-content padding>
   <ion-card style="margin-right:0; margin-left:0; width: 100%;">
     <ion-card-header style="background-color: rgba(36, 148, 175) !important; color: white; ">
-      <h2 style="color: white; font-size: 16px !important;"><b>Accident Details</b></h2>
+      <h2 style="color: white; font-size: 16px !important;">
+        <b>Accident Details</b>
+      </h2>
     </ion-card-header>
     <ion-card-content class="accident-details-contents">
       <ion-item>
         <ul>
-          <li><b>Accident Type: </b><span>{{accidentForm['type']}}</span></li>
-          <li><b>Fatal: </b><span>{{accidentForm['fatal']?'Yes':'No'}}</span></li>
-          <li><b>No. Of Casualities: </b><span>{{accidentForm['numOfCasualities']}}</span></li>
-          <li><b>No. of Vehicle Involved: </b><span>{{accidentForm['numOfVehicle']}}</span></li>
-          <li><b>How did the Accident Happen?: </b><span>{{accidentForm['description']}}</span></li>
-          <li><b>Location: </b><span>{{accidentForm['address']}}</span></li>
-          <li><b>Remarks: </b><span>{{accidentForm['remark']}}</span></li>
-          <li><b>Primary and Secondary Causes of the accident:
-            </b><span>{{accidentForm['primaryAndSecondaryCauses']}}</span></li>
-          <li><b>Drawing Of Accident Details: </b><span>{{accidentForm['drawing']}}</span></li>
-          <li><b>Information On Analysing Agency And Personnel: </b><span>{{accidentForm['analysingInfo']}}</span></li>
+          <li>
+            <b>Accident Type: </b>
+            <span>{{accidentForm['type']}}</span>
+          </li>
+          <li>
+            <b>Fatal: </b>
+            <span>{{accidentForm['fatal']?'Yes':'No'}}</span>
+          </li>
+          <li>
+            <b>No. Of Casualities: </b>
+            <span>{{accidentForm['numOfCasualities']}}</span>
+          </li>
+          <li>
+            <b>No. of Vehicle Involved: </b>
+            <span>{{accidentForm['numOfVehicle']}}</span>
+          </li>
+          <li>
+            <b>How did the Accident Happen?: </b>
+            <span>{{accidentForm['description']}}</span>
+          </li>
+          <li>
+            <b>Location: </b>
+            <span>{{accidentForm['address']}}</span>
+          </li>
+          <li>
+            <b>Remarks: </b>
+            <span>{{accidentForm['remark']}}</span>
+          </li>
+          <li>
+            <b>Primary and Secondary Causes of the accident:
+            </b>
+            <span>{{accidentForm['primaryAndSecondaryCauses']}}</span>
+          </li>
+          <li>
+            <b>Drawing Of Accident Details: </b>
+            <span>{{accidentForm['drawing']}}</span>
+          </li>
+          <li>
+            <b>Information On Analysing Agency And Personnel: </b>
+            <span>{{accidentForm['analysingInfo']}}</span>
+          </li>
         </ul>
       </ion-item>
     </ion-card-content>
     <div *ngFor="let vehicle of accidentForm['vehicles']; let i = index">
       <ion-card>
         <ion-card-header style="background-color: rgba(36, 148, 175) !important; color: white; ">
-          <h3 style="color: white; font-size: 16px !important;"> <b>Vehicle {{i+1}} Details</b> </h3>
+          <h3 style="color: white; font-size: 16px !important;">
+            <b>Vehicle {{i+1}} Details</b>
+          </h3>
         </ion-card-header>
         <ion-item style="padding-left:0 !important;">
           <ion-item>
             <ul>
-              <li><b>Vehicle Number</b> : {{vehicle.number}}</li>
-              <li><b>Vehicle Model</b> : {{vehicle.model}}</li>
+              <li>
+                <b>Vehicle Number</b> : {{vehicle.number}}</li>
+              <li>
+                <b>Vehicle Model</b> : {{vehicle.model}}</li>
             </ul>
           </ion-item>
         </ion-item>
@@ -72,22 +108,39 @@
 
             <ion-item>
               <ul>
-                <li><b>Name: </b>{{person.name}}</li>
-                <li><b>Driving Licence: </b>{{person.licence}}</li>
-                <li><b>Gender: </b><span>{{person.gender}}</span></li>
-                <li><b>Age: </b><span>{{person.age}}</span></li>
-                <li><b>Address: </b><span>{{person.address}}</span></li>
-                <li><b>Under Influence: </b><span>{{person.underInfluence?'Yes':'No'}}</span></li>
-                <li><b>Type and Extent of Human Factor: </b>{{person.typeAndExtendOfHumanFactor}}</li>
-                <li><b>Nature of any injuries: </b>{{person.natureOfAnyInjuries}}</li>
-                <li><b>Data on Socio-economic status: </b>{{person.dataOnSocioEconomicStatus}}</li>
+                <li>
+                  <b>Name: </b>{{person.name}}</li>
+                <li>
+                  <b>Driving Licence: </b>{{person.licence}}</li>
+                <li>
+                  <b>Gender: </b>
+                  <span>{{person.gender}}</span>
+                </li>
+                <li>
+                  <b>Age: </b>
+                  <span>{{person.age}}</span>
+                </li>
+                <li>
+                  <b>Address: </b>
+                  <span>{{person.address}}</span>
+                </li>
+                <li>
+                  <b>Under Influence: </b>
+                  <span>{{person.underInfluence?'Yes':'No'}}</span>
+                </li>
+                <li>
+                  <b>Type and Extent of Human Factor: </b>{{person.typeAndExtendOfHumanFactor}}</li>
+                <li>
+                  <b>Nature of any injuries: </b>{{person.natureOfAnyInjuries}}</li>
+                <li>
+                  <b>Data on Socio-economic status: </b>{{person.dataOnSocioEconomicStatus}}</li>
               </ul>
             </ion-item>
           </ion-card>
         </div>
       </ion-card>
     </div>
-    <div class="pedestrian-details" *ngIf="accidentForm['pedestrians'].length">
+    <div class="pedestrian-details" *ngIf="accidentForm['pedestrians']&&accidentForm['pedestrians'].length">
       <ion-card>
         <ion-card-header style="background-color: rgba(36, 148, 175) !important; color: white; ">
           <h3 style="color: white; font-size: 16px !important;">Pedestrian Details</h3>
@@ -108,22 +161,39 @@
             <ion-item>
               <ion-item style="padding-left: 0;">
                 <ul>
-                    <li><b>Name: </b><span>{{ped.name}}</span></li>
-                    <li><b>Gender: </b><span>{{ped.gender}}</span></li>
-                    <li><b>Age: </b><span>{{ped.age}}</span></li>
-                    <li><b>Address: </b><span>{{ped.address}}</span></li>
-                    <li><b>Under Influence: </b><span>{{ped.underInfluence?'Yes':'No'}}</span></li>
-                    <li><b>Type and Extent of Human Factor: </b>{{ped.typeAndExtendOfHumanFactor}}</li>
-                    <li><b>Nature of any injuries: </b>{{ped.natureOfAnyInjuries}}</li>
-                    <li><b>Data on Socio-economic status: </b>{{ped.dataOnSocioEconomicStatus}}</li>
-                  </ul>
-                </ion-item>
+                  <li>
+                    <b>Name: </b>
+                    <span>{{ped.name}}</span>
+                  </li>
+                  <li>
+                    <b>Gender: </b>
+                    <span>{{ped.gender}}</span>
+                  </li>
+                  <li>
+                    <b>Age: </b>
+                    <span>{{ped.age}}</span>
+                  </li>
+                  <li>
+                    <b>Address: </b>
+                    <span>{{ped.address}}</span>
+                  </li>
+                  <li>
+                    <b>Under Influence: </b>
+                    <span>{{ped.underInfluence?'Yes':'No'}}</span>
+                  </li>
+                  <li>
+                    <b>Type and Extent of Human Factor: </b>{{ped.typeAndExtendOfHumanFactor}}</li>
+                  <li>
+                    <b>Nature of any injuries: </b>{{ped.natureOfAnyInjuries}}</li>
+                  <li>
+                    <b>Data on Socio-economic status: </b>{{ped.dataOnSocioEconomicStatus}}</li>
+                </ul>
               </ion-item>
-            </ion-card>
-
-          </div>
+            </ion-item>
+          </ion-card>
+        </div>
       </ion-card>
-      
+
     </div>
   </ion-card>
 

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, Navbar } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera } from '@ionic-native/camera';
@@ -19,7 +19,8 @@ import { AddPedestrianPage } from '../add-pedestrian/add-pedestrian';
   templateUrl: 'submit-accident.html',
 })
 export class SubmitAccidentPage {
-
+  accidentGlobalObject: any;
+  @ViewChild(Navbar) navBar: Navbar;
   accidentForm: FormGroup;
 
   constructor(public navParams: NavParams,
@@ -31,13 +32,20 @@ export class SubmitAccidentPage {
     public toastSev: ToastProvider,
     public alertCtrl: AlertController,
     private navCtrl: NavController) {
+    this.accidentGlobalObject = this.navParams.get('accident');
     this.accidentForm = <FormGroup>this.navParams.get('accident');
     console.log(this.accidentForm);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SubmitAccidentPage');
-    // this.accidentForm = <FormGroup>this.navParams.get('accident');
+    this.navBar.backButtonClick = (e: UIEvent) => {
+      // todo something
+      if (this.accidentGlobalObject.hasOwnProperty('vehicleCounter')) {
+        this.accidentGlobalObject.vehicleCounter--;
+      }
+      this.navCtrl.pop();
+    }
   }
 
   addPedestrian() {
@@ -90,7 +98,7 @@ export class SubmitAccidentPage {
     alert.present();
   }
 
-  goToHome(){
+  goToHome() {
     this.navCtrl.popToRoot();
   }
 

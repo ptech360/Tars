@@ -66,10 +66,10 @@ export class ReportAccidentPage implements OnInit {
     console.log(this.accidentGlobalObject);
   }
 
-  patchAccident(){
+  patchAccident() {
     const accident = this.navParams.get('accident');
-    Object.keys(accident).forEach(key => {      
-      if(this.accidentForm.controls[key]){
+    Object.keys(accident).forEach(key => {
+      if (this.accidentForm.controls[key]) {
         this.accidentForm.controls[key].patchValue(accident[key]);
       }
     })
@@ -88,8 +88,9 @@ export class ReportAccidentPage implements OnInit {
       // todo something
       this.navCtrl.pop();
     }
-    if(this.navParams.get('accident')){
+    if (this.navParams.get('accident')) {
       this.accidentGlobalObject = this.navParams.get('accident');
+      this.accidentGlobalObject.vehicleCounter = 0;
       this.patchAccident();
     }
     this.accSev.getAccidentTypes().subscribe(response => {
@@ -113,14 +114,14 @@ export class ReportAccidentPage implements OnInit {
       id: [],
       fatal: [false, [Validators.required]],
       numOfCasualities: [1, [Validators.required]],
-      description: ['Lorem Ipsum is simply dummy text of the printing and typesetting industry', [Validators.required]],
-      numOfVehicle: [1, [Validators.required]],
-      remark: ['Contrary to popular belief, Lorem Ipsum is not simply random text', [Validators.required]],
+      description: ['', [Validators.required]],
+      numOfVehicle: [0, [Validators.required]],
+      remark: ['', [Validators.required]],
       medias: this.fb.array([]),
       type: ['', [Validators.required]],
-      primaryAndSecondaryCauses: ['fact that a reader will be distracted by the readable content of a page when looking at its layou'],
-      drawing: ['fact that a reader will be distracted by the readable content of a page'],
-      analysingInfo: ['It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout', [Validators.required]],
+      primaryAndSecondaryCauses: [''],
+      drawing: [''],
+      analysingInfo: ['', [Validators.required]],
       longitude: [, [Validators.required]],
       latitude: [, [Validators.required]],
       address: [, [Validators.required]]
@@ -248,7 +249,7 @@ export class ReportAccidentPage implements OnInit {
     return formData;
   }
 
-  goToHome(){
+  goToHome() {
     this.navCtrl.popToRoot();
   }
 

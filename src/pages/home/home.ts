@@ -1,17 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, Events, Alert, AlertController } from 'ionic-angular';
 import { ReportAccidentPage } from '../report-accident/report-accident';
 import { ViewAccidentsPage } from '../view-accidents/view-accidents';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AccidentProvider } from '../../providers/accident/accident';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor(public navCtrl: NavController, public events: Events, public alertCtrl: AlertController, public auth: AuthProvider) {
+  constructor(public navCtrl: NavController,
+    public events: Events,
+    public alertCtrl: AlertController,
+    public auth: AuthProvider,
+    public accSev: AccidentProvider) {
 
+  }
+
+  ngOnInit() {
+    this.accSev.getAccidentTypes().subscribe(response => {
+
+    });
   }
 
   reportAccident() {

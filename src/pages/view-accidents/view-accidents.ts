@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { AccidentPage } from '../accident/accident';
 import { AccidentDetailsPage } from '../accident-details/accident-details';
@@ -20,7 +20,10 @@ import { ToastProvider } from '../../providers/toast/toast';
 export class ViewAccidentsPage {
   accidents = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public accSev: AccidentProvider,
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public accSev: AccidentProvider,
+    public alertCtrl: AlertController,
     public toastSev: ToastProvider,
   ) {
     this.toastSev.showLoader();
@@ -30,7 +33,7 @@ export class ViewAccidentsPage {
       this.toastSev.hideLoader();
     }, (error => {
       this.toastSev.hideLoader();
-
+      this.showError(error.message)
     }));
   }
 
@@ -49,8 +52,17 @@ export class ViewAccidentsPage {
     this.navCtrl.push(ReportAccidentPage, { 'accident': this.accidents[index] });
   }
 
-  goToHome(){
+  goToHome() {
     this.navCtrl.popToRoot();
+  }
+
+  showError = (message) => {
+    const alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    })
+    alert.present();
   }
 
 

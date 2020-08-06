@@ -4,20 +4,24 @@ page-view-accidents {
 
         .view-header{
             
-            margin-left: -10px;
-            margin-right: -10px;
-            margin-top: -10px;
+            margin-left: -5px;
+            margin-right: -5px;
+            margin-top: -5px;
             padding: 10px;
             background: rgba(0,0,0,0.03);
             box-shadow: 0 0 3px #ddd;
 
             ion-col{
+                padding-top: 0;
+                padding-bottom: 0;
                 b{
                     color: #333;
                 }
-                small{
-                    color: #2494af;
-                    // vertical-align: top;
+                p{
+                    margin-bottom: 0;
+                    small{
+                        color: #2494af;
+                    }
                 }
             }
 
@@ -28,31 +32,34 @@ page-view-accidents {
                     color: #2494af;
                     border: solid 1px;
                     height: 20px;
-                    margin: 0;
+                    margin: 8px 0 0 0;
                 }
             }
         }
 
         .view-contents{
-            padding: 15px 0;
+            padding: 10px 5px;
             ion-col{
                 color: #333;
                 line-height: 22px;
             }
         }
         .view-footer{
-            margin-left: -10px;
-            margin-right: -10px;
-            margin-bottom: -10px;
-            padding: 10px;
+            margin-left: -5px;
+            margin-right: -5px;
+            margin-bottom: -5px;
+            padding: 8px 10px;
             background: rgba(0,0,0,0.01);
             box-shadow: 0 0 2px #ddd;
             ion-col{
+                padding-top: 0;
+                padding-bottom: 0;
                 b{
                     color: #333;
 
                 }
                 p{
+                    margin-bottom: 0;
                     .submitted{
                         color: #32db64;
 

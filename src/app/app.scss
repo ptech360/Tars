@@ -50,6 +50,8 @@ ion-alert{
       background: rgba(0,0,0,0.05);
       .alert-title{
         font-size: 18px;
+        margin-top: 0;
+        color: #333;
       }
     }
     .alert-radio-group{
@@ -62,6 +64,11 @@ ion-alert{
           padding: 5px 10px 5px 20px !important;
         }
       }
+    }
+
+    .alert-message{
+      padding-top: 20px;
+      font-size: 15px;
     }
   }
 }

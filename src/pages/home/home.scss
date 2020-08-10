@@ -1,4 +1,14 @@
 page-home {
+  img.accident-logo {
+    max-width: 100px;
+    margin: 0 auto 10px;
+}
+ion-card-header{
+  background-color: white !important;
+}
+.btns-main{
+  background-color: #fafafa;
+}
   .home-background{
     background-color: #fafafa !important;
   }
@@ -30,7 +40,7 @@ page-home {
   .home-page{
     max-width: 550px;
     margin: auto;
-    margin-top: 120px;
+    margin-top: 50px;
     ion-card{
       box-shadow: 0 0 3px #ddd !important;
       background-color: white !important;

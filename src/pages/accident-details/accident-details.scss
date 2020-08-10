@@ -56,3 +56,42 @@ page-accident-details {
         }
     }
 }
+
+.media-files-main{
+    display: inline-block;
+    width: 100%;
+
+    ion-label.label {
+        .media-list {
+            padding: 5px;
+            border: solid 1px #ddd;
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 15px;
+
+            &:nth-child(2){
+                margin-top: 10px !important;
+            }
+
+            a{
+                font-size: 14px;
+                padding: 5px 0;
+                display: inline-block;
+                color: #333;
+
+            }
+            a.download-btn {
+                background: #2494af;
+                color: white;
+                padding: 5px 10px !important;
+                display: inline-block;
+                text-decoration: none;
+                font-size: 14px !important;
+                margin: 5px 0;
+                border-radius: 2px;
+            }
+        }
+    }
+
+}

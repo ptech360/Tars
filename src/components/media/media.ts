@@ -8,13 +8,18 @@ import {
 } from '@ionic-native/media-capture';
 import { File, FileEntry } from '@ionic-native/File';
 import { Media, MediaObject } from '@ionic-native/media';
-import { StreamingMedia } from '@ionic-native/streaming-media';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Base64 } from '@ionic-native/base64';
 import { Platform, ActionSheetController, AlertController } from 'ionic-angular';
 import { FileProvider } from '../../providers/file/file';
-import { FormArray, FormGroup, FormControl } from '@angular/forms';
+import { FormArray, FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { AccidentProvider } from '../../providers/accident/accident';
+import { FileTransferObject, FileTransfer } from '@ionic-native/file-transfer';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ToastProvider } from '../../providers/toast/toast';
 const MEDIA_FOLDER_NAME = 'my_media';
+
 /**
  * Generated class for the MediaComponent component.
  *
@@ -26,15 +31,33 @@ const MEDIA_FOLDER_NAME = 'my_media';
   templateUrl: 'media.html'
 })
 export class MediaComponent implements OnInit, AfterViewInit {
+  mediaFiles: any[];
+  bucketUrl: string;
   directory: string;
+  @Input() viewOnly: boolean;
   @Input() formGroup: FormGroup;
   @Input() mediaFor: string;
+  @Input() set medias(medias: any[]) {
+    this.mediaFiles = medias;
+    if (medias && medias.length && this.formGroup) {
+      const accidentPics = <FormArray>this.formGroup.controls['medias'];
+      medias.forEach(media => {
+        accidentPics.push(new FormBuilder().group({
+          id: media.id
+        }));
+      });
+    }
+  }
   files = [];
 
+
+  accessToken = "&access_token=" + localStorage.getItem('access_token');
   constructor(
+    private sanatizer: DomSanitizer,
     private imagePicker: ImagePicker,
     private mediaCapture: MediaCapture,
     private file: File,
+    private transfer: FileTransfer,
     private media: Media,
     private streamingMedia: StreamingMedia,
     private photoViewer: PhotoViewer,
@@ -42,12 +65,15 @@ export class MediaComponent implements OnInit, AfterViewInit {
     private plt: Platform,
     private fileService: FileProvider,
     public alertCtrl: AlertController,
-    private base64: Base64
+    private base64: Base64,
+    private accidentProvider: AccidentProvider,
+    public toastSev: ToastProvider
   ) {
     console.log('Hello MediaComponent Component');
   }
 
   ngOnInit() {
+    this.bucketUrl = this.accidentProvider.getBaseUrl() + '/api/media/download?name=';
   }
 
   ngAfterViewInit() {
@@ -120,6 +146,13 @@ export class MediaComponent implements OnInit, AfterViewInit {
       results => {
         for (var i = 0; i < results.length; i++) {
           this.copyFileToLocalDir(results[i]);
+
+          this.file.resolveLocalFilesystemUrl(results[i])
+            .then(entry => {
+              (<FileEntry>entry).file(file => {
+                this.readFile({ fullPath: results[i] });
+              })
+            })
         }
       }
     );
@@ -226,6 +259,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
       const path = f.nativeURL.replace(/^file:\/\//, '');
       const audioFile: MediaObject = this.media.create(path);
       audioFile.play();
+
     } else if (f.name.indexOf('.MOV') > -1 || f.name.indexOf('.mp4') > -1) {
       // E.g: Use the Streaming Media plugin to play a video
       this.streamingMedia.playVideo(f.nativeURL);
@@ -235,6 +269,28 @@ export class MediaComponent implements OnInit, AfterViewInit {
     }
   }
 
+  openMediaFile(media) {
+    if (media.media) {
+      this.openFile(media.media);
+    } else {
+      this.downloadAndPlay(this.bucketUrl + media.mediaName, media)
+    }
+  }
+
+  downloadAndPlay(url, media) {
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    this.toastSev.showLoader();
+    fileTransfer.download(url, this.file.dataDirectory + '/' + this.mediaFor + '/' + media.mediaOriginalName).then((entry) => {
+      this.toastSev.hideLoader();
+      media.media = entry;
+      console.log('download complete: ', entry);
+      this.openFile(entry)
+    }, (error) => {
+      console.log(error);
+      // handle error
+    });
+  }
+
   deleteFile(f: FileEntry, index: number) {
     const path = f.nativeURL.substr(0, f.nativeURL.lastIndexOf('/') + 1);
     this.file.removeFile(path, f.name).then(() => {
@@ -242,6 +298,12 @@ export class MediaComponent implements OnInit, AfterViewInit {
       medias.removeAt(index);
       this.loadFiles();
     }, err => this.showError(err.message))
+  }
+
+  deleteMediaFile(media, index) {
+    this.mediaFiles.splice(this.mediaFiles.findIndex(m => m.id == media.id), 1);
+    const medias = <FormArray>this.formGroup.controls['medias'];
+    medias.removeAt(index);
   }
 
   loadFiles() {

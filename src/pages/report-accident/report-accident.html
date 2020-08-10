@@ -101,11 +101,11 @@
       </ion-card>
     </div>
     <div>
-    <ion-card>
-      <ion-list>
-        <media [mediaFor]="'accident'" [formGroup]="accidentForm"></media>
-      </ion-list>
-    </ion-card>
+      <ion-card>
+        <ion-list>
+          <media [medias]="accidentGlobalObject.medias" [mediaFor]="'accident'" [formGroup]="accidentForm"></media>
+        </ion-list>
+      </ion-card>
     </div>
     <div padding>
       <button type="submit" ion-button block [disabled]="accidentForm.invalid" (click)="saveAccidentReport()"> Save</button>

@@ -1,15 +1,15 @@
 <ion-header>
     <ion-toolbar color="primary">
-      <ion-navbar>
-        <ion-title>Add Involved Vehicle</ion-title>
-      </ion-navbar>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="goToHome()">
-          <ion-icon name="home"></ion-icon>
-        </button>
-      </ion-buttons>
+        <ion-navbar>
+            <ion-title>Add Involved Vehicle</ion-title>
+        </ion-navbar>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goToHome()">
+                <ion-icon name="home"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
 
 <!-- <ion-title>Vehicle 1</ion-title> -->
 
@@ -36,7 +36,7 @@
             </ion-item>
             <div class="media-list-box" margin-top padding>
                 <ion-list>
-                    <media [mediaFor]="'vehicle'" [formGroup]="vehicleFormGroup"></media>
+                    <media [medias]="accidentGlobalObject?.vehicles[accidentGlobalObject.vehicleCounter]?.medias" [mediaFor]="'vehicle'" [formGroup]="vehicleFormGroup"></media>
                 </ion-list>
             </div>
 

@@ -8,7 +8,7 @@ import { AddPedestrianPage } from '../add-pedestrian/add-pedestrian';
 import { SubmitAccidentPage } from '../submit-accident/submit-accident';
 import { AddDriverPage } from '../add-driver/add-driver';
 import { AddPersonPage } from '../add-person/add-person';
-
+declare let VanillaFile: any;
 @Component({
     selector: 'page-add-vehicle',
     templateUrl: 'add-vehicle.html',
@@ -55,12 +55,12 @@ export class AddVehiclePage implements OnInit {
                     persons.push(this.fb.group(person))
                 });
             }
-            if (currentVehicle.medias && currentVehicle.medias.length) {
-                const medias = this.vehicleFormGroup.controls['medias']
-                currentVehicle.medias.forEach(media => {
-                    medias.patchValue(this.fb.group(media))
-                });
-            }
+            // if (currentVehicle.medias && currentVehicle.medias.length) {
+            //     const medias = this.vehicleFormGroup.controls['medias']
+            //     currentVehicle.medias.forEach(media => {
+            //         medias.patchValue(this.fb.group(media))
+            //     });
+            // }
         }
     }
 
@@ -190,17 +190,24 @@ export class AddVehiclePage implements OnInit {
             if (!model.hasOwnProperty(propertyName) || model[propertyName] == undefined) continue;
             let formKey = namespace ? `${namespace}.${propertyName}` : propertyName;
             if (model[propertyName] instanceof Array) {
-                model[propertyName].forEach((element, index) => {
-                    if (typeof element != 'object') {
-                        formData.append(`${formKey}[${index}]`, element);
-                    } else if (element instanceof File) {
-                        const file: File = element;
-                        formData.append(`${formKey}[${index}]`, file);
-                    } else {
-                        const tempFormKey = `${formKey}[${index}]`;
-                        this.convertModelToFormData(element, formData, tempFormKey);
-                    }
-                });
+                if (propertyName == 'medias') {
+                    model[propertyName].forEach((element, index) => {
+                        if (element instanceof VanillaFile) {
+                            formData.append(propertyName + '[' + index + '].media', element);
+                        } else {
+                            formData.append(propertyName + '[' + index + '].id', element.id);
+                        }
+                    });
+                } else {
+                    model[propertyName].forEach((element, index) => {
+                        if (typeof element != 'object') {
+                            formData.append(`${formKey}[${index}]`, element);
+                        } else {
+                            const tempFormKey = `${formKey}[${index}]`;
+                            this.convertModelToFormData(element, formData, tempFormKey);
+                        }
+                    });
+                }
             } else if (typeof model[propertyName] === 'object' && !(model[propertyName] instanceof File)) {
                 this.convertModelToFormData(model[propertyName], formData, formKey);
             }
@@ -211,7 +218,7 @@ export class AddVehiclePage implements OnInit {
         return formData;
     }
 
-    goToHome(){
+    goToHome() {
         this.navCtrl.popToRoot();
     }
 

@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@ang
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastProvider } from '../../providers/toast/toast';
-
+declare let VanillaFile: any;
 /**
  * Generated class for the AddPedestrianPage page.
  *
@@ -123,17 +123,24 @@ export class AddPedestrianPage {
       if (!model.hasOwnProperty(propertyName) || model[propertyName] == undefined) continue;
       let formKey = namespace ? `${namespace}.${propertyName}` : propertyName;
       if (model[propertyName] instanceof Array) {
-        model[propertyName].forEach((element, index) => {
-          if (typeof element != 'object') {
-            formData.append(`${formKey}[${index}]`, element);
-          } else if (element instanceof File) {
-            const file: File = element;
-            formData.append(`${formKey}[${index}]`, file);
-          } else {
-            const tempFormKey = `${formKey}[${index}]`;
-            this.convertModelToFormData(element, formData, tempFormKey);
-          }
-        });
+        if (propertyName == 'medias') {
+          model[propertyName].forEach((element, index) => {
+            if (element instanceof VanillaFile) {
+              formData.append(propertyName + '[' + index + '].media', element);
+            } else {
+              formData.append(propertyName + '[' + index + '].id', element.id);
+            }
+          });
+        } else {
+          model[propertyName].forEach((element, index) => {
+            if (typeof element != 'object') {
+              formData.append(`${formKey}[${index}]`, element);
+            } else {
+              const tempFormKey = `${formKey}[${index}]`;
+              this.convertModelToFormData(element, formData, tempFormKey);
+            }
+          });
+        }
       } else if (typeof model[propertyName] === 'object' && !(model[propertyName] instanceof File)) {
         this.convertModelToFormData(model[propertyName], formData, formKey);
       }

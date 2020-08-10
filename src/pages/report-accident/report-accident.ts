@@ -8,6 +8,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient } from '@angular/common/http';
 import { InvolvedVehiclePage } from '../involved-vehicle/involved-vehicle';
 import { AddVehiclePage } from '../add-vehicle/add-vehicle';
+declare let VanillaFile: any;
+
 /**
  * Generated class for the ReportAccidentPage page.
  *
@@ -22,16 +24,6 @@ import { AddVehiclePage } from '../add-vehicle/add-vehicle';
 export class ReportAccidentPage implements OnInit {
   accidentGlobalObject: any = {};
   @ViewChild(Navbar) navBar: Navbar;
-  cameraOptions: CameraOptions = {
-    sourceType: this.camera.PictureSourceType.CAMERA,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    correctOrientation: true,
-    targetWidth: 600,
-    targetHeight: 600,
-  };
-
   accidentForm: FormGroup;
   accidentTypes = [];
   // accidentInitiates = [];
@@ -59,6 +51,7 @@ export class ReportAccidentPage implements OnInit {
 
   ionViewWillEnter() {
     this.accidentGlobalObject.vehicleCounter = 0;
+
     console.log(this.accidentGlobalObject);
   }
 
@@ -177,7 +170,11 @@ export class ReportAccidentPage implements OnInit {
       if (key == 'medias') {
         if (typeof (this.accidentForm.value[key]) == 'object') {
           this.accidentForm.value.medias.forEach((element, index) => {
-            formData.append(key + '[' + index + '].media', element);
+            if (element instanceof VanillaFile) {
+              formData.append(key + '[' + index + '].media', element);
+            } else {
+              formData.append(key + '[' + index + '].id', element.id);
+            }
           });
         }
       }

@@ -79,6 +79,9 @@
           </li>
         </ul>
       </ion-item>
+      <ion-list>
+        <media [medias]="accidentForm['medias']" [mediaFor]="'accident'" [viewOnly]="true"></media>
+      </ion-list>
     </ion-card-content>
     <div *ngFor="let vehicle of accidentForm['vehicles']; let i = index">
       <ion-card>
@@ -97,6 +100,9 @@
             </ul>
           </ion-item>
         </ion-item>
+        <ion-list>
+          <media [medias]="vehicle['medias']" [mediaFor]="'vehicle'" [viewOnly]="true"></media>
+        </ion-list>
         <div class="person-of-vehicle" *ngFor="let person of vehicle.persons; let i = index">
           <ion-card>
             <ion-card-header *ngIf="person.type=='Driver'">
@@ -189,6 +195,9 @@
                     <b>Data on Socio-economic status: </b>{{ped.dataOnSocioEconomicStatus}}</li>
                 </ul>
               </ion-item>
+              <ion-list>
+                <media [medias]="ped['medias']" [mediaFor]="'person'" [viewOnly]="true"></media>
+              </ion-list>
             </ion-item>
           </ion-card>
         </div>

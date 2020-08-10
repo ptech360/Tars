@@ -1,8 +1,20 @@
 <!-- Generated template for the MediaComponent component -->
 
 <div class="media-list">
-  <ng-container *ngFor="let f of files; let i = index;">
-    <ion-item>
+  <ng-container *ngIf="mediaFiles&&mediaFiles.length">
+    <ion-item *ngFor="let f of mediaFiles; let i = index;">
+      <div class="file" (click)="openMediaFile(f)">
+        <ion-icon name="image" slot="start" *ngIf="f.mediaOriginalName.endsWith('jpg')"></ion-icon>
+        <ion-icon name="videocam" slot="start" *ngIf="f.mediaOriginalName.endsWith('MOV') || f.mediaOriginalName.endsWith('mp4')"></ion-icon>
+        <ion-icon name="mic" slot="start" *ngIf="f.mediaOriginalName.endsWith('wav')"></ion-icon>
+        <strong>{{ f.mediaOriginalName }}</strong>
+        <p>{{ f.mediaName }}</p>
+      </div>
+      <ion-icon class="delete" name="trash" slot="icon-only" slot="end" (click)="deleteMediaFile(f, i)" color="danger" *ngIf="!viewOnly"></ion-icon>
+    </ion-item>
+  </ng-container>
+  <ng-container *ngIf="!viewOnly">
+    <ion-item *ngFor="let f of files; let i = index;">
       <div class="file" (click)="openFile(f)">
         <ion-icon name="image" slot="start" *ngIf="f.name.endsWith('jpg')"></ion-icon>
         <ion-icon name="videocam" slot="start" *ngIf="f.name.endsWith('MOV') || f.name.endsWith('mp4')"></ion-icon>
@@ -15,7 +27,7 @@
   </ng-container>
 </div>
 
-<ion-item class="capture">
+<ion-item class="capture" *ngIf="!viewOnly">
   <h2 color="primary">Capture Photos/Video</h2>
   <button style="height: 30px !important;" class="select-media-bnt" ion-button fill="clear" expand="full" color="light" (click)="selectMedia()">
     <ion-icon slot="start" name="document"></ion-icon>

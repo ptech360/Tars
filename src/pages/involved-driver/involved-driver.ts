@@ -50,39 +50,8 @@ export class InvolvedDriverPage {
       natureOfAnyInjuries: [''],
       dataOnSocioEconomicStatus: [''],
       personPics: this.fb.array([]),
-      personType:['driver']
+      personType: ['driver']
     });
-  }
-
-  private captureDriver(driverForm: FormGroup) {
-    this.camera.getPicture(this.cameraOptions).then((onSuccess) => {
-      const driverImages = <FormArray>driverForm.controls['personPics'];
-      const fileName: string = 'person-img' + new Date().toISOString().substring(0, 10) + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.jpeg';
-      let file = this.fb.group({
-        name: fileName,
-        url: 'data:image/jpeg;base64,' + onSuccess
-      });
-      driverImages.push(new FormControl(this.dataURLtoFile('data:image/jpeg;base64,' +onSuccess, fileName)));
-      this.driverImageUrls.push(file);
-    }, (onError) => {
-      alert(onError);
-    })
-  }
-  
-
-  dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, { type: mime });
-  }
-
-  delDriverImage(driverForm: FormGroup, index: number) {
-    const driverImages = <FormArray>driverForm.controls['personPics'];
-    driverImages.removeAt(index);
-    this.driverImageUrls.splice(index,1);
   }
 
   saveDriver() {

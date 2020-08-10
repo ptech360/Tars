@@ -33,21 +33,9 @@
             </ion-select>
           </ion-item>
           <ion-item class="border">
-            <ion-label>No. of Casualities
-              <code>*</code>
-            </ion-label>
-            <ion-input type="number" formControlName="numOfCasualities" text-right></ion-input>
-          </ion-item>
-          <ion-item class="border accident-happen">
-            <ion-label stacked>How did the Accident Happen?
+            <ion-label stacked>Address
               <code>*</code> </ion-label>
-            <ion-textarea formControlName="description"></ion-textarea>
-          </ion-item>
-          <ion-item class="border">
-            <ion-label>Fatal
-              <code>*</code>
-            </ion-label>
-            <ion-toggle formControlName="fatal"></ion-toggle>
+            <ion-textarea formControlName="address"></ion-textarea>
           </ion-item>
           <ion-item class="border">
             <ion-label>No. of Vehicle Involved
@@ -60,42 +48,44 @@
               <ion-option value="4">4</ion-option>
             </ion-select>
           </ion-item>
+          <ion-item class="border">
+            <ion-label>No. of Casualities
+              <code>*</code>
+            </ion-label>
+            <ion-input type="number" formControlName="numOfCasualities" text-right></ion-input>
+          </ion-item>
+          <ion-item class="border accident-happen">
+            <ion-label stacked>How did the Accident Happen?
+              <code>*</code> </ion-label>
+            <ion-textarea formControlName="description"></ion-textarea>
+          </ion-item>
+          <!-- <ion-item class="border">
+            <ion-label>Fatal
+              <code>*</code>
+            </ion-label>
+            <ion-toggle formControlName="fatal"></ion-toggle>
+          </ion-item> -->
         </ion-list>
       </ion-card>
       <ion-card class="remarks-card">
         <ion-list>
+          <ion-item class="border">
+            <ion-label stacked>Information On Analysing Agency And Personnel
+              <code>*</code> </ion-label>
+            <ion-textarea formControlName="analysingInfo"></ion-textarea>
+          </ion-item>
+          <ion-item class="border">
+            <ion-label stacked>Primary and Secondary Causes of the accident</ion-label>
+            <ion-textarea formControlName="primaryAndSecondaryCauses"></ion-textarea>
+          </ion-item>
+          <ion-item class="border">
+            <ion-label stacked>Drawing Of Accident Details</ion-label>
+            <ion-textarea formControlName="drawing"></ion-textarea>
+          </ion-item>
           <ion-item class="border">
             <ion-label stacked>Remarks
               <code>*</code> </ion-label>
             <ion-textarea formControlName="remark"></ion-textarea>
-          </ion-item>
-
-          <ion-item class="border">
-            <ion-label stacked>Information On Analysing Agency And Personnel
-              <code>*</code> </ion-label>
-            <ion-input formControlName="analysingInfo"></ion-input>
-          </ion-item>
-
-          <ion-item class="border">
-            <ion-label stacked>Primary and Secondary Causes of the accident</ion-label>
-            <ion-input formControlName="primaryAndSecondaryCauses"></ion-input>
-          </ion-item>
-
-          <ion-item class="border">
-            <ion-label stacked>Drawing Of Accident Details</ion-label>
-            <ion-input formControlName="drawing"></ion-input>
-          </ion-item>
-
-
-        </ion-list>
-      </ion-card>
-
-      <ion-card class="remarks-card">
-        <ion-list>
-          <ion-item class="border">
-            <ion-label stacked>Address
-              <code>*</code> </ion-label>
-            <ion-input formControlName="address"></ion-input>
           </ion-item>
         </ion-list>
       </ion-card>

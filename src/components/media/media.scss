@@ -46,7 +46,8 @@
         &.item {
             .file{
                 display: inline-block;
-                width: auto;
+                width: calc(100% - 40px);
+                
 
                 strong{
                     color: #333;

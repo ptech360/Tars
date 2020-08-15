@@ -27,8 +27,10 @@
       <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Driving Licence<code>*</code></ion-label>
-      <ion-input type="text" formControlName="licence" ></ion-input>
+      <ion-label>Driving Licence
+        <code>*</code>
+      </ion-label>
+      <ion-input type="text" formControlName="licence"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Age
@@ -69,23 +71,9 @@
       <ion-label stacked>Data on Socio-economic status</ion-label>
       <ion-input formControlName="dataOnSocioEconomicStatus"></ion-input>
     </ion-item>
-    <div padding>
-      <!-- <ion-card > -->
-      <ion-card *ngFor="let img of driverImageUrls;let i = index;">
-
-        <img [src]="img.value.url" />
-        <ion-row>
-          <ion-col text-right>
-            <!-- <button ion-button color="danger" clear icon-only item-end (click)="delDriverImage(driverForm,i)">
-              <ion-icon name='trash' is-active="false"></ion-icon>
-            </button> -->
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </div>
     <div class="media-list-box" padding-left padding-right>
       <ion-list style="margin-bottom: 0;">
-        <media [mediaFor]="'driver'" [formGroup]="driverForm"></media>
+        <media [medias]="ediPersonObject?ediPersonObject.medias:null" [mediaFor]="'driver'" [formGroup]="driverForm"></media>
       </ion-list>
     </div>
     <div padding>

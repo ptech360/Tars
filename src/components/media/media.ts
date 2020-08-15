@@ -18,7 +18,10 @@ import { AccidentProvider } from '../../providers/accident/accident';
 import { FileTransferObject, FileTransfer } from '@ionic-native/file-transfer';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastProvider } from '../../providers/toast/toast';
+import { CameraOptions, Camera } from '@ionic-native/camera';
+import { FilePath } from '@ionic-native/file-path';
 const MEDIA_FOLDER_NAME = 'my_media';
+declare let VanillaFile: any;
 
 /**
  * Generated class for the MediaComponent component.
@@ -51,6 +54,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
   files = [];
 
 
+
   accessToken = "&access_token=" + localStorage.getItem('access_token');
   constructor(
     private sanatizer: DomSanitizer,
@@ -67,7 +71,9 @@ export class MediaComponent implements OnInit, AfterViewInit {
     public alertCtrl: AlertController,
     private base64: Base64,
     private accidentProvider: AccidentProvider,
-    public toastSev: ToastProvider
+    public toastSev: ToastProvider,
+    public camera: Camera,
+    public filePath: FilePath
   ) {
     console.log('Hello MediaComponent Component');
   }
@@ -127,9 +133,15 @@ export class MediaComponent implements OnInit, AfterViewInit {
         //   }
         // },
         {
-          text: 'Load multiple',
+          text: 'Pick images from Gallary',
           handler: () => {
             this.pickImages();
+          }
+        },
+        {
+          text: 'Pick video from Gallary',
+          handler: () => {
+            this.pickVideos();
           }
         },
         {
@@ -144,24 +156,60 @@ export class MediaComponent implements OnInit, AfterViewInit {
   pickImages() {
     this.imagePicker.getPictures({}).then(
       results => {
+        console.log(results);
+
+        const accidentPics = <FormArray>this.formGroup.controls['medias'];
         for (var i = 0; i < results.length; i++) {
           this.copyFileToLocalDir(results[i]);
-
           this.file.resolveLocalFilesystemUrl(results[i])
             .then(entry => {
               (<FileEntry>entry).file(file => {
-                this.readFile({ fullPath: results[i] });
+                var reader = new FileReader();
+                var that = this;
+                reader.onloadend = function (evt: any) {
+                  accidentPics.push(new FormControl(that.dataURLtoFile(evt.target.result, file.name, file.type)));
+                };
+                reader.readAsDataURL(file);
               })
             })
         }
       }
     );
-
     // If you get problems on Android, try to ask for Permission first
     // this.imagePicker.requestReadPermission().then(result => {
     //   console.log('requestReadPermission: ', result);
     //   this.selectMultiple();
     // });
+  }
+
+  pickVideos() {
+    const cameraOptions: CameraOptions = {
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.NATIVE_URI,
+      mediaType: this.camera.MediaType.VIDEO
+    };
+    this.camera.getPicture(cameraOptions).then(
+      results => {
+        const accidentPics = <FormArray>this.formGroup.controls['medias'];
+        this.copyFileToLocalDir('file:///' + results);
+        this.file.resolveLocalFilesystemUrl('file:///' + results)
+          .then(entry => {
+            (<FileEntry>entry).file(file => {
+              const reader = new FileReader();
+              this.toastSev.showLoader('Processing video...')
+              const that = this;
+              reader.onloadend = function (evt: any) {
+                that.toastSev.hideLoader();
+                accidentPics.push(new FormControl(that.dataURLtoFile(evt.target.result, file.name, file.type)));
+              };
+              reader.readAsDataURL(file);
+
+            })
+          })
+
+
+      }
+    )
   }
 
   captureImage() {

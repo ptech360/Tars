@@ -142,6 +142,12 @@
                   <b>Data on Socio-economic status: </b>{{person.dataOnSocioEconomicStatus}}</li>
               </ul>
             </ion-item>
+            <ion-list *ngIf="person.type=='Driver'">
+              <media [medias]="person['medias']" [mediaFor]="'driver'" [viewOnly]="true"></media>
+            </ion-list>
+            <ion-list *ngIf="person.type=='Passenger'">
+              <media [medias]="person['medias']" [mediaFor]="'passenger'" [viewOnly]="true"></media>
+            </ion-list>
           </ion-card>
         </div>
       </ion-card>
@@ -196,7 +202,7 @@
                 </ul>
               </ion-item>
               <ion-list>
-                <media [medias]="ped['medias']" [mediaFor]="'person'" [viewOnly]="true"></media>
+                <media [medias]="ped['medias']" [mediaFor]="'pedestrain'" [viewOnly]="true"></media>
               </ion-list>
             </ion-item>
           </ion-card>

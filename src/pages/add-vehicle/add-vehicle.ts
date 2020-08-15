@@ -51,8 +51,8 @@ export class AddVehiclePage implements OnInit {
             this.vehicleFormGroup.controls.model.patchValue(currentVehicle.model);
             if (currentVehicle.persons && currentVehicle.persons.length) {
                 const persons = <FormArray>this.vehicleFormGroup.controls['persons']
-                currentVehicle.persons.forEach(person => {
-                    persons.push(this.fb.group(person))
+                currentVehicle.persons.forEach((person, index) => {
+                    persons.push(this.fb.group(Object.assign({}, person, { medias: this.fb.array(person.medias || []) })))
                 });
             }
             // if (currentVehicle.medias && currentVehicle.medias.length) {
@@ -193,9 +193,9 @@ export class AddVehiclePage implements OnInit {
                 if (propertyName == 'medias') {
                     model[propertyName].forEach((element, index) => {
                         if (element instanceof VanillaFile) {
-                            formData.append(propertyName + '[' + index + '].media', element);
+                            formData.append(formKey + '[' + index + '].media', element);
                         } else {
-                            formData.append(propertyName + '[' + index + '].id', element.id);
+                            formData.append(formKey + '[' + index + '].id', element.id);
                         }
                     });
                 } else {

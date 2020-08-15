@@ -15,13 +15,13 @@ import { ToastProvider } from '../../providers/toast/toast';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage implements OnInit{
+export class LoginPage implements OnInit {
 
-  loginForm:FormGroup;
+  loginForm: FormGroup;
   logging: boolean;
   errorMsg: string;
 
-  constructor(public events: Events,public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public auth: AuthProvider, public toastProvider: ToastProvider) {
+  constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams, public fb: FormBuilder, public auth: AuthProvider, public toastProvider: ToastProvider) {
   }
 
   ionViewDidLoad() {
@@ -37,7 +37,7 @@ export class LoginPage implements OnInit{
 
   createForm() {
     this.loginForm = this.fb.group({
-      username: ['pankaj', Validators.required],
+      username: ['alkag', Validators.required],
       password: ['12345', Validators.required]
     });
   }
@@ -53,20 +53,20 @@ export class LoginPage implements OnInit{
   login() {
     this.logging = true;
     this.auth.login(this.loginForm.value).toPromise()
-    .then((res: any) => {
-      this.auth.saveToken(res.access_token)
-      this.navigate();
-    })
-    .catch((err: any) => {
-      if (err.status == 400) {
-        this.showError('Username or Password is Invalid');
-      } else {
-        this.showError(err.message);
-      }
-    })
-    .then(() => {
-      this.logging = false;
-    });
+      .then((res: any) => {
+        this.auth.saveToken(res.access_token)
+        this.navigate();
+      })
+      .catch((err: any) => {
+        if (err.status == 400) {
+          this.showError('Username or Password is Invalid');
+        } else {
+          this.showError(err.message);
+        }
+      })
+      .then(() => {
+        this.logging = false;
+      });
   }
 
   navigate() {

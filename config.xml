@@ -94,6 +94,7 @@
     <allow-navigation href="http://192.168.1.8:8101" sessionid="dee137b3" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <allow-navigation href="http://localhost:8100" sessionid="4be9ff22" />
+    <plugin name="cordova-plugin-filepath" spec="^1.5.8" />
     <engine name="browser" spec="6.0.0" />
     <engine name="android" spec="7.1.4" />
 </widget>

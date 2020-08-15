@@ -17,6 +17,7 @@ import { AccidentProvider } from '../../providers/accident/accident';
   templateUrl: 'add-driver.html',
 })
 export class AddDriverPage {
+  ediPersonObject: any;
   driverForm: FormGroup;
   driverImageUrls: any = [];
   driver: FormArray;
@@ -38,10 +39,11 @@ export class AddDriverPage {
     this.index = this.navParams.get('index');
     console.log(this.navParams.get('persons'));
     if (this.index == 0) {
+      this.ediPersonObject = this.driver.controls[this.index].value;
       const editPersonObj = this.driver.controls[this.index];
       console.log(editPersonObj);
       Object.keys(editPersonObj.value).forEach(key => {
-        if (editPersonObj.value[key]&&this.driverForm.controls[key]) {
+        if (key != 'medias' && editPersonObj.value[key] && this.driverForm.controls[key]) {
           this.driverForm.controls[key].patchValue(editPersonObj.value[key]);
         }
       });
@@ -53,7 +55,7 @@ export class AddDriverPage {
     this.driverForm = this.fb.group({
       id: [null],
       name: ['Pankaj', [Validators.required]],
-      licence: [null,  [Validators.required]],
+      licence: [null, [Validators.required]],
       age: [28, [Validators.required]],
       address: ['xyz', [Validators.required]],
       gender: ['', [Validators.required]],

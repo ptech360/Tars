@@ -13,6 +13,7 @@ import { Media } from '@ionic-native/media';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { FilePath } from '@ionic-native/file-path';
 
 import { Tars } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -102,7 +103,8 @@ import { AddDriverPage } from '../pages/add-driver/add-driver';
     ApiProvider,
     AccidentProvider,
     FileProvider,
-    Base64
+    Base64,
+    FilePath
   ]
 })
 export class AppModule { }

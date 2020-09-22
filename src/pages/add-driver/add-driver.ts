@@ -54,10 +54,10 @@ export class AddDriverPage {
   getDriver() {
     this.driverForm = this.fb.group({
       id: [null],
-      name: ['Pankaj', [Validators.required]],
+      name: ['', [Validators.required]],
       licence: [null, [Validators.required]],
-      age: [28, [Validators.required]],
-      address: ['xyz', [Validators.required]],
+      age: ['', [Validators.required]],
+      address: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       typeAndExtendOfHumanFactor: [null],
       natureOfAnyInjuries: [null],

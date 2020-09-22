@@ -33,4 +33,8 @@ export class AccidentDetailsPage {
   goToHome() {
     this.navCtrl.popToRoot();
   }
+
+  encodeURIComponent(url) {
+    return url.replace(/\\/g, '/');
+  }
 }

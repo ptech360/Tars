@@ -13,6 +13,7 @@
     <allow-intent href="*" />
     <allow-navigation href="*" />
     <allow-navigation href="data:*" />
+    <preference name="AndroidLaunchMode" value="singleTop" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
@@ -95,6 +96,10 @@
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <allow-navigation href="http://localhost:8100" sessionid="4be9ff22" />
     <plugin name="cordova-plugin-filepath" spec="^1.5.8" />
+    <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.3.3">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="your usage message" />
+    </plugin>
+    <plugin name="cordova-plugin-android-permissions" spec="^1.1.0" />
     <engine name="browser" spec="6.0.0" />
     <engine name="android" spec="7.1.4" />
 </widget>

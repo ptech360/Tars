@@ -37,7 +37,7 @@
             <div class="media-list-box" margin-top padding>
                 <ion-list>
                     <media [medias]="accidentGlobalObject.vehicles?accidentGlobalObject?.vehicles[accidentGlobalObject.vehicleCounter]?.medias:null"
-                        [mediaFor]="'vehicle'" [formGroup]="vehicleFormGroup"></media>
+                        [mediaFor]="'vehicle' + (accidentGlobalObject.vehicleCounter + 1)" [formGroup]="vehicleFormGroup"></media>
                 </ion-list>
             </div>
 

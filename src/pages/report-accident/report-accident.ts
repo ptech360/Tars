@@ -51,12 +51,9 @@ export class ReportAccidentPage implements OnInit {
 
   ionViewWillEnter() {
     this.accidentGlobalObject.vehicleCounter = 0;
-
-    console.log(this.accidentGlobalObject);
   }
 
   ngOnInit() {
-    console.log(this.accidentGlobalObject);
   }
 
   patchAccident() {
@@ -69,8 +66,9 @@ export class ReportAccidentPage implements OnInit {
   }
 
   getGeoLoacation() {
+    this.toastSev.showLoader('Getting current location');
     this.httpClient.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + this.latitude + ',' + this.longitude + '&key=AIzaSyCaNwEauxusdcGJMGNvzcRdCSVo9zBWt-M').subscribe((response: any) => {
-      console.log(response);
+      this.toastSev.hideLoader();
       this.location = response.results ? response.results[0].formatted_address : 'Not Locate';
       this.accidentForm.controls.address.patchValue(this.location);
     })
@@ -95,8 +93,10 @@ export class ReportAccidentPage implements OnInit {
       this.accidentForm.controls.latitude.patchValue(this.latitude);
       this.accidentForm.controls.longitude.patchValue(this.longitude);
       setTimeout(() => {
-        this.getGeoLoacation();
-      }, 2000);
+        if (!this.accidentForm.controls.address.value) {
+          this.getGeoLoacation();
+        }
+      }, 1000);
     }).catch(error => {
       this.showError(error.message);
     });
@@ -105,19 +105,21 @@ export class ReportAccidentPage implements OnInit {
   getAccidentForm() {
     return this.fb.group({
       id: [],
+      firNum: [],
       fatal: [false, [Validators.required]],
       numOfCasualities: [1, [Validators.required]],
       description: ['', [Validators.required]],
       numOfVehicle: [0, [Validators.required]],
+      typeAndExtent: [''],
       remark: ['', [Validators.required]],
       medias: this.fb.array([]),
       type: ['', [Validators.required]],
       primaryAndSecondaryCauses: [''],
       drawing: [''],
       analysingInfo: ['', [Validators.required]],
-      longitude: [, [Validators.required]],
-      latitude: [, [Validators.required]],
-      address: [, [Validators.required]]
+      longitude: [''],
+      latitude: [''],
+      address: ['', [Validators.required]]
     });
   }
 
@@ -199,7 +201,7 @@ export class ReportAccidentPage implements OnInit {
       this.accSev.addAccidentReport(formData).subscribe(response => {
         this.accidentObject = response;
         this.toastSev.hideLoader();
-        this.toastSev.showToast('Accident Reported !');
+        this.toastSev.showToast('Accident Report Initiated !');
         this.accidentGlobalObject = response;
         this.accidentGlobalObject.vehicleCounter = 0;
         this.navCtrl.push(AddVehiclePage, { accident: this.accidentGlobalObject });

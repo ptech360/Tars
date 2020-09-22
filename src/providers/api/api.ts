@@ -18,7 +18,8 @@ export class ApiProvider {
   // url: string = 'http://tars-env.waqdt6r6dm.ap-south-1.elasticbeanstalk.com';
   // url: string = 'http://tars.us-east-2.elasticbeanstalk.com';
   // url: string = 'http://localhost:8083';
-  url: string = 'http://3.133.28.174';
+  url: string = 'http://117.197.101.200:8081';
+  // url: string = 'http://3.133.28.174';
 
 
 
@@ -34,7 +35,7 @@ export class ApiProvider {
     reqOpts['observe'] = 'response';
     reqOpts.headers = {};
     reqOpts.headers['Authorization'] = this.getAccessToken();
-    reqOpts.headers['platform']='app';
+    reqOpts.headers['platform'] = 'app';
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {

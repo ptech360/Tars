@@ -6,6 +6,7 @@ import { Activity } from './app.activity';
 import { AuthProvider } from '../providers/auth/auth';
 import { NetworkProvider } from '../providers/network/network';
 import { ToastProvider } from '../providers/toast/toast';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 @Component({
   templateUrl: 'app.html'
 })
@@ -16,7 +17,8 @@ export class Tars extends Activity {
     public appCtrl: App,
     public authProvider: AuthProvider,
     public networkProvider: NetworkProvider,
-    public toastProvider: ToastProvider,) {
+    public toastProvider: ToastProvider,
+    androidPermissions: AndroidPermissions) {
     super(events, appCtrl, authProvider, networkProvider, toastProvider);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -24,6 +26,16 @@ export class Tars extends Activity {
       statusBar.styleDefault();
       statusBar.styleBlackTranslucent();
       splashScreen.hide();
+      androidPermissions.requestPermissions(
+        [
+          androidPermissions.PERMISSION.CAMERA,
+          androidPermissions.PERMISSION.CALL_PHONE,
+          androidPermissions.PERMISSION.GET_ACCOUNTS,
+          androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
+          androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+          androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION
+        ]
+      );
     });
   }
 }

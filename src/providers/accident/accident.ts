@@ -151,7 +151,7 @@ export class AccidentProvider {
   }
 
   editVehicleReport(accidentId: number, vehicleId: number, object: any) {
-    return this.api.put('/api/accident/' + accidentId + '/vehicle/' + vehicleId, object, {});
+    return this.api.put('api/accident/' + accidentId + '/vehicle/' + vehicleId, object, {});
   }
 
   addPedestrian(accidentId: number, object: any) {

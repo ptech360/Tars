@@ -20,6 +20,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ToastProvider } from '../../providers/toast/toast';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { FilePath } from '@ionic-native/file-path';
+import { VideoEditor } from '@ionic-native/video-editor';
 const MEDIA_FOLDER_NAME = 'my_media';
 declare let VanillaFile: any;
 
@@ -44,6 +45,9 @@ export class MediaComponent implements OnInit, AfterViewInit {
     this.mediaFiles = medias;
     if (medias && medias.length && this.formGroup) {
       const accidentPics = <FormArray>this.formGroup.controls['medias'];
+      while (accidentPics.length !== 0) {
+        accidentPics.removeAt(0)
+      }
       medias.forEach(media => {
         accidentPics.push(new FormBuilder().group({
           id: media.id
@@ -73,7 +77,8 @@ export class MediaComponent implements OnInit, AfterViewInit {
     private accidentProvider: AccidentProvider,
     public toastSev: ToastProvider,
     public camera: Camera,
-    public filePath: FilePath
+    public filePath: FilePath,
+    private videoEditor: VideoEditor
   ) {
     console.log('Hello MediaComponent Component');
   }
@@ -154,7 +159,9 @@ export class MediaComponent implements OnInit, AfterViewInit {
   }
 
   pickImages() {
-    this.imagePicker.getPictures({}).then(
+    this.imagePicker.getPictures({
+      quality: 50
+    }).then(
       results => {
         console.log(results);
 
@@ -166,8 +173,8 @@ export class MediaComponent implements OnInit, AfterViewInit {
               (<FileEntry>entry).file(file => {
                 var reader = new FileReader();
                 var that = this;
-                reader.onloadend = function (evt: any) {
-                  accidentPics.push(new FormControl(that.dataURLtoFile(evt.target.result, file.name, file.type)));
+                reader.onloadend = () => {
+                  accidentPics.push(new FormControl(that.dataURLtoFile(reader.result, file.name, file.type)));
                 };
                 reader.readAsDataURL(file);
               })
@@ -175,6 +182,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
         }
       }
     );
+
     // If you get problems on Android, try to ask for Permission first
     // this.imagePicker.requestReadPermission().then(result => {
     //   console.log('requestReadPermission: ', result);
@@ -191,25 +199,23 @@ export class MediaComponent implements OnInit, AfterViewInit {
     this.camera.getPicture(cameraOptions).then(
       results => {
         const accidentPics = <FormArray>this.formGroup.controls['medias'];
-        this.copyFileToLocalDir('file:///' + results);
-        this.file.resolveLocalFilesystemUrl('file:///' + results)
-          .then(entry => {
-            (<FileEntry>entry).file(file => {
-              const reader = new FileReader();
-              this.toastSev.showLoader('Processing video...')
-              const that = this;
-              reader.onloadend = function (evt: any) {
-                that.toastSev.hideLoader();
-                accidentPics.push(new FormControl(that.dataURLtoFile(evt.target.result, file.name, file.type)));
-              };
-              reader.readAsDataURL(file);
+        if (results && results.length) {
+          this.toastSev.showLoader('Processing video...');
+          this.copyFileToLocalDir('file:///' + results);
+          this.file.resolveLocalFilesystemUrl('file:///' + results)
+            .then(entry => {
+              (<FileEntry>entry).file(file => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  this.toastSev.hideLoader();
+                  accidentPics.push(new FormControl(this.dataURLtoFile(reader.result, file.name, file.type)));
+                };
+                reader.readAsDataURL(file);
 
+              })
             })
-          })
-
-
-      }
-    )
+        }
+      })
   }
 
   captureImage() {
@@ -239,6 +245,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
     });
   }
 
+
   dataURLtoFile(dataurl, filename, fileType) {
     var arr = dataurl.split(','),
       bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
@@ -263,13 +270,34 @@ export class MediaComponent implements OnInit, AfterViewInit {
     this.mediaCapture.captureVideo().then(
       (data: MediaFile[]) => {
         if (data.length > 0) {
-          this.copyFileToLocalDir(data[0].fullPath);
-          this.file.resolveLocalFilesystemUrl(data[0].fullPath)
-            .then(entry => {
-              (<FileEntry>entry).file(file => {
-                this.readFile(data[0]);
+          const accidentPics = <FormArray>this.formGroup.controls['medias'];
+          this.toastSev.showLoader('Processing video...');
+          this.videoEditor.transcodeVideo({
+            fileUri: data[0].fullPath,
+            outputFileName: Date.now().toString(),
+            outputFileType: this.videoEditor.OutputFileType.MPEG4
+          }).then((fileUri: string) => {
+            this.copyFileToLocalDir(data[0].fullPath);
+            this.file.resolveLocalFilesystemUrl('file:///' + fileUri)
+              .then(entry => {
+                (<FileEntry>entry).file(file => {
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    this.toastSev.hideLoader();
+                    accidentPics.push(new FormControl(this.dataURLtoFile(reader.result, file.name, file.type)));
+                  };
+                  reader.readAsDataURL(file);
+                })
               })
-            })
+          })
+            .catch((error: any) => console.log('video transcode error', error));
+
+          // this.file.resolveLocalFilesystemUrl(data[0].fullPath)
+          //   .then(entry => {
+          //     (<FileEntry>entry).file(file => {
+          //       this.readFile(data[0]);
+          //     })
+          //   })
         }
       },
       (err: any) => this.showError(err.message)
@@ -321,8 +349,12 @@ export class MediaComponent implements OnInit, AfterViewInit {
     if (media.media) {
       this.openFile(media.media);
     } else {
-      this.downloadAndPlay(this.bucketUrl + media.mediaName, media)
+      this.downloadAndPlay(this.encodeURIComponent(this.bucketUrl + media.mediaName), media)
     }
+  }
+
+  encodeURIComponent(url) {
+    return url.replace(/\\/g, '/');
   }
 
   downloadAndPlay(url, media) {

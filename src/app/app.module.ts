@@ -14,6 +14,8 @@ import { StreamingMedia } from '@ionic-native/streaming-media';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
+import { VideoEditor } from '@ionic-native/video-editor';
+import { AndroidPermissions } from '@ionic-native/android-permissions'
 
 import { Tars } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -104,7 +106,9 @@ import { AddDriverPage } from '../pages/add-driver/add-driver';
     AccidentProvider,
     FileProvider,
     Base64,
-    FilePath
+    FilePath,
+    VideoEditor,
+    AndroidPermissions
   ]
 })
 export class AppModule { }

@@ -24,6 +24,11 @@
     <div class="bg-white">
       <ion-card>
         <ion-list>
+          <ion-item class="border">
+            <ion-label stacked>FIR Number
+              <code>*</code> </ion-label>
+            <ion-input formControlName="firNum"></ion-input>
+          </ion-item>
           <ion-item class="border" lines="none">
             <ion-label>Accident Type
               <code>*</code>
@@ -81,6 +86,11 @@
           <ion-item class="border">
             <ion-label stacked>Drawing Of Accident Details</ion-label>
             <ion-textarea formControlName="drawing"></ion-textarea>
+          </ion-item>
+          <ion-item class="border">
+            <ion-label stacked>Type and extent of property damage
+              <code>*</code> </ion-label>
+            <ion-textarea formControlName="typeAndExtent"></ion-textarea>
           </ion-item>
           <ion-item class="border">
             <ion-label stacked>Remarks

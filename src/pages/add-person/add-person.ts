@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { AccidentProvider } from '../../providers/accident/accident';
+import { MediaComponent } from '../../components/media/media';
 
 /**
  * Generated class for the AddPersonPage page.
@@ -16,6 +17,8 @@ import { AccidentProvider } from '../../providers/accident/accident';
   templateUrl: 'add-person.html',
 })
 export class AddPersonPage {
+  @ViewChild('media') media: MediaComponent;
+  vehicle: any = {};
   personForm: FormGroup;
   personImageUrls: any = [];
   personTypes = [];
@@ -43,11 +46,17 @@ export class AddPersonPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddPersonPage');
-    this.persons = <FormArray>this.navParams.get('persons')
-    console.log(this.navParams.get('persons'));
+    this.persons = <FormArray>this.navParams.get('vehicle').controls['persons']
+    this.vehicle = this.navParams.get('vehicle');
     this.index = this.navParams.get('index');
     console.log("index - ", this.index);
-    if (this.index) {
+    console.log(this.vehicle);
+
+  }
+
+  patchPassenger() {
+
+    if (this.persons.controls[this.index]) {
       const editPersonObj = this.persons.controls[this.index];
       console.log(editPersonObj);
       Object.keys(editPersonObj.value).forEach(key => {
@@ -55,8 +64,21 @@ export class AddPersonPage {
           this.personForm.controls[key].patchValue(editPersonObj.value[key]);
         }
       });
+      setTimeout(() => {
+        this.media.setMedias(editPersonObj.value.medias);
+      }, 500);
     }
+  }
 
+  ionViewWillEnter() {
+    console.log(this.vehicle);
+    this.patchPassenger();
+    this.media.setMediaFor(`vehicle${this.vehicle.value.vehicleCounter}-passenger${this.index}`)
+    this.media.createDirectory();
+    this.media.loadAndPatchFiles();
+    // this.viewCtrl.onDidDismiss(() => {
+    //   this.media.clearDirectory();
+    // })
   }
 
   getPassenger() {

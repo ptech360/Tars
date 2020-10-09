@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { AccidentProvider } from '../../providers/accident/accident';
+import { MediaComponent } from '../../components/media/media';
 
 /**
  * Generated class for the AddDriverPage page.
@@ -17,6 +18,8 @@ import { AccidentProvider } from '../../providers/accident/accident';
   templateUrl: 'add-driver.html',
 })
 export class AddDriverPage {
+  @ViewChild('media') media: MediaComponent;
+  vehicle: any = {};
   ediPersonObject: any;
   driverForm: FormGroup;
   driverImageUrls: any = [];
@@ -34,21 +37,37 @@ export class AddDriverPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddDriverPage');
-    this.driver = <FormArray>this.navParams.get('persons')
+    this.driver = <FormArray>this.navParams.get('vehicle').controls['persons'];
     this.index = this.navParams.get('index');
-    console.log(this.navParams.get('persons'));
+    this.vehicle = this.navParams.get('vehicle').value;
+    console.log(this.navParams.get('vehicle'));
+  }
+
+  patchDriver() {
     if (this.index == 0) {
       this.ediPersonObject = this.driver.controls[this.index].value;
-      const editPersonObj = this.driver.controls[this.index];
+      const editPersonObj: any = this.driver.controls[this.index];
       console.log(editPersonObj);
       Object.keys(editPersonObj.value).forEach(key => {
         if (key != 'medias' && editPersonObj.value[key] && this.driverForm.controls[key]) {
           this.driverForm.controls[key].patchValue(editPersonObj.value[key]);
         }
       });
+      setTimeout(() => {
+        this.media.setMedias(editPersonObj.value.medias);
+      }, 500);
     }
+  }
 
+  ionViewWillEnter() {
+    this.patchDriver();
+
+    this.media.setMediaFor(`vehicle${this.vehicle.vehicleCounter}-driver`)
+    this.media.createDirectory();
+    this.media.loadAndPatchFiles();
+    // this.viewCtrl.onDidDismiss(() => {
+    //   this.media.clearDirectory();
+    // })
   }
 
   getDriver() {

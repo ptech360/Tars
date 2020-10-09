@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, ModalController, AlertController, Navbar } from 'ionic-angular';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { NavController, NavParams, ModalController, AlertController, Navbar, Platform } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -8,6 +8,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClient } from '@angular/common/http';
 import { InvolvedVehiclePage } from '../involved-vehicle/involved-vehicle';
 import { AddVehiclePage } from '../add-vehicle/add-vehicle';
+import { MediaComponent } from '../../components/media/media';
 declare let VanillaFile: any;
 
 /**
@@ -21,9 +22,10 @@ declare let VanillaFile: any;
   selector: 'page-report-accident',
   templateUrl: 'report-accident.html',
 })
-export class ReportAccidentPage implements OnInit {
+export class ReportAccidentPage implements OnInit, OnDestroy {
   accidentGlobalObject: any = {};
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild('media') media: MediaComponent;
   accidentForm: FormGroup;
   accidentTypes = [];
   // accidentInitiates = [];
@@ -44,16 +46,26 @@ export class ReportAccidentPage implements OnInit {
     public httpClient: HttpClient,
     public modalCtrl: ModalController,
     private geolocation: Geolocation,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public platform: Platform
   ) {
     this.accidentForm = this.getAccidentForm();
   }
 
   ionViewWillEnter() {
+    if (this.accidentGlobalObject.medias) {
+      setTimeout(() => {
+        this.media.setMedias(this.accidentGlobalObject.medias);
+      }, 1000);
+    }
     this.accidentGlobalObject.vehicleCounter = 0;
+    this.media.setMediaFor('accident')
+    this.media.createDirectory();
+    this.media.clearFiles();
   }
 
   ngOnInit() {
+
   }
 
   patchAccident() {
@@ -187,10 +199,11 @@ export class ReportAccidentPage implements OnInit {
 
     if (this.accidentForm.value.id) {
       this.accSev.editAccidentReport(this.accidentForm.value.id, formData).subscribe(response => {
+        this.ngOnDestroy();
         this.accidentObject = response;
         this.toastSev.hideLoader();
         this.toastSev.showToast('Accident Updated !');
-        Object.assign(this.accidentGlobalObject, response);
+        this.accidentGlobalObject = response;
         this.accidentGlobalObject.vehicleCounter = 0;
         this.navCtrl.push(AddVehiclePage, { accident: this.accidentGlobalObject });
       }, error => {
@@ -199,6 +212,7 @@ export class ReportAccidentPage implements OnInit {
       });
     } else {
       this.accSev.addAccidentReport(formData).subscribe(response => {
+        this.ngOnDestroy();
         this.accidentObject = response;
         this.toastSev.hideLoader();
         this.toastSev.showToast('Accident Report Initiated !');
@@ -250,6 +264,10 @@ export class ReportAccidentPage implements OnInit {
 
   goToHome() {
     this.navCtrl.popToRoot();
+  }
+
+  ngOnDestroy() {
+    this.media.clearDirectory();
   }
 
 }

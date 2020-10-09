@@ -73,7 +73,7 @@
     </ion-item>
     <div class="media-list-box" padding-left padding-right>
       <ion-list style="margin-bottom: 0;">
-        <media [medias]="ediPersonObject?ediPersonObject.medias:null" [mediaFor]="'driver'" [formGroup]="driverForm"></media>
+        <media #media [formGroup]="driverForm"></media>
       </ion-list>
     </div>
     <div padding>

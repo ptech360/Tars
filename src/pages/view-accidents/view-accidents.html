@@ -27,34 +27,6 @@
 
 
 <ion-content class="background">
-  <!-- <ion-card *ngFor="let acc of accidents;">
-    <ion-card-content>
-      <ion-card-title>
-        {{acc.accidentType}}
-      </ion-card-title>
-      <p>{{acc.description}}.</p>
-    </ion-card-content>
-    <ion-card *ngFor="let vehicle of acc.vehicle;">
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="/assets/imgs/profile.png">
-        </ion-avatar>
-        <h2>{{vehicle.person.name}}</h2>
-        <p>{{vehicle.person.licence}}</p>
-      </ion-item>
-
-      <img [src]="vehicleImg.url" *ngFor="let vehicleImg of vehicle.vehiclePics;">
-
-      <ion-card-content>
-        <ion-item>
-          <h2>Vehicle Number : {{vehicle.number}}</h2>
-          <h2>Vehicle Model : {{vehicle.model}}</h2>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-
-  </ion-card> -->
-
   <ion-list>
 
     <ion-card class="view-card" *ngFor="let acc of accidents;let i = index;" (click)="openIncidentDetailPage(i)">
@@ -62,13 +34,14 @@
         <ion-row class="view-header">
           <ion-col col-8 text-wrap>
             <b>{{acc.type}}</b>
-            <p><small>{{acc.createdAt | date:'medium'}}</small></p>
+            <p>
+              <small>{{acc.createdAt | date:'medium'}}</small>
+            </p>
           </ion-col>
           <ion-col col-4 text-wrap text-right>
-            <button class="edit" ion-button color="primary" clear icon-only item-end *ngIf="acc.status=='Draft'"
-            (click)="editAccident(i,$event)">
-            <ion-icon name='create' is-active="false"></ion-icon>
-          </button>
+            <button class="edit" ion-button color="primary" clear icon-only item-end *ngIf="acc.status=='Draft'" (click)="editAccident(i,$event)">
+              <ion-icon name='create' is-active="false"></ion-icon>
+            </button>
           </ion-col>
         </ion-row>
         <ion-row class="view-contents">

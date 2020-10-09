@@ -41,16 +41,22 @@ export class MediaComponent implements OnInit, AfterViewInit {
   @Input() viewOnly: boolean;
   @Input() formGroup: FormGroup;
   @Input() mediaFor: string;
-  @Input() set medias(medias: any[]) {
-    this.mediaFiles = medias;
-    if (medias && medias.length && this.formGroup) {
+  @Input() set savedMedia(medias: any[]) {
+    this.mediaFiles = medias && medias.filter(m => {
+      const f = !(m instanceof VanillaFile)
+      return f;
+    });
+    if (this.mediaFiles && this.mediaFiles.length && this.formGroup) {
       const accidentPics = <FormArray>this.formGroup.controls['medias'];
       while (accidentPics.length !== 0) {
         accidentPics.removeAt(0)
       }
-      medias.forEach(media => {
+      this.mediaFiles.forEach(media => {
         accidentPics.push(new FormBuilder().group({
-          id: media.id
+          id: media.id,
+          extension: media.extension,
+          mediaName: media.mediaName,
+          mediaOriginalName: media.mediaOriginalName
         }));
       });
     }
@@ -88,31 +94,62 @@ export class MediaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+
+  }
+
+  setMedias(medias) {
+    this.savedMedia = medias;
+  }
+
+  setMediaFor(mediaFor) {
+    this.mediaFor = mediaFor;
+  }
+
+  clearDirectory(mediaFor?: string) {
     this.plt.ready().then(() => {
       let path = this.file.dataDirectory;
       try {
-        this.file.checkDir(path, this.mediaFor).then(
+        const dirName = mediaFor || this.mediaFor
+        this.file.checkDir(path, dirName).then(
           () => {
             // this.file.removeRecursively(path, this.mediaFor);
-            this.loadFiles().then(() => {
-              this.files.forEach(f => {
-                this.file.removeFile(path + '/' + this.mediaFor, f.name)
-              });
-              this.loadFiles()
-            })
+            // this.loadFiles().then(() => {
+            //   try {
+            //     this.files.forEach(f => {
+            //       this.file.removeFile(path + '/' + this.mediaFor, f.name)
+            //     });
+            //   } catch (e) {
+            //     console.log(e);
+
+            //   }
+            // })
+            this.file.removeRecursively(path, dirName).catch(e => console.log(e))
+            this.files = []
+            // this.loadFiles();
+            // this.file.createDir(path, this.mediaFor, true).catch(e => console.log(e))
+            // this.loadFiles()
           },
           err => {
             console.log(err);
 
-            this.file.createDir(path, this.mediaFor, false);
+            this.file.createDir(path, this.mediaFor, true);
           }
         );
       } catch (error) {
-        this.showError(error.message);
-
+        //this.showError(error.message);
+        this.file.createDir(path, this.mediaFor, true);
       }
 
     });
+  }
+
+  clearFiles() {
+    this.files = [];
+  }
+
+  createDirectory() {
+    let path = this.file.dataDirectory;
+    this.file.createDir(path, this.mediaFor, true);
   }
 
   async selectMedia() {
@@ -318,7 +355,6 @@ export class MediaComponent implements OnInit, AfterViewInit {
     const name = myPath.substr(myPath.lastIndexOf('/') + 1);
     const copyFrom = myPath.substr(0, myPath.lastIndexOf('/') + 1);
     const copyTo = this.file.dataDirectory + this.mediaFor;
-
     this.file.copyFile(copyFrom, name, copyTo, newName).then(
       success => {
         this.loadFiles();
@@ -391,6 +427,31 @@ export class MediaComponent implements OnInit, AfterViewInit {
       res => {
         this.files = res;
         console.log(this.files);
+      },
+      err => this.showError(err.message)
+    );
+  }
+
+  loadAndPatchFiles() {
+    this.files = [];
+    this.file.listDir(this.file.dataDirectory, this.mediaFor).then(
+      res => {
+        this.files = res;
+        const accidentPics = <FormArray>this.formGroup.controls['medias'];
+        while (accidentPics.length !== 0) {
+          accidentPics.removeAt(0)
+        }
+        this.files.forEach(entry => {
+          (<FileEntry>entry).file(file => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              this.toastSev.hideLoader();
+              accidentPics.push(new FormControl(this.dataURLtoFile(reader.result, file.name, file.type)));
+            };
+            reader.readAsDataURL(file);
+
+          })
+        });
       },
       err => this.showError(err.message)
     );

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NavParams, ModalController, AlertController, NavController, Navbar } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
@@ -8,14 +8,16 @@ import { AddPedestrianPage } from '../add-pedestrian/add-pedestrian';
 import { SubmitAccidentPage } from '../submit-accident/submit-accident';
 import { AddDriverPage } from '../add-driver/add-driver';
 import { AddPersonPage } from '../add-person/add-person';
+import { MediaComponent } from '../../components/media/media';
 declare let VanillaFile: any;
 @Component({
     selector: 'page-add-vehicle',
     templateUrl: 'add-vehicle.html',
 })
-export class AddVehiclePage implements OnInit {
+export class AddVehiclePage implements OnInit, OnDestroy {
     accidentGlobalObject: any;
     @ViewChild(Navbar) navBar: Navbar;
+    @ViewChild('media') media: MediaComponent;
     vehicleFormGroup: FormGroup;
     vehicleImageUrls = [];
     personTypes = [];
@@ -36,21 +38,27 @@ export class AddVehiclePage implements OnInit {
             model: ['', [Validators.required]],
             medias: this.fb.array([]),
             persons: this.fb.array([], Validators.minLength(1)),
+            vehicleCounter: [this.accidentGlobalObject.vehicleCounter + 1]
         })
 
-        if (this.accidentGlobalObject.hasOwnProperty('vehicleCounter') && this.accidentGlobalObject.hasOwnProperty('vehicles')) {
-            this.patchVehicle();
-        }
+
     }
 
     patchVehicle() {
+        this.vehicleFormGroup.controls.vehicleCounter.patchValue(this.accidentGlobalObject.vehicleCounter + 1);
         const currentVehicle = this.accidentGlobalObject.vehicles[this.accidentGlobalObject.vehicleCounter]
         if (this.accidentGlobalObject.vehicles && currentVehicle) {
             this.vehicleFormGroup.controls.id.patchValue(currentVehicle.id);
             this.vehicleFormGroup.controls.number.patchValue(currentVehicle.number);
             this.vehicleFormGroup.controls.model.patchValue(currentVehicle.model);
+            setTimeout(() => {
+                this.media.setMedias(currentVehicle.medias);
+            }, 1000);
             if (currentVehicle.persons && currentVehicle.persons.length) {
                 const persons = <FormArray>this.vehicleFormGroup.controls['persons']
+                while (persons.length) {
+                    persons.removeAt(0);
+                }
                 currentVehicle.persons.forEach((person, index) => {
                     persons.push(this.fb.group(Object.assign({}, person, { medias: this.fb.array(person.medias || []) })))
                 });
@@ -75,6 +83,14 @@ export class AddVehiclePage implements OnInit {
         }
     }
 
+    ionViewWillEnter() {
+        if (this.accidentGlobalObject.hasOwnProperty('vehicleCounter') && this.accidentGlobalObject.hasOwnProperty('vehicles')) {
+            this.patchVehicle();
+        }
+        this.media.setMediaFor('vehicle' + (this.accidentGlobalObject.vehicleCounter + 1))
+        this.media.createDirectory();
+    }
+
     ngOnInit() {
     }
 
@@ -83,22 +99,23 @@ export class AddVehiclePage implements OnInit {
             number: [, [Validators.required]],
             model: [, [Validators.required]],
             medias: this.fb.array([]),
-            persons: this.fb.array([], Validators.required)
+            persons: this.fb.array([], Validators.required),
+            vehicleCounter: this.accidentGlobalObject.vehicleCounter + 1
         })
     }
 
     addPerson() {
-        const modal = this.modalCtrl.create(AddPersonPage, { persons: this.vehicleFormGroup.controls['persons'] });
+        const modal = this.modalCtrl.create(AddPersonPage, { vehicle: this.vehicleFormGroup, index: this.vehicleFormGroup.get('persons').value.length });
         modal.present();
     }
 
     editPerson(index) {
         if (index == 0) {
-            const modal = this.modalCtrl.create(AddDriverPage, { persons: this.vehicleFormGroup.controls['persons'], index: index });
+            const modal = this.modalCtrl.create(AddDriverPage, { vehicle: this.vehicleFormGroup, index: index });
             modal.present();
         }
         else {
-            const modal = this.modalCtrl.create(AddPersonPage, { persons: this.vehicleFormGroup.controls['persons'], index: index });
+            const modal = this.modalCtrl.create(AddPersonPage, { vehicle: this.vehicleFormGroup, index: index });
             modal.present();
         }
     }
@@ -109,7 +126,7 @@ export class AddVehiclePage implements OnInit {
     }
 
     addDriver() {
-        const modal = this.modalCtrl.create(AddDriverPage, { persons: this.vehicleFormGroup.controls['persons'] });
+        const modal = this.modalCtrl.create(AddDriverPage, { vehicle: this.vehicleFormGroup });
         modal.present();
     }
 
@@ -123,6 +140,7 @@ export class AddVehiclePage implements OnInit {
         if (this.vehicleFormGroup.value.id) {
             const formData = this.convertModelToFormData(this.vehicleFormGroup.value, new FormData(), '');
             this.accSev.editVehicleReport(this.accidentGlobalObject.id, this.vehicleFormGroup.value.id, formData).subscribe(response => {
+                this.ngOnDestroy();
                 if (this.accidentGlobalObject.vehicles && this.accidentGlobalObject.vehicles.length) {
                     if (response.medias == null) response.medias = []
                     const vehicleIndex: number = this.accidentGlobalObject.vehicles.findIndex(v => v.id == response.id);
@@ -149,6 +167,7 @@ export class AddVehiclePage implements OnInit {
             delete this.vehicleFormGroup.value.id;
             const formData = this.convertModelToFormData(this.vehicleFormGroup.value, new FormData(), '');
             this.accSev.addVehicleReport(this.accidentGlobalObject.id, formData).subscribe(response => {
+                this.ngOnDestroy();
                 this.vehicleFormGroup.get('id').patchValue(response.id)
                 if (this.accidentGlobalObject.vehicles && this.accidentGlobalObject.vehicles.length) {
                     if (response.medias == null) response.medias = []
@@ -224,7 +243,17 @@ export class AddVehiclePage implements OnInit {
 
 
 
-
+    ngOnDestroy() {
+        this.media.clearDirectory(`vehicle${this.accidentGlobalObject.vehicleCounter + 1}-driver`)
+        let persons = this.vehicleFormGroup.value.persons as Array<any>;
+        if (persons.length) {
+            persons = persons.filter(p => p.type == 'Passenger');
+            persons.forEach((element, index) => {
+                this.media.clearDirectory(`vehicle${this.accidentGlobalObject.vehicleCounter + 1}-passenger${index + 1}`);
+            });
+        }
+        this.media.clearDirectory();
+    }
 
 
 }

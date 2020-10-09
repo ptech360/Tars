@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, AlertController, ViewController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { AccidentProvider } from '../../providers/accident/accident';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastProvider } from '../../providers/toast/toast';
+import { MediaComponent } from '../../components/media/media';
 declare let VanillaFile: any;
 /**
  * Generated class for the AddPedestrianPage page.
@@ -16,8 +17,8 @@ declare let VanillaFile: any;
   selector: 'page-add-pedestrian',
   templateUrl: 'add-pedestrian.html',
 })
-export class AddPedestrianPage {
-
+export class AddPedestrianPage implements OnDestroy {
+  @ViewChild('media') media: MediaComponent;
   pedestrainForm: FormGroup;
   accidentForm: FormGroup;
   index: number = -1;
@@ -37,22 +38,36 @@ export class AddPedestrianPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddPedestrianPage');
-    console.log(this.navParams.get('accident'));
     this.accidentForm = <FormGroup>this.navParams.get('accident');
     this.index = this.navParams.get('index');
-    if (this.navParams.get('index') > -1) {
+
+    // if (this.accidentForm['index']) {
+    //   this.index = this.accidentForm['index'];
+    // }
+  }
+
+  patchPadestrain() {
+    if (this.index > -1) {
       const editPedestrainObj = this.accidentForm['pedestrians'][this.index];
-      console.log(editPedestrainObj);
       Object.keys(editPedestrainObj).forEach(key => {
         if (editPedestrainObj[key] && this.pedestrainForm.controls[key]) {
           this.pedestrainForm.controls[key].patchValue(editPedestrainObj[key]);
         }
+        setTimeout(() => {
+          this.media.setMedias(editPedestrainObj.medias);
+        }, 500);
       });
     }
-    // if (this.accidentForm['index']) {
-    //   this.index = this.accidentForm['index'];
-    // }
+  }
+
+  ionViewWillEnter() {
+    this.patchPadestrain();
+    this.media.setMediaFor(`pedestrain${this.index || 0}`)
+    this.media.createDirectory();
+    this.media.loadAndPatchFiles();
+    // this.viewCtrl.onDidDismiss(() => {
+    //   this.media.clearDirectory();
+    // })
   }
 
   getPedestrianForm() {
@@ -79,6 +94,7 @@ export class AddPedestrianPage {
     const formData = this.convertModelToFormData(this.pedestrainForm.value, new FormData(), '');
     if (this.pedestrainForm.value.id) {
       this.accService.editPedestrian(this.accidentForm['id'], this.pedestrainForm.value.id, formData).subscribe(response => {
+        this.media.clearDirectory();
         this.toastSev.hideLoader();
         this.toastSev.showToast('Pedestrian Updated !');
         pedestrian[this.index] = response;
@@ -92,6 +108,7 @@ export class AddPedestrianPage {
     }
     else {
       this.accService.addPedestrian(this.accidentForm['id'], formData).subscribe(response => {
+        this.media.clearDirectory();
         pedestrian.push(response);
         this.toastSev.hideLoader();
         console.log(response);
@@ -162,6 +179,10 @@ export class AddPedestrianPage {
       buttons: ['OK']
     })
     alert.present();
+  }
+
+  ngOnDestroy() {
+    this.media.clearDirectory();
   }
 
 }

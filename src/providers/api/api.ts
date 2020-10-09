@@ -94,7 +94,6 @@ export class ApiProvider {
   private handleError(err: HttpErrorResponse) {
     // console.log('inside handle error', err);
     let errorInfo: any = {};
-
     if (err.error instanceof Error || err.error instanceof ProgressEvent) {
       /**A client-side or network error occurred. Handle it accordingly.*/
       // console.log('An error occurred:', );

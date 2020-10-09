@@ -80,7 +80,7 @@
         </ul>
       </ion-item>
       <ion-list>
-        <media [medias]="accidentForm['medias']" [mediaFor]="'accident'" [viewOnly]="true"></media>
+        <media [savedMedia]="accidentForm['medias']" [mediaFor]="'accident'" [viewOnly]="true"></media>
       </ion-list>
     </ion-card-content>
     <div *ngFor="let vehicle of accidentForm['vehicles']; let i = index">
@@ -101,7 +101,7 @@
           </ion-item>
         </ion-item>
         <ion-list>
-          <media [medias]="vehicle['medias']" [mediaFor]="'vehicle'" [viewOnly]="true"></media>
+          <media [savedMedia]="vehicle['medias']" [mediaFor]="'vehicle'" [viewOnly]="true"></media>
         </ion-list>
         <div class="person-of-vehicle" *ngFor="let person of vehicle.persons; let i = index">
           <ion-card>
@@ -109,7 +109,7 @@
               <h3>Driver Details</h3>
             </ion-card-header>
             <ion-card-header *ngIf="person.type=='Passenger'">
-              <b>Passenger ({{i}})</b>
+              <b>Passenger</b>
             </ion-card-header>
 
             <ion-item>
@@ -143,10 +143,10 @@
               </ul>
             </ion-item>
             <ion-list *ngIf="person.type=='Driver'">
-              <media [medias]="person['medias']" [mediaFor]="'driver'" [viewOnly]="true"></media>
+              <media [savedMedia]="person['medias']" [mediaFor]="'driver'" [viewOnly]="true"></media>
             </ion-list>
             <ion-list *ngIf="person.type=='Passenger'">
-              <media [medias]="person['medias']" [mediaFor]="'passenger'" [viewOnly]="true"></media>
+              <media [savedMedia]="person['medias']" [mediaFor]="'passenger'" [viewOnly]="true"></media>
             </ion-list>
           </ion-card>
         </div>
@@ -160,7 +160,7 @@
         <div *ngFor="let ped of accidentForm['pedestrians']; let i = index;">
           <ion-card>
             <ion-card-header style="padding: 5px 15px;">
-              <h2 style="margin-top: 5px !important; font-size: 15px !important; color: #333 !important; ">Pedestrain {{i+1}}</h2>
+              <h2 style="margin-top: 5px !important; font-size: 15px !important; color: #333 !important; ">Pedestrain</h2>
               <div class="action">
                 <button class="edit" ion-button color="primary" clear icon-only item-end (click)="editPedestrian(i)">
                   <ion-icon name='create' is-active="false"></ion-icon>
@@ -202,7 +202,7 @@
                 </ul>
               </ion-item>
               <ion-list>
-                <media [medias]="ped['medias']" [mediaFor]="'pedestrain'" [viewOnly]="true"></media>
+                <media [savedMedia]="ped['medias']" [mediaFor]="'pedestrain'" [viewOnly]="true"></media>
               </ion-list>
             </ion-item>
           </ion-card>

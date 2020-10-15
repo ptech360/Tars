@@ -35,6 +35,7 @@ export class AddVehiclePage implements OnInit, OnDestroy {
         this.vehicleFormGroup = this.fb.group({
             id: [],
             number: ['', [Validators.required]],
+            sequence: [this.accidentGlobalObject.vehicleCounter + 1],
             model: ['', [Validators.required]],
             medias: this.fb.array([]),
             persons: this.fb.array([], Validators.minLength(1)),

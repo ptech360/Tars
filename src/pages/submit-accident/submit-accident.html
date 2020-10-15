@@ -109,7 +109,7 @@
               <h3>Driver Details</h3>
             </ion-card-header>
             <ion-card-header *ngIf="person.type=='Passenger'">
-              <b>Passenger</b>
+              <b>Passenger({{i}})</b>
             </ion-card-header>
 
             <ion-item>
@@ -160,7 +160,7 @@
         <div *ngFor="let ped of accidentForm['pedestrians']; let i = index;">
           <ion-card>
             <ion-card-header style="padding: 5px 15px;">
-              <h2 style="margin-top: 5px !important; font-size: 15px !important; color: #333 !important; ">Pedestrain</h2>
+              <h2 style="margin-top: 5px !important; font-size: 15px !important; color: #333 !important; ">Pedestrain{{i+1}}</h2>
               <div class="action">
                 <button class="edit" ion-button color="primary" clear icon-only item-end (click)="editPedestrian(i)">
                   <ion-icon name='create' is-active="false"></ion-icon>

@@ -67,6 +67,8 @@ export class AddPersonPage {
       setTimeout(() => {
         this.media.setMedias(editPersonObj.value.medias);
       }, 500);
+    } else {
+      this.personForm.controls['sequence'].patchValue(this.index);
     }
   }
 
@@ -85,6 +87,7 @@ export class AddPersonPage {
     this.personForm = this.fb.group({
       id: [null],
       name: ['', [Validators.required]],
+      sequence: [this.index],
       licence: [null, [Validators.required]],
       age: ['', [Validators.required]],
       address: ['', [Validators.required]],

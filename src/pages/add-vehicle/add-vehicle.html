@@ -58,7 +58,7 @@
                             <ion-item>
                                 <span *ngIf="i==0">Driver Details</span>
                                 <!-- Person {{i+1}} -->
-                                <span *ngIf="i>0">Passenger Details</span>
+                                <span *ngIf="i>0">Passenger{{i}} Details</span>
                                 <button class="edit" ion-button color="primary" clear icon-only item-end (click)="editPerson(i)">
                                     <ion-icon name='create' is-active="false"></ion-icon>
                                 </button>

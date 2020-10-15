@@ -74,6 +74,7 @@ export class AddPedestrianPage implements OnDestroy {
     this.pedestrainForm = this.fb.group({
       id: [null],
       name: ['', [Validators.required]],
+      sequence: [this.index ? this.index + 1 : 1],
       age: ['', [Validators.required]],
       address: ['', [Validators.required]],
       gender: [, [Validators.required]],

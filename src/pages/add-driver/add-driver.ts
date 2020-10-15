@@ -74,6 +74,7 @@ export class AddDriverPage {
     this.driverForm = this.fb.group({
       id: [null],
       name: ['', [Validators.required]],
+      sequence: [0],
       licence: [null, [Validators.required]],
       age: ['', [Validators.required]],
       address: ['', [Validators.required]],

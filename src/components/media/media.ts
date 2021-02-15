@@ -4,7 +4,8 @@ import {
   MediaCapture,
   MediaFile,
   CaptureError,
-  CaptureImageOptions
+  CaptureImageOptions,
+  CaptureVideoOptions
 } from '@ionic-native/media-capture';
 import { File, FileEntry } from '@ionic-native/File';
 import { Media, MediaObject } from '@ionic-native/media';
@@ -304,7 +305,11 @@ export class MediaComponent implements OnInit, AfterViewInit {
   }
 
   recordVideo() {
-    this.mediaCapture.captureVideo().then(
+    const captureVideoOptions: CaptureVideoOptions = {
+      limit: 1,
+      quality: 0
+    }
+    this.mediaCapture.captureVideo(captureVideoOptions).then(
       (data: MediaFile[]) => {
         if (data.length > 0) {
           const accidentPics = <FormArray>this.formGroup.controls['medias'];

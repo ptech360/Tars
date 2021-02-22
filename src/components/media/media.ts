@@ -36,12 +36,16 @@ declare let VanillaFile: any;
   templateUrl: 'media.html'
 })
 export class MediaComponent implements OnInit, AfterViewInit {
+  mediaFile: any;
   mediaFiles: any[];
   bucketUrl: string;
   directory: string;
   @Input() viewOnly: boolean;
   @Input() formGroup: FormGroup;
   @Input() mediaFor: string;
+  @Input() set video(video) {
+    this.mediaFile = video;
+  }
   @Input() set savedMedia(medias: any[]) {
     this.mediaFiles = medias && medias.filter(m => {
       const f = !(m instanceof VanillaFile)
@@ -305,11 +309,7 @@ export class MediaComponent implements OnInit, AfterViewInit {
   }
 
   recordVideo() {
-    const captureVideoOptions: CaptureVideoOptions = {
-      limit: 1,
-      quality: 0
-    }
-    this.mediaCapture.captureVideo(captureVideoOptions).then(
+    this.mediaCapture.captureVideo().then(
       (data: MediaFile[]) => {
         if (data.length > 0) {
           const accidentPics = <FormArray>this.formGroup.controls['medias'];

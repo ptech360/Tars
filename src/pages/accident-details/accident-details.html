@@ -119,10 +119,11 @@
             <a [attr.href]="encodeURIComponent(bucketUrl + accidentImg.mediaName) + accessToken" class="download-btn"> Download Media </a> -->
           </div>
           <div *ngIf="accidentImg.extension=='.mp4'">
-            <video height="200" width="100%" controls>
+            <media [video]="accidentImg" [viewOnly]="true"></media>
+            <!-- <video height="200" width="100%" controls>
               <source [src]="encodeURIComponent(bucketUrl + accidentImg.mediaName) + accessToken" type="video/mp4">
               <a [attr.href]="encodeURIComponent(bucketUrl + accidentImg.mediaName) + accessToken">{{accidentImg.mediaOriginalName}}</a>
-            </video>
+            </video> -->
           </div>
         </div>
       </ion-item>
@@ -155,10 +156,11 @@
                   <a [attr.href]="bucketUrl + vehicleImg.mediaName + accessToken" class="download-btn"> Download Media </a> -->
                 </div>
                 <div *ngIf="vehicleImg.extension=='.mp4'">
-                  <video height="200" width="100%" controls>
+                  <!-- <video height="200" width="100%" controls>
                     <source [src]="encodeURIComponent(bucketUrl + vehicleImg.mediaName) + accessToken" type="video/mp4">
                     <a [attr.href]="encodeURIComponent(bucketUrl + vehicleImg.mediaName) + accessToken">{{vehicleImg.mediaOriginalName}}</a>
-                  </video>
+                  </video> -->
+                  <media [video]="vehicleImg" [viewOnly]="true"></media>
                 </div>
               </div>
             </ion-item>
@@ -217,10 +219,11 @@
                   <a [attr.href]="encodeURIComponent(bucketUrl + personImg.mediaName) + accessToken" class="download-btn"> Download Media </a> -->
                 </div>
                 <div *ngIf="personImg.extension=='.mp4'">
-                  <video height="200" width="100%" controls>
+                  <!-- <video height="200" width="100%" controls>
                     <source [src]="encodeURIComponent(bucketUrl + personImg.mediaName) + accessToken" type="video/mp4">
                     <a [attr.href]="encodeURIComponent(bucketUrl + personImg.mediaName) + accessToken">{{personImg.mediaOriginalName}}</a>
-                  </video>
+                  </video> -->
+                  <media [video]="vehicleImg" [viewOnly]="true"></media>
                 </div>
               </div>
             </ion-item>
@@ -282,10 +285,11 @@
                 <a [attr.href]="encodeURIComponent(bucketUrl + pedestrianImg.mediaName) + accessToken" class="download-btn"> Download Media </a> -->
               </div>
               <div *ngIf="pedestrianImg.extension=='.mp4'">
-                <video height="200" width="100%" controls>
+                <!-- <video height="200" width="100%" controls>
                   <source [src]="encodeURIComponent(bucketUrl + pedestrianImg.mediaName) + accessToken" type="video/mp4">
                   <a [attr.href]="encodeURIComponent(bucketUrl + pedestrianImg.mediaName) + accessToken">{{pedestrianImg.mediaOriginalName}}</a>
-                </video>
+                </video> -->
+                <media [video]="vehicleImg" [viewOnly]="true"></media>
               </div>
             </div>
           </ion-item>

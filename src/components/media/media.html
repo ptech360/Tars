@@ -1,6 +1,15 @@
 <!-- Generated template for the MediaComponent component -->
 
 <div class="media-list">
+  <ng-container *ngIf="mediaFile">
+    <ion-item>
+      <div class="file" (click)="openMediaFile(mediaFile)">
+        <ion-icon name="videocam" slot="start" *ngIf="mediaFile.mediaOriginalName.endsWith('MOV') || mediaFile.mediaOriginalName.endsWith('mp4')"></ion-icon>
+        <strong>{{ mediaFile?.mediaOriginalName }}</strong>
+        <p>{{ mediaFile?.mediaName }}</p>
+      </div>
+    </ion-item>
+  </ng-container>
   <ng-container *ngIf="mediaFiles&&mediaFiles.length">
     <ion-item *ngFor="let f of mediaFiles; let i = index;">
       <div class="file" (click)="openMediaFile(f)">

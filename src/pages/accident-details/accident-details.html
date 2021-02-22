@@ -115,8 +115,8 @@
         <div class="media-list" *ngFor="let accidentImg of accident.medias;let i = index;">
           <div *ngIf="accidentImg.extension=='.jpg'">
             <img style="max-height: 200px; min-height: auto; width: 100%; height: auto; " [src]="encodeURIComponent(bucketUrl + accidentImg.mediaName) + accessToken">
-            <a>{{accidentImg.mediaOriginalName}}</a>
-            <a [attr.href]="encodeURIComponent(bucketUrl + accidentImg.mediaName) + accessToken" class="download-btn"> Download Media </a>
+            <!-- <a>{{accidentImg.mediaOriginalName}}</a>
+            <a [attr.href]="encodeURIComponent(bucketUrl + accidentImg.mediaName) + accessToken" class="download-btn"> Download Media </a> -->
           </div>
           <div *ngIf="accidentImg.extension=='.mp4'">
             <video height="200" width="100%" controls>
@@ -151,8 +151,8 @@
               <div class="media-list" *ngFor="let vehicleImg of vehicle.medias;let i = index;">
                 <div *ngIf="vehicleImg.extension=='.jpg'">
                   <img style="max-height: 200px; min-height: auto; width: 100%; height: auto; " [src]="encodeURIComponent(bucketUrl + vehicleImg.mediaName) + accessToken">
-                  <a>{{vehicleImg.mediaOriginalName}}</a>
-                  <a [attr.href]="bucketUrl + vehicleImg.mediaName + accessToken" class="download-btn"> Download Media </a>
+                  <!-- <a>{{vehicleImg.mediaOriginalName}}</a>
+                  <a [attr.href]="bucketUrl + vehicleImg.mediaName + accessToken" class="download-btn"> Download Media </a> -->
                 </div>
                 <div *ngIf="vehicleImg.extension=='.mp4'">
                   <video height="200" width="100%" controls>
@@ -213,8 +213,8 @@
               <div class="media-list" *ngFor="let personImg of pass.medias;let i = index;">
                 <div *ngIf="personImg.extension=='.jpg'">
                   <img style="max-height: 200px; min-height: auto; width: 100%; height: auto; " [src]="encodeURIComponent(bucketUrl + personImg.mediaName) + accessToken">
-                  <a>{{personImg.mediaOriginalName}}</a>
-                  <a [attr.href]="encodeURIComponent(bucketUrl + personImg.mediaName) + accessToken" class="download-btn"> Download Media </a>
+                  <!-- <a>{{personImg.mediaOriginalName}}</a>
+                  <a [attr.href]="encodeURIComponent(bucketUrl + personImg.mediaName) + accessToken" class="download-btn"> Download Media </a> -->
                 </div>
                 <div *ngIf="personImg.extension=='.mp4'">
                   <video height="200" width="100%" controls>
@@ -278,8 +278,8 @@
             <div class="media-list" *ngFor="let pedestrianImg of pedestrian.medias;let i = index;">
               <div *ngIf="pedestrianImg.extension=='.jpg'">
                 <img style="max-height: 200px; min-height: auto; width: 100%; height: auto; " [src]="encodeURIComponent(bucketUrl + pedestrianImg.mediaName) + accessToken">
-                <a>{{pedestrianImg.mediaOriginalName}}</a>
-                <a [attr.href]="encodeURIComponent(bucketUrl + pedestrianImg.mediaName) + accessToken" class="download-btn"> Download Media </a>
+                <!-- <a>{{pedestrianImg.mediaOriginalName}}</a>
+                <a [attr.href]="encodeURIComponent(bucketUrl + pedestrianImg.mediaName) + accessToken" class="download-btn"> Download Media </a> -->
               </div>
               <div *ngIf="pedestrianImg.extension=='.mp4'">
                 <video height="200" width="100%" controls>
